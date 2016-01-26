@@ -3892,7 +3892,7 @@ m_pidSource = pidSource;
               <OBJECT>
                 <ID name="" mc="Standard.Parameter" uid="e23e3e57-ee2d-4303-a0c6-046fa0979be2"/>
                 <ATTRIBUTES>
-                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="ParameterPassing">Out</ATT>
                   <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="TypeConstraint"></ATT>
@@ -3913,7 +3913,7 @@ m_pidSource = pidSource;
                     <OBJECT>
                       <ID name="" mc="Standard.Note" uid="cce92501-5fd9-4c51-b3dc-03a806459cf1"/>
                       <ATTRIBUTES>
-                        <ATT name="Content"><![CDATA[The current value of the selected source parameter.]]></ATT>
+                        <ATT name="Content"><![CDATA[the result to use in PIDController]]></ATT>
                         <ATT name="MimeType"></ATT>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -3928,11 +3928,16 @@ m_pidSource = pidSource;
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+            <LINK relation="Redefines">
+              <REFOBJ>
+                <ID name="pidGet" mc="Standard.Operation" uid="ca309188-662b-41b8-b7ac-ca0323b9c333"/>
+              </REFOBJ>
+            </LINK>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="4198ab30-ec40-45d3-878f-0a40f0648ac1"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Implement the PIDSource interface.]]></ATT>
+                  <ATT name="Content"><![CDATA[Get the result to use in PIDController]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>

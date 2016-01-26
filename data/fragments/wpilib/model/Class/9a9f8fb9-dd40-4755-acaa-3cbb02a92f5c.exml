@@ -1325,7 +1325,7 @@ one measurement hasn't complted, then return 0.]]></ATT>
               <OBJECT>
                 <ID name="" mc="Standard.Parameter" uid="c832f302-5847-4341-8bf8-a884db8370ff"/>
                 <ATTRIBUTES>
-                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="ParameterPassing">Out</ATT>
                   <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="TypeConstraint"></ATT>
@@ -1346,7 +1346,7 @@ one measurement hasn't complted, then return 0.]]></ATT>
                     <OBJECT>
                       <ID name="" mc="Standard.Note" uid="93580304-6be8-4a94-b34a-6b120994a51e"/>
                       <ATTRIBUTES>
-                        <ATT name="Content"><![CDATA[The range in DistanceUnit]]></ATT>
+                        <ATT name="Content"><![CDATA[the result to use in PIDController]]></ATT>
                         <ATT name="MimeType"></ATT>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -1361,11 +1361,16 @@ one measurement hasn't complted, then return 0.]]></ATT>
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+            <LINK relation="Redefines">
+              <REFOBJ>
+                <ID name="pidGet" mc="Standard.Operation" uid="ca309188-662b-41b8-b7ac-ca0323b9c333"/>
+              </REFOBJ>
+            </LINK>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="ee46d609-f89d-4f57-b091-0a2a1b971c9b"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Get the range in the current DistanceUnit for the PIDSource base object.]]></ATT>
+                  <ATT name="Content"><![CDATA[Get the result to use in PIDController]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>

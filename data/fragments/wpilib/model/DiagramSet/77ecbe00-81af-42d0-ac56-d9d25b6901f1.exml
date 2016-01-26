@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Auto Diagrams" version="4">
+  <OBJECT>
+    <ID name="Auto Diagrams" mc="Standard.DiagramSet" uid="77ecbe00-81af-42d0-ac56-d9d25b6901f1"/>
+    <PID name="FIRST FRC 2016" mc="Standard.DiagramSet" uid="794b241e-e012-4cf1-be46-748238571a0c"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[Auto Diagrams]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Sub">
+        <COMPID name="Package Structure" mc="Standard.DiagramSet" uid="82844f55-dda1-4ccf-baa8-64d8fde5de12"/>
+        <COMPID name="SubPackage Structure" mc="Standard.DiagramSet" uid="104f0dc7-d8ca-49a7-8fed-54c909f4e45a"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

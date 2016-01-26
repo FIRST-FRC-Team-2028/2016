@@ -18,7 +18,7 @@
         <COMPID name="edu" mc="Standard.Package" uid="d1f7019f-3614-483a-af31-b76e08300171"/>
       </COMP>
       <COMP relation="Product">
-        <COMPID name="overview diagram" mc="Standard.ClassDiagram" uid="209302ef-f7e5-4df8-9a2f-7a63c1342245"/>
+        <COMPID name="Stronghold" mc="Standard.ClassDiagram" uid="319ab192-8153-469b-b5d5-a013f8c342a4"/>
       </COMP>
       <COMP relation="Descriptor">
         <OBJECT>

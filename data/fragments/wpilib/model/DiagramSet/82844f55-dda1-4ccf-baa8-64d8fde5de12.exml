@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Package Structure" version="4">
+  <OBJECT>
+    <ID name="Package Structure" mc="Standard.DiagramSet" uid="82844f55-dda1-4ccf-baa8-64d8fde5de12"/>
+    <PID name="Auto Diagrams" mc="Standard.DiagramSet" uid="77ecbe00-81af-42d0-ac56-d9d25b6901f1"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[Package Structure]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <LINK relation="ReferencedDiagram">
+        <ID name="Stronghold" mc="Standard.ClassDiagram" uid="319ab192-8153-469b-b5d5-a013f8c342a4"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

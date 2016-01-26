@@ -594,7 +594,7 @@ The zero G voltage varies by accelerometer model. There are constants defined fo
               <OBJECT>
                 <ID name="" mc="Standard.Parameter" uid="5213af4c-08a1-4522-9a45-f2c04892703f"/>
                 <ATTRIBUTES>
-                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="ParameterPassing">Out</ATT>
                   <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="TypeConstraint"></ATT>
@@ -615,7 +615,7 @@ The zero G voltage varies by accelerometer model. There are constants defined fo
                     <OBJECT>
                       <ID name="" mc="Standard.Note" uid="f87ad625-5390-4be9-a2c2-936b67dddce6"/>
                       <ATTRIBUTES>
-                        <ATT name="Content"><![CDATA[The current acceleration in Gs.]]></ATT>
+                        <ATT name="Content"><![CDATA[the result to use in PIDController]]></ATT>
                         <ATT name="MimeType"></ATT>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -630,11 +630,16 @@ The zero G voltage varies by accelerometer model. There are constants defined fo
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+            <LINK relation="Redefines">
+              <REFOBJ>
+                <ID name="pidGet" mc="Standard.Operation" uid="ca309188-662b-41b8-b7ac-ca0323b9c333"/>
+              </REFOBJ>
+            </LINK>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="18499ac9-f941-40ac-be57-33d05fd576cc"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Get the Acceleration for the PID Source parent.]]></ATT>
+                  <ATT name="Content"><![CDATA[Get the result to use in PIDController]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>

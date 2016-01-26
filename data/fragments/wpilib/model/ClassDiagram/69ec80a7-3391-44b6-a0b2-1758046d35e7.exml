@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="com" version="4">
+  <OBJECT>
+    <ID name="com" mc="Standard.ClassDiagram" uid="69ec80a7-3391-44b6-a0b2-1758046d35e7"/>
+    <PID name="com" mc="Standard.Package" uid="e9be676f-3310-4525-8559-47431a5086d8"/>
+    <ATTRIBUTES>
+      <ATT name="UiDataVersion">240</ATT>
+      <ATT name="UiData"><![CDATA[eJztWmtv4jgU/StRtF8TYt7dMh21BHWrQotoO9J8QjexQzN1bGSbabO/fh0C3RamaaA0QzuRQCROfH0f5/hxROfrQ0SNn0TIkLMvJrId0/h61Ln0fhBfGSHWTaah4in5YnIxsSOOCQ25jUOYCIhsgkPFhS0VqPDOJpREhCmZ3vvLl06jq/m9m96bRgQ/uBg/DuqYR52h4FMiVGwwiPRYFGI+Uy4o0M++AZ2RhRNsRqlZOepUlh3Wul6pmBLzWQjVrBBk8r60fS6InfbN4V8XpA+Y4OVgvQc1IkHOUS60iUVPgzwo1zvTPs4vkwtMAphRtRJkJQ0nK3BBKCiCtR8rORskTcbPpEV7TkHKRSWM5gHx2w60rFrtAFn1ute0wPGqFmo12k69iWsN0srOtramzhm/Z33wCF0Z+EqJkE3MI59Hncr8Qab/nJIz1uXRlMtQ6cy/YC2Hqe5tSLEgiYV+KNUzMNS2wPMU/Dv4l2gkD5OryTpG0AYYHmlXgE2S8i+KUncO9Qe19bfubAzv+keCd8gUESw7xuFx9/z4tDce9YaDS7e3kr4em0V/5wr1nMR/jchUEKmrCAmkBrrLY9avrkc33eubUc99L7It0GI4PvG8AAUWhnbCswBZgFHdajTAgQaqB0FAdsAzFu4PzRq7oNlQhBGI+GJetTesGuuMcw6dQwvpz8Zsa+Zlmzb1EG9NuYRvKblLbK4ZG0DIElC8EaOtLTCaWJUaqOSW6HIJjdWLZcs/85bitzftYhHZLBG5bixFQw6D8pbfj0N/zdAJ1yMBe0xGAFS+EuXc1B2J77nAO7CmdPrHUq/OhL9iTYlZHtfoL5K/uSnwpBLgqy0ifETmE7Ic7GJdOuE4Lp7nyCmJ/tuJ7unSb7PsVBY/v0rny4+eVj/7IL7Eqj5rRZzZc+6lby0eafS66dEy2QTTXtqa5u0tUD7TG/pJsuwtzzKb4zr3+bzcUr0brvVGW3ueJN/4o9ayvL5tuZhtSvI9VSeqzvbyBCr1iX3XJwLfabUcp2a1arW2Vcc4sNoYYQu8JjrA4FRr6JVpPdeENbwFpng0SKKlmg5yf+QK9Gn1ClSwYLGGlBKt7yZgoE+iYKCCJQz07kebT4DRP2ob+JElDfSBNY1qwZpGyfx91jiqn1bjqBascZS7sFLz2GfNY/3RigP9kN3JjJll5fWTiSvgXle1D7Em6nPuZYsqy1kFpwaknlfi+bb4mcViVsbNev2Wf/yEq1hdssk9tfvH33uj8clx9/x0dHlz4e56EXnRytNS/Y+apxjIFKFKDOwaA9eXw8J2EP8B1z5EkQ==]]></ATT>
+      <ATT name="PdeProperties"></ATT>
+      <ATT name="Name"><![CDATA[com]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <LINK relation="Extension">
+        <FOREIGNID name="AutoDiagram" mc="Standard.Stereotype" uid="8fb43b1c-7819-11e1-a4f1-002564c97630"/>
+      </LINK>
+      <COMP relation="Properties">
+        <OBJECT>
+          <ID name="AutoDiagram" mc="Standard.PropertyTable" uid="402a137d-b77c-495a-a317-40a2ea179cae"/>
+          <ATTRIBUTES>
+            <ATT name="Name"><![CDATA[AutoDiagram]]></ATT>
+            <ATT name="Content"><![CDATA[#Tue Jan 26 16:17:40 EST 2016
+Kind=subpackage_structure_autodiagram
+]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES></DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+      <COMP relation="Descriptor">
+        <OBJECT>
+          <ID name="" mc="Standard.Note" uid="00c95b7a-7905-4f57-be90-0fe2a1b53730"/>
+          <ATTRIBUTES>
+            <ATT name="Content"></ATT>
+            <ATT name="MimeType"></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

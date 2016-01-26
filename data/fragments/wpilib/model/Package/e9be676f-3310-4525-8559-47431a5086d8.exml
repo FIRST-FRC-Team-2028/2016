@@ -2,7 +2,7 @@
 <!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="com" version="4">
   <OBJECT>
     <ID name="com" mc="Standard.Package" uid="e9be676f-3310-4525-8559-47431a5086d8"/>
-    <PID name="wpilib" mc="Standard.Package" uid="eeeccf80-bc10-46d4-9ada-067315b2b79d"/>
+    <PID name="Stronghold" mc="Standard.Package" uid="eeeccf80-bc10-46d4-9ada-067315b2b79d"/>
     <ATTRIBUTES>
       <ATT name="IsInstantiable">false</ATT>
       <ATT name="IsAbstract">false</ATT>
@@ -33,6 +33,9 @@
             </LINK>
           </DEPENDENCIES>
         </OBJECT>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="com" mc="Standard.ClassDiagram" uid="69ec80a7-3391-44b6-a0b2-1758046d35e7"/>
       </COMP>
     </DEPENDENCIES>
   </OBJECT>

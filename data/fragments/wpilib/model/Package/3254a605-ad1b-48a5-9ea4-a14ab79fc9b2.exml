@@ -19,6 +19,7 @@
         <COMPID name="TankTread" mc="Standard.Class" uid="a38fcf5c-bc25-4155-8afc-05a8335fee44"/>
         <COMPID name="Shooter" mc="Standard.Class" uid="e7c0967b-bd2b-41d7-a528-2d3f463133d3"/>
         <COMPID name="ClimbingArm" mc="Standard.Class" uid="899c26b9-be06-403c-b6de-a1d9d8a5322b"/>
+        <COMPID name="DriveUnit" mc="Standard.Class" uid="69d74b75-df80-4243-808f-74bb65f3aa0a"/>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>

@@ -884,7 +884,7 @@ m_pidSource = pidSource;
               <OBJECT>
                 <ID name="" mc="Standard.Parameter" uid="2fe4caba-1b36-42dc-b354-51261bb00a2f"/>
                 <ATTRIBUTES>
-                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="ParameterPassing">Out</ATT>
                   <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="TypeConstraint"></ATT>
@@ -905,7 +905,7 @@ m_pidSource = pidSource;
                     <OBJECT>
                       <ID name="" mc="Standard.Note" uid="f0234fd8-83fe-4b99-9c21-5e8513c73ebf"/>
                       <ATTRIBUTES>
-                        <ATT name="Content"><![CDATA[the output according to the gyro]]></ATT>
+                        <ATT name="Content"><![CDATA[the result to use in PIDController]]></ATT>
                         <ATT name="MimeType"></ATT>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -920,6 +920,11 @@ m_pidSource = pidSource;
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+            <LINK relation="Redefines">
+              <REFOBJ>
+                <ID name="pidGet" mc="Standard.Operation" uid="ca309188-662b-41b8-b7ac-ca0323b9c333"/>
+              </REFOBJ>
+            </LINK>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="2f4f8b66-9905-4449-94a1-c5d022ef12f7"/>
@@ -938,8 +943,7 @@ m_pidSource = pidSource;
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="aa0b972f-5bfa-4924-a588-b4f6d973cd2b"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Get the output of the gyro for use with PIDControllers.
-May be the angle or rate depending on the set PIDSourceParameter]]></ATT>
+                  <ATT name="Content"><![CDATA[Get the result to use in PIDController]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>

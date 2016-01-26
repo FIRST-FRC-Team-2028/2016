@@ -2381,7 +2381,7 @@ HALUtil.checkStatus(status.asIntBuffer());
               <OBJECT>
                 <ID name="" mc="Standard.Parameter" uid="fffdda77-420c-4a48-9ccd-88147f505ba2"/>
                 <ATTRIBUTES>
-                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="ParameterPassing">Out</ATT>
                   <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="TypeConstraint"></ATT>
@@ -2402,7 +2402,7 @@ HALUtil.checkStatus(status.asIntBuffer());
                     <OBJECT>
                       <ID name="" mc="Standard.Note" uid="3d14aa62-c0be-4ff8-b4f3-24624cda2735"/>
                       <ATTRIBUTES>
-                        <ATT name="Content"><![CDATA[the average voltage]]></ATT>
+                        <ATT name="Content"><![CDATA[the result to use in PIDController]]></ATT>
                         <ATT name="MimeType"></ATT>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -2417,11 +2417,16 @@ HALUtil.checkStatus(status.asIntBuffer());
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+            <LINK relation="Redefines">
+              <REFOBJ>
+                <ID name="pidGet" mc="Standard.Operation" uid="ca309188-662b-41b8-b7ac-ca0323b9c333"/>
+              </REFOBJ>
+            </LINK>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="9a4727b2-35ee-4e42-a01d-d2d0abd78bfd"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Get the average voltage for use with PIDController]]></ATT>
+                  <ATT name="Content"><![CDATA[Get the result to use in PIDController]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>

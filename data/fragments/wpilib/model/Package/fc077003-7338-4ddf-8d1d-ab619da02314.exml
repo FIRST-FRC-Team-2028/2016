@@ -19,6 +19,9 @@
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
       </LINK>
+      <COMP relation="Product">
+        <COMPID name="PhantomMentalists" mc="Standard.ClassDiagram" uid="9c10ec1d-41ab-4426-8b7c-cf5b9976f6fe"/>
+      </COMP>
     </DEPENDENCIES>
   </OBJECT>
 </EXT>

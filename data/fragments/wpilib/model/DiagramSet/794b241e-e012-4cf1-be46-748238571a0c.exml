@@ -1,12 +1,16 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="wpilib" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="FIRST FRC 2016" version="4">
   <OBJECT>
-    <ID name="wpilib" mc="Standard.DiagramSet" uid="794b241e-e012-4cf1-be46-748238571a0c"/>
+    <ID name="FIRST FRC 2016" mc="Standard.DiagramSet" uid="794b241e-e012-4cf1-be46-748238571a0c"/>
     <PID name="wpilib" mc="Standard.Project" uid="45e76e93-ca1a-433d-9f65-db5091932d80"/>
     <ATTRIBUTES>
-      <ATT name="Name"><![CDATA[wpilib]]></ATT>
+      <ATT name="Name"><![CDATA[FIRST FRC 2016]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
-    <DEPENDENCIES></DEPENDENCIES>
+    <DEPENDENCIES>
+      <COMP relation="Sub">
+        <COMPID name="Auto Diagrams" mc="Standard.DiagramSet" uid="77ecbe00-81af-42d0-ac56-d9d25b6901f1"/>
+      </COMP>
+    </DEPENDENCIES>
   </OBJECT>
 </EXT>
