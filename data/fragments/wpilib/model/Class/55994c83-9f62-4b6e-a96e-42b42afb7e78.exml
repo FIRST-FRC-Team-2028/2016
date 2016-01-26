@@ -1,0 +1,2555 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="HALLibrary" version="4">
+  <OBJECT>
+    <ID name="HALLibrary" mc="Standard.Class" uid="55994c83-9f62-4b6e-a96e-42b42afb7e78"/>
+    <PID name="hal" mc="Standard.Package" uid="2f0b753b-4186-4f4f-b5f6-033b3c030964"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[HALLibrary]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedOperation">
+        <OBJECT>
+          <ID name="delayTicks" mc="Standard.Operation" uid="992340c4-11d1-4aba-89ee-f9da32206366"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[delayTicks]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="IO">
+              <OBJECT>
+                <ID name="ticks" mc="Standard.Parameter" uid="789e3fba-e23c-4a22-8e33-5122e563617f"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[ticks]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="949f1d03-aa28-4fdf-8d8e-4fb047eff671"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="ee881ea2-3fce-4546-856a-48eea9960596"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Notifier.h:339</i>
+<i>native declaration : AthenaJava\target\native\include\HAL\Interrupts.h:342</i>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:409</i>
+Original signature : <code>bool checkPWMChannel(void*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Digital.h:84</i>
+Original signature : <code>bool checkRelayChannel(void*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Digital.h:86</i>
+Original signature : <code>void* initializeNotifier(initializeNotifier_ProcessQueue_callback*, int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Notifier.h:334</i><br>
+@deprecated use the safer methods {@link #initializeNotifier(edu.wpi.first.wpilibj.hal.HALLibrary.initializeNotifier_ProcessQueue_callback, java.nio.IntBuffer)} and {@link #initializeNotifier(edu.wpi.first.wpilibj.hal.HALLibrary.initializeNotifier_ProcessQueue_callback, com.sun.jna.ptr.IntByReference)} instead
+Original signature : <code>void* initializeNotifier(initializeNotifier_ProcessQueue_callback*, int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Notifier.h:334</i>
+Original signature : <code>void cleanNotifier(void*, int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Notifier.h:336</i><br>
+@deprecated use the safer methods {@link #cleanNotifier(com.sun.jna.Pointer, java.nio.IntBuffer)} and {@link #cleanNotifier(com.sun.jna.Pointer, com.sun.jna.ptr.IntByReference)} instead
+Original signature : <code>void cleanNotifier(void*, int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Notifier.h:336</i>
+Original signature : <code>void updateNotifierAlarm(void*, uint32_t, int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Notifier.h:338</i><br>
+@deprecated use the safer methods {@link #updateNotifierAlarm(com.sun.jna.Pointer, int, java.nio.IntBuffer)} and {@link #updateNotifierAlarm(com.sun.jna.Pointer, int, com.sun.jna.ptr.IntByReference)} instead
+Original signature : <code>void updateNotifierAlarm(void*, uint32_t, int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Notifier.h:338</i>
+Original signature : <code>void delayTicks(int32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Utilities.h:366</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="bc702719-59c7-48a7-850b-30a91be735e9"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[//public interface initializeNotifier_ProcessQueue_callback extends Callback {
+//    void apply(int uint32_t1, Pointer voidPtr1);
+//};
+//public interface FUNCPTR extends Callback {
+//    int apply(Object... varargs);
+//};
+//public static native byte checkPWMChannel(Pointer digital_port_pointer);
+//public static native byte checkRelayChannel(Pointer digital_port_pointer);
+//@Deprecated
+//public static native Pointer initializeNotifier(HALLibrary.initializeNotifier_ProcessQueue_callback ProcessQueue, IntByReference status);
+//public static native Pointer initializeNotifier(HALLibrary.initializeNotifier_ProcessQueue_callback ProcessQueue, IntBuffer status);
+//@Deprecated
+//public static native void cleanNotifier(Pointer notifier_pointer, IntByReference status);
+//public static native void cleanNotifier(Pointer notifier_pointer, IntBuffer status);
+//@Deprecated
+//public static native void updateNotifierAlarm(Pointer notifier_pointer, int triggerTime, IntByReference status);
+//public static native void updateNotifierAlarm(Pointer notifier_pointer, int triggerTime, IntBuffer status);]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="JavaComment" mc="Standard.NoteType" uid="69ab88b5-741c-11e1-89e3-002564c97630"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="delayMillis" mc="Standard.Operation" uid="c7b15e49-3b70-423b-a916-626f0340a150"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[delayMillis]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="IO">
+              <OBJECT>
+                <ID name="ms" mc="Standard.Parameter" uid="45be82cf-75d1-485e-9a88-db3afb5ea142"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[ms]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="4b925ed3-da07-43f3-924e-959a29d35be6"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="c2343d1c-e58c-4870-a657-ab2dd6a93ed9"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>void delayMillis(double)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Utilities.h:368</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="delaySeconds" mc="Standard.Operation" uid="35d7c985-787b-4a0e-b553-868c303c0abb"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[delaySeconds]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="IO">
+              <OBJECT>
+                <ID name="s" mc="Standard.Parameter" uid="f5742dde-f4a7-4aa7-b516-8c1058e5ed78"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[s]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="7572971e-8ec9-404d-b388-a5368cd04ffc"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="e59ca5f3-ccb8-404f-ac62-f20d04a5c803"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>void delaySeconds(double)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Utilities.h:370</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="initializeMutex" mc="Standard.Operation" uid="fc06e353-8844-44d6-af83-f39dbb16c04a"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[initializeMutex]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="IO">
+              <OBJECT>
+                <ID name="flags" mc="Standard.Parameter" uid="759703dd-cff8-4d28-bb2c-dfb5817debf7"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[flags]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Return">
+              <OBJECT>
+                <ID name="" mc="Standard.Parameter" uid="29eb3c8a-7d0d-404b-b4ca-e9d480119397"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Tag">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TaggedValue" uid="3355d314-f497-4f16-8d89-4463114dc030"/>
+                      <ATTRIBUTES>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <COMP relation="Actual">
+                          <OBJECT>
+                            <ID name="" mc="Standard.TagParameter" uid="6cd323ad-8942-4fa2-9b58-db79e2269a8f"/>
+                            <ATTRIBUTES>
+                              <ATT name="Value"><![CDATA[ByteBuffer]]></ATT>
+                              <ATT name="status">1970354901745664</ATT>
+                            </ATTRIBUTES>
+                            <DEPENDENCIES></DEPENDENCIES>
+                          </OBJECT>
+                        </COMP>
+                        <LINK relation="Definition">
+                          <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="00380080-0000-01a4-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="bca91bfe-5bef-4011-9e4d-4e74a9dbb5f1"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="9d9a05fe-8bee-494f-83ca-21aaa733aed0"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>MUTEX_ID initializeMutex(uint32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:385</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="deleteMutex" mc="Standard.Operation" uid="f5b87031-4f16-4e92-b42e-27d60b732ac9"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[deleteMutex]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="IO">
+              <OBJECT>
+                <ID name="sem" mc="Standard.Parameter" uid="166ee00e-6809-45d9-9cb2-543134aa6b4b"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[sem]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Tag">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TaggedValue" uid="a0f977c5-e74f-4a45-b7ed-0a770b874650"/>
+                      <ATTRIBUTES>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <COMP relation="Actual">
+                          <OBJECT>
+                            <ID name="" mc="Standard.TagParameter" uid="85ed0be4-2589-465c-a01f-4f53c9094b2b"/>
+                            <ATTRIBUTES>
+                              <ATT name="Value"><![CDATA[ByteBuffer]]></ATT>
+                              <ATT name="status">1970354901745664</ATT>
+                            </ATTRIBUTES>
+                            <DEPENDENCIES></DEPENDENCIES>
+                          </OBJECT>
+                        </COMP>
+                        <LINK relation="Definition">
+                          <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="00380080-0000-01a4-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="ebb41740-b58e-4634-a012-6514e506eb4f"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="13732d5b-e33a-4534-88f8-62dfa3a37326"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>void deleteMutex(MUTEX_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:387</i><br>
+@deprecated use the safer methods {@link #deleteMutex(edu.wpi.first.wpilibj.hal.HALLibrary.MUTEX_ID)} and {@link #deleteMutex(com.sun.jna.Pointer)} instead
+Original signature : <code>void deleteMutex(MUTEX_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:387</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="69e6c33d-285c-418e-a790-a486dfd5fd7c"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[//@Deprecated
+//public static native void deleteMutex(Pointer sem);]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="JavaComment" mc="Standard.NoteType" uid="69ab88b5-741c-11e1-89e3-002564c97630"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="takeMutex" mc="Standard.Operation" uid="f95b771e-9d29-40e8-936b-73076e1e964c"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[takeMutex]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="IO">
+              <OBJECT>
+                <ID name="sem" mc="Standard.Parameter" uid="d4933e3b-bccf-479e-ba58-5b45e5840263"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[sem]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Tag">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TaggedValue" uid="d9094ac1-0fac-4553-8326-622b9e9717d2"/>
+                      <ATTRIBUTES>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <COMP relation="Actual">
+                          <OBJECT>
+                            <ID name="" mc="Standard.TagParameter" uid="851680c3-c724-434e-abed-7d1a8eea204b"/>
+                            <ATTRIBUTES>
+                              <ATT name="Value"><![CDATA[ByteBuffer]]></ATT>
+                              <ATT name="status">1970354901745664</ATT>
+                            </ATTRIBUTES>
+                            <DEPENDENCIES></DEPENDENCIES>
+                          </OBJECT>
+                        </COMP>
+                        <LINK relation="Definition">
+                          <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="00380080-0000-01a4-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="timeout" mc="Standard.Parameter" uid="2301dfc1-c986-43c6-8961-fa1de7acc97c"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[timeout]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Return">
+              <OBJECT>
+                <ID name="" mc="Standard.Parameter" uid="0f8350f9-e007-4daf-9157-96201c3e2f55"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="byte" mc="Standard.DataType" uid="00000004-0000-0013-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="cbe6f868-7b98-45eb-9087-5c1f24061f99"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="fff96f28-3739-4e59-9dba-323ed315bfbb"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>int8_t takeMutex(MUTEX_ID, int32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:389</i><br>
+@deprecated use the safer methods {@link #takeMutex(edu.wpi.first.wpilibj.hal.HALLibrary.MUTEX_ID, int)} and {@link #takeMutex(com.sun.jna.Pointer, int)} instead
+Original signature : <code>int8_t takeMutex(MUTEX_ID, int32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:389</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="e5db042f-a18b-4132-83bf-c87eb04ab880"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[//@Deprecated
+//public static native byte takeMutex(Pointer sem, int timeout);]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="JavaComment" mc="Standard.NoteType" uid="69ab88b5-741c-11e1-89e3-002564c97630"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="testDouble" mc="Standard.Operation" uid="24bc6cfd-34b2-408f-8981-7b737ed425b9"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[testDouble]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="IO">
+              <OBJECT>
+                <ID name="param" mc="Standard.Parameter" uid="8b38ae9c-ddc3-4b10-8d17-8c0324a77193"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[param]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Return">
+              <OBJECT>
+                <ID name="" mc="Standard.Parameter" uid="a8a4ed25-ff11-42b9-adcd-9cf6332411cf"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="11f7b084-7535-4369-b90f-bab43cebab95"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="4aa5dad0-8c22-4165-b94f-c314e76cbcf5"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>int8_t giveMutex(MUTEX_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:391</i><br>
+@deprecated use the safer methods {@link #giveMutex(edu.wpi.first.wpilibj.hal.HALLibrary.MUTEX_ID)} and {@link #giveMutex(com.sun.jna.Pointer)} instead
+Original signature : <code>int8_t giveMutex(MUTEX_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:391</i>
+Original signature : <code>SEMAPHORE_ID initializeSemaphore(uint32_t, uint32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:393</i>
+Original signature : <code>void deleteSemaphore(SEMAPHORE_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:395</i><br>
+@deprecated use the safer methods {@link #deleteSemaphore(edu.wpi.first.wpilibj.hal.HALLibrary.SEMAPHORE_ID)} and {@link #deleteSemaphore(com.sun.jna.Pointer)} instead
+Original signature : <code>void deleteSemaphore(SEMAPHORE_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:395</i>
+Original signature : <code>int8_t takeSemaphore(SEMAPHORE_ID, int32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:397</i><br>
+@deprecated use the safer methods {@link #takeSemaphore(edu.wpi.first.wpilibj.hal.HALLibrary.SEMAPHORE_ID, int)} and {@link #takeSemaphore(com.sun.jna.Pointer, int)} instead
+Original signature : <code>int8_t takeSemaphore(SEMAPHORE_ID, int32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:397</i>
+Original signature : <code>int8_t giveSemaphore(SEMAPHORE_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:399</i><br>
+@deprecated use the safer methods {@link #giveSemaphore(edu.wpi.first.wpilibj.hal.HALLibrary.SEMAPHORE_ID)} and {@link #giveSemaphore(com.sun.jna.Pointer)} instead
+Original signature : <code>int8_t giveSemaphore(SEMAPHORE_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:399</i>
+Original signature : <code>MULTIWAIT_ID initializeMultiWait()</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:401</i>
+Original signature : <code>void deleteMultiWait(MULTIWAIT_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:403</i><br>
+@deprecated use the safer methods {@link #deleteMultiWait(edu.wpi.first.wpilibj.hal.HALLibrary.MULTIWAIT_ID)} and {@link #deleteMultiWait(com.sun.jna.Pointer)} instead
+Original signature : <code>void deleteMultiWait(MULTIWAIT_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:403</i>
+Original signature : <code>int8_t takeMultiWait(MULTIWAIT_ID, int32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:405</i><br>
+@deprecated use the safer methods {@link #takeMultiWait(edu.wpi.first.wpilibj.hal.HALLibrary.MULTIWAIT_ID, int)} and {@link #takeMultiWait(com.sun.jna.Pointer, int)} instead
+Original signature : <code>int8_t takeMultiWait(MULTIWAIT_ID, int32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:405</i>
+Original signature : <code>int8_t giveMultiWait(MULTIWAIT_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:407</i><br>
+@deprecated use the safer methods {@link #giveMultiWait(edu.wpi.first.wpilibj.hal.HALLibrary.MULTIWAIT_ID)} and {@link #giveMultiWait(com.sun.jna.Pointer)} instead
+Original signature : <code>int8_t giveMultiWait(MULTIWAIT_ID)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Semaphore.h:407</i>
+Original signature : <code>TASK spawnTask(char*, int, int, int, FUNCPTR, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:420</i><br>
+@deprecated use the safer methods {@link #spawnTask(java.nio.ByteBuffer, int, int, int, edu.wpi.first.wpilibj.hal.HALLibrary.FUNCPTR, int, int, int, int, int, int, int, int, int, int)} and {@link #spawnTask(com.sun.jna.Pointer, int, int, int, edu.wpi.first.wpilibj.hal.HALLibrary.FUNCPTR, int, int, int, int, int, int, int, int, int, int)} instead
+Original signature : <code>TASK spawnTask(char*, int, int, int, FUNCPTR, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:420</i>
+Original signature : <code>STATUS restartTask(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:422</i><br>
+@deprecated use the safer methods {@link #restartTask(edu.wpi.first.wpilibj.hal.HALLibrary.TASK)} and {@link #restartTask(com.sun.jna.Pointer)} instead
+Original signature : <code>STATUS restartTask(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:422</i>
+Original signature : <code>STATUS deleteTask(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:424</i><br>
+@deprecated use the safer methods {@link #deleteTask(edu.wpi.first.wpilibj.hal.HALLibrary.TASK)} and {@link #deleteTask(com.sun.jna.Pointer)} instead
+Original signature : <code>STATUS deleteTask(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:424</i>
+Original signature : <code>STATUS isTaskReady(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:426</i><br>
+@deprecated use the safer methods {@link #isTaskReady(edu.wpi.first.wpilibj.hal.HALLibrary.TASK)} and {@link #isTaskReady(com.sun.jna.Pointer)} instead
+Original signature : <code>STATUS isTaskReady(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:426</i>
+Original signature : <code>STATUS isTaskSuspended(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:428</i><br>
+@deprecated use the safer methods {@link #isTaskSuspended(edu.wpi.first.wpilibj.hal.HALLibrary.TASK)} and {@link #isTaskSuspended(com.sun.jna.Pointer)} instead
+Original signature : <code>STATUS isTaskSuspended(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:428</i>
+Original signature : <code>STATUS suspendTask(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:430</i><br>
+@deprecated use the safer methods {@link #suspendTask(edu.wpi.first.wpilibj.hal.HALLibrary.TASK)} and {@link #suspendTask(com.sun.jna.Pointer)} instead
+Original signature : <code>STATUS suspendTask(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:430</i>
+Original signature : <code>STATUS resumeTask(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:432</i><br>
+@deprecated use the safer methods {@link #resumeTask(edu.wpi.first.wpilibj.hal.HALLibrary.TASK)} and {@link #resumeTask(com.sun.jna.Pointer)} instead
+Original signature : <code>STATUS resumeTask(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:432</i>
+Original signature : <code>STATUS verifyTaskID(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:434</i><br>
+@deprecated use the safer methods {@link #verifyTaskID(edu.wpi.first.wpilibj.hal.HALLibrary.TASK)} and {@link #verifyTaskID(com.sun.jna.Pointer)} instead
+Original signature : <code>STATUS verifyTaskID(TASK)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:434</i>
+Original signature : <code>STATUS setTaskPriority(TASK, int)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:436</i><br>
+@deprecated use the safer methods {@link #setTaskPriority(edu.wpi.first.wpilibj.hal.HALLibrary.TASK, int)} and {@link #setTaskPriority(com.sun.jna.Pointer, int)} instead
+Original signature : <code>STATUS setTaskPriority(TASK, int)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:436</i>
+Original signature : <code>STATUS getTaskPriority(TASK, int*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:438</i><br>
+@deprecated use the safer methods {@link #getTaskPriority(edu.wpi.first.wpilibj.hal.HALLibrary.TASK, java.nio.IntBuffer)} and {@link #getTaskPriority(com.sun.jna.Pointer, com.sun.jna.ptr.IntByReference)} instead
+Original signature : <code>STATUS getTaskPriority(TASK, int*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\Task.h:438</i>
+Original signature : <code>void* getPort(uint8_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:446</i>
+Original signature : <code>uint16_t getFPGAVersion(int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:452</i><br>
+@deprecated use the safer methods {@link #getFPGAVersion(java.nio.IntBuffer)} and {@link #getFPGAVersion(com.sun.jna.ptr.IntByReference)} instead
+Original signature : <code>uint16_t getFPGAVersion(int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:452</i>
+Original signature : <code>uint32_t getFPGARevision(int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:454</i><br>
+@deprecated use the safer methods {@link #getFPGARevision(java.nio.IntBuffer)} and {@link #getFPGARevision(com.sun.jna.ptr.IntByReference)} instead
+Original signature : <code>uint32_t getFPGARevision(int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:454</i>
+Original signature : <code>uint32_t getFPGATime(int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:456</i><br>
+@deprecated use the safer methods {@link #getFPGATime(java.nio.IntBuffer)} and {@link #getFPGATime(com.sun.jna.ptr.IntByReference)} instead
+Original signature : <code>uint32_t getFPGATime(int32_t*)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:456</i>
+Original signature : <code>double testDouble(double)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:462</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="cbfc1299-230a-4188-b857-b83437fbef0e"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[//@Deprecated
+//public static native byte giveMutex(Pointer sem);
+//public static native byte giveMutex(HALLibrary.MUTEX_ID sem);
+//public static native HALLibrary.SEMAPHORE_ID initializeSemaphore(int flags, int initial_value);
+//@Deprecated
+//public static native void deleteSemaphore(Pointer sem);
+//public static native void deleteSemaphore(HALLibrary.SEMAPHORE_ID sem);
+//@Deprecated
+//public static native byte takeSemaphore(Pointer sem, int timeout);
+//public static native byte takeSemaphore(HALLibrary.SEMAPHORE_ID sem, int timeout);
+//@Deprecated
+//public static native byte giveSemaphore(Pointer sem);
+//public static native byte giveSemaphore(HALLibrary.SEMAPHORE_ID sem);
+//public static native HALLibrary.MULTIWAIT_ID initializeMultiWait();
+//@Deprecated
+//public static native void deleteMultiWait(Pointer sem);
+//public static native void deleteMultiWait(HALLibrary.MULTIWAIT_ID sem);
+//@Deprecated
+//public static native byte takeMultiWait(Pointer sem, int timeout);
+//public static native byte takeMultiWait(HALLibrary.MULTIWAIT_ID sem, int timeout);
+//@Deprecated
+//public static native byte giveMultiWait(Pointer sem);
+//public static native byte giveMultiWait(HALLibrary.MULTIWAIT_ID sem);
+//@Deprecated
+//public static native HALLibrary.TASK spawnTask(Pointer name, int priority, int options, int stackSize, HALLibrary.FUNCPTR entryPt, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9);
+//public static native HALLibrary.TASK spawnTask(ByteBuffer name, int priority, int options, int stackSize, HALLibrary.FUNCPTR entryPt, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9);
+//@Deprecated
+//public static native int restartTask(Pointer task);
+//public static native int restartTask(HALLibrary.TASK task);
+//@Deprecated
+//public static native int deleteTask(Pointer task);
+//public static native int deleteTask(HALLibrary.TASK task);
+//@Deprecated
+//public static native int isTaskReady(Pointer task);
+//public static native int isTaskReady(HALLibrary.TASK task);
+//@Deprecated
+//public static native int isTaskSuspended(Pointer task);
+//public static native int isTaskSuspended(HALLibrary.TASK task);
+//@Deprecated
+//public static native int suspendTask(Pointer task);
+//public static native int suspendTask(HALLibrary.TASK task);
+//@Deprecated
+//public static native int resumeTask(Pointer task);
+//public static native int resumeTask(HALLibrary.TASK task);
+//@Deprecated
+//public static native int verifyTaskID(Pointer task);
+//public static native int verifyTaskID(HALLibrary.TASK task);
+//@Deprecated
+//public static native int setTaskPriority(Pointer task, int priority);
+//public static native int setTaskPriority(HALLibrary.TASK task, int priority);
+//@Deprecated
+//public static native int getTaskPriority(Pointer task, IntByReference priority);
+//public static native int getTaskPriority(HALLibrary.TASK task, IntBuffer priority);
+//public static native Pointer getPort(byte pin);
+//@Deprecated
+//public static native short getFPGAVersion(IntByReference status);
+//public static native short getFPGAVersion(IntBuffer status);
+//@Deprecated
+//public static native int getFPGARevision(IntByReference status);
+//public static native int getFPGARevision(IntBuffer status);
+//@Deprecated
+//public static native int getFPGATime(IntByReference status);
+//public static native int getFPGATime(IntBuffer status);]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="JavaComment" mc="Standard.NoteType" uid="69ab88b5-741c-11e1-89e3-002564c97630"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="testInt32" mc="Standard.Operation" uid="011fdac8-84de-49e5-9a0c-4bdc608497a8"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[testInt32]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="IO">
+              <OBJECT>
+                <ID name="param" mc="Standard.Parameter" uid="98a67772-96d9-4bcf-bf4f-4206f01e25d9"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"><![CDATA[param]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Return">
+              <OBJECT>
+                <ID name="" mc="Standard.Parameter" uid="ac87dc86-288b-497c-999d-d56d55045dad"/>
+                <ATTRIBUTES>
+                  <ATT name="ParameterPassing">In</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="TypeConstraint"></ATT>
+                  <ATT name="DefaultValue"></ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="IsException">false</ATT>
+                  <ATT name="IsStream">false</ATT>
+                  <ATT name="Effect">ReadEffect</ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Type">
+                    <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="f3d766d2-21b2-4ea1-b7cd-1edc22940f1b"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="9b48d7a4-6292-4e3f-894d-bb2a4efc11a5"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>int32_t testInt32(int32_t)</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:464</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="NumericArrayResize" mc="Standard.Operation" uid="1d56a021-06bb-4274-8e21-653c3b0cf427"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[NumericArrayResize]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="f21161e4-54a2-44aa-a9b2-59df5c3ce271"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="49014b86-8ff5-46ec-8a99-336aaa30e391"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>void NumericArrayResize()</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:470</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="RTSetCleanupProc" mc="Standard.Operation" uid="e49eef17-e637-43cb-bbd4-a93923c6c19e"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[RTSetCleanupProc]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="9c27167e-70f3-4b18-a493-7084e0664768"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="781efc77-873b-4383-bce9-66e546fa4e8e"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>void RTSetCleanupProc()</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:472</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="EDVR_CreateReference" mc="Standard.Operation" uid="033e14c2-b1ad-4f52-9b79-ffbdff5e26e5"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[EDVR_CreateReference]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="5cc45c28-747a-4ee1-a1bf-b7e39478b93e"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="85c5237c-32d1-4548-8949-54100573bd0a"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>void EDVR_CreateReference()</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:474</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="Occur" mc="Standard.Operation" uid="548737d9-dfc3-4204-b252-5564a53a0eca"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[Occur]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="814f4718-3241-4623-8af4-d83eeb4d38c2"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNative" mc="Standard.TagType" uid="003800a8-0000-017d-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="61e7098a-abe1-4a44-a978-63abb67cf40b"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[Original signature : <code>void Occur()</code><br>
+<i>native declaration : AthenaJava\target\native\include\HAL\HAL.h:476</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+      <COMP relation="OwnedAttribute">
+        <OBJECT>
+          <ID name="NULL_PARAMETER_MESSAGE" mc="Standard.Attribute" uid="91433c5b-e2ef-4edc-82dd-f0fcf5bcfa34"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["A pointer parameter to a method is NULL"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[NULL_PARAMETER_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="8bb9b64e-6be5-4fed-b22f-9585583c214b"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="39694dfd-c992-4da1-9e6d-4307d5e69523"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="5118fb3f-5fb8-497f-9c3a-e27d922f1987"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="724a16fc-2ff7-432f-bbb9-31a703e29aaa"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="NO_AVAILABLE_RESOURCES_MESSAGE" mc="Standard.Attribute" uid="6225f16b-1f44-4677-b662-e51fcd6f123a"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["No available resources to allocate"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[NO_AVAILABLE_RESOURCES_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="d01f2e91-ffef-4e9f-ac83-ce934c18fc7b"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="5e62b826-292d-4b76-b36e-e732753b7c2f"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="ecafdccf-e401-4266-997f-3e449426eb62"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="4ff4012e-cde3-48fc-80d0-12e04d170ab6"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="INCOMPATIBLE_STATE_MESSAGE" mc="Standard.Attribute" uid="ca4f5108-2a38-49ce-8f5f-fc3a3c2deff1"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["Incompatible State: The operation cannot be completed"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[INCOMPATIBLE_STATE_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="09de8247-1d04-4b9a-9bbf-895743944823"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="fd2ff3db-2331-4aa5-a113-72cba0de9892"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="6fedfb82-0eb0-4861-a90f-3d2c61690bf8"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="8e9a6771-cf93-42a4-9cd7-ce2fadf31757"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="ANALOG_TRIGGER_PULSE_OUTPUT_ERROR_MESSAGE" mc="Standard.Attribute" uid="813f36c6-ebb2-4625-82d8-09a4587b686c"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["Attempted to read AnalogTrigger pulse output."]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[ANALOG_TRIGGER_PULSE_OUTPUT_ERROR_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="98079f8a-e84d-4236-9a59-9090ef9934cc"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="7f6f4b78-8c0b-45f2-859c-95776c6c5784"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="8c1f28be-fc04-401a-8caf-043b0e1ace74"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="83b2b1b7-c413-4b44-84b3-67b5d0000883"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="ANALOG_TRIGGER_LIMIT_ORDER_ERROR" mc="Standard.Attribute" uid="7909a859-465b-4b41-be8c-f76e12a7785f"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA[-10]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[ANALOG_TRIGGER_LIMIT_ORDER_ERROR]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Type">
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+            </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="93b719ea-87c3-4c11-81a8-e9d9cf13af03"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="c4b13a6b-3c14-4d50-9c74-0602634699ea"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="SPI_READ_NO_DATA" mc="Standard.Attribute" uid="897cf454-11a7-42ca-80d3-d1c84e026473"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA[14]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[SPI_READ_NO_DATA]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Type">
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+            </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="9a9956f7-18cd-4652-88ef-e983e20e1748"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="6b8e71ff-c980-4b21-b08d-7463d2836a60"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="VOLTAGE_OUT_OF_RANGE_MESSAGE" mc="Standard.Attribute" uid="cca153e9-dc8a-43b5-aca7-579f6206ec40"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["Voltage to convert to raw value is out of range [-10; 10]"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[VOLTAGE_OUT_OF_RANGE_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="74823792-be0f-410f-92c0-533b8dcd9edf"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="078034f2-95da-48c2-bbc1-0313e84511f1"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="31b1ac3c-fcdc-4020-8def-2ce82f69ff29"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="33359d5e-92d5-48a4-86db-57a18b856f10"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="ANALOG_TRIGGER_LIMIT_ORDER_ERROR_MESSAGE" mc="Standard.Attribute" uid="fdf19013-533f-4bc1-a9d2-af8d5d4af2e9"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["AnalogTrigger limits error.  Lower limit > Upper Limit"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[ANALOG_TRIGGER_LIMIT_ORDER_ERROR_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="d4a9f835-7993-43f0-8121-40fd5b4f979d"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="3758f85f-eb24-483c-a5b8-8f3eb4f9c4c1"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="9262e451-3d84-4fb7-a5d3-d71b1c35143c"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="6609a516-05bf-410e-9a62-d1d4f3e68c5d"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="SPI_WRITE_NO_MOSI" mc="Standard.Attribute" uid="f9721e15-172f-4691-82a0-65e1535a2135"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA[12]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[SPI_WRITE_NO_MOSI]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Type">
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+            </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="5c606505-a3c0-4879-a02d-cadc7c57ec2c"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="9ede17bc-4764-4b8c-9adc-8f1492379ccd"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="PARAMETER_OUT_OF_RANGE_MESSAGE" mc="Standard.Attribute" uid="ea942232-e90a-43d1-9c71-731d87f9c7c7"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["A parameter is out of range."]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[PARAMETER_OUT_OF_RANGE_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="f9130faf-f4e8-4466-98f5-058b025fa8f5"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="7110b34c-3fb9-40bf-9556-8716d6b84f6e"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="893feca4-649e-43e6-8d6c-a13285634c69"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="f070935d-4bfc-4e25-815c-7d71511659f3"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="OK" mc="Standard.Attribute" uid="95fd54be-1323-4e94-845e-acb7c54c0b7d"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA[0]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[OK]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Type">
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+            </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="4dc66823-ce98-4156-8105-85b6edeeea97"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="8cfdb26b-1afc-4045-888a-689996676ba4"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Task.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="ERROR" mc="Standard.Attribute" uid="34bef38c-a6b7-4ae5-8df0-fc4fde0d5c58"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA[(-1)]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[ERROR]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Type">
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+            </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="90de32a3-e0cd-416b-9d6f-63a6a35d139f"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="be585881-f6c5-485a-af54-12a07ea9c087"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Task.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="SAMPLE_RATE_TOO_HIGH_MESSAGE" mc="Standard.Attribute" uid="2ad50c6f-cc11-4abb-9eb1-05f61731016c"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["Analog module sample rate is too high"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[SAMPLE_RATE_TOO_HIGH_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="9063a03f-1593-44f8-9cbd-521b68972c70"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="a2db68fe-23ed-4741-aabd-0c42d3bcf7cf"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="6d22a894-f1a1-4b91-961b-4bfae68f5098"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="b411c188-0b87-42f9-a99e-915c3394a706"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="SPI_WRITE_NO_MOSI_MESSAGE" mc="Standard.Attribute" uid="4c2a5302-f86c-4d91-a59c-8f680189daa0"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["Cannot write to SPI port with no MOSI output"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[SPI_WRITE_NO_MOSI_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="ade2e3a4-1bc0-4b49-a6b8-e78cea37cac2"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="7fbbc83f-ca37-4b36-9962-b5e95b5a6841"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="db429265-f05c-4e45-83b0-4f4e366ad23f"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="479daac9-5985-4582-82d9-facc946b6e84"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="SPI_READ_NO_MISO" mc="Standard.Attribute" uid="e91fc3d8-bd3a-4375-bc06-6ebb8af3b54b"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA[13]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[SPI_READ_NO_MISO]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Type">
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
+            </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="e1678b4b-0700-49f4-9b30-a2c02a8fb45b"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="25bef784-3e9c-41c1-a41c-5d2cf2262114"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="SPI_READ_NO_DATA_MESSAGE" mc="Standard.Attribute" uid="700af4d6-4ff9-40d7-9ef7-a0f610d4ea46"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["No data available to read from SPI"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[SPI_READ_NO_DATA_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="c87a0b0e-4d20-40ff-a198-ba895a16d05d"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="f2ca664a-7422-4265-b580-07f9ceac9717"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="079daa02-3829-4f96-af5b-a73f5c0206e3"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="7bc1e65f-9a3f-4c96-9687-17bdf94e941e"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="SPI_READ_NO_MISO_MESSAGE" mc="Standard.Attribute" uid="e7274b62-d872-4eeb-9336-cafd8cd388ac"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["Cannot read from SPI port with no MISO input"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[SPI_READ_NO_MISO_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="12a9ad12-3762-4247-9784-8360bdd61d8b"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="ca4a4162-cc0d-4b99-9e23-a55cc9815950"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="8e342f72-ef43-46a9-93e2-5e3eec4ed36b"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="653385b6-d567-4465-b755-aade7a2bbeb9"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>
+<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="LOOP_TIMING_ERROR_MESSAGE" mc="Standard.Attribute" uid="4aa62f2b-3e03-4587-bd60-0ef67771f376"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA["Digital module loop timing is not the expected value"]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[LOOP_TIMING_ERROR_MESSAGE]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="2d4f6476-5c54-4af3-866b-3b3c8c7e06cd"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="a41911c8-3a7f-44fa-a5bb-be308b4e98f3"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="d6f35f3e-8f21-4ed9-b4cc-29ab26e9c5cd"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="5c4b7b7d-47eb-4230-8cb0-c7e519aa84a3"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<i>native declaration : AthenaJava\target\native\include\HAL\Errors.h</i>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+      <COMP relation="OwnedElement">
+        <COMPID name="Mode" mc="Standard.Interface" uid="8245d4bd-820c-428a-8c62-79777af47266"/>
+        <COMPID name="tSPIConstants" mc="Standard.Interface" uid="2285125c-c6bc-4d86-ba68-e35acbd5232d"/>
+        <COMPID name="tFrameMode" mc="Standard.Interface" uid="75644074-31e7-4458-86e7-b76c896949b5"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Tag">
+        <OBJECT>
+          <ID name="" mc="Standard.TaggedValue" uid="d945bc82-7aa8-4cd3-8ec1-784085067275"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Actual">
+              <OBJECT>
+                <ID name="" mc="Standard.TagParameter" uid="055a5cfb-e2cd-4afe-8efa-30e4c51868be"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"><![CDATA[java.nio.ByteBuffer]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TagParameter" uid="49852b14-ecec-4173-bb5d-cd54cd8e99ae"/>
+                <ATTRIBUTES>
+                  <ATT name="Value"><![CDATA[java.nio.IntBuffer]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <LINK relation="Definition">
+              <FOREIGNID name="JavaImport" mc="Standard.TagType" uid="003800a8-0000-0155-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+      <COMP relation="Descriptor">
+        <OBJECT>
+          <ID name="" mc="Standard.Note" uid="81a27d5f-471c-4550-959b-637d39f50509"/>
+          <ATTRIBUTES>
+            <ATT name="Content"><![CDATA[JNA Wrapper for library <b>HAL</b><br>
+This file was autogenerated by <a href="http://jnaerator.googlecode.com/">JNAerator</a>,<br>
+a tool written by <a href="http://ochafik.com/">Olivier Chafik</a> that <a href="http://code.google.com/p/jnaerator/wiki/CreditsAndLicense">uses a few opensource projects.</a>.<br>
+For help, please visit <a href="http://nativelibs4java.googlecode.com/">NativeLibs4Java</a> , <a href="http://rococoa.dev.java.net/">Rococoa</a>, or <a href="http://jna.dev.java.net/">JNA</a>.]]></ATT>
+            <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015d-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="" mc="Standard.Note" uid="f98ad04c-3a6e-4ba2-839b-758518dea20d"/>
+          <ATTRIBUTES>
+            <ATT name="Content"><![CDATA[/*
+    public static final GlobalDouble kDefaultWatchdogExpiration = new GlobalDouble(HALLibrary.JNA_NATIVE_LIB, "kDefaultWatchdogExpiration");
+    public static final GlobalInt HAL_NO_WAIT = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "HAL_NO_WAIT");
+    public static final GlobalInt HAL_WAIT_FOREVER = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "HAL_WAIT_FOREVER");
+    public static final GlobalInt SEMAPHORE_Q_FIFO = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "SEMAPHORE_Q_FIFO");
+    */
+/*
+    public static final GlobalInt SEMAPHORE_DELETE_SAFE = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "SEMAPHORE_DELETE_SAFE");
+    public static final GlobalInt SEMAPHORE_INVERSION_SAFE = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "SEMAPHORE_INVERSION_SAFE");
+    public static final GlobalInt SEMAPHORE_NO_WAIT = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "SEMAPHORE_NO_WAIT");
+    */
+/*
+    public static final GlobalInt SEMAPHORE_EMPTY = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "SEMAPHORE_EMPTY");
+    public static final GlobalInt SEMAPHORE_FULL = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "SEMAPHORE_FULL");
+    public static final GlobalInt VXWORKS_FP_TASK = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "VXWORKS_FP_TASK");
+    public static final GlobalInt HAL_objLib_OBJ_ID_ERROR = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "HAL_objLib_OBJ_ID_ERROR");
+    public static final GlobalInt HAL_objLib_OBJ_DELETED = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "HAL_objLib_OBJ_DELETED");
+    public static final GlobalInt HAL_taskLib_ILLEGAL_OPTIONS = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "HAL_taskLib_ILLEGAL_OPTIONS");
+    public static final GlobalInt HAL_memLib_NOT_ENOUGH_MEMORY = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "HAL_memLib_NOT_ENOUGH_MEMORY");
+    public static final GlobalInt HAL_taskLib_ILLEGAL_PRIORITY = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "HAL_taskLib_ILLEGAL_PRIORITY");
+    public static final GlobalInt dio_kNumSystems = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "dio_kNumSystems");
+    public static final GlobalInt solenoid_kNumDO7_0Elements = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "solenoid_kNumDO7_0Elements");
+    public static final GlobalInt interrupt_kNumSystems = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "interrupt_kNumSystems");
+    public static final GlobalInt kSystemClockTicksPerMicrosecond = new GlobalInt(HALLibrary.JNA_NATIVE_LIB, "kSystemClockTicksPerMicrosecond");
+    */
+/*
+    public static class TASK extends PointerType {
+        public TASK(Pointer address) {
+            super(address);
+        }
+        public TASK() {
+            super();
+        }
+    };
+    public static class MUTEX_ID extends PointerType {
+        public MUTEX_ID(Pointer address) {
+            super(address);
+        }
+        public MUTEX_ID() {
+            super();
+        }
+    };
+    public static class MULTIWAIT_ID extends PointerType {
+        public MULTIWAIT_ID(Pointer address) {
+            super(address);
+        }
+        public MULTIWAIT_ID() {
+            super();
+        }
+    };
+    public static class SEMAPHORE_ID extends PointerType {
+        public SEMAPHORE_ID(Pointer address) {
+            super(address);
+        }
+        public SEMAPHORE_ID() {
+            super();
+        }
+    };
+    */
+static {
+        System.loadLibrary("JNIWrappers");
+    //    Native.register(HALLibrary.class, HALLibrary.JNA_NATIVE_LIB);
+    }]]></ATT>
+            <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="JavaMembers" mc="Standard.NoteType" uid="003800a8-0000-015b-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="image" version="4">
+  <OBJECT>
+    <ID name="image" mc="Standard.Package" uid="c0a0729c-d2bb-4a28-850d-9aac39136e1e"/>
+    <PID name="wpilibj" mc="Standard.Package" uid="09f3a4a2-6888-4361-bafd-8d8f46c158d7"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[image]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="BinaryImage" mc="Standard.Class" uid="c33db46e-7967-4249-ae33-d646f399ca4b"/>
+        <COMPID name="ColorImage" mc="Standard.Class" uid="5c7f82ed-6972-4f3e-a911-27c1c95ba389"/>
+        <COMPID name="HSLImage" mc="Standard.Class" uid="98a63817-a5bc-4551-809e-efa4db9bb7f4"/>
+        <COMPID name="ImageBase" mc="Standard.Class" uid="82cc9d4a-0291-49bc-ac42-b3d0d8b0c4e4"/>
+        <COMPID name="MonoImage" mc="Standard.Class" uid="6104874a-eda7-4c14-aa4c-97cbbe4c47ed"/>
+        <COMPID name="NIVisionException" mc="Standard.Class" uid="57528a1d-0d15-42e6-aa37-e618f6de578b"/>
+        <COMPID name="ParticleAnalysisReport" mc="Standard.Class" uid="7f5d7a0f-72ff-4954-817e-47d7929c6232"/>
+        <COMPID name="RGBImage" mc="Standard.Class" uid="a6d0f7df-4f57-4770-a585-c259a1553ba8"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

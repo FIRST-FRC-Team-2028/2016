@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="NIVision" version="4">
+  <OBJECT>
+    <ID name="NIVision" mc="Standard.Class" uid="51bbd50c-064d-4459-b639-bb30c8c872bb"/>
+    <PID name="vision" mc="Standard.Package" uid="271b808a-2515-47fb-ae84-be52161be679"/>
+    <ATTRIBUTES>
+      <ATT name="IsActive">false</ATT>
+      <ATT name="IsMain">false</ATT>
+      <ATT name="IsElementary">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[NIVision]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="DetectEllipsesResult" mc="Standard.Class" uid="da66b60b-bc19-4ee6-878c-a56824bad36a"/>
+        <COMPID name="ROI" mc="Standard.Class" uid="e900e2d5-840e-42aa-8e39-69ff662f2785"/>
+        <COMPID name="ShapeDetectionOptions" mc="Standard.Class" uid="0b00f543-f686-4b99-a34a-7f57b7cab9c4"/>
+        <COMPID name="CurveOptions" mc="Standard.Class" uid="59cabcdc-bd17-4c1d-b805-382663216143"/>
+        <COMPID name="RawData" mc="Standard.Class" uid="bebd6d8f-2c88-4317-88b4-03e4fda4cb33"/>
+        <COMPID name="ImageType" mc="Standard.Class" uid="57250263-82a8-483e-b7c0-a611ec348822"/>
+        <COMPID name="ColorMode" mc="Standard.Class" uid="d1a6c71b-1805-4f68-9116-84f2068e5286"/>
+        <COMPID name="Image" mc="Standard.Class" uid="7ce3eeb4-ae9d-4cd1-84cd-945a77309db0"/>
+        <COMPID name="EllipseDescriptor" mc="Standard.Class" uid="c2c80365-7f9f-4343-886b-898bc3b30944"/>
+        <COMPID name="ParticleFilterCriteria2" mc="Standard.Class" uid="3014ef24-ba31-47be-a73d-c54d7a8c001d"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Tag">
+        <OBJECT>
+          <ID name="" mc="Standard.TaggedValue" uid="d4e4d1fc-f614-4bd1-a7db-e6b2baf04363"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Definition">
+              <FOREIGNID name="JavaExtern" mc="Standard.TagType" uid="003800a8-0000-0157-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

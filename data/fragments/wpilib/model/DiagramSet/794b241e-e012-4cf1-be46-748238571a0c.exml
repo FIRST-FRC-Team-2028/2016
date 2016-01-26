@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="wpilib" version="4">
+  <OBJECT>
+    <ID name="wpilib" mc="Standard.DiagramSet" uid="794b241e-e012-4cf1-be46-748238571a0c"/>
+    <PID name="wpilib" mc="Standard.Project" uid="45e76e93-ca1a-433d-9f65-db5091932d80"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[wpilib]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES></DEPENDENCIES>
+  </OBJECT>
+</EXT>
