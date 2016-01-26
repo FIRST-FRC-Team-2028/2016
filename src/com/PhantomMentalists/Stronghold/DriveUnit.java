@@ -41,22 +41,25 @@ public class DriveUnit {
     public void setSpeed(double speed) {
     }
 
+    /**
+     * <Enter note text here>
+     */
     @objid ("5dad8b50-8973-4186-80f9-5dd883b14e9d")
-    double getSpeedSetpoint() {
+    public double getSpeedSetpoint() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.speedSetpoint;
     }
 
     @objid ("6b1aafd1-f349-430d-8d23-f281df820075")
-    void setSpeedSetpoint(double value) {
+    public void setSpeedSetpoint(double value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.speedSetpoint = value;
     }
 
     @objid ("03f75dd6-ebef-46e3-af08-99fe8154fc8b")
     public enum GearSelection {
-        LowGear,
-        HighGear;
+        kLowGear,
+        kHighGear;
     }
 
 }

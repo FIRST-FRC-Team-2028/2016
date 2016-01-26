@@ -34,8 +34,8 @@ public class WestCoastDrive implements PIDOutput {
      */
     @objid ("16b50431-1206-4647-ae61-5a474135b8b3")
     public enum SuspensionState {
-        Raised,
-        Lowered;
+        kRaised,
+        kLowered;
     }
 
     /**
@@ -43,12 +43,12 @@ public class WestCoastDrive implements PIDOutput {
      */
     @objid ("521d40fa-84c2-458c-9b1a-63c2d24a9a74")
     public enum WheelLocation {
-        FrontRight,
-        FrontLeft,
-        RearRight,
-        RearLeft,
-        MiddleRight,
-        MiddleLeft;
+        kFrontRight,
+        kFrontLeft,
+        kRearRight,
+        kRearLeft,
+        kMiddleRight,
+        kMiddleLeft;
     }
 
 }

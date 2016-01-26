@@ -85,4 +85,8 @@ public class Telepath extends SampleRobot implements PIDSource {
     public double pidGet() {
     }
 
+    @objid ("b2f54c9f-b426-4269-aabb-1604a583d152")
+    public void shoot() {
+    }
+
 }

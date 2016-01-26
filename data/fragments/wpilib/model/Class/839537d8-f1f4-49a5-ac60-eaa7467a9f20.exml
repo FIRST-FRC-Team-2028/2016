@@ -232,6 +232,20 @@
             </COMP>
           </DEPENDENCIES>
         </OBJECT>
+        <OBJECT>
+          <ID name="shoot" mc="Standard.Operation" uid="b2f54c9f-b426-4269-aabb-1604a583d152"/>
+          <ATTRIBUTES>
+            <ATT name="Concurrency">false</ATT>
+            <ATT name="Final">false</ATT>
+            <ATT name="Passing">MethodOut</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">false</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[shoot]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES></DEPENDENCIES>
+        </OBJECT>
       </COMP>
       <COMP relation="OwnedAttribute">
         <OBJECT>
@@ -929,6 +943,22 @@
       <LINK relation="Extension">
         <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>
       </LINK>
+      <COMP relation="DependsOnDependency">
+        <OBJECT>
+          <ID name="" mc="Standard.Dependency" uid="a79519eb-09ff-435b-8737-16d3fbcb520f"/>
+          <ATTRIBUTES>
+            <ATT name="DependsOnId"></ATT>
+            <ATT name="DependsOnName"></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="DependsOn">
+              <ID name="Parameters" mc="Standard.Class" uid="a5f86b3a-a108-4159-9a04-9f7eb8bd5490"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
     </DEPENDENCIES>
   </OBJECT>
 </EXT>

@@ -8,4 +8,28 @@ public class ClimbingArm {
     public ClimbingArm() {
     }
 
+    @objid ("aeb2632b-96b3-4001-8a1a-6655759a1229")
+    public void manualMoveForward() {
+    }
+
+    @objid ("4d55bb48-6960-4de6-ad94-99c0e3b53226")
+    public void manualMoveBackward() {
+    }
+
+    @objid ("fc35b51c-7c86-4ff7-a3d8-d45acbad3f4a")
+    public void autoDeployArm() {
+    }
+
+    @objid ("c79c6bd4-bedc-408f-b152-b67ec1425b47")
+    public void autoRetractArm() {
+    }
+
+    @objid ("17ccc502-6324-4a87-bbc3-e61847c4d098")
+    public void autoExtendArm() {
+    }
+
+    @objid ("13e1033b-fb72-493a-8320-db6e610fdf26")
+    public boolean isDeployed() {
+    }
+
 }

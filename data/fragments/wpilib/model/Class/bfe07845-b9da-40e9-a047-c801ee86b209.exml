@@ -345,17 +345,17 @@
           <DEPENDENCIES>
             <COMP relation="Value">
               <OBJECT>
-                <ID name="Raised" mc="Standard.EnumerationLiteral" uid="38b4deb0-4075-4563-9c62-6a1f16474e26"/>
+                <ID name="kRaised" mc="Standard.EnumerationLiteral" uid="38b4deb0-4075-4563-9c62-6a1f16474e26"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[Raised]]></ATT>
+                  <ATT name="Name"><![CDATA[kRaised]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="Lowered" mc="Standard.EnumerationLiteral" uid="62d2307b-83d0-479f-8ecd-b2f4e14de703"/>
+                <ID name="kLowered" mc="Standard.EnumerationLiteral" uid="62d2307b-83d0-479f-8ecd-b2f4e14de703"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[Lowered]]></ATT>
+                  <ATT name="Name"><![CDATA[kLowered]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
@@ -396,49 +396,49 @@
           <DEPENDENCIES>
             <COMP relation="Value">
               <OBJECT>
-                <ID name="FrontRight" mc="Standard.EnumerationLiteral" uid="aa9e2f58-2413-4978-a7bc-c532f223a211"/>
+                <ID name="kFrontRight" mc="Standard.EnumerationLiteral" uid="aa9e2f58-2413-4978-a7bc-c532f223a211"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[FrontRight]]></ATT>
+                  <ATT name="Name"><![CDATA[kFrontRight]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="FrontLeft" mc="Standard.EnumerationLiteral" uid="eddb6ed3-058d-4838-93ab-8fd86989a7e3"/>
+                <ID name="kFrontLeft" mc="Standard.EnumerationLiteral" uid="eddb6ed3-058d-4838-93ab-8fd86989a7e3"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[FrontLeft]]></ATT>
+                  <ATT name="Name"><![CDATA[kFrontLeft]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="RearRight" mc="Standard.EnumerationLiteral" uid="0a6cb88d-1aac-45cf-9d78-d543e4e90466"/>
+                <ID name="kRearRight" mc="Standard.EnumerationLiteral" uid="0a6cb88d-1aac-45cf-9d78-d543e4e90466"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[RearRight]]></ATT>
+                  <ATT name="Name"><![CDATA[kRearRight]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="RearLeft" mc="Standard.EnumerationLiteral" uid="c93e249a-290e-42f5-bc04-034d03683f68"/>
+                <ID name="kRearLeft" mc="Standard.EnumerationLiteral" uid="c93e249a-290e-42f5-bc04-034d03683f68"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[RearLeft]]></ATT>
+                  <ATT name="Name"><![CDATA[kRearLeft]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="MiddleRight" mc="Standard.EnumerationLiteral" uid="cc94c4b9-5b93-4214-983f-26fa7debd46a"/>
+                <ID name="kMiddleRight" mc="Standard.EnumerationLiteral" uid="cc94c4b9-5b93-4214-983f-26fa7debd46a"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[MiddleRight]]></ATT>
+                  <ATT name="Name"><![CDATA[kMiddleRight]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="MiddleLeft" mc="Standard.EnumerationLiteral" uid="54634c81-62fe-4eaa-aefc-7a158dbccb7e"/>
+                <ID name="kMiddleLeft" mc="Standard.EnumerationLiteral" uid="54634c81-62fe-4eaa-aefc-7a158dbccb7e"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[MiddleLeft]]></ATT>
+                  <ATT name="Name"><![CDATA[kMiddleLeft]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>

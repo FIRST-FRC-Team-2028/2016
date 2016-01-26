@@ -75,7 +75,7 @@
             </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
-                <ID name="" mc="Standard.Note" uid="8e4d356d-54cf-4333-9a99-72531f688643"/>
+                <ID name="" mc="Standard.Note" uid="94cf2d11-6169-4a08-806c-63c16aed77c3"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
                   <ATT name="MimeType"></ATT>
@@ -152,7 +152,7 @@
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
             <ATT name="Passing">MethodOut</ATT>
-            <ATT name="Visibility">PackageVisibility</ATT>
+            <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
             <ATT name="Name"><![CDATA[getSpeedSetpoint]]></ATT>
@@ -236,6 +236,20 @@
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="d0c54eb9-9e39-47f4-939c-8466b7b0bcac"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
+                  <ATT name="MimeType"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
             </COMP>
           </DEPENDENCIES>
         </OBJECT>
@@ -245,7 +259,7 @@
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
             <ATT name="Passing">MethodOut</ATT>
-            <ATT name="Visibility">PackageVisibility</ATT>
+            <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
             <ATT name="Name"><![CDATA[setSpeedSetpoint]]></ATT>
@@ -579,17 +593,17 @@ this.speedSetpoint = value;]]></ATT>
           <DEPENDENCIES>
             <COMP relation="Value">
               <OBJECT>
-                <ID name="LowGear" mc="Standard.EnumerationLiteral" uid="032fcbbb-fc1e-4fdd-932a-19a5e84eea55"/>
+                <ID name="kLowGear" mc="Standard.EnumerationLiteral" uid="032fcbbb-fc1e-4fdd-932a-19a5e84eea55"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[LowGear]]></ATT>
+                  <ATT name="Name"><![CDATA[kLowGear]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="HighGear" mc="Standard.EnumerationLiteral" uid="6043a72a-f2ff-4874-a1f9-c125d9033891"/>
+                <ID name="kHighGear" mc="Standard.EnumerationLiteral" uid="6043a72a-f2ff-4874-a1f9-c125d9033891"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[HighGear]]></ATT>
+                  <ATT name="Name"><![CDATA[kHighGear]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES></DEPENDENCIES>
