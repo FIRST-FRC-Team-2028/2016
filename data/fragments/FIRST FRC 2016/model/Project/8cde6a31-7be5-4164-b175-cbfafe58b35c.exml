@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="FIRST FRC 2016" version="4">
+  <OBJECT>
+    <ID name="FIRST FRC 2016" mc="Standard.Project" uid="8cde6a31-7be5-4164-b175-cbfafe58b35c"/>
+    <ATTRIBUTES>
+      <ATT name="ProjectContext"></ATT>
+      <ATT name="ProjectDescr"></ATT>
+      <ATT name="Name"><![CDATA[FIRST FRC 2016]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="DiagramRoot">
+        <COMPID name="FIRST FRC 2016" mc="Standard.DiagramSet" uid="4d30b948-b30b-445e-b0e5-39a92002b2eb"/>
+      </COMP>
+      <COMP relation="Model">
+        <COMPID name="first frc 2016" mc="Standard.Package" uid="d7b9adaa-b30c-4c3d-b8fb-bf2062da88e5"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

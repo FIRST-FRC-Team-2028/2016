@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="vision" version="4">
+  <OBJECT>
+    <ID name="vision" mc="Standard.Package" uid="ce776972-30a7-487e-97f8-d1598147b5ff"/>
+    <PID name="wpilibj" mc="Standard.Package" uid="09f3a4a2-6888-4361-bafd-8d8f46c158d7"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[vision]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="AxisCamera" mc="Standard.Class" uid="be90ff3e-07f3-4413-85e4-f14802d330a1"/>
+        <COMPID name="USBCamera" mc="Standard.Class" uid="fc7a5d2a-69b7-4c13-be9d-0730a725b11d"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

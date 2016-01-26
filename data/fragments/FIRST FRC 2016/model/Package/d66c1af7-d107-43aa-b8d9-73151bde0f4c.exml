@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="internal" version="4">
+  <OBJECT>
+    <ID name="internal" mc="Standard.Package" uid="d66c1af7-d107-43aa-b8d9-73151bde0f4c"/>
+    <PID name="wpilibj" mc="Standard.Package" uid="09f3a4a2-6888-4361-bafd-8d8f46c158d7"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[internal]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="HardwareHLUsageReporting" mc="Standard.Class" uid="7d975439-c753-43db-9847-8b1d28efdfa5"/>
+        <COMPID name="HardwareTimer" mc="Standard.Class" uid="bc6baf84-59ed-4997-95b6-aeeb52ef0793"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

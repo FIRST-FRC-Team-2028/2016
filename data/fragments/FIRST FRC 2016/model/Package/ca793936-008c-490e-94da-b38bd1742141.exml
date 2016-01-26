@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="communication" version="4">
+  <OBJECT>
+    <ID name="communication" mc="Standard.Package" uid="ca793936-008c-490e-94da-b38bd1742141"/>
+    <PID name="wpilibj" mc="Standard.Package" uid="09f3a4a2-6888-4361-bafd-8d8f46c158d7"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[communication]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="FRCNetworkCommunicationsLibrary" mc="Standard.Class" uid="1667a304-f5b4-46de-9440-8cae16a6df7d"/>
+        <OBJECT>
+          <ID name="HALAllianceStationID" mc="Standard.Enumeration" uid="87ebda9a-18ed-4747-8d1b-a7b2af66c839"/>
+          <ATTRIBUTES>
+            <ATT name="IsElementary">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="IsLeaf">true</ATT>
+            <ATT name="IsRoot">false</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="Name"><![CDATA[HALAllianceStationID]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Value">
+              <OBJECT>
+                <ID name="Red1" mc="Standard.EnumerationLiteral" uid="f17ec3d5-11b9-4d3e-af12-ba1896dcf049"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Red1]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Red2" mc="Standard.EnumerationLiteral" uid="af32697d-0354-445f-bfce-ecc5ca38aebd"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Red2]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Red3" mc="Standard.EnumerationLiteral" uid="347977ae-54fb-4e1c-abda-49310eedf915"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Red3]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Blue1" mc="Standard.EnumerationLiteral" uid="60316e0b-95fe-4d79-ada9-c0f32e6a7a92"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Blue1]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Blue2" mc="Standard.EnumerationLiteral" uid="f3e68341-fa1b-4310-90fc-982b53bde6c8"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Blue2]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="Blue3" mc="Standard.EnumerationLiteral" uid="1eade219-96d2-4739-b930-9a6e371682f4"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[Blue3]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <LINK relation="Extension">
+              <FOREIGNID name="JavaEnumeration" mc="Standard.Stereotype" uid="01ec23a8-0000-0262-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+        <COMPID name="HALControlWord" mc="Standard.Class" uid="3457b57a-a092-4003-88cf-76ccd333f981"/>
+        <COMPID name="NIRioStatus" mc="Standard.Class" uid="be426876-fd0f-4856-8b42-2a71b1f0e711"/>
+        <COMPID name="UsageReporting" mc="Standard.Class" uid="a78ec866-5eb2-4cc3-aacb-b052f9893e1f"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

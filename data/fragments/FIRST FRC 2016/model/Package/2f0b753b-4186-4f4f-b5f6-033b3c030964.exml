@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="hal" version="4">
+  <OBJECT>
+    <ID name="hal" mc="Standard.Package" uid="2f0b753b-4186-4f4f-b5f6-033b3c030964"/>
+    <PID name="wpilibj" mc="Standard.Package" uid="09f3a4a2-6888-4361-bafd-8d8f46c158d7"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[hal]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="CanTalonSRX" mc="Standard.Class" uid="ade78aeb-d3fd-40c5-a8e3-389e87d78dd6"/>
+        <COMPID name="CtreCanNode" mc="Standard.Class" uid="ad8d11d7-03be-4e90-8de1-7b160ad80903"/>
+        <COMPID name="AccelerometerJNI" mc="Standard.Class" uid="d7000afd-cdf4-469c-bed3-608770ba704d"/>
+        <COMPID name="AnalogJNI" mc="Standard.Class" uid="47827c74-a7a6-4f44-9c20-d9c7603393c3"/>
+        <COMPID name="CanTalonJNI" mc="Standard.Class" uid="9bf6ad22-f106-4539-a589-2b40859525b3"/>
+        <COMPID name="CompressorJNI" mc="Standard.Class" uid="89c050c0-6423-4216-8509-59929d99f1fe"/>
+        <COMPID name="CounterJNI" mc="Standard.Class" uid="10c8b4b0-b60f-4df5-90fe-4dd1a752813b"/>
+        <COMPID name="DIOJNI" mc="Standard.Class" uid="5281f511-89e5-4304-b97a-f6256cfcd588"/>
+        <COMPID name="EncoderJNI" mc="Standard.Class" uid="03bc3181-95f4-4eb7-b073-5b963ce737dd"/>
+        <COMPID name="HALLibrary" mc="Standard.Class" uid="55994c83-9f62-4b6e-a96e-42b42afb7e78"/>
+        <COMPID name="HALUtil" mc="Standard.Class" uid="2fedb0cd-3b87-4377-aef8-023d9794cfd5"/>
+        <COMPID name="I2CJNI" mc="Standard.Class" uid="dec06f1d-bca3-400e-922e-593eadd2c3f4"/>
+        <COMPID name="InterruptJNI" mc="Standard.Class" uid="e37f30e9-28a9-423e-9f31-9b668503983a"/>
+        <COMPID name="JNIWrapper" mc="Standard.Class" uid="79503753-548f-47ba-b77f-e527100a0c9f"/>
+        <COMPID name="PDPJNI" mc="Standard.Class" uid="1fdc289f-5da7-46dc-892e-507b3e3bd0d5"/>
+        <COMPID name="PowerJNI" mc="Standard.Class" uid="e51ebc84-5621-4256-bc73-7a4437ba1605"/>
+        <COMPID name="PWMJNI" mc="Standard.Class" uid="4121c591-20e8-4ca1-aab8-0b50ba167b51"/>
+        <COMPID name="RelayJNI" mc="Standard.Class" uid="373f097a-58db-4b30-9206-f50792c840a4"/>
+        <COMPID name="SerialPortJNI" mc="Standard.Class" uid="f0cda342-aa2a-4fd0-87d1-05c6cb32070a"/>
+        <COMPID name="SolenoidJNI" mc="Standard.Class" uid="9471e81a-3970-4adf-bd68-9789e39964e8"/>
+        <COMPID name="SPIJNI" mc="Standard.Class" uid="31504312-85c8-4c28-8a43-9b3d946fc5cc"/>
+        <COMPID name="SWIGTYPE_p_CTR_Code" mc="Standard.Class" uid="70d7d835-a74e-46df-80a4-2ab56beb0868"/>
+        <COMPID name="SWIGTYPE_p_double" mc="Standard.Class" uid="2f27a857-cb0d-4c7a-9bbe-e21b69d758b1"/>
+        <COMPID name="SWIGTYPE_p_float" mc="Standard.Class" uid="8981ac91-2784-492d-b5ed-209612f762b1"/>
+        <COMPID name="SWIGTYPE_p_int" mc="Standard.Class" uid="c445e517-ca3a-40bf-be7f-619ff62c4b17"/>
+        <COMPID name="SWIGTYPE_p_int32_t" mc="Standard.Class" uid="7dfe75d1-e477-4803-998d-9483a080f8de"/>
+        <COMPID name="SWIGTYPE_p_uint32_t" mc="Standard.Class" uid="e629bd6a-1269-40cd-9db5-cb1af3b92d51"/>
+        <COMPID name="SWIGTYPE_p_UINT8" mc="Standard.Class" uid="5387e8ba-bf21-4109-b447-21c39da82db4"/>
+        <COMPID name="SWIGTYPE_p_uint8_t" mc="Standard.Class" uid="a5546c79-9457-4fd0-b12d-c26fcc5d3e6d"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

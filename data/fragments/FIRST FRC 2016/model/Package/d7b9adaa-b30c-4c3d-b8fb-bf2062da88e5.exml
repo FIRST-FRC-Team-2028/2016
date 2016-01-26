@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="FIRST FRC 2016" version="4">
+  <OBJECT>
+    <ID name="FIRST FRC 2016" mc="Standard.Package" uid="d7b9adaa-b30c-4c3d-b8fb-bf2062da88e5"/>
+    <PID name="FIRST FRC 2016" mc="Standard.Project" uid="8cde6a31-7be5-4164-b175-cbfafe58b35c"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[FIRST FRC 2016]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="com" mc="Standard.Package" uid="e9be676f-3310-4525-8559-47431a5086d8"/>
+        <COMPID name="edu" mc="Standard.Package" uid="d1f7019f-3614-483a-af31-b76e08300171"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="Sub-Packages Structure Diagram (automatic)" mc="Standard.ClassDiagram" uid="8408006a-ec89-4b3f-adf4-fab999c08397"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

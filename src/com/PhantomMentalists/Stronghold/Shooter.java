@@ -47,6 +47,12 @@ public class Shooter {
     public void manualRunShooter() {
     }
 
+    /**
+     */
+    @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
+    public boolean isUpToSpeed() {
+    }
+
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
     public enum ShooterPosition {
         kLow,

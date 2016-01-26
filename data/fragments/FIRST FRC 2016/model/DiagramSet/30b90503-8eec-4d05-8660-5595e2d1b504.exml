@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="SubPackage Structure" version="4">
+  <OBJECT>
+    <ID name="SubPackage Structure" mc="Standard.DiagramSet" uid="30b90503-8eec-4d05-8660-5595e2d1b504"/>
+    <PID name="Auto Diagrams" mc="Standard.DiagramSet" uid="1f917afb-3fc9-4982-bc32-f10d4127a947"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[SubPackage Structure]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <LINK relation="ReferencedDiagram">
+        <ID name="Sub-Packages Structure Diagram (automatic)" mc="Standard.ClassDiagram" uid="8408006a-ec89-4b3f-adf4-fab999c08397"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

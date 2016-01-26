@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Stronghold" version="4">
+  <OBJECT>
+    <ID name="Stronghold" mc="Standard.Package" uid="3254a605-ad1b-48a5-9ea4-a14ab79fc9b2"/>
+    <PID name="PhantomMentalists" mc="Standard.Package" uid="fc077003-7338-4ddf-8d1d-ab619da02314"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Stronghold]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Telepath" mc="Standard.Class" uid="839537d8-f1f4-49a5-ac60-eaa7467a9f20"/>
+        <COMPID name="WestCoastDrive" mc="Standard.Class" uid="bfe07845-b9da-40e9-a047-c801ee86b209"/>
+        <COMPID name="TankTread" mc="Standard.Class" uid="a38fcf5c-bc25-4155-8afc-05a8335fee44"/>
+        <COMPID name="Shooter" mc="Standard.Class" uid="e7c0967b-bd2b-41d7-a528-2d3f463133d3"/>
+        <COMPID name="ClimbingArm" mc="Standard.Class" uid="899c26b9-be06-403c-b6de-a1d9d8a5322b"/>
+        <COMPID name="DriveUnit" mc="Standard.Class" uid="69d74b75-df80-4243-808f-74bb65f3aa0a"/>
+        <COMPID name="Parameters" mc="Standard.Class" uid="a5f86b3a-a108-4159-9a04-9f7eb8bd5490"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Product">
+        <COMPID name="Stronghold Class diagram" mc="Standard.ClassDiagram" uid="6be8224e-6877-4ebe-9a5c-854f97f68aa6"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
