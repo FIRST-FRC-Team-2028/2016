@@ -5,6 +5,12 @@ import edu.wpi.first.wpilibj.PIDOutput;
 
 @objid ("bfe07845-b9da-40e9-a047-c801ee86b209")
 public class WestCoastDrive implements PIDOutput {
+    /**
+     * <Enter note text here>
+     */
+    @objid ("994a7329-7dde-4b3a-af65-88988500092f")
+    public double turnSetpoint;
+
     @objid ("b8a106fc-3334-47d0-b500-cf128b91b6c0")
     protected DriveUnit leftSide;
 

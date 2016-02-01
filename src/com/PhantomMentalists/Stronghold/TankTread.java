@@ -11,12 +11,6 @@ public class TankTread {
     @objid ("38a1efee-fa70-49db-b68c-adb8fbbd8233")
     protected CANTalon tiltMotor;
 
-    /**
-     * May become a Spike if no speed control is required (and Spikes save weight and/or space compared to Talon)
-     */
-    @objid ("1d94eac0-d4b2-4a8a-a1e4-6c0b611adf80")
-    protected CANTalon driveMotor;
-
     @objid ("ef54315f-71a9-48b1-8840-4441e6e9db2c")
     public TankTread() {
     }

@@ -3,23 +3,19 @@ package com.PhantomMentalists.Stronghold;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 @objid ("839537d8-f1f4-49a5-ac60-eaa7467a9f20")
-public class Telepath extends SampleRobot implements PIDSource {
+public class Telepath extends SampleRobot {
     /**
      * <Enter note text here>
      */
     @objid ("f4bbb171-d580-4f7e-858a-1f36d93dabaa")
     public boolean autopilotEnabled;
 
-    /**
-     * <Enter note text here>
-     */
     @objid ("f6c31ec5-102f-4066-8abb-a43eefb32659")
-    protected TankTread frontTankTread;
+    protected TankTread tankTread;
 
     /**
      * <Enter note text here>
@@ -47,12 +43,6 @@ public class Telepath extends SampleRobot implements PIDSource {
      */
     @objid ("d13607f0-e64f-4d43-8cb5-52ab7f6a9113")
     protected Gyro gyro;
-
-    /**
-     * <Enter note text here>
-     */
-    @objid ("deeac924-c864-4554-b89f-80b73d2bacc5")
-    protected TankTread rearTankTread;
 
     @objid ("6538383a-6e25-4552-ad07-03d18282baf2")
     public void autonomous() {
