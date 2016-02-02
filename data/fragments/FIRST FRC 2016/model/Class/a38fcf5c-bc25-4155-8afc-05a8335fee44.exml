@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="TankTread" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="PusherArm" version="4">
   <OBJECT>
-    <ID name="TankTread" mc="Standard.Class" uid="a38fcf5c-bc25-4155-8afc-05a8335fee44"/>
+    <ID name="PusherArm" mc="Standard.Class" uid="a38fcf5c-bc25-4155-8afc-05a8335fee44"/>
     <PID name="Stronghold" mc="Standard.Package" uid="3254a605-ad1b-48a5-9ea4-a14ab79fc9b2"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>
@@ -11,13 +11,13 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[TankTread]]></ATT>
+      <ATT name="Name"><![CDATA[PusherArm]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedOperation">
         <OBJECT>
-          <ID name="TankTread" mc="Standard.Operation" uid="ef54315f-71a9-48b1-8840-4441e6e9db2c"/>
+          <ID name="PusherArm" mc="Standard.Operation" uid="ef54315f-71a9-48b1-8840-4441e6e9db2c"/>
           <ATTRIBUTES>
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
@@ -25,7 +25,7 @@
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[TankTread]]></ATT>
+            <ATT name="Name"><![CDATA[PusherArm]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
@@ -58,20 +58,6 @@
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
             <ATT name="Name"><![CDATA[manualLower]]></ATT>
-            <ATT name="status">1970354901745664</ATT>
-          </ATTRIBUTES>
-          <DEPENDENCIES></DEPENDENCIES>
-        </OBJECT>
-        <OBJECT>
-          <ID name="manualRun" mc="Standard.Operation" uid="84011ff3-a38d-40cd-b74e-f92f6824adaa"/>
-          <ATTRIBUTES>
-            <ATT name="Concurrency">false</ATT>
-            <ATT name="Final">false</ATT>
-            <ATT name="Passing">MethodOut</ATT>
-            <ATT name="Visibility">Public</ATT>
-            <ATT name="IsClass">false</ATT>
-            <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[manualRun]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES></DEPENDENCIES>
@@ -170,9 +156,41 @@
           </DEPENDENCIES>
         </OBJECT>
       </COMP>
+      <COMP relation="OwnedImport">
+        <OBJECT>
+          <ID name="ElementImport" mc="Standard.ElementImport" uid="afb80123-c64c-4e49-b2bc-53cf605b2d19"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"><![CDATA[ElementImport]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="Parameters" mc="Standard.Class" uid="a5f86b3a-a108-4159-9a04-9f7eb8bd5490"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>
       </LINK>
+      <COMP relation="Descriptor">
+        <OBJECT>
+          <ID name="Note" mc="Standard.Note" uid="fa7f4540-a898-4fa7-8dbc-fb556755b930"/>
+          <ATTRIBUTES>
+            <ATT name="Content"><![CDATA[<p>Author: Ryan</p>
+]]></ATT>
+            <ATT name="MimeType"></ATT>
+            <ATT name="Name"><![CDATA[Note]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
     </DEPENDENCIES>
   </OBJECT>
 </EXT>

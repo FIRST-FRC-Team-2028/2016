@@ -1,5 +1,6 @@
 package com.PhantomMentalists.Stronghold;
 
+import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -40,10 +41,16 @@ public class DriveUnit {
     protected CANTalon followerMotor;
 
     /**
-     * Controls the hardware that changes gears in the DriveUnit's gearbox.
+     * Controls the hardware that sets the gearbox to high gear.
      */
     @objid ("0fb4ba63-1470-4131-a627-451ab5778848")
-    protected Solenoid gearSolenoid;
+    protected Solenoid highGear;
+
+    /**
+     * Controls the hardware that sets the gearbox to low gear.
+     */
+    @objid ("21ea24e8-f7b6-4d61-8baa-d4e1f3550a1d")
+    protected Solenoid lowGear;
 
     /**
      * DriveUnit constructor.  This method initializes all attributes of the DriveUnit to a known state.  It instantiates all hardware attributes (both Talon Motor Controllers and the gear Solenoid) using values from Parameters.  it sets the master Talon Motor Controller in Voltage control mode and sets the follower Talon Motor Controller in follower mode.  It sets the gearbox to low gear.

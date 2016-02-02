@@ -1,5 +1,6 @@
 package com.PhantomMentalists.Stronghold;
 
+import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.PIDOutput;
 
@@ -22,6 +23,7 @@ public class WestCoastDrive implements PIDOutput {
     }
 
     /**
+     * 
      */
     @objid ("a6904588-3865-4548-9fb7-1075a02226d8")
     public void SetSuspension(SuspensionState suspensionState, WheelLocation wheel) {

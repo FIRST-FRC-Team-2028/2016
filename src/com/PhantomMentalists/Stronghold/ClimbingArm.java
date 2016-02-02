@@ -1,9 +1,17 @@
 package com.PhantomMentalists.Stronghold;
 
+import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+import edu.wpi.first.wpilibj.CANTalon;
 
 @objid ("899c26b9-be06-403c-b6de-a1d9d8a5322b")
 public class ClimbingArm {
+    @objid ("534c37a6-0aae-48e4-9ccf-475ca53c092c")
+    protected CANTalon extendRetractMotor;
+
+    @objid ("c7d0df5b-dc61-45b7-bf18-207bbf5d74a8")
+    protected CANTalon raiseLowerMotor;
+
     @objid ("c215a8ac-a925-4c23-aab7-ec75ee354734")
     public ClimbingArm() {
     }

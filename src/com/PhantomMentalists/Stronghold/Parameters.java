@@ -11,13 +11,13 @@ public class Parameters {
      * CAN ID for the first (primary) motor on the left-side Drive Unit.
      */
     @objid ("a46d1d4c-8185-43c1-abd5-648d21706f50")
-    public static final int kLeftMotor1CanId = 21;
+    public static final int kLeftMasterDriveMotorCanId = 21;
 
     /**
      * CAN ID for the second motor powering the Left Drive Unit
      */
     @objid ("1421bb0d-9370-4be8-8702-e551cebf019f")
-    public static final int kLeftMotor2CanId = 12;
+    public static final int kLeftFollowerDriveMotorCanId = 12;
 
     /**
      * This value stores the IP address to the Axis Camera for team 2028.

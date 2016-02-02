@@ -17,7 +17,7 @@
     <DEPENDENCIES>
       <COMP relation="OwnedAttribute">
         <OBJECT>
-          <ID name="kLeftMotor1CanId" mc="Standard.Attribute" uid="a46d1d4c-8185-43c1-abd5-648d21706f50"/>
+          <ID name="kLeftMasterDriveMotorCanId" mc="Standard.Attribute" uid="a46d1d4c-8185-43c1-abd5-648d21706f50"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[21]]></ATT>
@@ -31,7 +31,7 @@
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">true</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[kLeftMotor1CanId]]></ATT>
+            <ATT name="Name"><![CDATA[kLeftMasterDriveMotorCanId]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
@@ -71,7 +71,7 @@
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="kLeftMotor2CanId" mc="Standard.Attribute" uid="1421bb0d-9370-4be8-8702-e551cebf019f"/>
+          <ID name="kLeftFollowerDriveMotorCanId" mc="Standard.Attribute" uid="1421bb0d-9370-4be8-8702-e551cebf019f"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[12]]></ATT>
@@ -85,7 +85,7 @@
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">true</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[kLeftMotor2CanId]]></ATT>
+            <ATT name="Name"><![CDATA[kLeftFollowerDriveMotorCanId]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>

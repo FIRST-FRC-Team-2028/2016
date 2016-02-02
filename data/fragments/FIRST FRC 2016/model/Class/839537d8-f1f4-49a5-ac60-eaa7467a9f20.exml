@@ -304,7 +304,7 @@
           </ATTRIBUTES>
           <DEPENDENCIES>
             <LINK relation="Target">
-              <ID name="TankTread" mc="Standard.Class" uid="a38fcf5c-bc25-4155-8afc-05a8335fee44"/>
+              <ID name="PusherArm" mc="Standard.Class" uid="a38fcf5c-bc25-4155-8afc-05a8335fee44"/>
             </LINK>
             <COMP relation="Opposite">
               <OBJECT>
@@ -825,6 +825,128 @@
             </COMP>
           </DEPENDENCIES>
         </OBJECT>
+        <OBJECT>
+          <ID name="compressor" mc="Standard.AssociationEnd" uid="d2da6e1b-bef0-4381-913a-8415a15e5b2d"/>
+          <ATTRIBUTES>
+            <ATT name="Aggregation">KindIsComposition</ATT>
+            <ATT name="IsChangeable">true</ATT>
+            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Protected</ATT>
+            <ATT name="IsClass">false</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[compressor]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Target">
+              <ID name="Compressor" mc="Standard.Class" uid="ab260faf-a885-40fa-a45a-dafb31aed422"/>
+            </LINK>
+            <COMP relation="Opposite">
+              <OBJECT>
+                <ID name="" mc="Standard.AssociationEnd" uid="16167286-02e9-46b1-b8aa-7dc1f054cf93"/>
+                <ATTRIBUTES>
+                  <ATT name="Aggregation">KindIsAssociation</ATT>
+                  <ATT name="IsChangeable">true</ATT>
+                  <ATT name="Changeable">ReadWrite</ATT>
+                  <ATT name="IsDerived">false</ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="Visibility">Public</ATT>
+                  <ATT name="IsClass">false</ATT>
+                  <ATT name="IsAbstract">false</ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Opposite">
+                    <COMPID name="compressor" mc="Standard.AssociationEnd" uid="d2da6e1b-bef0-4381-913a-8415a15e5b2d"/>
+                  </COMP>
+                  <COMP relation="Association">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Association" uid="f0849b93-b890-41e8-9168-196705671d10"/>
+                      <ATTRIBUTES>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Association">
+              <COMPID name="" mc="Standard.Association" uid="f0849b93-b890-41e8-9168-196705671d10"/>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="ultrasonic" mc="Standard.AssociationEnd" uid="9138d184-226a-4bbc-a217-038faae3c1d4"/>
+          <ATTRIBUTES>
+            <ATT name="Aggregation">KindIsComposition</ATT>
+            <ATT name="IsChangeable">true</ATT>
+            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Protected</ATT>
+            <ATT name="IsClass">false</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[ultrasonic]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Target">
+              <ID name="Ultrasonic" mc="Standard.Class" uid="9a9f8fb9-dd40-4755-acaa-3cbb02a92f5c"/>
+            </LINK>
+            <COMP relation="Opposite">
+              <OBJECT>
+                <ID name="" mc="Standard.AssociationEnd" uid="c6c234a2-ab8c-4956-a955-2f1fa1ccc257"/>
+                <ATTRIBUTES>
+                  <ATT name="Aggregation">KindIsAssociation</ATT>
+                  <ATT name="IsChangeable">true</ATT>
+                  <ATT name="Changeable">ReadWrite</ATT>
+                  <ATT name="IsDerived">false</ATT>
+                  <ATT name="IsOrdered">false</ATT>
+                  <ATT name="IsUnique">false</ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+                  <ATT name="Visibility">Public</ATT>
+                  <ATT name="IsClass">false</ATT>
+                  <ATT name="IsAbstract">false</ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Opposite">
+                    <COMPID name="ultrasonic" mc="Standard.AssociationEnd" uid="9138d184-226a-4bbc-a217-038faae3c1d4"/>
+                  </COMP>
+                  <COMP relation="Association">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Association" uid="dfc330a8-354e-459f-9f46-be31cd0b1b58"/>
+                      <ATTRIBUTES>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Association">
+              <COMPID name="" mc="Standard.Association" uid="dfc330a8-354e-459f-9f46-be31cd0b1b58"/>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
       </COMP>
       <COMP relation="Parent">
         <OBJECT>
@@ -844,25 +966,24 @@
       <COMP relation="OwnedBehavior">
         <COMPID name="Telepath States" mc="Standard.StateMachine" uid="54dc92b2-7b46-49ce-85ab-1860e038db24"/>
       </COMP>
-      <LINK relation="Extension">
-        <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>
-      </LINK>
-      <COMP relation="DependsOnDependency">
+      <COMP relation="OwnedImport">
         <OBJECT>
-          <ID name="" mc="Standard.Dependency" uid="a79519eb-09ff-435b-8737-16d3fbcb520f"/>
+          <ID name="ElementImport" mc="Standard.ElementImport" uid="716ee4d1-2311-4081-ba42-6bf9a787f436"/>
           <ATTRIBUTES>
-            <ATT name="DependsOnId"></ATT>
-            <ATT name="DependsOnName"></ATT>
-            <ATT name="Name"></ATT>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"><![CDATA[ElementImport]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
-            <LINK relation="DependsOn">
+            <LINK relation="ImportedElement">
               <ID name="Parameters" mc="Standard.Class" uid="a5f86b3a-a108-4159-9a04-9f7eb8bd5490"/>
             </LINK>
           </DEPENDENCIES>
         </OBJECT>
       </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>
+      </LINK>
     </DEPENDENCIES>
   </OBJECT>
 </EXT>
