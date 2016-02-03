@@ -657,7 +657,7 @@ this.gear = value;]]></ATT>
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
             <ATT name="Passing">MethodOut</ATT>
-            <ATT name="Visibility">PackageVisibility</ATT>
+            <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
             <ATT name="Name"><![CDATA[getGear]]></ATT>
@@ -1268,6 +1268,57 @@ this.gear = value;]]></ATT>
             </LINK>
           </DEPENDENCIES>
         </OBJECT>
+        <OBJECT>
+          <ID name="Gear" mc="Standard.Enumeration" uid="d18d0297-82a7-46fd-b0cf-1bda39f0d7f9"/>
+          <ATTRIBUTES>
+            <ATT name="IsElementary">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="IsLeaf">false</ATT>
+            <ATT name="IsRoot">false</ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="Name"><![CDATA[Gear]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <COMP relation="Value">
+              <OBJECT>
+                <ID name="kLowGear" mc="Standard.EnumerationLiteral" uid="cb2ae4ce-9e85-4077-88a7-8307b9b1bbc8"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[kLowGear]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="kHighGear" mc="Standard.EnumerationLiteral" uid="20f35c74-b274-4502-8848-6e95002f6b8b"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[kHighGear]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES></DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <LINK relation="Extension">
+              <FOREIGNID name="JavaEnumeration" mc="Standard.Stereotype" uid="01ec23a8-0000-0262-0000-000000000000"/>
+            </LINK>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="1d21b695-c2d5-43f4-9c87-b5bf8e0cf7a5"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
+                  <ATT name="MimeType"></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>
@@ -1276,24 +1327,12 @@ this.gear = value;]]></ATT>
         <OBJECT>
           <ID name="" mc="Standard.Note" uid="83467336-3bb4-40e6-8ab5-f7d832f655ba"/>
           <ATTRIBUTES>
-            <ATT name="Content"><![CDATA[DriveUnit encapsulates all the hardware that makes one side of the robot drive.  There will always be two instances of DriveUnit, one controlling the left side and one controlling the right side.  Each DriveUnit has two Talon Motor Controllers, configured as master/follower as well as a Solenoid to change gears in the gearbox.  Each gearbox has a quadrature encoder that measures the speed of the gearbox which can be used to give the DriveUnit's motors a speed setpoint (as opposed to a percentage of bus voltage output).]]></ATT>
+            <ATT name="Content"><![CDATA[DriveUnit encapsulates all the hardware that makes one side of the robot drive.  There will always be two instances of DriveUnit, one controlling the left side and one controlling the right side.  Each DriveUnit has two Talon Motor Controllers, configured as master/follower as well as a Solenoid to change gears in the gearbox.  Each gearbox has a quadrature encoder that measures the speed of the gearbox which can be used to give the DriveUnit's motors a speed setpoint (as opposed to a percentage of bus voltage output).
+
+@author Diego
+]]></ATT>
             <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
             <ATT name="Name"></ATT>
-            <ATT name="status">1970354901745664</ATT>
-          </ATTRIBUTES>
-          <DEPENDENCIES>
-            <LINK relation="Model">
-              <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
-            </LINK>
-          </DEPENDENCIES>
-        </OBJECT>
-        <OBJECT>
-          <ID name="Note" mc="Standard.Note" uid="555815c2-a15f-4e24-a667-3ffaeff84437"/>
-          <ATTRIBUTES>
-            <ATT name="Content"><![CDATA[<p>Author: Diego</p>
-]]></ATT>
-            <ATT name="MimeType"></ATT>
-            <ATT name="Name"><![CDATA[Note]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>

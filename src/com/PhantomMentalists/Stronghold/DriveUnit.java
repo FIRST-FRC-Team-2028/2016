@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * DriveUnit encapsulates all the hardware that makes one side of the robot drive.  There will always be two instances of DriveUnit, one controlling the left side and one controlling the right side.  Each DriveUnit has two Talon Motor Controllers, configured as master/follower as well as a Solenoid to change gears in the gearbox.  Each gearbox has a quadrature encoder that measures the speed of the gearbox which can be used to give the DriveUnit's motors a speed setpoint (as opposed to a percentage of bus voltage output).
+ * 
+ * @author Diego
  */
 @objid ("69d74b75-df80-4243-808f-74bb65f3aa0a")
 public class DriveUnit {
@@ -26,7 +28,7 @@ public class DriveUnit {
      * This attribute stores the gear the DriveUnit's gearbox should be in.
      */
     @objid ("68cc68bf-030b-4f27-aefb-dc90d58f4c1f")
-    protected GearSelection gear;
+    protected Gear gear;
 
     /**
      * Master Talon Speed Controller.  This device controls the output voltage either in speed control mode (i.e., getting a setpoint and using the quadrature encoder to maintain that speed) or voltage control (i.e., setting the output to a percentage of the bus voltage).
@@ -109,17 +111,6 @@ public class DriveUnit {
     }
 
     /**
-     * Returns the gearbox gear.
-     * 
-     * @returns GearSelection - the gear the gearbox is in.
-     */
-    @objid ("2cfac25a-2c6d-4687-8320-e4c174d5ea81")
-    public GearSelection getGear() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.gear;
-    }
-
-    /**
      * Returns the placement
      * 
      * @returns Placement - The location of the DriveUnit
@@ -136,21 +127,30 @@ public class DriveUnit {
      * @param value - the gear (Low or High) to set the gearbox to.
      */
     @objid ("07a16abf-c1bb-4ebe-a0a0-9cee9c2b7b66")
-    public void setGear(GearSelection value) {
+    public void setGear(Gear value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.gear = value;
     }
 
-    @objid ("03f75dd6-ebef-46e3-af08-99fe8154fc8b")
-    public enum GearSelection {
-        kLowGear,
-        kHighGear;
+    @objid ("e4914053-d1c5-48d3-9a8a-aeefb3c7c402")
+    public Gear getGear() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.gear;
     }
 
     @objid ("b87fda8c-c9ff-4309-987b-05d2794dfab0")
     public enum Placement {
         Left,
         Right;
+    }
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("d18d0297-82a7-46fd-b0cf-1bda39f0d7f9")
+    public enum Gear {
+        kLowGear,
+        kHighGear;
     }
 
 }

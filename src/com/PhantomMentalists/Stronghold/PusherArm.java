@@ -4,6 +4,9 @@ import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.CANTalon;
 
+/**
+ * <p>Author: Ryan</p>
+ */
 @objid ("a38fcf5c-bc25-4155-8afc-05a8335fee44")
 public class PusherArm {
     /**

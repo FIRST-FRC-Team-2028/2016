@@ -8,9 +8,14 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * This class encapsulates the state (attributes) and logic (methods) required to control Telepath's shooter to score points by hurling a boulder into the high goal.
+ * 
+ * @author Nazhere and Moose
  */
 @objid ("e7c0967b-bd2b-41d7-a528-2d3f463133d3")
 public class Shooter {
+    @objid ("871f3fd5-0de0-4432-868a-82369fcf07de")
+    public Solenoid Kicker;
+
     @objid ("6684d714-fbb6-42f7-91d5-a80c4aa7b92e")
     protected DigitalInput ballSensor;
 
@@ -35,7 +40,6 @@ public class Shooter {
     }
 
     /**
-     * 
      */
     @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
     public boolean isBallLoaded() {
@@ -49,16 +53,11 @@ public class Shooter {
     public void manualRunBallFeeder() {
     }
 
-    @objid ("d1df8542-0d68-4c46-a1e7-cd12eb759c65")
-    public void manualRunShooterHood() {
-    }
-
     @objid ("eba4d1df-2aa2-4f39-b3a7-f0ca4f9b6626")
     public void manualRunShooter() {
     }
 
     /**
-     * 
      */
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
     public boolean isUpToSpeed() {
