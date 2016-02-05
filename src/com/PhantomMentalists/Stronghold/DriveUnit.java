@@ -60,7 +60,8 @@ public class DriveUnit {
      * @param placement - Identifies if this DriveUnit is mounted on the left or right side of the robot.
      */
     @objid ("72aba1e2-59da-49cd-914f-a0aba060f665")
-    public DriveUnit(Placement placement) {
+    public DriveUnit(Placement placements) {
+    	placement = placements;
     }
 
     /**
@@ -99,6 +100,7 @@ public class DriveUnit {
      */
     @objid ("ff98472c-d4a4-4aa7-815a-ae058c161375")
     public boolean isSpeedControlEnabled() {
+    	return false;
     }
 
     /**

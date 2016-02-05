@@ -3,7 +3,7 @@ package com.PhantomMentalists.Stronghold;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 @objid ("839537d8-f1f4-49a5-ac60-eaa7467a9f20")
 public class Telepath extends SampleRobot {
+	
     /**
      * <Enter note text here>
      */
@@ -45,7 +46,7 @@ public class Telepath extends SampleRobot {
      * <Enter note text here>
      */
     @objid ("d13607f0-e64f-4d43-8cb5-52ab7f6a9113")
-    protected Gyro gyro;
+    protected AnalogGyro gyro;
 
     @objid ("d2da6e1b-bef0-4381-913a-8415a15e5b2d")
     protected Compressor compressor;
@@ -59,6 +60,10 @@ public class Telepath extends SampleRobot {
 
     @objid ("a9a437aa-9281-40cd-a90f-1fa3eec18b3c")
     public void operatorControl() {
+    	while(isOperatorControl() && isEnabled())
+    	{
+    		
+    	}
     }
 
     @objid ("bc395b50-2496-4ddf-b4ca-1891ed75cbb4")
@@ -70,10 +75,12 @@ public class Telepath extends SampleRobot {
      */
     @objid ("1b4fdd3a-dca2-4cca-93c8-4daa1f3253b4")
     public double getRangeToTarget() {
+    	return 0;
     }
 
     @objid ("92f9f534-aeba-40f2-849c-24d5ee83688c")
     public double getAngleToTarget() {
+    	return 0;
     }
 
     /**
@@ -82,6 +89,7 @@ public class Telepath extends SampleRobot {
      */
     @objid ("e92caffb-11f7-41f4-acdc-b40ce1d43e94")
     public double pidGet() {
+    	return 0;
     }
 
     @objid ("b2f54c9f-b426-4269-aabb-1604a583d152")

@@ -50,7 +50,7 @@ public class Parameters {
      * <Enter note text here>
      */
     @objid ("fe6208ba-4d13-4928-b0c0-dea88626ef4e")
-    public static final String kClimberAngleMotorCanId = 43;
+    public static final int kClimberAngleMotorCanId = 43;
 
     /**
      * <Enter note text here>
@@ -71,6 +71,6 @@ public class Parameters {
      * <Enter note text here>
      */
     @objid ("84c6a947-3dd9-40ea-a483-650ecea1dbfb")
-    public static final String kCameraIpAddress = 10.20.28.11;
+    public static final String kCameraIpAddress = "10.20.28.11";
 
 }

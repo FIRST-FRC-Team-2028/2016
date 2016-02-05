@@ -43,6 +43,7 @@ public class Shooter {
      */
     @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
     public boolean isBallLoaded() {
+    	return false;
     }
 
     @objid ("f1761ce3-8d39-43f8-9b3c-6adaedaec7ad")
@@ -61,6 +62,7 @@ public class Shooter {
      */
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
     public boolean isUpToSpeed() {
+    	return false;
     }
 
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
