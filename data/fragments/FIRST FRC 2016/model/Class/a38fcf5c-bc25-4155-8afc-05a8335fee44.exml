@@ -79,11 +79,11 @@
       </COMP>
       <COMP relation="OwnedEnd">
         <OBJECT>
-          <ID name="tiltMotor" mc="Standard.AssociationEnd" uid="38a1efee-fa70-49db-b68c-adb8fbbd8233"/>
+          <ID name="tiltMotor" mc="Standard.AssociationEnd" uid="4db7315e-daa2-48ed-a50e-6c2ebb928eab"/>
           <ATTRIBUTES>
             <ATT name="Aggregation">KindIsComposition</ATT>
             <ATT name="IsChangeable">true</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -101,7 +101,7 @@
             </LINK>
             <COMP relation="Opposite">
               <OBJECT>
-                <ID name="" mc="Standard.AssociationEnd" uid="fff3437d-a6ef-46bc-8a22-a8cc498119b0"/>
+                <ID name="" mc="Standard.AssociationEnd" uid="1c6bcc7f-2079-4192-9ac1-57c69cae850b"/>
                 <ATTRIBUTES>
                   <ATT name="Aggregation">KindIsAssociation</ATT>
                   <ATT name="IsChangeable">true</ATT>
@@ -109,7 +109,7 @@
                   <ATT name="IsDerived">false</ATT>
                   <ATT name="IsOrdered">false</ATT>
                   <ATT name="IsUnique">false</ATT>
-                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[0]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="Visibility">Public</ATT>
                   <ATT name="IsClass">false</ATT>
@@ -119,11 +119,11 @@
                 </ATTRIBUTES>
                 <DEPENDENCIES>
                   <COMP relation="Opposite">
-                    <COMPID name="tiltMotor" mc="Standard.AssociationEnd" uid="38a1efee-fa70-49db-b68c-adb8fbbd8233"/>
+                    <COMPID name="tiltMotor" mc="Standard.AssociationEnd" uid="4db7315e-daa2-48ed-a50e-6c2ebb928eab"/>
                   </COMP>
                   <COMP relation="Association">
                     <OBJECT>
-                      <ID name="" mc="Standard.Association" uid="cc572880-e5aa-4eaa-96c3-47a47d156fa6"/>
+                      <ID name="" mc="Standard.Association" uid="40568853-123f-4527-b661-cbb3951ec5a8"/>
                       <ATTRIBUTES>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -135,14 +135,28 @@
               </OBJECT>
             </COMP>
             <COMP relation="Association">
-              <COMPID name="" mc="Standard.Association" uid="cc572880-e5aa-4eaa-96c3-47a47d156fa6"/>
+              <COMPID name="" mc="Standard.Association" uid="40568853-123f-4527-b661-cbb3951ec5a8"/>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="1a70474c-fc9e-4b58-b467-4b082694c6fc"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
             </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
-                <ID name="" mc="Standard.Note" uid="ae1bf6fa-1d44-4c03-9e9c-7a40918d1923"/>
+                <ID name="" mc="Standard.Note" uid="21308f2c-c6b7-43e6-a67b-a79fca614524"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -178,9 +192,8 @@
         <OBJECT>
           <ID name="Note" mc="Standard.Note" uid="fa7f4540-a898-4fa7-8dbc-fb556755b930"/>
           <ATTRIBUTES>
-            <ATT name="Content"><![CDATA[<p>Author: Ryan</p>
-]]></ATT>
-            <ATT name="MimeType"></ATT>
+            <ATT name="Content"><![CDATA[<p>Author: Ryan</p>]]></ATT>
+            <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
             <ATT name="Name"><![CDATA[Note]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>

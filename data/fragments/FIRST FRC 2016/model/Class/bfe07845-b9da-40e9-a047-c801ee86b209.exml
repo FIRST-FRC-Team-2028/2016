@@ -70,7 +70,7 @@
                   </LINK>
                   <COMP relation="Descriptor">
                     <OBJECT>
-                      <ID name="" mc="Standard.Note" uid="0fbaac39-63ba-4069-8d7c-8cb850f1bc22"/>
+                      <ID name="" mc="Standard.Note" uid="317a0f16-e664-486c-a57d-709eeb737f75"/>
                       <ATTRIBUTES>
                         <ATT name="Content"><![CDATA[the value calculated by PIDController]]></ATT>
                         <ATT name="MimeType"></ATT>
@@ -79,7 +79,7 @@
                       </ATTRIBUTES>
                       <DEPENDENCIES>
                         <LINK relation="Model">
-                          <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="01240268-0000-0044-0000-000000000000"/>
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
                         </LINK>
                       </DEPENDENCIES>
                     </OBJECT>
@@ -94,16 +94,16 @@
             </LINK>
             <COMP relation="Descriptor">
               <OBJECT>
-                <ID name="" mc="Standard.Note" uid="bbbc50b4-a7a1-4a26-8b06-e16bf6f2c2b0"/>
+                <ID name="" mc="Standard.Note" uid="ec37373b-2116-4cda-9e45-dd1fabe09078"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[Set the output to the value calculated by PIDController]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES>
                   <LINK relation="Model">
-                    <FOREIGNID name="Javadoc" mc="Standard.NoteType" uid="003800a8-0000-015f-0000-000000000000"/>
+                    <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
@@ -186,6 +186,22 @@
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="9764def5-6ebe-440c-a6d6-b4c06f91cb62"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[return 0;]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="JavaReturned" mc="Standard.NoteType" uid="003800a8-0000-0190-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
@@ -227,9 +243,6 @@
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
-            <LINK relation="Extension">
-              <FOREIGNID name="JavaGetter" mc="Standard.Stereotype" uid="01ec25e8-0000-00f0-0000-000000000000"/>
-            </LINK>
             <COMP relation="DependsOnDependency">
               <OBJECT>
                 <ID name="" mc="Standard.Dependency" uid="364d71bf-8513-42de-bab8-4d0df6537782"/>
@@ -256,7 +269,7 @@
                 <ID name="" mc="Standard.Note" uid="d4f0a3ec-6d28-4ce9-9937-7ba39c017217"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[// Automatically generated method. Please delete this comment before entering specific code.]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -270,7 +283,7 @@
                 <ID name="" mc="Standard.Note" uid="58acf333-4320-4810-81d5-3158c689bcc3"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[return this.gear;]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -322,9 +335,6 @@
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
-            <LINK relation="Extension">
-              <FOREIGNID name="JavaSetter" mc="Standard.Stereotype" uid="01ec25e8-0000-00f5-0000-000000000000"/>
-            </LINK>
             <COMP relation="DependsOnDependency">
               <OBJECT>
                 <ID name="" mc="Standard.Dependency" uid="2ec83688-0586-4194-874d-0d30fa12d352"/>
@@ -351,8 +361,9 @@
                 <ID name="" mc="Standard.Note" uid="8a208b48-a3f3-4f25-86aa-53ccfe1b686b"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[// Automatically generated method. Please delete this comment before entering specific code.
-this.gear = value;]]></ATT>
-                  <ATT name="MimeType"></ATT>
+this.gear = value;
+]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -373,7 +384,7 @@ this.gear = value;]]></ATT>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -389,12 +400,26 @@ this.gear = value;]]></ATT>
             <LINK relation="Type">
               <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
             </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="e80a32df-e7cb-4abe-8506-556e385511ef"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="9844c7d4-b314-4004-890f-87de0e6633a7"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -411,9 +436,9 @@ this.gear = value;]]></ATT>
           <ID name="gear" mc="Standard.Attribute" uid="28bc5bec-15fd-4924-b01c-5f725341e189"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
-            <ATT name="Value"><![CDATA[kLow]]></ATT>
+            <ATT name="Value"><![CDATA[Gear.kLowGear]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -456,7 +481,7 @@ this.gear = value;]]></ATT>
           <ATTRIBUTES>
             <ATT name="Aggregation">KindIsComposition</ATT>
             <ATT name="IsChangeable">true</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -510,6 +535,20 @@ this.gear = value;]]></ATT>
             <COMP relation="Association">
               <COMPID name="" mc="Standard.Association" uid="0c5747dd-8c55-4b42-941a-021f1843a0de"/>
             </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="236331ad-3c32-4edf-9063-ce495a5d2fba"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
@@ -517,7 +556,7 @@ this.gear = value;]]></ATT>
           <ATTRIBUTES>
             <ATT name="Aggregation">KindIsComposition</ATT>
             <ATT name="IsChangeable">true</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -571,14 +610,28 @@ this.gear = value;]]></ATT>
             <COMP relation="Association">
               <COMPID name="" mc="Standard.Association" uid="fa9d6164-b793-46e6-b1da-b87dc8c2e2ab"/>
             </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="5ea83834-3200-4240-b3d9-cd8fc52e374e"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
           </DEPENDENCIES>
         </OBJECT>
       </COMP>
       <COMP relation="Realized">
         <OBJECT>
-          <ID name="InterfaceRealization" mc="Standard.InterfaceRealization" uid="4097617c-1f5c-4317-a71e-dde90ae298c4"/>
+          <ID name="" mc="Standard.InterfaceRealization" uid="6462197c-dba8-4acb-9a29-6d5db6d73074"/>
           <ATTRIBUTES>
-            <ATT name="Name"><![CDATA[InterfaceRealization]]></ATT>
+            <ATT name="Name"></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
@@ -599,19 +652,6 @@ this.gear = value;]]></ATT>
           <DEPENDENCIES>
             <LINK relation="ImportedElement">
               <ID name="Parameters" mc="Standard.Class" uid="a5f86b3a-a108-4159-9a04-9f7eb8bd5490"/>
-            </LINK>
-          </DEPENDENCIES>
-        </OBJECT>
-        <OBJECT>
-          <ID name="ElementImport" mc="Standard.ElementImport" uid="13d2a84b-21d7-47d0-8fcc-7544d2cb5d24"/>
-          <ATTRIBUTES>
-            <ATT name="Visibility">Private</ATT>
-            <ATT name="Name"><![CDATA[ElementImport]]></ATT>
-            <ATT name="status">1970354901745664</ATT>
-          </ATTRIBUTES>
-          <DEPENDENCIES>
-            <LINK relation="ImportedElement">
-              <ID name="DriveUnit" mc="Standard.Class" uid="69d74b75-df80-4243-808f-74bb65f3aa0a"/>
             </LINK>
           </DEPENDENCIES>
         </OBJECT>
@@ -641,9 +681,8 @@ this.gear = value;]]></ATT>
         <OBJECT>
           <ID name="Note" mc="Standard.Note" uid="8c9cfcac-a9d6-4852-9658-aa7055a25f7d"/>
           <ATTRIBUTES>
-            <ATT name="Content"><![CDATA[<p>Author: Zavion</p>
-]]></ATT>
-            <ATT name="MimeType"></ATT>
+            <ATT name="Content"><![CDATA[<p>Author: Zavion</p>]]></ATT>
+            <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
             <ATT name="Name"><![CDATA[Note]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>

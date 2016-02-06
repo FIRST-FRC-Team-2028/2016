@@ -22,7 +22,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[21]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -76,7 +76,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[22]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -130,7 +130,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[11]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -184,7 +184,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[12]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -238,7 +238,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[51]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -292,7 +292,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[33]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -330,7 +330,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[32]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -368,7 +368,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[31]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -406,7 +406,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[43]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -420,7 +420,7 @@
           </ATTRIBUTES>
           <DEPENDENCIES>
             <LINK relation="Type">
-              <FOREIGNID name="string" mc="Standard.DataType" uid="00000004-0000-000d-0000-000000000000"/>
+              <FOREIGNID name="integer" mc="Standard.DataType" uid="00000004-0000-0009-0000-000000000000"/>
             </LINK>
             <COMP relation="Tag">
               <OBJECT>
@@ -460,7 +460,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[42]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -514,7 +514,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[41]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -568,7 +568,7 @@
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"><![CDATA[44]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -604,9 +604,9 @@
           <ID name="kCameraIpAddress" mc="Standard.Attribute" uid="84c6a947-3dd9-40ea-a483-650ecea1dbfb"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
-            <ATT name="Value"><![CDATA[10.20.28.11]]></ATT>
+            <ATT name="Value"><![CDATA["10.20.28.11"]]></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">Read</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -620,7 +620,7 @@
           </ATTRIBUTES>
           <DEPENDENCIES>
             <LINK relation="Type">
-              <FOREIGNID name="string" mc="Standard.DataType" uid="00000004-0000-000d-0000-000000000000"/>
+              <ID name="String" mc="Standard.Class" uid="38435926-6957-497e-9238-0c3706da4cff"/>
             </LINK>
             <COMP relation="Tag">
               <OBJECT>
@@ -635,10 +635,86 @@
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="7b950c75-3079-4fc1-8f31-2d92f916c4c1"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Actual">
+                    <OBJECT>
+                      <ID name="" mc="Standard.TagParameter" uid="e55fe720-79d6-475e-aec7-e4399691253b"/>
+                      <ATTRIBUTES>
+                        <ATT name="Value"><![CDATA[String]]></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES></DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaTypeExpr" mc="Standard.TagType" uid="003800a8-0000-0165-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
             </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="9f46f195-72a4-444d-b4b0-57372947220f"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+          </DEPENDENCIES>
+        </OBJECT>
+        <OBJECT>
+          <ID name="delay" mc="Standard.Attribute" uid="7845afef-ef6b-4ac8-af0a-df9c3c2140db"/>
+          <ATTRIBUTES>
+            <ATT name="TypeConstraint"></ATT>
+            <ATT name="Value"><![CDATA[0.05]]></ATT>
+            <ATT name="TargetIsClass">false</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
+            <ATT name="IsDerived">false</ATT>
+            <ATT name="IsOrdered">false</ATT>
+            <ATT name="IsUnique">false</ATT>
+            <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+            <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
+            <ATT name="Visibility">Public</ATT>
+            <ATT name="IsClass">true</ATT>
+            <ATT name="IsAbstract">false</ATT>
+            <ATT name="Name"><![CDATA[delay]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Type">
+              <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
+            </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="5d290180-7ea8-4941-9fa7-0df63fbe88d0"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="9de46464-db38-4dfb-b2eb-2a89c10c480c"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>

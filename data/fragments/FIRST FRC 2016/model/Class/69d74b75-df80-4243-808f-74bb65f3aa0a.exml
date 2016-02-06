@@ -31,7 +31,7 @@
           <DEPENDENCIES>
             <COMP relation="IO">
               <OBJECT>
-                <ID name="placement" mc="Standard.Parameter" uid="38264a53-1b66-4184-8d4a-5933b015f71e"/>
+                <ID name="placements" mc="Standard.Parameter" uid="5581c036-0d2c-498c-9549-3742ab2af97e"/>
                 <ATTRIBUTES>
                   <ATT name="ParameterPassing">In</ATT>
                   <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
@@ -43,7 +43,7 @@
                   <ATT name="IsException">false</ATT>
                   <ATT name="IsStream">false</ATT>
                   <ATT name="Effect">ReadEffect</ATT>
-                  <ATT name="Name"><![CDATA[placement]]></ATT>
+                  <ATT name="Name"><![CDATA[placements]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES>
@@ -63,7 +63,6 @@
                 <ID name="" mc="Standard.Note" uid="8bece6f3-4d27-44a1-9cd6-612a637512af"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[DriveUnit constructor.  This method initializes all attributes of the DriveUnit to a known state.  It instantiates all hardware attributes (both Talon Motor Controllers and the gear Solenoid) using values from Parameters.  it sets the master Talon Motor Controller in Voltage control mode and sets the follower Talon Motor Controller in follower mode.  It sets the gearbox to low gear.
-
 @param placement - Identifies if this DriveUnit is mounted on the left or right side of the robot.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
@@ -72,6 +71,20 @@
                 <DEPENDENCIES>
                   <LINK relation="Model">
                     <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="53d737b6-e778-4a0e-b1ed-4337587a0baf"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[placement = placements;]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="JavaCode" mc="Standard.NoteType" uid="003800a8-0000-018e-0000-000000000000"/>
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
@@ -115,9 +128,6 @@
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
-            <LINK relation="Extension">
-              <FOREIGNID name="JavaGetter" mc="Standard.Stereotype" uid="01ec25e8-0000-00f0-0000-000000000000"/>
-            </LINK>
             <COMP relation="DependsOnDependency">
               <OBJECT>
                 <ID name="" mc="Standard.Dependency" uid="fe73c939-c4d6-439e-a990-70ee6f014188"/>
@@ -144,7 +154,7 @@
                 <ID name="" mc="Standard.Note" uid="80d7467c-ac14-41fe-b708-7bd8b0e1af91"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[// Automatically generated method. Please delete this comment before entering specific code.]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -158,7 +168,7 @@
                 <ID name="" mc="Standard.Note" uid="1be187c1-991e-4e71-8fdd-d4190b11aa1f"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[return this.speedSetpoint;]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -172,8 +182,7 @@
                 <ID name="" mc="Standard.Note" uid="debf615f-d5d3-496a-9ec2-619a2dead3d6"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[Returns the setpoint.
-
-@returns double - setpoint of the drive motor controller as a percentage in the range -1.0 .. 0 .. 1.0 where negative values indicate reverse and positive values indicate forward.  ]]></ATT>
+@returns double - setpoint of the drive motor controller as a percentage in the range -1.0 .. 0 .. 1.0 where negative values indicate reverse and positive values indicate forward.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -221,12 +230,25 @@
                   <LINK relation="Type">
                     <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
                   </LINK>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="2a5477c2-35fe-4549-8032-da7091e17331"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[- Percentage of the motor's output in the range -1.0 .. 0 .. 1.0 where negative values indicate reverse and positive values indicate forward.]]></ATT>
+                        <ATT name="MimeType"></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
-            <LINK relation="Extension">
-              <FOREIGNID name="JavaSetter" mc="Standard.Stereotype" uid="01ec25e8-0000-00f5-0000-000000000000"/>
-            </LINK>
             <COMP relation="DependsOnDependency">
               <OBJECT>
                 <ID name="" mc="Standard.Dependency" uid="752aa5d9-7af1-4f29-87b1-1e828bbb908a"/>
@@ -253,8 +275,9 @@
                 <ID name="" mc="Standard.Note" uid="3decaa7b-c082-4851-aac7-fc1216b1dffe"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[// Automatically generated method. Please delete this comment before entering specific code.
-this.speedSetpoint = value;]]></ATT>
-                  <ATT name="MimeType"></ATT>
+this.speedSetpoint = value;
+]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -267,9 +290,7 @@ this.speedSetpoint = value;]]></ATT>
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="f62e0242-cf7d-4138-870d-b33fe5194b70"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Sets the motor controller setpoint.
-
-@param value - Percentage of the motor's output in the range -1.0 .. 0 .. 1.0 where negative values indicate reverse and positive values indicate forward.]]></ATT>
+                  <ATT name="Content"><![CDATA[Sets the motor controller setpoint.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -356,7 +377,6 @@ this.speedSetpoint = value;]]></ATT>
                 <ID name="" mc="Standard.Note" uid="269a6c00-77a5-407e-8cf1-f089099940b6"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[Queries if the masterMotor is in speed control mode
-
 @returns boolean - true if Talon Speed Controller is in speed control mode, false otherwise.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
@@ -365,6 +385,20 @@ this.speedSetpoint = value;]]></ATT>
                 <DEPENDENCIES>
                   <LINK relation="Model">
                     <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="5cde2616-2eb7-4b7d-a4f8-b2efb9334325"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[return false;]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="JavaReturned" mc="Standard.NoteType" uid="003800a8-0000-0190-0000-000000000000"/>
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
@@ -405,6 +439,22 @@ this.speedSetpoint = value;]]></ATT>
                   <LINK relation="Type">
                     <FOREIGNID name="boolean" mc="Standard.DataType" uid="00000004-0000-0005-0000-000000000000"/>
                   </LINK>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="d06c2994-b04e-42a1-b9e7-ddff1596a8af"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[- true enables speed control (if it is not in speed control mode), false enables voltage control (only if it is not in voltage control mode already).]]></ATT>
+                        <ATT name="MimeType"></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
@@ -412,9 +462,7 @@ this.speedSetpoint = value;]]></ATT>
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="952ea610-6497-46cb-a83f-8431dba7dfd0"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Enables or disables the Talon Motor Controller's speed control.  Note:  This method must check the current state of the masterMotor's speed control setting before changing it.
-
-@param speedControlEnabled - true enables speed control (if it is not in speed control mode), false enables voltage control (only if it is not in voltage control mode already).]]></ATT>
+                  <ATT name="Content"><![CDATA[Enables or disables the Talon Motor Controller's speed control.  Note:  This method must check the current state of the masterMotor's speed control setting before changing it.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -464,26 +512,9 @@ this.speedSetpoint = value;]]></ATT>
                       <ID name="Placement" mc="Standard.Enumeration" uid="b87fda8c-c9ff-4309-987b-05d2794dfab0"/>
                     </REFOBJ>
                   </LINK>
-                  <COMP relation="Tag">
-                    <OBJECT>
-                      <ID name="" mc="Standard.TaggedValue" uid="59b49814-deaa-4c08-a440-ec8b72863541"/>
-                      <ATTRIBUTES>
-                        <ATT name="Name"></ATT>
-                        <ATT name="status">1970354901745664</ATT>
-                      </ATTRIBUTES>
-                      <DEPENDENCIES>
-                        <LINK relation="Definition">
-                          <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="eb8c1900-000a-b31d-0000-000000000000"/>
-                        </LINK>
-                      </DEPENDENCIES>
-                    </OBJECT>
-                  </COMP>
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
-            <LINK relation="Extension">
-              <FOREIGNID name="JavaGetter" mc="Standard.Stereotype" uid="01ec25e8-0000-00f0-0000-000000000000"/>
-            </LINK>
             <COMP relation="DependsOnDependency">
               <OBJECT>
                 <ID name="" mc="Standard.Dependency" uid="b3d34c8c-5ff7-41b1-a86a-b78019a11ebb"/>
@@ -510,7 +541,7 @@ this.speedSetpoint = value;]]></ATT>
                 <ID name="" mc="Standard.Note" uid="91eeaf13-c052-4b12-8210-ee6fba2e2b10"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[// Automatically generated method. Please delete this comment before entering specific code.]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -524,7 +555,7 @@ this.speedSetpoint = value;]]></ATT>
                 <ID name="" mc="Standard.Note" uid="a0dd8ede-2b1b-4938-8193-69ffffde3614"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[return this.placement;]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -538,7 +569,6 @@ this.speedSetpoint = value;]]></ATT>
                 <ID name="" mc="Standard.Note" uid="ce099104-36e2-435a-9aa5-15d6f332beee"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[Returns the placement
-
 @returns Placement - The location of the DriveUnit]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
@@ -589,12 +619,25 @@ this.speedSetpoint = value;]]></ATT>
                       <ID name="Gear" mc="Standard.Enumeration" uid="d18d0297-82a7-46fd-b0cf-1bda39f0d7f9"/>
                     </REFOBJ>
                   </LINK>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="f60a4e47-25bb-4c9e-ba43-df332f05c5e9"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[- the gear (Low or High) to set the gearbox to.]]></ATT>
+                        <ATT name="MimeType"></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
-            <LINK relation="Extension">
-              <FOREIGNID name="JavaSetter" mc="Standard.Stereotype" uid="01ec25e8-0000-00f5-0000-000000000000"/>
-            </LINK>
             <COMP relation="DependsOnDependency">
               <OBJECT>
                 <ID name="" mc="Standard.Dependency" uid="08f65016-fb93-455b-83f9-c501d0e3b1ca"/>
@@ -621,8 +664,9 @@ this.speedSetpoint = value;]]></ATT>
                 <ID name="" mc="Standard.Note" uid="7d7cd243-7ae2-4b19-b54f-e1973727dbae"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[// Automatically generated method. Please delete this comment before entering specific code.
-this.gear = value;]]></ATT>
-                  <ATT name="MimeType"></ATT>
+this.gear = value;
+]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -635,9 +679,7 @@ this.gear = value;]]></ATT>
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="3a33332a-295f-412b-a52e-33d19273278f"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Sets the gearbox gear.
-
-@param value - the gear (Low or High) to set the gearbox to.]]></ATT>
+                  <ATT name="Content"><![CDATA[Sets the gearbox gear.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -690,9 +732,6 @@ this.gear = value;]]></ATT>
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
-            <LINK relation="Extension">
-              <FOREIGNID name="JavaGetter" mc="Standard.Stereotype" uid="01ec25e8-0000-00f0-0000-000000000000"/>
-            </LINK>
             <COMP relation="DependsOnDependency">
               <OBJECT>
                 <ID name="" mc="Standard.Dependency" uid="132e8521-0217-4a94-9dc3-1a15a9cc0bf9"/>
@@ -719,7 +758,7 @@ this.gear = value;]]></ATT>
                 <ID name="" mc="Standard.Note" uid="ced85645-0a98-4193-b8a4-db2f8a5276ae"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[// Automatically generated method. Please delete this comment before entering specific code.]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -733,7 +772,7 @@ this.gear = value;]]></ATT>
                 <ID name="" mc="Standard.Note" uid="f0185b60-5b2b-4189-8316-d7b549683588"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[return this.gear;]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -754,7 +793,7 @@ this.gear = value;]]></ATT>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"></ATT>
             <ATT name="TargetIsClass">false</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -770,12 +809,25 @@ this.gear = value;]]></ATT>
             <LINK relation="Type">
               <FOREIGNID name="double" mc="Standard.DataType" uid="00000004-0000-0010-0000-000000000000"/>
             </LINK>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="1277bfa0-564d-4d30-ba81-b359b4a0b199"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="87230bc9-6a72-47cd-af70-08967bd97fec"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[speedSetpoint is the speed the drive motors should be running in the range of -1.0 .. 0 .. 1.0 where zero is stopped, negative numbers are reverse (up to 100% at -1.0) and positive numbers are forward (up to 100% at 1.0).
-]]></ATT>
+                  <ATT name="Content"><![CDATA[speedSetpoint is the speed the drive motors should be running in the range of -1.0 .. 0 .. 1.0 where zero is stopped, negative numbers are reverse (up to 100% at -1.0) and positive numbers are forward (up to 100% at 1.0).]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -815,7 +867,7 @@ this.gear = value;]]></ATT>
             </LINK>
             <COMP relation="Tag">
               <OBJECT>
-                <ID name="" mc="Standard.TaggedValue" uid="de573ff8-5e0e-479e-9273-5394169ba1a7"/>
+                <ID name="" mc="Standard.TaggedValue" uid="e98a0610-ec58-4f60-a283-188cb0354080"/>
                 <ATTRIBUTES>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -823,6 +875,18 @@ this.gear = value;]]></ATT>
                 <DEPENDENCIES>
                   <LINK relation="Definition">
                     <FOREIGNID name="JavaFinal" mc="Standard.TagType" uid="003800a8-0000-0161-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="ec8966ae-3e22-4685-8dd9-47c269384c14"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
                   </LINK>
                 </DEPENDENCIES>
               </OBJECT>
@@ -887,6 +951,20 @@ this.gear = value;]]></ATT>
                 </DEPENDENCIES>
               </OBJECT>
             </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="ed2d701b-6355-4ae7-8822-97b01629f190"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="b58cc7e1-4e64-4b1e-8005-57aa0a5eaa68"/>
@@ -908,11 +986,11 @@ this.gear = value;]]></ATT>
       </COMP>
       <COMP relation="OwnedEnd">
         <OBJECT>
-          <ID name="masterMotor" mc="Standard.AssociationEnd" uid="8ebf763a-4c0e-4724-936a-e4bfc59091f5"/>
+          <ID name="masterMotor" mc="Standard.AssociationEnd" uid="93e44ffb-90ea-4f63-9dda-bf5923393a19"/>
           <ATTRIBUTES>
             <ATT name="Aggregation">KindIsComposition</ATT>
             <ATT name="IsChangeable">true</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -930,7 +1008,7 @@ this.gear = value;]]></ATT>
             </LINK>
             <COMP relation="Opposite">
               <OBJECT>
-                <ID name="" mc="Standard.AssociationEnd" uid="9f37a015-78ac-4532-ab3e-3ec68b8ecdaa"/>
+                <ID name="" mc="Standard.AssociationEnd" uid="dd624417-3ff7-4598-9ebe-0e5f2742d0bd"/>
                 <ATTRIBUTES>
                   <ATT name="Aggregation">KindIsAssociation</ATT>
                   <ATT name="IsChangeable">true</ATT>
@@ -938,7 +1016,7 @@ this.gear = value;]]></ATT>
                   <ATT name="IsDerived">false</ATT>
                   <ATT name="IsOrdered">false</ATT>
                   <ATT name="IsUnique">false</ATT>
-                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[0]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="Visibility">Public</ATT>
                   <ATT name="IsClass">false</ATT>
@@ -948,11 +1026,11 @@ this.gear = value;]]></ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES>
                   <COMP relation="Opposite">
-                    <COMPID name="masterMotor" mc="Standard.AssociationEnd" uid="8ebf763a-4c0e-4724-936a-e4bfc59091f5"/>
+                    <COMPID name="masterMotor" mc="Standard.AssociationEnd" uid="93e44ffb-90ea-4f63-9dda-bf5923393a19"/>
                   </COMP>
                   <COMP relation="Association">
                     <OBJECT>
-                      <ID name="" mc="Standard.Association" uid="8d9adfce-d5c1-4311-8db8-461045510fdf"/>
+                      <ID name="" mc="Standard.Association" uid="5552740b-a605-42bd-befc-cf579f9a0072"/>
                       <ATTRIBUTES>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -964,11 +1042,25 @@ this.gear = value;]]></ATT>
               </OBJECT>
             </COMP>
             <COMP relation="Association">
-              <COMPID name="" mc="Standard.Association" uid="8d9adfce-d5c1-4311-8db8-461045510fdf"/>
+              <COMPID name="" mc="Standard.Association" uid="5552740b-a605-42bd-befc-cf579f9a0072"/>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="98fc69cc-ba82-47e3-aa1a-ada2ec754654"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
             </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
-                <ID name="" mc="Standard.Note" uid="40f6818c-cf79-4472-9012-6ff84f9c0991"/>
+                <ID name="" mc="Standard.Note" uid="038aaadf-2f26-4cb8-b489-68ee7d4d0fbd"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[Master Talon Speed Controller.  This device controls the output voltage either in speed control mode (i.e., getting a setpoint and using the quadrature encoder to maintain that speed) or voltage control (i.e., setting the output to a percentage of the bus voltage).]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
@@ -985,11 +1077,11 @@ this.gear = value;]]></ATT>
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="followerMotor" mc="Standard.AssociationEnd" uid="f561482b-0252-461f-84e6-29dc422cce48"/>
+          <ID name="followerMotor" mc="Standard.AssociationEnd" uid="4e8a45ac-4494-4cb2-9042-fed3e7f97224"/>
           <ATTRIBUTES>
             <ATT name="Aggregation">KindIsComposition</ATT>
             <ATT name="IsChangeable">true</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -1007,7 +1099,7 @@ this.gear = value;]]></ATT>
             </LINK>
             <COMP relation="Opposite">
               <OBJECT>
-                <ID name="" mc="Standard.AssociationEnd" uid="73010d96-e540-4e00-ba82-50dfdf5d17ce"/>
+                <ID name="" mc="Standard.AssociationEnd" uid="23419678-6d6f-461e-9998-57d779b3bbc6"/>
                 <ATTRIBUTES>
                   <ATT name="Aggregation">KindIsAssociation</ATT>
                   <ATT name="IsChangeable">true</ATT>
@@ -1015,7 +1107,7 @@ this.gear = value;]]></ATT>
                   <ATT name="IsDerived">false</ATT>
                   <ATT name="IsOrdered">false</ATT>
                   <ATT name="IsUnique">false</ATT>
-                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[0]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="Visibility">Public</ATT>
                   <ATT name="IsClass">false</ATT>
@@ -1025,11 +1117,11 @@ this.gear = value;]]></ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES>
                   <COMP relation="Opposite">
-                    <COMPID name="followerMotor" mc="Standard.AssociationEnd" uid="f561482b-0252-461f-84e6-29dc422cce48"/>
+                    <COMPID name="followerMotor" mc="Standard.AssociationEnd" uid="4e8a45ac-4494-4cb2-9042-fed3e7f97224"/>
                   </COMP>
                   <COMP relation="Association">
                     <OBJECT>
-                      <ID name="" mc="Standard.Association" uid="1436ceb7-370b-44f8-a331-7cbad360dddd"/>
+                      <ID name="" mc="Standard.Association" uid="1f2d2b32-5205-4bee-9d72-d23c547d9fa9"/>
                       <ATTRIBUTES>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -1041,11 +1133,25 @@ this.gear = value;]]></ATT>
               </OBJECT>
             </COMP>
             <COMP relation="Association">
-              <COMPID name="" mc="Standard.Association" uid="1436ceb7-370b-44f8-a331-7cbad360dddd"/>
+              <COMPID name="" mc="Standard.Association" uid="1f2d2b32-5205-4bee-9d72-d23c547d9fa9"/>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="24523203-5c4c-491c-8c3b-90ce2b7f8ce2"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
             </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
-                <ID name="" mc="Standard.Note" uid="4cb26527-3c16-4c05-8c62-b8cdeacb32c1"/>
+                <ID name="" mc="Standard.Note" uid="4cc7a753-d639-497b-99d4-5950f1ea5306"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[Motor controller for the second motor on the gearbox.  This motor controller will be set in follower mode and always output the same as the master motor controller.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
@@ -1062,11 +1168,11 @@ this.gear = value;]]></ATT>
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="highGear" mc="Standard.AssociationEnd" uid="0fb4ba63-1470-4131-a627-451ab5778848"/>
+          <ID name="highGear" mc="Standard.AssociationEnd" uid="0481c694-c2c4-4ced-8acb-4e7c6b6b92d1"/>
           <ATTRIBUTES>
             <ATT name="Aggregation">KindIsComposition</ATT>
             <ATT name="IsChangeable">true</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -1084,7 +1190,7 @@ this.gear = value;]]></ATT>
             </LINK>
             <COMP relation="Opposite">
               <OBJECT>
-                <ID name="" mc="Standard.AssociationEnd" uid="6467e513-62fd-4d39-b802-a74aa1462758"/>
+                <ID name="" mc="Standard.AssociationEnd" uid="76e3734d-a8a8-4773-9cd5-4a161afa794f"/>
                 <ATTRIBUTES>
                   <ATT name="Aggregation">KindIsAssociation</ATT>
                   <ATT name="IsChangeable">true</ATT>
@@ -1092,7 +1198,7 @@ this.gear = value;]]></ATT>
                   <ATT name="IsDerived">false</ATT>
                   <ATT name="IsOrdered">false</ATT>
                   <ATT name="IsUnique">false</ATT>
-                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[0]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="Visibility">Public</ATT>
                   <ATT name="IsClass">false</ATT>
@@ -1102,11 +1208,11 @@ this.gear = value;]]></ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES>
                   <COMP relation="Opposite">
-                    <COMPID name="highGear" mc="Standard.AssociationEnd" uid="0fb4ba63-1470-4131-a627-451ab5778848"/>
+                    <COMPID name="highGear" mc="Standard.AssociationEnd" uid="0481c694-c2c4-4ced-8acb-4e7c6b6b92d1"/>
                   </COMP>
                   <COMP relation="Association">
                     <OBJECT>
-                      <ID name="" mc="Standard.Association" uid="002e73e2-2457-44b7-a146-953c4cb61855"/>
+                      <ID name="" mc="Standard.Association" uid="1f741497-ad62-4419-b0bf-d532f980b0fa"/>
                       <ATTRIBUTES>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -1118,11 +1224,25 @@ this.gear = value;]]></ATT>
               </OBJECT>
             </COMP>
             <COMP relation="Association">
-              <COMPID name="" mc="Standard.Association" uid="002e73e2-2457-44b7-a146-953c4cb61855"/>
+              <COMPID name="" mc="Standard.Association" uid="1f741497-ad62-4419-b0bf-d532f980b0fa"/>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="f69bd0ba-43c6-46bc-b957-86229a97a4ca"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
             </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
-                <ID name="" mc="Standard.Note" uid="f518e057-98c1-480b-aa26-2dbd57627fc9"/>
+                <ID name="" mc="Standard.Note" uid="34b08d4c-208f-488d-a9ec-d14b5140910c"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[Controls the hardware that sets the gearbox to high gear.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
@@ -1139,11 +1259,11 @@ this.gear = value;]]></ATT>
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="lowGear" mc="Standard.AssociationEnd" uid="21ea24e8-f7b6-4d61-8baa-d4e1f3550a1d"/>
+          <ID name="lowGear" mc="Standard.AssociationEnd" uid="63e9ddc3-81da-4bfc-9639-fcb085f32ec5"/>
           <ATTRIBUTES>
             <ATT name="Aggregation">KindIsComposition</ATT>
             <ATT name="IsChangeable">true</ATT>
-            <ATT name="Changeable">ReadWrite</ATT>
+            <ATT name="Changeable">AccesNone</ATT>
             <ATT name="IsDerived">false</ATT>
             <ATT name="IsOrdered">false</ATT>
             <ATT name="IsUnique">false</ATT>
@@ -1161,7 +1281,7 @@ this.gear = value;]]></ATT>
             </LINK>
             <COMP relation="Opposite">
               <OBJECT>
-                <ID name="" mc="Standard.AssociationEnd" uid="d3fa5515-c955-44be-b21b-2b54c48b2ad5"/>
+                <ID name="" mc="Standard.AssociationEnd" uid="b07dbfff-9142-4b74-83c2-208214792884"/>
                 <ATTRIBUTES>
                   <ATT name="Aggregation">KindIsAssociation</ATT>
                   <ATT name="IsChangeable">true</ATT>
@@ -1169,7 +1289,7 @@ this.gear = value;]]></ATT>
                   <ATT name="IsDerived">false</ATT>
                   <ATT name="IsOrdered">false</ATT>
                   <ATT name="IsUnique">false</ATT>
-                  <ATT name="MultiplicityMin"><![CDATA[1]]></ATT>
+                  <ATT name="MultiplicityMin"><![CDATA[0]]></ATT>
                   <ATT name="MultiplicityMax"><![CDATA[1]]></ATT>
                   <ATT name="Visibility">Public</ATT>
                   <ATT name="IsClass">false</ATT>
@@ -1179,11 +1299,11 @@ this.gear = value;]]></ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES>
                   <COMP relation="Opposite">
-                    <COMPID name="lowGear" mc="Standard.AssociationEnd" uid="21ea24e8-f7b6-4d61-8baa-d4e1f3550a1d"/>
+                    <COMPID name="lowGear" mc="Standard.AssociationEnd" uid="63e9ddc3-81da-4bfc-9639-fcb085f32ec5"/>
                   </COMP>
                   <COMP relation="Association">
                     <OBJECT>
-                      <ID name="" mc="Standard.Association" uid="53a1c151-f496-450c-82fb-694bc44922a5"/>
+                      <ID name="" mc="Standard.Association" uid="6da409a3-c53a-4fba-909d-5c7dfc4683b5"/>
                       <ATTRIBUTES>
                         <ATT name="Name"></ATT>
                         <ATT name="status">1970354901745664</ATT>
@@ -1195,14 +1315,27 @@ this.gear = value;]]></ATT>
               </OBJECT>
             </COMP>
             <COMP relation="Association">
-              <COMPID name="" mc="Standard.Association" uid="53a1c151-f496-450c-82fb-694bc44922a5"/>
+              <COMPID name="" mc="Standard.Association" uid="6da409a3-c53a-4fba-909d-5c7dfc4683b5"/>
+            </COMP>
+            <COMP relation="Tag">
+              <OBJECT>
+                <ID name="" mc="Standard.TaggedValue" uid="5c90580d-8ddf-49d0-a8d4-4aa771a1de88"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Definition">
+                    <FOREIGNID name="JavaNoInitValue" mc="Standard.TagType" uid="00d007fc-0003-bf52-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
             </COMP>
             <COMP relation="Descriptor">
               <OBJECT>
-                <ID name="" mc="Standard.Note" uid="7140adfb-eac3-45ee-9e19-080bf0b6f16a"/>
+                <ID name="" mc="Standard.Note" uid="901c1c0b-b39a-41a4-aadc-434af54a5ea9"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[Controls the hardware that sets the gearbox to low gear.
-]]></ATT>
+                  <ATT name="Content"><![CDATA[Controls the hardware that sets the gearbox to low gear.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -1238,7 +1371,7 @@ this.gear = value;]]></ATT>
           <ATTRIBUTES>
             <ATT name="IsElementary">true</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="IsLeaf">false</ATT>
+            <ATT name="IsLeaf">true</ATT>
             <ATT name="IsRoot">false</ATT>
             <ATT name="Visibility">Public</ATT>
             <ATT name="Name"><![CDATA[Placement]]></ATT>
@@ -1273,7 +1406,7 @@ this.gear = value;]]></ATT>
           <ATTRIBUTES>
             <ATT name="IsElementary">true</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="IsLeaf">false</ATT>
+            <ATT name="IsLeaf">true</ATT>
             <ATT name="IsRoot">false</ATT>
             <ATT name="Visibility">Public</ATT>
             <ATT name="Name"><![CDATA[Gear]]></ATT>
@@ -1306,7 +1439,7 @@ this.gear = value;]]></ATT>
                 <ID name="" mc="Standard.Note" uid="1d21b695-c2d5-43f4-9c87-b5bf8e0cf7a5"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
@@ -1329,8 +1462,7 @@ this.gear = value;]]></ATT>
           <ATTRIBUTES>
             <ATT name="Content"><![CDATA[DriveUnit encapsulates all the hardware that makes one side of the robot drive.  There will always be two instances of DriveUnit, one controlling the left side and one controlling the right side.  Each DriveUnit has two Talon Motor Controllers, configured as master/follower as well as a Solenoid to change gears in the gearbox.  Each gearbox has a quadrature encoder that measures the speed of the gearbox which can be used to give the DriveUnit's motors a speed setpoint (as opposed to a percentage of bus voltage output).
 
-@author Diego
-]]></ATT>
+@author Diego]]></ATT>
             <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
             <ATT name="Name"></ATT>
             <ATT name="status">1970354901745664</ATT>

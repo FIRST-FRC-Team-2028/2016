@@ -16,6 +16,7 @@
       <COMP relation="OwnedElement">
         <COMPID name="com" mc="Standard.Package" uid="e9be676f-3310-4525-8559-47431a5086d8"/>
         <COMPID name="edu" mc="Standard.Package" uid="d1f7019f-3614-483a-af31-b76e08300171"/>
+        <COMPID name="java" mc="Standard.Package" uid="66fa5bb1-77de-4180-b991-b4ebeab90076"/>
       </COMP>
       <COMP relation="Product">
         <COMPID name="Sub-Packages Structure Diagram (automatic)" mc="Standard.ClassDiagram" uid="8408006a-ec89-4b3f-adf4-fab999c08397"/>

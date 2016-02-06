@@ -21,6 +21,7 @@
         <COMPID name="ClimbingArm" mc="Standard.Class" uid="899c26b9-be06-403c-b6de-a1d9d8a5322b"/>
         <COMPID name="DriveUnit" mc="Standard.Class" uid="69d74b75-df80-4243-808f-74bb65f3aa0a"/>
         <COMPID name="Parameters" mc="Standard.Class" uid="a5f86b3a-a108-4159-9a04-9f7eb8bd5490"/>
+        <COMPID name="Autopilot" mc="Standard.Package" uid="bf0f9707-d35b-4301-be3e-e8b45397d4d1"/>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
