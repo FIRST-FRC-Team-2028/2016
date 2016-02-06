@@ -54,7 +54,7 @@ public abstract class Autopilot {
      */
     @objid ("63e39f0e-afb4-40ba-a73a-0998c5997f41")
     public boolean isEnabled() {
-    	return false;
+        return false;
     }
 
     @objid ("fd1d5c3f-9dc1-4bf4-8f73-d86fa21874d2")

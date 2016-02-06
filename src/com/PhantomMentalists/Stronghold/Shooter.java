@@ -13,31 +13,31 @@ import edu.wpi.first.wpilibj.Solenoid;
  */
 @objid ("e7c0967b-bd2b-41d7-a528-2d3f463133d3")
 public class Shooter {
-    @objid ("871f3fd5-0de0-4432-868a-82369fcf07de")
+    @objid ("4ede4b6a-ff63-46f7-9714-da4101e49e75")
     public Solenoid Kicker;
 
     /**
      * <Enter note text here>
      */
-    @objid ("54c45f11-335d-432c-93c6-f1a8354239b9")
+    @objid ("63f2413a-d988-445a-ace3-67d34b261a43")
     protected DigitalInput ballSensor;
 
     /**
      * <Enter note text here>
      */
-    @objid ("fde5fcfa-15dc-4eae-a052-65112042635a")
+    @objid ("89cdc41c-1864-4459-8d64-5f9914675c79")
     protected CANTalon leftPitchingMotor;
 
     /**
      * <Enter note text here>
      */
-    @objid ("e22e0db7-a4cb-46a2-85aa-b7a1de718fc6")
+    @objid ("3149120a-5cf8-4902-bee1-1e15cfb9d14b")
     protected CANTalon rightPitchingMotor;
 
-    @objid ("01c41837-6db2-47af-ba2f-e34cc6166b56")
+    @objid ("ca52f5d5-e895-4f2b-b8eb-cf991ceae8ff")
     protected CANTalon tiltMotor;
 
-    @objid ("2c653aa8-a80f-4797-975e-a6799cc7f9aa")
+    @objid ("c541cb16-62b1-4934-bb7c-a37d4bd8f851")
     protected Solenoid ballShooter;
 
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")

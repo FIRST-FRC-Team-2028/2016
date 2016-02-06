@@ -3,7 +3,6 @@ package com.PhantomMentalists.Stronghold;
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
-
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PIDController;
@@ -18,15 +17,6 @@ public class Telepath extends SampleRobot {
      */
     @objid ("f4bbb171-d580-4f7e-858a-1f36d93dabaa")
     public boolean autopilotEnabled;
-
-    /**
-     * <Enter note text here>
-     */
-    @objid ("43907ee7-e5ac-4f1f-a329-14bd5bc4d746")
-    protected Compressor compressor;
-
-    @objid ("09a60e77-0334-4068-acd2-f120b29e285c")
-    protected Ultrasonic ultrasonic;
 
     /**
      * <Enter note text here>
@@ -48,6 +38,15 @@ public class Telepath extends SampleRobot {
 
     @objid ("352325f0-e7b8-4746-8690-a318ffdc697c")
     protected Autopilot autopilot;
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("2e3ccbe3-294d-43e9-a432-a5e5a2404953")
+    protected Compressor compressor;
+
+    @objid ("db783e88-13f5-4b14-8fe6-548b6ff54137")
+    protected Ultrasonic ultrasonic;
 
     /**
      * <Enter note text here>

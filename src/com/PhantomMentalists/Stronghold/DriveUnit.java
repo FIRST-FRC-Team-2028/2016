@@ -33,25 +33,25 @@ public class DriveUnit {
     /**
      * Master Talon Speed Controller.  This device controls the output voltage either in speed control mode (i.e., getting a setpoint and using the quadrature encoder to maintain that speed) or voltage control (i.e., setting the output to a percentage of the bus voltage).
      */
-    @objid ("55e92490-85a2-42cd-a1de-790918f3ca94")
+    @objid ("93e44ffb-90ea-4f63-9dda-bf5923393a19")
     protected CANTalon masterMotor;
 
     /**
      * Motor controller for the second motor on the gearbox.  This motor controller will be set in follower mode and always output the same as the master motor controller.
      */
-    @objid ("5112acf9-2abd-47c6-ba50-8b2ac737bae8")
+    @objid ("4e8a45ac-4494-4cb2-9042-fed3e7f97224")
     protected CANTalon followerMotor;
 
     /**
      * Controls the hardware that sets the gearbox to high gear.
      */
-    @objid ("88f2590d-03e9-4b48-b9ae-0d5395dcbfb7")
+    @objid ("0481c694-c2c4-4ced-8acb-4e7c6b6b92d1")
     protected Solenoid highGear;
 
     /**
      * Controls the hardware that sets the gearbox to low gear.
      */
-    @objid ("294a8c08-4d6b-40db-aa39-ae069218fae4")
+    @objid ("63e9ddc3-81da-4bfc-9639-fcb085f32ec5")
     protected Solenoid lowGear;
 
     /**

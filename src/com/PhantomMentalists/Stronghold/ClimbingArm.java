@@ -12,10 +12,10 @@ public class ClimbingArm {
     /**
      * <Enter note text here>
      */
-    @objid ("de0098a0-c9b9-42cb-8012-212eec71543c")
+    @objid ("66dd6e50-c2c1-49f7-8f19-a78ccab2976f")
     protected CANTalon extendRetractMotor;
 
-    @objid ("94a77f41-a9e3-4f3b-b9c4-58e16c9e1898")
+    @objid ("585b27f8-06a7-403e-a648-3ca745308acc")
     protected CANTalon raiseLowerMotor;
 
     @objid ("c215a8ac-a925-4c23-aab7-ec75ee354734")
