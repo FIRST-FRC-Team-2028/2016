@@ -2,7 +2,10 @@ package com.PhantomMentalists.Stronghold;
 
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -59,8 +62,27 @@ public class DriveUnit {
      * @param placement - Identifies if this DriveUnit is mounted on the left or right side of the robot.
      */
     @objid ("72aba1e2-59da-49cd-914f-a0aba060f665")
-    public DriveUnit(Placement placements) {
+    public DriveUnit(Placement placements) 
+    {
+    	this.gear = Gear.kLowGear;
         placement = placements;
+        if (placement == Placement.Right) 
+        {
+        	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
+        	followerMotor = new CANTalon(Parameters.kRightFollowerDriveMotorCanId);
+        	followerMotor.changeControlMode(ControlMode.Follower);
+        	followerMotor.set(Parameters.kRightMasterDriveMotorCanId);
+        }
+        else if (placement == Placement.Left)
+        {
+        	masterMotor = new CANTalon(Parameters.kLeftMasterDriveMotorCanId);
+        	followerMotor = new CANTalon(Parameters.kLeftFollowerDriveMotorCanId);
+        	followerMotor.changeControlMode(ControlMode.Follower);
+        	followerMotor.set(Parameters.kLeftMasterDriveMotorCanId);
+        	
+        }
+        masterMotor.changeControlMode(ControlMode.PercentVbus);
+    	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     }
 
     /**
@@ -87,7 +109,9 @@ public class DriveUnit {
      * This method is called on every iteration through the main loop.  This method is responsible for updating the internal state of the DriveUnit based on it's attributes (which may have been changed since the last call to process().  It changes Talon Motor Controller setpoints, sends telemetry values to the Smart Dashboard, and checks to see if either Motor controllers are exceeding their current threshold (and automatically downshifts the gearbox to low gear if they are).
      */
     @objid ("de5d82d9-c9f3-4739-b5a8-eeb4984e075c")
-    public void process() {
+    public void process() 
+    {    	
+    	masterMotor.set(speedSetpoint);    	    	
     }
 
     /**
@@ -95,8 +119,14 @@ public class DriveUnit {
      * @returns boolean - true if Talon Speed Controller is in speed control mode, false otherwise.
      */
     @objid ("ff98472c-d4a4-4aa7-815a-ae058c161375")
-    public boolean isSpeedControlEnabled() {
-        return false;
+    public boolean isSpeedControlEnabled() 
+    {
+    	if (masterMotor.getControlMode() == ControlMode.Speed) 
+    	{
+    		return true;
+    	}       	
+    	return false;
+    	
     }
 
     /**
@@ -104,7 +134,12 @@ public class DriveUnit {
      * @param speedControlEnabled - true enables speed control (if it is not in speed control mode), false enables voltage control (only if it is not in voltage control mode already).
      */
     @objid ("c990d0bb-d6b3-4333-a041-3a38b70461a9")
-    public void setSpeedControl(boolean speedControlEnabled) {
+    public void setSpeedControl(boolean speedControlEnabled) 
+    {
+    	if (speedControlEnabled)
+    	{
+    		masterMotor.changeControlMode(ControlMode.Speed);
+    	}
     }
 
     /**
@@ -125,6 +160,16 @@ public class DriveUnit {
     public void setGear(Gear value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.gear = value;
+        if (gear == Gear.kHighGear)
+        {
+        	highGear.set(true);
+        	lowGear.set(false);
+        }
+        else if (gear == Gear.kLowGear)
+        {
+        	highGear.set(false);
+        	lowGear.set(true);
+        }
     }
 
     @objid ("e4914053-d1c5-48d3-9a8a-aeefb3c7c402")
