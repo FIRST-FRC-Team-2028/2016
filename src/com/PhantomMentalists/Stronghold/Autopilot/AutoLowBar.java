@@ -17,8 +17,6 @@ public class AutoLowBar extends Autopilot {
         super(drive, shooter, pusherArm, climbingArm);
     }
 
-    /**
-     */
     @objid ("48bf2e81-2671-4b6d-bc5e-7c79022f61d0")
     public void process() {
     }

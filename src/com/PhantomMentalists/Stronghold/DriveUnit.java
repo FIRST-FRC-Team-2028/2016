@@ -33,40 +33,39 @@ public class DriveUnit {
     /**
      * Master Talon Speed Controller.  This device controls the output voltage either in speed control mode (i.e., getting a setpoint and using the quadrature encoder to maintain that speed) or voltage control (i.e., setting the output to a percentage of the bus voltage).
      */
-    @objid ("8ebf763a-4c0e-4724-936a-e4bfc59091f5")
+    @objid ("55e92490-85a2-42cd-a1de-790918f3ca94")
     protected CANTalon masterMotor;
 
     /**
      * Motor controller for the second motor on the gearbox.  This motor controller will be set in follower mode and always output the same as the master motor controller.
      */
-    @objid ("f561482b-0252-461f-84e6-29dc422cce48")
+    @objid ("5112acf9-2abd-47c6-ba50-8b2ac737bae8")
     protected CANTalon followerMotor;
 
     /**
      * Controls the hardware that sets the gearbox to high gear.
      */
-    @objid ("0fb4ba63-1470-4131-a627-451ab5778848")
+    @objid ("88f2590d-03e9-4b48-b9ae-0d5395dcbfb7")
     protected Solenoid highGear;
 
     /**
      * Controls the hardware that sets the gearbox to low gear.
      */
-    @objid ("21ea24e8-f7b6-4d61-8baa-d4e1f3550a1d")
+    @objid ("294a8c08-4d6b-40db-aa39-ae069218fae4")
     protected Solenoid lowGear;
 
     /**
      * DriveUnit constructor.  This method initializes all attributes of the DriveUnit to a known state.  It instantiates all hardware attributes (both Talon Motor Controllers and the gear Solenoid) using values from Parameters.  it sets the master Talon Motor Controller in Voltage control mode and sets the follower Talon Motor Controller in follower mode.  It sets the gearbox to low gear.
-     * 
      * @param placement - Identifies if this DriveUnit is mounted on the left or right side of the robot.
      */
     @objid ("72aba1e2-59da-49cd-914f-a0aba060f665")
-    public DriveUnit(Placement placement) {
+    public DriveUnit(Placement placements) {
+        placement = placements;
     }
 
     /**
      * Returns the setpoint.
-     * 
-     * @returns double - setpoint of the drive motor controller as a percentage in the range -1.0 .. 0 .. 1.0 where negative values indicate reverse and positive values indicate forward.  
+     * @returns double - setpoint of the drive motor controller as a percentage in the range -1.0 .. 0 .. 1.0 where negative values indicate reverse and positive values indicate forward.
      */
     @objid ("5dad8b50-8973-4186-80f9-5dd883b14e9d")
     public double getSpeedSetpoint() {
@@ -76,7 +75,6 @@ public class DriveUnit {
 
     /**
      * Sets the motor controller setpoint.
-     * 
      * @param value - Percentage of the motor's output in the range -1.0 .. 0 .. 1.0 where negative values indicate reverse and positive values indicate forward.
      */
     @objid ("6b1aafd1-f349-430d-8d23-f281df820075")
@@ -94,16 +92,15 @@ public class DriveUnit {
 
     /**
      * Queries if the masterMotor is in speed control mode
-     * 
      * @returns boolean - true if Talon Speed Controller is in speed control mode, false otherwise.
      */
     @objid ("ff98472c-d4a4-4aa7-815a-ae058c161375")
     public boolean isSpeedControlEnabled() {
+        return false;
     }
 
     /**
      * Enables or disables the Talon Motor Controller's speed control.  Note:  This method must check the current state of the masterMotor's speed control setting before changing it.
-     * 
      * @param speedControlEnabled - true enables speed control (if it is not in speed control mode), false enables voltage control (only if it is not in voltage control mode already).
      */
     @objid ("c990d0bb-d6b3-4333-a041-3a38b70461a9")
@@ -112,7 +109,6 @@ public class DriveUnit {
 
     /**
      * Returns the placement
-     * 
      * @returns Placement - The location of the DriveUnit
      */
     @objid ("9f636d22-f55f-43bf-b998-1f88f80adbc2")
@@ -123,7 +119,6 @@ public class DriveUnit {
 
     /**
      * Sets the gearbox gear.
-     * 
      * @param value - the gear (Low or High) to set the gearbox to.
      */
     @objid ("07a16abf-c1bb-4ebe-a0a0-9cee9c2b7b66")

@@ -1,7 +1,6 @@
 package com.PhantomMentalists.Stronghold;
 
 import com.PhantomMentalists.Stronghold.DriveUnit.Gear;
-import com.PhantomMentalists.Stronghold.DriveUnit;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -21,7 +20,7 @@ public class WestCoastDrive implements PIDOutput {
      * <Enter note text here>
      */
     @objid ("28bc5bec-15fd-4924-b01c-5f725341e189")
-    protected Gear gear = kLow;
+    protected Gear gear = Gear.kLowGear;
 
     @objid ("b8a106fc-3334-47d0-b500-cf128b91b6c0")
     protected DriveUnit leftSide;
@@ -47,6 +46,7 @@ public class WestCoastDrive implements PIDOutput {
 
     @objid ("ea714300-5ea7-4831-acb5-2503084baa47")
     public double getSetpoint() {
+        return 0;
     }
 
     @objid ("77501865-67e2-4889-b074-f047bd3616a6")

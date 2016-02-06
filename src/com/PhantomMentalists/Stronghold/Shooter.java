@@ -16,19 +16,28 @@ public class Shooter {
     @objid ("871f3fd5-0de0-4432-868a-82369fcf07de")
     public Solenoid Kicker;
 
-    @objid ("6684d714-fbb6-42f7-91d5-a80c4aa7b92e")
+    /**
+     * <Enter note text here>
+     */
+    @objid ("54c45f11-335d-432c-93c6-f1a8354239b9")
     protected DigitalInput ballSensor;
 
-    @objid ("75dc4e42-0ff3-473e-ba0e-7afcd800dd26")
+    /**
+     * <Enter note text here>
+     */
+    @objid ("fde5fcfa-15dc-4eae-a052-65112042635a")
     protected CANTalon leftPitchingMotor;
 
-    @objid ("17010cd2-3e92-4a35-ac2c-24b4698847ce")
+    /**
+     * <Enter note text here>
+     */
+    @objid ("e22e0db7-a4cb-46a2-85aa-b7a1de718fc6")
     protected CANTalon rightPitchingMotor;
 
-    @objid ("154896da-7aff-4686-82b6-6b3a73c3e144")
+    @objid ("01c41837-6db2-47af-ba2f-e34cc6166b56")
     protected CANTalon tiltMotor;
 
-    @objid ("6e459665-5e6d-4d0f-b774-334e966614b6")
+    @objid ("2c653aa8-a80f-4797-975e-a6799cc7f9aa")
     protected Solenoid ballShooter;
 
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
@@ -39,10 +48,9 @@ public class Shooter {
     public void shoot() {
     }
 
-    /**
-     */
     @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
     public boolean isBallLoaded() {
+        return false;
     }
 
     @objid ("f1761ce3-8d39-43f8-9b3c-6adaedaec7ad")
@@ -57,10 +65,9 @@ public class Shooter {
     public void manualRunShooter() {
     }
 
-    /**
-     */
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
     public boolean isUpToSpeed() {
+        return false;
     }
 
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")

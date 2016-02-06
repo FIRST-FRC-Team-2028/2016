@@ -3,8 +3,8 @@ package com.PhantomMentalists.Stronghold;
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -17,8 +17,20 @@ public class Telepath extends SampleRobot {
     @objid ("f4bbb171-d580-4f7e-858a-1f36d93dabaa")
     public boolean autopilotEnabled;
 
+    /**
+     * <Enter note text here>
+     */
+    @objid ("43907ee7-e5ac-4f1f-a329-14bd5bc4d746")
+    protected Compressor compressor;
+
+    @objid ("09a60e77-0334-4068-acd2-f120b29e285c")
+    protected Ultrasonic ultrasonic;
+
+    /**
+     * <Enter note text here>
+     */
     @objid ("f6c31ec5-102f-4066-8abb-a43eefb32659")
-    protected PusherArm tankTread;
+    protected PusherArm pusherArm;
 
     /**
      * <Enter note text here>
@@ -32,24 +44,6 @@ public class Telepath extends SampleRobot {
     @objid ("434ab641-6873-4ddc-a690-48168db127aa")
     protected ClimbingArm climbingArm;
 
-    /**
-     * <p>The turn controller takes over steering the robot, rotating it in place to point directly at the target we&#39;re going to shoot at. &nbsp;It gets the angle to turn to by using the pidGet() method (realized from the PIDSource interface).</p>
-     */
-    @objid ("14ee1a17-2513-4710-b3e0-3f157c1733d9")
-    protected PIDController turnPidController;
-
-    /**
-     * <Enter note text here>
-     */
-    @objid ("d13607f0-e64f-4d43-8cb5-52ab7f6a9113")
-    protected Gyro gyro;
-
-    @objid ("d2da6e1b-bef0-4381-913a-8415a15e5b2d")
-    protected Compressor compressor;
-
-    @objid ("9138d184-226a-4bbc-a217-038faae3c1d4")
-    protected Ultrasonic ultrasonic;
-
     @objid ("352325f0-e7b8-4746-8690-a318ffdc697c")
     protected Autopilot autopilot;
 
@@ -59,7 +53,7 @@ public class Telepath extends SampleRobot {
     @objid ("6538383a-6e25-4552-ad07-03d18282baf2")
     public void autonomous() {
         while (isAutonomous() && isEnabled()) {
-        	Timer.delay(Parameters.delay);
+            Timer.delay(Parameters.delay);
         }
     }
 
@@ -69,7 +63,7 @@ public class Telepath extends SampleRobot {
     @objid ("a9a437aa-9281-40cd-a90f-1fa3eec18b3c")
     public void operatorControl() {
         while (isEnabled() && isOperatorControl()) {
-        	Timer.delay(Parameters.delay);
+            Timer.delay(Parameters.delay);
         }
     }
 
@@ -82,10 +76,12 @@ public class Telepath extends SampleRobot {
      */
     @objid ("1b4fdd3a-dca2-4cca-93c8-4daa1f3253b4")
     public double getRangeToTarget() {
+        return 0;
     }
 
     @objid ("92f9f534-aeba-40f2-849c-24d5ee83688c")
     public double getAngleToTarget() {
+        return 0;
     }
 
     /**
@@ -94,6 +90,7 @@ public class Telepath extends SampleRobot {
      */
     @objid ("e92caffb-11f7-41f4-acdc-b40ce1d43e94")
     public double pidGet() {
+        return 0;
     }
 
     @objid ("b2f54c9f-b426-4269-aabb-1604a583d152")
