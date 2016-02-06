@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Ultrasonic;
 
 @objid ("839537d8-f1f4-49a5-ac60-eaa7467a9f20")
 public class Telepath extends SampleRobot {
@@ -45,8 +44,17 @@ public class Telepath extends SampleRobot {
     @objid ("2e3ccbe3-294d-43e9-a432-a5e5a2404953")
     protected Compressor compressor;
 
-    @objid ("db783e88-13f5-4b14-8fe6-548b6ff54137")
-    protected Ultrasonic ultrasonic;
+    /**
+     * <Enter note text here>
+     */
+    @objid ("32e1d7a9-9c5f-40cb-beaa-5698d7dbfb75")
+    protected UltrasonicSensor ultrasonic;
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("819d3be2-a72e-4178-9fd5-0d5727789bcf")
+    protected AnalogGyro gyro;
 
     /**
      * <Enter note text here>

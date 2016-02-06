@@ -91,6 +91,7 @@
         <COMPID name="Victor" mc="Standard.Class" uid="93779258-5dfd-4a7a-904b-061f9fa3391b"/>
         <COMPID name="VictorSP" mc="Standard.Class" uid="b401fc3f-157b-472b-994f-f60ac25715ca"/>
         <COMPID name="vision" mc="Standard.Package" uid="ce776972-30a7-487e-97f8-d1598147b5ff"/>
+        <COMPID name="AnalogGyro" mc="Standard.Class" uid="d0d432b1-3e58-4c7a-a809-d05b4f36d7f3"/>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
