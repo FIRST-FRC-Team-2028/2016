@@ -3,6 +3,8 @@ package com.PhantomMentalists.Stronghold;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
  * <p>Author: Ricky</p>
@@ -12,6 +14,8 @@ public class ClimbingArm {
     /**
      * <Enter note text here>
      */
+	CANTalon position, l_pull, r_pull, extend;
+
     @objid ("de0098a0-c9b9-42cb-8012-212eec71543c")
     protected CANTalon extendRetractMotor;
 
@@ -19,7 +23,33 @@ public class ClimbingArm {
     protected CANTalon raiseLowerMotor;
 
     @objid ("c215a8ac-a925-4c23-aab7-ec75ee354734")
-    public ClimbingArm() {
+    public ClimbingArm()
+    {
+    	position = new CANTalon(0);
+		l_pull = new CANTalon(0);
+		r_pull = new CANTalon(0);
+		extend = new CANTalon(0);
+		
+		position.changeControlMode(TalonControlMode.Position);
+		l_pull.changeControlMode(TalonControlMode.PercentVbus);
+		r_pull.changeControlMode(TalonControlMode.PercentVbus);
+		extend.changeControlMode(TalonControlMode.Position);
+		
+		position.enableBrakeMode(true);
+		l_pull.enableBrakeMode(true);
+		r_pull.enableBrakeMode(true);
+		extend.enableBrakeMode(true);
+		
+		position.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		extend.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		
+		position.setPID(0, 0, 0);
+		extend.setPID(0, 0, 0);
+		
+		position.enable();
+		l_pull.enable();
+		r_pull.enable();
+		extend.enable();
     }
 
     @objid ("a661b8a2-befb-4ed3-95cc-e445670fa559")
