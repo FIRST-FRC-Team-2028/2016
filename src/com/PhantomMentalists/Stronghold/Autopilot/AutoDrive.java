@@ -1,16 +1,15 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
 import com.PhantomMentalists.Stronghold.ClimbingArm;
-import com.PhantomMentalists.Stronghold.DriveUnit;
-import com.PhantomMentalists.Stronghold.Parameters;
 import com.PhantomMentalists.Stronghold.PusherArm;
 import com.PhantomMentalists.Stronghold.Shooter;
+import com.PhantomMentalists.Stronghold.WestCoastDrive;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 @objid ("faf35b12-f052-4aeb-b323-6c3b10671387")
 public class AutoDrive extends Autopilot {
     @objid ("13eec206-2a84-4912-8c67-28d062557de8")
-    public AutoDrive(DriveUnit drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climbingArm) {
+    public AutoDrive(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climbingArm) {
         super(drive, shooter, pusherArm, climbingArm);
     }
 
