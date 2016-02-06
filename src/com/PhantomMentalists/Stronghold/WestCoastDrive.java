@@ -49,9 +49,7 @@ public class WestCoastDrive implements PIDOutput
     @objid ("fc5f1ae8-f7bf-4800-924d-f54e5ee2a661")
     public void pidWrite(double output) 
     
-    	{
-    	
-    	}
+    {}
 
     @objid ("efa356b3-f44c-44ee-a418-1ba6be974be5")
     public void setSetpoint(double setPoint)
