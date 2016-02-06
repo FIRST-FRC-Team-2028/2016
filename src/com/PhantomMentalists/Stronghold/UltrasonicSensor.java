@@ -32,4 +32,11 @@ public class UltrasonicSensor implements PIDSource {
     public double pidGet() {
     }
 
+    /**
+     * This method is responsible for reporting the distance in inches to the smart dashboard.
+     */
+    @objid ("898baa49-95e8-40a6-881a-2aae5fcdef3c")
+    public void process() {
+    }
+
 }

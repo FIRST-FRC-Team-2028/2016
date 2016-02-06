@@ -65,7 +65,7 @@ public class Shooter {
      * @param power Power to apply to the tilt motor as a percentage in counts per 100 miliseconds where negative numbers run the motors in reverse and positive numbers run the motors forward
      */
     @objid ("f1761ce3-8d39-43f8-9b3c-6adaedaec7ad")
-    public void setShootAngle(ShooterPosition shooterPosition) {
+    public void setShootState(ShooterPosition shooterPosition) {
     }
 
     /**
@@ -134,12 +134,39 @@ public class Shooter {
     public boolean isKnownPosition() {
     }
 
+    /**
+     * This enumeration provides an easy to use value for each state the shooter can be in.
+     */
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
     public enum ShooterPosition {
+        /**
+         * This setpoint puts the Shooter tilt angle at the home position
+         */
         kHome,
+        /**
+         * This represents the shooter tilt angle is in an unknown position.  This is the initial state of the robot until it is homed.
+         */
         kUnknown,
-        kShoot,
-        kLowBar;
+        /**
+         * This setpoint holds the tilt angle of the shooter for shooting at the goal from the batter position.
+         */
+        kShootBatter,
+        /**
+         * This setpoint indicates the shooter tilt angle is correct for shooting when the robot is lined up on the tape in the center of the courtyard.
+         */
+        kShootTape,
+        /**
+         * This setpoint aligns the shooter tilt angle to take a shot from the couryard just inside the defense.
+         */
+        kShootDefense,
+        /**
+         * This setpoint puts the shooter tilt angle at the full-down position to clear the low bar.
+         */
+        kLowBar,
+        /**
+         * This setpoint holds the shooter tilt angle to the full-down position and runs the pitching machine motors in reverse until a ball is loaded.
+         */
+        kReload;
     }
 
 }

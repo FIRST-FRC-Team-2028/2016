@@ -90,7 +90,7 @@
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="setShootAngle" mc="Standard.Operation" uid="f1761ce3-8d39-43f8-9b3c-6adaedaec7ad"/>
+          <ID name="setShootState" mc="Standard.Operation" uid="f1761ce3-8d39-43f8-9b3c-6adaedaec7ad"/>
           <ATTRIBUTES>
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
@@ -98,7 +98,7 @@
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[setShootAngle]]></ATT>
+            <ATT name="Name"><![CDATA[setShootState]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
@@ -1265,7 +1265,24 @@ This method is used when the Shooter is in autopilot control.  It sets the posit
                   <ATT name="Name"><![CDATA[kHome]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="1facb864-d856-40b4-b856-f0e837420a82"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This setpoint puts the Shooter tilt angle at the home position]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
                 <ID name="kUnknown" mc="Standard.EnumerationLiteral" uid="fbc0fdd2-e91c-4526-bd9a-d58486e19775"/>
@@ -1273,28 +1290,170 @@ This method is used when the Shooter is in autopilot control.  It sets the posit
                   <ATT name="Name"><![CDATA[kUnknown]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="3c42de98-5787-4d86-936b-909591c6de06"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This represents the shooter tilt angle is in an unknown position.  This is the initial state of the robot until it is homed.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="kShoot" mc="Standard.EnumerationLiteral" uid="c566ef06-2d9c-4bc1-b0b3-3601cd1e6d34"/>
+                <ID name="kShootBatter" mc="Standard.EnumerationLiteral" uid="c566ef06-2d9c-4bc1-b0b3-3601cd1e6d34"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[kShoot]]></ATT>
+                  <ATT name="Name"><![CDATA[kShootBatter]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="84aa4bd6-c181-4893-990b-2aeb6a1dcca2"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This setpoint holds the tilt angle of the shooter for shooting at the goal from the batter position.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="kLowBar" mc="Standard.EnumerationLiteral" uid="6d395638-9edc-4233-8415-2c3f097ca57d"/>
+                <ID name="kShootTape" mc="Standard.EnumerationLiteral" uid="6d395638-9edc-4233-8415-2c3f097ca57d"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[kShootTape]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="36d96393-68f0-48be-bffc-8f70158d64a2"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This setpoint indicates the shooter tilt angle is correct for shooting when the robot is lined up on the tape in the center of the courtyard.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="kShootDefense" mc="Standard.EnumerationLiteral" uid="a0ecdee4-56db-4826-b395-4eaf3426041a"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[kShootDefense]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="0a0d7a64-affc-43ca-8c88-87e09eceb13a"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This setpoint aligns the shooter tilt angle to take a shot from the couryard just inside the defense.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="kLowBar" mc="Standard.EnumerationLiteral" uid="64659104-bf2f-4267-a5ec-2aec0ad5f5d7"/>
                 <ATTRIBUTES>
                   <ATT name="Name"><![CDATA[kLowBar]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="b629ce05-9c63-4830-a150-345e72d4b032"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This setpoint puts the shooter tilt angle at the full-down position to clear the low bar.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="kReload" mc="Standard.EnumerationLiteral" uid="ed6a9902-1556-47eb-92d9-8898fb5c3d4d"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[kReload]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="8e9f92a5-1a59-4962-9317-47dad1085f2b"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This setpoint holds the shooter tilt angle to the full-down position and runs the pitching machine motors in reverse until a ball is loaded.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
             </COMP>
             <LINK relation="Extension">
               <FOREIGNID name="JavaEnumeration" mc="Standard.Stereotype" uid="01ec23a8-0000-0262-0000-000000000000"/>
             </LINK>
+            <COMP relation="Descriptor">
+              <OBJECT>
+                <ID name="" mc="Standard.Note" uid="f2d9b3ce-1a84-4826-b1dc-f3d3bdc5842f"/>
+                <ATTRIBUTES>
+                  <ATT name="Content"><![CDATA[This enumeration provides an easy to use value for each state the shooter can be in.]]></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                  <ATT name="Name"></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <LINK relation="Model">
+                    <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                  </LINK>
+                </DEPENDENCIES>
+              </OBJECT>
+            </COMP>
           </DEPENDENCIES>
         </OBJECT>
       </COMP>

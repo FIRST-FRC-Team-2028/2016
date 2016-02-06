@@ -18,6 +18,8 @@
         <COMPID name="AutoDrive" mc="Standard.Class" uid="faf35b12-f052-4aeb-b323-6c3b10671387"/>
         <COMPID name="AutoMoat" mc="Standard.Class" uid="2e7b2583-3a04-4188-beec-544aff2708ac"/>
         <COMPID name="AutoLowBar" mc="Standard.Class" uid="6e68fcd3-ac51-46b8-9089-679dbdd5f934"/>
+        <COMPID name="Autonomous" mc="Standard.Class" uid="d5c53723-495a-4d0d-9cc0-37fc89facee4"/>
+        <COMPID name="AutoDrawBridge" mc="Standard.Class" uid="38a40f7b-cbe0-4b5c-be22-96454d76cbba"/>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>

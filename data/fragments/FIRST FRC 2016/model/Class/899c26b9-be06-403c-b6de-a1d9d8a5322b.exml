@@ -306,7 +306,7 @@ The climber uses an encoder to count ticks as both the tilt/angle motor and exte
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="getPositionSetpoint" mc="Standard.Operation" uid="c0ae318d-f340-4754-b8b7-cb333e3f0d81"/>
+          <ID name="getClimberState" mc="Standard.Operation" uid="c0ae318d-f340-4754-b8b7-cb333e3f0d81"/>
           <ATTRIBUTES>
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
@@ -314,7 +314,7 @@ The climber uses an encoder to count ticks as both the tilt/angle motor and exte
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[getPositionSetpoint]]></ATT>
+            <ATT name="Name"><![CDATA[getClimberState]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
@@ -359,7 +359,7 @@ The climber uses an encoder to count ticks as both the tilt/angle motor and exte
                 <DEPENDENCIES>
                   <LINK relation="DependsOn">
                     <REFOBJ>
-                      <ID name="positionSetpoint" mc="Standard.Attribute" uid="10bfa7f1-d560-4ed8-995e-1dbf6f3fefbd"/>
+                      <ID name="climberState" mc="Standard.Attribute" uid="10bfa7f1-d560-4ed8-995e-1dbf6f3fefbd"/>
                     </REFOBJ>
                   </LINK>
                   <LINK relation="Extension">
@@ -386,7 +386,7 @@ The climber uses an encoder to count ticks as both the tilt/angle motor and exte
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="25f09f75-306a-4b1f-8037-538359a40dbf"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[return this.positionSetpoint;]]></ATT>
+                  <ATT name="Content"><![CDATA[return this.climberState;]]></ATT>
                   <ATT name="MimeType"></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -415,7 +415,7 @@ The climber uses an encoder to count ticks as both the tilt/angle motor and exte
           </DEPENDENCIES>
         </OBJECT>
         <OBJECT>
-          <ID name="setPositionSetpoint" mc="Standard.Operation" uid="523aa711-b676-4bf5-9a4c-66a33139a9d7"/>
+          <ID name="setClimberState" mc="Standard.Operation" uid="523aa711-b676-4bf5-9a4c-66a33139a9d7"/>
           <ATTRIBUTES>
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
@@ -423,7 +423,7 @@ The climber uses an encoder to count ticks as both the tilt/angle motor and exte
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[setPositionSetpoint]]></ATT>
+            <ATT name="Name"><![CDATA[setClimberState]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
@@ -468,7 +468,7 @@ The climber uses an encoder to count ticks as both the tilt/angle motor and exte
                 <DEPENDENCIES>
                   <LINK relation="DependsOn">
                     <REFOBJ>
-                      <ID name="positionSetpoint" mc="Standard.Attribute" uid="10bfa7f1-d560-4ed8-995e-1dbf6f3fefbd"/>
+                      <ID name="climberState" mc="Standard.Attribute" uid="10bfa7f1-d560-4ed8-995e-1dbf6f3fefbd"/>
                     </REFOBJ>
                   </LINK>
                   <LINK relation="Extension">
@@ -482,7 +482,7 @@ The climber uses an encoder to count ticks as both the tilt/angle motor and exte
                 <ID name="" mc="Standard.Note" uid="9e419844-3a9a-421d-a2b3-d39650aee541"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[// Automatically generated method. Please delete this comment before entering specific code.
-this.positionSetpoint = value;]]></ATT>
+this.climberState = value;]]></ATT>
                   <ATT name="MimeType"></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
@@ -499,7 +499,7 @@ this.positionSetpoint = value;]]></ATT>
       </COMP>
       <COMP relation="OwnedAttribute">
         <OBJECT>
-          <ID name="positionSetpoint" mc="Standard.Attribute" uid="10bfa7f1-d560-4ed8-995e-1dbf6f3fefbd"/>
+          <ID name="climberState" mc="Standard.Attribute" uid="10bfa7f1-d560-4ed8-995e-1dbf6f3fefbd"/>
           <ATTRIBUTES>
             <ATT name="TypeConstraint"></ATT>
             <ATT name="Value"></ATT>
@@ -513,7 +513,7 @@ this.positionSetpoint = value;]]></ATT>
             <ATT name="Visibility">Protected</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[positionSetpoint]]></ATT>
+            <ATT name="Name"><![CDATA[climberState]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
@@ -850,7 +850,24 @@ this.positionSetpoint = value;]]></ATT>
                   <ATT name="Name"><![CDATA[kHome]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="f8920105-4d8e-4d4c-b549-79bfa4eb0df1"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This setpoint returns both climbing arms to fully retracted with the tilt angle at the home position.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
                 <ID name="kLowBar" mc="Standard.EnumerationLiteral" uid="d46ddb94-4132-4748-810c-67290e8c87d6"/>
@@ -858,31 +875,149 @@ this.positionSetpoint = value;]]></ATT>
                   <ATT name="Name"><![CDATA[kLowBar]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="35694abe-7f25-486b-8fe9-3b5171735029"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This setpoint holds the climbing arms in the fully retracted position with the tilt angle completely down to clear the low bar.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="kClimb" mc="Standard.EnumerationLiteral" uid="8602feca-839f-423c-a9e9-18842c22b745"/>
+                <ID name="kDeployForClimbing" mc="Standard.EnumerationLiteral" uid="8602feca-839f-423c-a9e9-18842c22b745"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[kDeployForClimbing]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="06cdfdd2-47b5-4608-a3c7-b689f7e70d11"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This state holds the climbing arms fully extended with the tilt angle set to reach out to the climbing bar on the tower.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="kClimb" mc="Standard.EnumerationLiteral" uid="e556dba0-b229-4a5f-8c08-2aed82ab6fb6"/>
                 <ATTRIBUTES>
                   <ATT name="Name"><![CDATA[kClimb]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="23eb4858-a874-452c-b72a-b0ff01e072cc"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This state retracts the climbing arms to lift the robot up the tower.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="kDrawBridge" mc="Standard.EnumerationLiteral" uid="e556dba0-b229-4a5f-8c08-2aed82ab6fb6"/>
+                <ID name="kRaised" mc="Standard.EnumerationLiteral" uid="ee0db0ed-1a31-450e-852c-9992a60f94be"/>
+                <ATTRIBUTES>
+                  <ATT name="Name"><![CDATA[kRaised]]></ATT>
+                  <ATT name="status">1970354901745664</ATT>
+                </ATTRIBUTES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="b0b47857-e4e3-47d6-bd11-89eb4829661f"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This state holds the climbing arms straight up.  It is used to avoid interfering with the shooter (when shooting) and to provide a neutral center of gravity when traversing defenses.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
+              </OBJECT>
+              <OBJECT>
+                <ID name="kDrawBridge" mc="Standard.EnumerationLiteral" uid="63110ea3-3612-4416-820a-b655bf82484c"/>
                 <ATTRIBUTES>
                   <ATT name="Name"><![CDATA[kDrawBridge]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="46fc6de3-a3a1-4290-9362-dcb8fa00c2ca"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This state holds the climbing arm high enough to just clear the top of the draw bridge.  Once in position, the robot can change the state to kLowBar which will push down on the draw bridge as the robot backs up to pull down the draw bridge.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="kUnknown" mc="Standard.EnumerationLiteral" uid="ee0db0ed-1a31-450e-852c-9992a60f94be"/>
+                <ID name="kUnknown" mc="Standard.EnumerationLiteral" uid="22d6dccf-a756-4f41-b16a-7dab482fdbec"/>
                 <ATTRIBUTES>
                   <ATT name="Name"><![CDATA[kUnknown]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
-                <DEPENDENCIES></DEPENDENCIES>
+                <DEPENDENCIES>
+                  <COMP relation="Descriptor">
+                    <OBJECT>
+                      <ID name="" mc="Standard.Note" uid="900f330b-1240-4cad-a220-43548fc3c4b7"/>
+                      <ATTRIBUTES>
+                        <ATT name="Content"><![CDATA[This state represents that either the climbing arm tilt angle or the climbing arm extension is in an unknown position.  This is the initial state of the robot until it is homed.]]></ATT>
+                        <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+                        <ATT name="Name"></ATT>
+                        <ATT name="status">1970354901745664</ATT>
+                      </ATTRIBUTES>
+                      <DEPENDENCIES>
+                        <LINK relation="Model">
+                          <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+                        </LINK>
+                      </DEPENDENCIES>
+                    </OBJECT>
+                  </COMP>
+                </DEPENDENCIES>
               </OBJECT>
             </COMP>
             <LINK relation="Extension">
@@ -892,7 +1027,7 @@ this.positionSetpoint = value;]]></ATT>
               <OBJECT>
                 <ID name="" mc="Standard.Note" uid="a10a40e3-2554-4913-a3bc-f5d67d3c2579"/>
                 <ATTRIBUTES>
-                  <ATT name="Content"><![CDATA[<Enter note text here>]]></ATT>
+                  <ATT name="Content"><![CDATA[This enumeration provides easy to read values for the states of the climbing arm.]]></ATT>
                   <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>

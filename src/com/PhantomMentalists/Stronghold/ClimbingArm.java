@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 @objid ("899c26b9-be06-403c-b6de-a1d9d8a5322b")
 public class ClimbingArm {
     @objid ("10bfa7f1-d560-4ed8-995e-1dbf6f3fefbd")
-    protected ClimberPositions positionSetpoint;
+    protected ClimberPositions climberState;
 
     /**
      * <Enter note text here>
@@ -76,26 +76,49 @@ public class ClimbingArm {
      * <Enter note text here>
      */
     @objid ("c0ae318d-f340-4754-b8b7-cb333e3f0d81")
-    public ClimberPositions getPositionSetpoint() {
+    public ClimberPositions getClimberState() {
         // Automatically generated method. Please delete this comment before entering specific code.
-        return this.positionSetpoint;
+        return this.climberState;
     }
 
     @objid ("523aa711-b676-4bf5-9a4c-66a33139a9d7")
-    public void setPositionSetpoint(ClimberPositions value) {
+    public void setClimberState(ClimberPositions value) {
         // Automatically generated method. Please delete this comment before entering specific code.
-        this.positionSetpoint = value;
+        this.climberState = value;
     }
 
     /**
-     * <Enter note text here>
+     * This enumeration provides easy to read values for the states of the climbing arm.
      */
     @objid ("c0a916c5-48f5-4fb3-806e-934e0e83cf0d")
     public enum ClimberPositions {
+        /**
+         * This setpoint returns both climbing arms to fully retracted with the tilt angle at the home position.
+         */
         kHome,
+        /**
+         * This setpoint holds the climbing arms in the fully retracted position with the tilt angle completely down to clear the low bar.
+         */
         kLowBar,
+        /**
+         * This state holds the climbing arms fully extended with the tilt angle set to reach out to the climbing bar on the tower.
+         */
+        kDeployForClimbing,
+        /**
+         * This state retracts the climbing arms to lift the robot up the tower.
+         */
         kClimb,
+        /**
+         * This state holds the climbing arms straight up.  It is used to avoid interfering with the shooter (when shooting) and to provide a neutral center of gravity when traversing defenses.
+         */
+        kRaised,
+        /**
+         * This state holds the climbing arm high enough to just clear the top of the draw bridge.  Once in position, the robot can change the state to kLowBar which will push down on the draw bridge as the robot backs up to pull down the draw bridge.
+         */
         kDrawBridge,
+        /**
+         * This state represents that either the climbing arm tilt angle or the climbing arm extension is in an unknown position.  This is the initial state of the robot until it is homed.
+         */
         kUnknown;
     }
 
