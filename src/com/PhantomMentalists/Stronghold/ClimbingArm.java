@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.CANTalon;
  */
 @objid ("899c26b9-be06-403c-b6de-a1d9d8a5322b")
 public class ClimbingArm {
+    @objid ("10bfa7f1-d560-4ed8-995e-1dbf6f3fefbd")
+    protected ClimberPositions positionSetpoint;
+
     /**
      * <Enter note text here>
      */
@@ -28,39 +31,72 @@ public class ClimbingArm {
     public ClimbingArm() {
     }
 
-    @objid ("a661b8a2-befb-4ed3-95cc-e445670fa559")
-    public double getPositionOfStageOne() {
-        return 0;
+    /**
+     * This method powers the tilt motor.  This method can only be used when autopilot is disabled and is intended for troubleshooting and debugging.
+     * 
+     * @param power Power to apply to the tilt motor as a percentage in the range of -1.0 .. 0 1.0 where -1.0 is 100% reverse and 1.0 is 100% forward.
+     */
+    @objid ("43dcda5e-dffa-4fab-9b4a-8aab3d753c53")
+    public void man ualTiltPower(double power) {
     }
 
-    @objid ("6de04ff3-23df-472a-9c94-0e666ba14075")
-    public void setPositionOfStageOne(double position) {
+    /**
+     * This method powers the extend motor and applies power to both winch motors.
+     * 
+     * When run forward, the extend motor drives the extension and both winch motors are run slowly forward (with a constant power value that comes from Parameters) to spool out cable (slowly so it doesn't get slack and tangle).  When run in reverse (retract), the power setting is sent to both winch motors and the extend motor is run slowly in reverse (with a constant power setting that comes from Parameters).  This method can only be used when autopilot is disabled and is intended for troubleshooting and debugging.  
+     * 
+     * @param power Power to apply to the extend motor as a percentage in the range of -1.0 .. 0 .. 1.0 where -1.0 is 100% reverse, 1.0 is 100% forward and zero is stopped.  Note:  The power to apply to the two winch motors is a constant that comes from Parameters when extending.
+     */
+    @objid ("dab10ac8-66a4-4b7b-b086-486f55b3cfa2")
+    public void manualExtendPower(double power) {
     }
 
-    @objid ("a46baf37-02e4-43cf-bd92-42521e614a74")
-    public boolean isStageTwoExtended() {
-        return false;
+    /**
+     */
+    @objid ("7e838403-f9e3-4d6a-a314-a1ddaee316e4")
+    public void autoSetPosition(ClimberPositions setpoint) {
     }
 
-    @objid ("5caadcfa-d288-4f21-999d-8c9b7150dba7")
-    public boolean isStageTwoRetracted() {
-        return false;
+    /**
+     * This method returns if the climber is in a known position.
+     * 
+     * The climber uses an encoder to count ticks as both the tilt/angle motor and extend/retract motors move.  When the robot is initially powered on, the climber angle and extend/retract is in an unknown state until it reaches a limit switch at a known position.  If either motor is ever shutoff for an over current condition it is reset to an unknown position (since that should never happen).
+     * 
+     * @return true if both angle and extend/retract motors have reached the home limit switch since being powered on, false otherwise.
+     */
+    @objid ("167125bc-aa77-43c9-95ca-cbd5a5461e37")
+    public boolean isKnownPosition() {
     }
 
-    @objid ("5447b3c0-a7a2-45f6-8b5a-ec97ee145ea1")
-    public void extendStageTwo() {
+    @objid ("93bc4b9e-0dd6-4d25-9cca-ff5ebcdd37bd")
+    public boolean isPositionAtSetpoint() {
     }
 
-    @objid ("0053d6a3-1878-46e1-b726-12de04b65c1d")
-    public void retractStageTwo() {
+    /**
+     * <Enter note text here>
+     */
+    @objid ("c0ae318d-f340-4754-b8b7-cb333e3f0d81")
+    public ClimberPositions getPositionSetpoint() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.positionSetpoint;
     }
 
-    @objid ("b1bdbdec-2f99-4692-89bb-a109403a4565")
-    public void extendHook() {
+    @objid ("523aa711-b676-4bf5-9a4c-66a33139a9d7")
+    public void setPositionSetpoint(ClimberPositions value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.positionSetpoint = value;
     }
 
-    @objid ("e9b32a28-ba8d-4bf9-bd50-c926ba81ac19")
-    public void retractHook() {
+    /**
+     * <Enter note text here>
+     */
+    @objid ("c0a916c5-48f5-4fb3-806e-934e0e83cf0d")
+    public enum ClimberPositions {
+        kHome,
+        kLowBar,
+        kClimb,
+        kDrawBridge,
+        kUnknown;
     }
 
 }

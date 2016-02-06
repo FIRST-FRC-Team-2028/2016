@@ -44,21 +44,37 @@ public class WestCoastDrive implements PIDOutput {
     public void setSetpoint(double setPoint) {
     }
 
+    /**
+     * <Enter note text here>
+     */
     @objid ("ea714300-5ea7-4831-acb5-2503084baa47")
     public double getSetpoint() {
         return 0;
     }
 
     @objid ("77501865-67e2-4889-b074-f047bd3616a6")
-    Gear getGear() {
+    public Gear getGear() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.gear;
     }
 
     @objid ("3e825af2-8a08-4402-9058-dd7ae4aa2260")
-    void setGear(Gear value) {
+    public void setGear(Gear value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.gear = value;
+    }
+
+    /**
+     */
+    @objid ("9dbdb5d2-34d6-4636-be83-08969370e707")
+    public void setDriveSetpoint(double value) {
+    }
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("e5b25702-e281-4d2a-b5b6-9babb0fc567f")
+    public double getDriveSetpoint() {
     }
 
 }

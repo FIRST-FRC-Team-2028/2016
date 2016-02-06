@@ -93,15 +93,6 @@ public class Telepath extends SampleRobot {
         return 0;
     }
 
-    /**
-     * Get the result to use in PIDController
-     * @return the result to use in PIDController
-     */
-    @objid ("e92caffb-11f7-41f4-acdc-b40ce1d43e94")
-    public double pidGet() {
-        return 0;
-    }
-
     @objid ("b2f54c9f-b426-4269-aabb-1604a583d152")
     public void shoot() {
     }

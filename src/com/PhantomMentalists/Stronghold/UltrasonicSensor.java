@@ -1,5 +1,6 @@
 package com.PhantomMentalists.Stronghold;
 
+import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -16,7 +17,7 @@ public class UltrasonicSensor implements PIDSource {
      * <Enter note text here>
      */
     @objid ("9671a31a-9088-4031-b46c-f6c0fb27ad33")
-    public UltrasonicSensor(int analogChannel) {
+    public UltrasonicSensor() {
     }
 
     @objid ("da43f4b5-7392-45fa-aaa1-0636243b388e")
