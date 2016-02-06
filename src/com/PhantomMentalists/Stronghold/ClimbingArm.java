@@ -1,10 +1,12 @@
 package com.PhantomMentalists.Stronghold;
 
-import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * <p>Author: Ricky</p>
@@ -12,9 +14,14 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 @objid ("899c26b9-be06-403c-b6de-a1d9d8a5322b")
 public class ClimbingArm {
     /**
-     * <Enter note text here>
+     * <Enter note here>
      */
 	CANTalon position, l_pull, r_pull, extend;
+	
+	DigitalInput extendedlswitchl = new DigitalInput(0);
+	DigitalInput extendedlswitchr = new DigitalInput(1);
+	DigitalInput retractedlswitchl = new DigitalInput(2);
+	DigitalInput retractedlswitchr = new DigitalInput(3);
 
     @objid ("de0098a0-c9b9-42cb-8012-212eec71543c")
     protected CANTalon extendRetractMotor;
@@ -53,38 +60,77 @@ public class ClimbingArm {
     }
 
     @objid ("a661b8a2-befb-4ed3-95cc-e445670fa559")
-    public double getPositionOfStageOne() {
-        return 0;
+    public double getStageOnePosition() 
+    {
+        return position.getPosition();
     }
 
     @objid ("6de04ff3-23df-472a-9c94-0e666ba14075")
-    public void setPositionOfStageOne(double position) {
+    public void setStageOnePosition(double Position) 
+    {
+    	position.setPosition(Position);
     }
 
     @objid ("a46baf37-02e4-43cf-bd92-42521e614a74")
-    public boolean isStageTwoExtended() {
-        return false;
+    public boolean isStageTwoExtendedl() 
+    {	
+    	if(extendedlswitchr.get() == false)
+    	{
+    		return false;
+    	}
+    	else
+    	{
+    		return true;
+    	}
+    }
+    
+    public boolean isStageTwoExtendedr()
+    {	
+    	if(extendedlswitchl.get() == false)
+    	{
+    		return false;
+    	}
+    	else
+    	{
+    		return true;
+    	}
     }
 
     @objid ("5caadcfa-d288-4f21-999d-8c9b7150dba7")
-    public boolean isStageTwoRetracted() {
-        return false;
+    public boolean isStageTwoRetractedl() 
+    {	
+        if(retractedlswitchl.get() == true)
+        {
+        	return true;
+        }
+        else
+        {
+        	return false; 
+        }
+    }
+    	
+    public boolean isStageTwoRetractedr()		
+    {
+    	if(retractedlswitchr.get() == true)
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
     }
 
     @objid ("5447b3c0-a7a2-45f6-8b5a-ec97ee145ea1")
-    public void extendStageTwo() {
+    public void extendStageTwo(double extendPosition) 
+    {
+    	extend.set(extendPosition); 
     }
 
     @objid ("0053d6a3-1878-46e1-b726-12de04b65c1d")
-    public void retractStageTwo() {
+    public void retractStageTwo(double retractV) 
+    {
+    	l_pull.set(retractV);
+    	r_pull.set(retractV);
     }
-
-    @objid ("b1bdbdec-2f99-4692-89bb-a109403a4565")
-    public void extendHook() {
-    }
-
-    @objid ("e9b32a28-ba8d-4bf9-bd50-c926ba81ac19")
-    public void retractHook() {
-    }
-
 }
