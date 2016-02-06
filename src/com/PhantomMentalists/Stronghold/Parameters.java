@@ -73,4 +73,10 @@ public class Parameters {
     @objid ("84c6a947-3dd9-40ea-a483-650ecea1dbfb")
     public static final String kCameraIpAddress = 10.20.28.11;
 
+    /**
+     * <Enter note text here>
+     */
+    @objid ("7845afef-ef6b-4ac8-af0a-df9c3c2140db")
+    public static final double delay = 0.05;
+
 }
