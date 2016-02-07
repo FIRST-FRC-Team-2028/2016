@@ -815,6 +815,9 @@ this.climberState = value;]]></ATT>
           </DEPENDENCIES>
         </OBJECT>
       </COMP>
+      <COMP relation="OwnedBehavior">
+        <COMPID name="State Machine" mc="Standard.StateMachine" uid="79c087a0-4bd3-46d9-9608-b5dffcce1e23"/>
+      </COMP>
       <COMP relation="OwnedImport">
         <OBJECT>
           <ID name="ElementImport" mc="Standard.ElementImport" uid="a3929639-9f62-4c56-8235-3310306fccfc"/>
@@ -895,9 +898,9 @@ this.climberState = value;]]></ATT>
                 </DEPENDENCIES>
               </OBJECT>
               <OBJECT>
-                <ID name="kDeployForClimbing" mc="Standard.EnumerationLiteral" uid="8602feca-839f-423c-a9e9-18842c22b745"/>
+                <ID name="kDeployHook" mc="Standard.EnumerationLiteral" uid="8602feca-839f-423c-a9e9-18842c22b745"/>
                 <ATTRIBUTES>
-                  <ATT name="Name"><![CDATA[kDeployForClimbing]]></ATT>
+                  <ATT name="Name"><![CDATA[kDeployHook]]></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>
                 <DEPENDENCIES>

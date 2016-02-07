@@ -1037,6 +1037,19 @@
             </LINK>
           </DEPENDENCIES>
         </OBJECT>
+        <OBJECT>
+          <ID name="ElementImport" mc="Standard.ElementImport" uid="2198aee2-b912-4376-a368-ac00cde2d33a"/>
+          <ATTRIBUTES>
+            <ATT name="Visibility">Private</ATT>
+            <ATT name="Name"><![CDATA[ElementImport]]></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="ImportedElement">
+              <ID name="DriveUnit" mc="Standard.Class" uid="69d74b75-df80-4243-808f-74bb65f3aa0a"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
       </COMP>
       <LINK relation="Extension">
         <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>

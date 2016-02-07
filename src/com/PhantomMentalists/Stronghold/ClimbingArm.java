@@ -103,7 +103,7 @@ public class ClimbingArm {
         /**
          * This state holds the climbing arms fully extended with the tilt angle set to reach out to the climbing bar on the tower.
          */
-        kDeployForClimbing,
+        kDeployHook,
         /**
          * This state retracts the climbing arms to lift the robot up the tower.
          */

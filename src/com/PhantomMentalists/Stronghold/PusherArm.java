@@ -15,6 +15,9 @@ public class PusherArm {
     @objid ("df266bd7-9e98-431b-9e8c-715f107364dc")
     public double tiltSetpoint;
 
+    @objid ("89ce3a76-eda0-444f-be92-555662aedc38")
+    public PusherArmPositions positionSetpoint;
+
     /**
      * <Enter note text here>
      */
@@ -55,6 +58,32 @@ public class PusherArm {
     public void setTiltSetpoint(double value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.tiltSetpoint = value;
+    }
+
+    @objid ("c189a01d-9bbd-4dfe-8412-5b13d3a439f1")
+    public PusherArmPositions getPositionSetpoint() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.positionSetpoint;
+    }
+
+    @objid ("3ed02eae-49ef-4d5d-a4e5-015002f2bad0")
+    public void setPositionSetpoint(PusherArmPositions value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.positionSetpoint = value;
+    }
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("ec445282-355a-4c32-847c-3f12cc077733")
+    public boolean isPositionAtSetpoint() {
+    }
+
+    @objid ("59979124-6f97-4353-a791-92fc6ed425b0")
+    public enum PusherArmPositions {
+        kUnknown,
+        kHome,
+        kLowBar;
     }
 
 }

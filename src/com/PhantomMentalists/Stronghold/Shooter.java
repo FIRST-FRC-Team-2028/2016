@@ -135,6 +135,13 @@ public class Shooter {
     }
 
     /**
+     * <Enter note text here>
+     */
+    @objid ("4d7bd443-0329-4985-8729-3ec742465875")
+    public boolean isPositionAtSetpoint() {
+    }
+
+    /**
      * This enumeration provides an easy to use value for each state the shooter can be in.
      */
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
