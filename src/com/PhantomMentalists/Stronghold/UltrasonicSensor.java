@@ -22,6 +22,7 @@ public class UltrasonicSensor implements PIDSource {
 
     @objid ("da43f4b5-7392-45fa-aaa1-0636243b388e")
     public double getRangeInInches() {
+    	return 0;
     }
 
     /**
@@ -30,6 +31,7 @@ public class UltrasonicSensor implements PIDSource {
      */
     @objid ("b343bf84-9bcd-43e5-bf15-329615ef6859")
     public double pidGet() {
+    	return 0;
     }
 
     /**
