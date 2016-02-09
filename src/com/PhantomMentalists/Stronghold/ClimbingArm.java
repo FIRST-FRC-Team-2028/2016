@@ -81,33 +81,25 @@ public class ClimbingArm {
     {
     	position.setPosition(Position);
     }
-
     /**
-     * Checks if stage two is fully extended on the left side. If it is fully extended, if will return true
-     * If it is not fully extended it will return false.  
-     * @return true if stage two is extended on the left side, False if it is not.
+     * This method checks if the arm is in a known position, if it is known it will return true, if it isn't it will return false.
+     * @return true if arm is in a known position, False if it is not.
      */
-    @objid ("a46baf37-02e4-43cf-bd92-42521e614a74")
-    public boolean isStageTwoExtendedl() 
-    {	
-//    	if(extendedlswitchr.get() == false)
-//    	{
-//    		return false;
-//    	}
-//    	else
-//    	{
-//    		return true;
-//    	}
+    public boolean isKnownPosition()
+    {
     	return false;
     }
-    
     /**
      * This method checks if stage two is fully extended on the right side.  If it is fully extended, it will return true
      * If it is not fully extended it will return false.
      * @return true if stage two is extended on right side, False if it is not.
      */
-    public boolean isStageTwoExtendedr()
+    public boolean isStageTwoExtended()
    {	
+    	// setSetPoint ---> getSetPoint ---> keep checking ---> arm is there 
+    	//apparently i can't be serious in coding so i will not be funny anymore!
+    	
+    	
 //    	if(extendedlswitchl.get() == false)
 //    	{
 //    		return false;
@@ -119,29 +111,11 @@ public class ClimbingArm {
     	return false;
     }
     /**
-     *  This method checks if stage two is fully retracted on the left side. If it is fully retracted, it will return true.
-     *  If it is not retracted it will return false.
-     *  @return true if stage two is retracted on the left side, False if it is not.
-     */
-    @objid ("5caadcfa-d288-4f21-999d-8c9b7150dba7")
-    public boolean isStageTwoRetractedl() 
-    {	
-//        if(retractedlswitchl.get() == true)
-//        {
-//        	return true;
-//        }
-//        else
-//        {
-//        	return false; 
-//        }
-    	return false;
-    }
-    /**
      * This method checks if stage two of the climber arm is fully retracted on the right side. If it is retracted, it will return true.
      * If it is not retracted it will return false.
      * @return true if stage two is retracted on the right side, False if it is not.
      */
-    public boolean isStageTwoRetractedr()		
+    public boolean isStageTwoRetracted()		
     {
 //    	if(retractedlswitchr.get() == true)
 //    	{
@@ -177,9 +151,9 @@ public class ClimbingArm {
      * This method sets the position of the first stage at home. Home is when the arm is laying horizontally facing the back of the robot.
      * @param homeAngle the angle value of the home position of the first stage.
      */
-    public void homePosition(double homeAngle)
+    public void homePosition()
     {
-    	position.setPosition(homeAngle);
+    	position.setPosition(0);
     }
     /**
      * This method extends the position of stage two of the climber arm.
