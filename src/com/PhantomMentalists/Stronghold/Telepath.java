@@ -86,7 +86,7 @@ public class Telepath extends SampleRobot {
     	shooter = new Shooter();
     	climbingArm = new ClimbingArm();
     	compressor = new Compressor();
-    	ultrasonic= new UltrasonicSensor();
+    	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
     	gyro = new AnalogGyro(Parameters.kGyroAnalogPort);
     }
 
