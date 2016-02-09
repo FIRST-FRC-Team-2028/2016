@@ -21,11 +21,6 @@ public class ClimbingArm {
      * 
      */
 	protected CANTalon position, l_pull, r_pull, extend;
-	
-//	DigitalInput extendedlswitchl = new DigitalInput(0);
-//	DigitalInput extendedlswitchr = new DigitalInput(1);
-//	DigitalInput retractedlswitchl = new DigitalInput(2);
-//	DigitalInput retractedlswitchr = new DigitalInput(3);
 
 //    @objid ("de0098a0-c9b9-42cb-8012-212eec71543c")
 //    protected CANTalon extendRetractMotor;
@@ -96,9 +91,7 @@ public class ClimbingArm {
      */
     public boolean isStageTwoExtended()
    {	
-    	// setSetPoint ---> getSetPoint ---> keep checking ---> arm is there 
-    	//apparently i can't be serious in coding so i will not be funny anymore!
-    	
+    	// setSetPoint ---> getSetPoint ---> keep checking ---> arm is there (note for me).
     	
 //    	if(extendedlswitchl.get() == false)
 //    	{
@@ -127,7 +120,6 @@ public class ClimbingArm {
 //    	}
     	return false;
     }
-    
     /**
      * This method gets the position of the first stage. (the first stage is what is connected to the chasiss.)
      * 
@@ -149,7 +141,6 @@ public class ClimbingArm {
     
     /**
      * This method sets the position of the first stage at home. Home is when the arm is laying horizontally facing the back of the robot.
-     * @param homeAngle the angle value of the home position of the first stage.
      */
     public void homePosition()
     {
@@ -159,14 +150,14 @@ public class ClimbingArm {
      * This method extends the position of stage two of the climber arm.
      * It extends the left and right pulling motors while extending the second stage with the extend motor.
      * @param extendPosition position that stage two will extend to.
-     * @param retractV the voltage value that will be applied to retracting stage two.
+     * @param extendV the voltage value that will be applied to retracting stage two.
      */
     @objid ("5447b3c0-a7a2-45f6-8b5a-ec97ee145ea1")
-    public void extendStageTwo(double extendPosition, double retractV) 
+    public void extendStageTwo(double extendPosition, double extendV) 
     {
     	extend.setPosition(extendPosition);
-    	l_pull.set(retractV);
-    	r_pull.set(retractV);
+    	l_pull.set(extendV);
+    	r_pull.set(extendV);
     }
 
     /**
@@ -181,4 +172,5 @@ public class ClimbingArm {
     	l_pull.set(retractV);
     	r_pull.set(retractV);
     }
+    
 }
