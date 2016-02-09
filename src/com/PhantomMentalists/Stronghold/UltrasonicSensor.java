@@ -1,8 +1,10 @@
 package com.PhantomMentalists.Stronghold;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 
 @objid ("db4144c8-7be1-48b5-9d58-9bc308243305")
 public class UltrasonicSensor implements PIDSource {
@@ -38,7 +40,6 @@ public class UltrasonicSensor implements PIDSource {
      */
     @objid ("da43f4b5-7392-45fa-aaa1-0636243b388e")
     public double getRangeInInches() {
-    	return 0;
     	double voltageValue = input.getVoltage();	    	
     	return (voltageValue / (5.0 / 512));
     }
@@ -49,15 +50,18 @@ public class UltrasonicSensor implements PIDSource {
      */
     @objid ("b343bf84-9bcd-43e5-bf15-329615ef6859")
     public double pidGet() {
-    	return 0;
-    }
-
-    /**
-     * This method is responsible for reporting the distance in inches to the smart dashboard.
-     */
-    @objid ("898baa49-95e8-40a6-881a-2aae5fcdef3c")
-    public void process() {
 		return getRangeInInches();
     }
 
-}
+	@Override
+	public PIDSourceType getPIDSourceType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPIDSourceType(PIDSourceType arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
