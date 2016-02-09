@@ -121,6 +121,7 @@ public class Shooter {
      */
     @objid ("f6797d96-b58a-47ee-a41a-4ea7709c5062")
     public boolean isPitchingMachineOn() {
+    	return false;
     }
 
     /**
@@ -132,6 +133,7 @@ public class Shooter {
      */
     @objid ("2a8ebf57-a97b-499d-af56-80d785a4ffde")
     public boolean isKnownPosition() {
+    	return false;
     }
 
     /**
@@ -139,6 +141,7 @@ public class Shooter {
      */
     @objid ("4d7bd443-0329-4985-8729-3ec742465875")
     public boolean isPositionAtSetpoint() {
+    	return false;
     }
 
     /**
