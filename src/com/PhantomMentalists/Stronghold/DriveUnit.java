@@ -128,7 +128,12 @@ public class DriveUnit {
     @objid ("6b1aafd1-f349-430d-8d23-f281df820075")
     public void setSpeedSetpoint(double value) {
         // Automatically generated method. Please delete this comment before entering specific code.
-        this.speedSetpoint = value;
+    	if (getSpeedSetpoint() != value)
+    	{
+    		this.speedSetpoint = value;
+    		masterMotor.set(speedSetpoint);
+    	}
+        
     }
 
     /**
@@ -144,7 +149,23 @@ public class DriveUnit {
     @objid ("de5d82d9-c9f3-4739-b5a8-eeb4984e075c")
     public void process() 
     {    	
-    	masterMotor.set(speedSetpoint);    	    	
+    	
+    }
+    
+    /**
+     * Returns if a certain threshold of the current of the motors is exceeded.
+     * Returns true if exceeded, returns false if the motors have not got to the threshold set.	
+     * @param threshold
+     * @return
+     */
+    
+    public boolean currentThresholdExceeded(double threshold)
+    {
+    	if (masterMotor.getOutputCurrent() >= threshold || followerMotor.getOutputCurrent() >= threshold)
+    	{
+    		return true;
+    	}
+    	return false;
     }
 
     /**
