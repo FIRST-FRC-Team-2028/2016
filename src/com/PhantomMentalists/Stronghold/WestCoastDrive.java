@@ -75,6 +75,7 @@ public class WestCoastDrive implements PIDOutput {
      */
     @objid ("e5b25702-e281-4d2a-b5b6-9babb0fc567f")
     public double getDriveSetpoint() {
+    	return 0;
     }
 
 }

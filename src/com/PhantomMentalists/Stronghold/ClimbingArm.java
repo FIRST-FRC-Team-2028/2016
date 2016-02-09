@@ -37,7 +37,7 @@ public class ClimbingArm {
      * @param power Power to apply to the tilt motor as a percentage in the range of -1.0 .. 0 1.0 where -1.0 is 100% reverse and 1.0 is 100% forward.
      */
     @objid ("43dcda5e-dffa-4fab-9b4a-8aab3d753c53")
-    public void man ualTiltPower(double power) {
+    public void manualTiltPower(double power) {
     }
 
     /**
@@ -66,10 +66,12 @@ public class ClimbingArm {
      */
     @objid ("167125bc-aa77-43c9-95ca-cbd5a5461e37")
     public boolean isKnownPosition() {
+    	return false;
     }
 
     @objid ("93bc4b9e-0dd6-4d25-9cca-ff5ebcdd37bd")
     public boolean isPositionAtSetpoint() {
+    	return false;
     }
 
     /**
