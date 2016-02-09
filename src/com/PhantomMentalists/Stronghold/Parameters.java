@@ -72,6 +72,8 @@ public class Parameters {
      */
     @objid ("84c6a947-3dd9-40ea-a483-650ecea1dbfb")
     public static final String kCameraIpAddress = "10.20.28.11";
+    
+    public static final int kGyroAnalogPort = 0;
 
     /**
      * <Enter note text here>
