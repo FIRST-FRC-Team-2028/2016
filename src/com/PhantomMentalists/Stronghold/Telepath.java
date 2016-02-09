@@ -1,12 +1,10 @@
 package com.PhantomMentalists.Stronghold;
 
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
-import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -16,6 +14,7 @@ public class Telepath extends SampleRobot {
     /**
      * <Enter note text here>
      */
+	protected Joystick lstick,rstick,buttonstick,analogstick;
     @objid ("f4bbb171-d580-4f7e-858a-1f36d93dabaa")
     public boolean autopilotEnabled;
 
@@ -65,6 +64,7 @@ public class Telepath extends SampleRobot {
     @objid ("a9a437aa-9281-40cd-a90f-1fa3eec18b3c")
     public void operatorControl() {
         while (isEnabled() && isOperatorControl()) {
+        	
             Timer.delay(Parameters.delay);
         }
     }
