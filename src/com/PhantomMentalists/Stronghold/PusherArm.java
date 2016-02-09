@@ -46,6 +46,7 @@ public class PusherArm {
      */
     @objid ("aa54b10a-1ca9-498f-8cb8-506906f9bd51")
     public boolean isKnownPosition() {
+    	return false;
     }
 
     @objid ("500c5ab5-ea57-4da4-be48-8df56fbced03")
@@ -77,6 +78,7 @@ public class PusherArm {
      */
     @objid ("ec445282-355a-4c32-847c-3f12cc077733")
     public boolean isPositionAtSetpoint() {
+    	return false;
     }
 
     @objid ("59979124-6f97-4353-a791-92fc6ed425b0")
