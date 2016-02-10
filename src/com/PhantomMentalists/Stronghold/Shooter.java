@@ -3,6 +3,7 @@ package com.PhantomMentalists.Stronghold;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -45,6 +46,10 @@ public class Shooter {
 
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
     public Shooter() {
+    	rightPitchingMotor = new CANTalon(Parameters.kRightShooterPitcherMotorCanId);
+    	leftPitchingMotor = new CANTalon(Parameters.kLeftShooterPitcherMotorCanId);
+    	tiltMotor = new CANTalon(Parameters.kShooterAngleMotorCanId);
+    	
     	rightPitchingMotor.enableBrakeMode(true);
     	leftPitchingMotor.enableBrakeMode(true);
     	tiltMotor.enableBrakeMode(true);
@@ -52,6 +57,10 @@ public class Shooter {
     	ballSensor.get();
     	Kicker.set(false);
     	position = ShooterPosition.kUnkown;
+    	rightPitchingMotor.changeControlMode(TalonControlMode.Speed);
+    	leftPitchingMotor.changeControlMode(TalonControlMode.Speed);
+    	tiltMotor.changeControlMode(TalonControlMode.Position);
+    	
     	
     }
 
@@ -67,12 +76,14 @@ public class Shooter {
     @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
     public boolean isBallLoaded() {
     	return ballSensor.get();
+    	//
     }
 
     @objid ("f1761ce3-8d39-43f8-9b3c-6adaedaec7ad")
     public void setShootAngle(ShooterPosition shooterPosition) {
     	tiltMotor.getEncPosition();
     	tiltMotor.set(0);
+    	//
     }
 
     @objid ("f0ee0c60-695b-452c-b734-44653ea8b4fd")
@@ -91,8 +102,14 @@ public class Shooter {
 
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
     public boolean isUpToSpeed() {
-    	return false;
+    	if(rightPitchingMotor && leftPitchingMotor.isUpToSpeed){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
         //if motor is up to speed return true else return false.
+    	//This is not correct but it is a shot
         
        
     }
@@ -103,7 +120,7 @@ public class Shooter {
         kMedium,
         kUnkown,
         kHigh;
-        
+    	//Do we need a kHome and kReload 
     }
 
 }
