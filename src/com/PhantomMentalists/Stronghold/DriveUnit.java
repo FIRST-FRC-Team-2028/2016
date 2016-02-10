@@ -148,7 +148,11 @@ public class DriveUnit {
      */
     @objid ("de5d82d9-c9f3-4739-b5a8-eeb4984e075c")
     public void process() 
-    {    	
+    {
+    	if(currentThresholdExceeded(0))
+    	{
+    		setGear(Gear.kLowGear);
+    	}
     	
     }
     
@@ -200,6 +204,7 @@ public class DriveUnit {
     		if (speedControlEnabled)
         	{
         		masterMotor.changeControlMode(ControlMode.Speed);
+        		masterMotor.setPID(p, i, d, f, izone, closeLoopRampRate, profile);
         	}
         	else 
         	{
