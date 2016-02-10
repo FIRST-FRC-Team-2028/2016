@@ -91,7 +91,9 @@ public class Shooter {
 
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
     public boolean isUpToSpeed() {
-        return false;
+    	return false;
+        //if motor is up to speed return true else return false.
+        
        
     }
 
