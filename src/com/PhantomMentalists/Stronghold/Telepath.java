@@ -4,11 +4,13 @@ import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.PhantomMentalists.Stronghold.DriveUnit;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 @objid ("839537d8-f1f4-49a5-ac60-eaa7467a9f20")
 public class Telepath extends SampleRobot {
@@ -79,6 +81,13 @@ public class Telepath extends SampleRobot {
 
     @objid ("bc395b50-2496-4ddf-b4ca-1891ed75cbb4")
     public Telepath() {
+    	pusherArm = new PusherArm();
+    	westCoastDrive = new WestCoastDrive();
+    	shooter = new Shooter();
+    	climbingArm = new ClimbingArm();
+    	compressor = new Compressor();
+    	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
+    	gyro = new AnalogGyro(Parameters.kGyroAnalogPort);
     }
 
     /**

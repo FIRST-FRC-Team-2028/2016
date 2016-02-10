@@ -44,6 +44,9 @@ public class Shooter {
     @objid ("2c653aa8-a80f-4797-975e-a6799cc7f9aa")
     protected Solenoid ballShooter;
 
+
+	private double tiltSetpoint;
+
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
     public Shooter() {
     	rightPitchingMotor = new CANTalon(Parameters.kRightShooterPitcherMotorCanId);
@@ -56,7 +59,7 @@ public class Shooter {
     	ballShooter.set(false);
     	ballSensor.get();
     	Kicker.set(false);
-    	position = ShooterPosition.kUnkown;
+    	position = ShooterPosition.kUnknown;
     	rightPitchingMotor.changeControlMode(TalonControlMode.Speed);
     	leftPitchingMotor.changeControlMode(TalonControlMode.Speed);
     	tiltMotor.changeControlMode(TalonControlMode.Position);
@@ -88,39 +91,114 @@ public class Shooter {
 
     @objid ("f0ee0c60-695b-452c-b734-44653ea8b4fd")
     public void manualRunBallFeeder() {
-    	position = ShooterPosition.kLow;
+    	position = ShooterPosition.kReload;
     	rightPitchingMotor.set(-1);
     	leftPitchingMotor.set(1);
     }
 
     @objid ("eba4d1df-2aa2-4f39-b3a7-f0ca4f9b6626")
     public void manualRunShooter() {
-    	position = ShooterPosition.kHigh;
+    	position = ShooterPosition.kShootTape;
     	rightPitchingMotor.set(1);
     	leftPitchingMotor.set(-1);
     }
 
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
     public boolean isUpToSpeed() {
-    	if(rightPitchingMotor && leftPitchingMotor.isUpToSpeed){
-    		return true;
-    	}
-    	else{
-    		return false;
-    	}
-        //if motor is up to speed return true else return false.
-    	//This is not correct but it is a shot
-        
-       
+//    	if(rightPitchingMotor && leftPitchingMotor){
+//    		return true;
+//    	}
+//    	else{
+//    		return false;
+//    	}
+//        //if motor is up to speed return true else return false.
+//    	//This is not correct but it is a shot
+//        
+//       
+        return false;
+    }
+
+    /**
+     * This method enables or disables the pneumatic ball pusher solenoid.
+     * 
+     * @param push True extends the penumatic ball thumper, false retracts it
+     */
+    @objid ("e0334a6b-b527-4a95-936a-51e68527f3ea")
+    public void pushBall(boolean push) {
+    }
+
+    @objid ("bf56ebbc-3451-4f51-88e0-c944b48b9819")
+    public double getTiltSetpoint() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.tiltSetpoint;
+    }
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("89bd53b8-23c9-4a16-adb2-95ec7d912696")
+    public void setTiltSetpoint(double value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.tiltSetpoint = value;
+    }
+
+    /**
+     */
+    @objid ("f6797d96-b58a-47ee-a41a-4ea7709c5062")
+    public boolean isPitchingMachineOn() {
+    	return false;
+    }
+
+    /**
+     * This method returns if the shooter is in a known position.
+     * 
+     * The shooter uses an encoder to count ticks as it moves.  When the robot is initially powered on, the shooter angle is in an unknown state until it reaches a limit switch at a known position.  If the motor is ever shutoff for an over current condition it is reset to an unknown position (since that should never happen).
+     * 
+     * @return true if shooter tilt angle has reached the home limit switch since being powered on, false otherwise.
+     */
+    @objid ("2a8ebf57-a97b-499d-af56-80d785a4ffde")
+    public boolean isKnownPosition() {
+    	return false;
+    }
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("4d7bd443-0329-4985-8729-3ec742465875")
+    public boolean isPositionAtSetpoint() {
+    	return false;
     }
 
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
     public enum ShooterPosition {
-        kLow,
-        kMedium,
-        kUnkown,
-        kHigh;
-    	//Do we need a kHome and kReload 
+         /**
+         * This setpoint puts the Shooter tilt angle at the home position
+         */
+        kHome,
+        /**
+         * This represents the shooter tilt angle is in an unknown position.  This is the initial state of the robot until it is homed.
+         */
+        kUnknown,
+        /**
+         * This setpoint holds the tilt angle of the shooter for shooting at the goal from the batter position.
+         */
+        kShootBatter,
+        /**
+         * This setpoint indicates the shooter tilt angle is correct for shooting when the robot is lined up on the tape in the center of the courtyard.
+         */
+        kShootTape,
+        /**
+         * This setpoint aligns the shooter tilt angle to take a shot from the couryard just inside the defense.
+         */
+        kShootDefense,
+        /**
+         * This setpoint puts the shooter tilt angle at the full-down position to clear the low bar.
+         */
+        kLowBar,
+        /**
+         * This setpoint holds the shooter tilt angle to the full-down position and runs the pitching machine motors in reverse until a ball is loaded.
+         */
+        kReload;
     }
 
 }
