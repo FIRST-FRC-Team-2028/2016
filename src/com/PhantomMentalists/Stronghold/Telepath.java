@@ -1,6 +1,7 @@
 package com.PhantomMentalists.Stronghold;
 
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
+import com.PhantomMentalists.Stronghold.DriveUnit;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
@@ -18,15 +19,6 @@ public class Telepath extends SampleRobot {
      */
     @objid ("f4bbb171-d580-4f7e-858a-1f36d93dabaa")
     public boolean autopilotEnabled;
-
-    /**
-     * <Enter note text here>
-     */
-    @objid ("43907ee7-e5ac-4f1f-a329-14bd5bc4d746")
-    protected Compressor compressor;
-
-    @objid ("09a60e77-0334-4068-acd2-f120b29e285c")
-    protected Ultrasonic ultrasonic;
 
     /**
      * <Enter note text here>
@@ -52,6 +44,24 @@ public class Telepath extends SampleRobot {
     /**
      * <Enter note text here>
      */
+    @objid ("2e3ccbe3-294d-43e9-a432-a5e5a2404953")
+    protected Compressor compressor;
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("32e1d7a9-9c5f-40cb-beaa-5698d7dbfb75")
+    protected UltrasonicSensor ultrasonic;
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("819d3be2-a72e-4178-9fd5-0d5727789bcf")
+    protected AnalogGyro gyro;
+
+    /**
+     * <Enter note text here>
+     */
     @objid ("6538383a-6e25-4552-ad07-03d18282baf2")
     public void autonomous() {
         while (isAutonomous() && isEnabled()) {
@@ -71,6 +81,13 @@ public class Telepath extends SampleRobot {
 
     @objid ("bc395b50-2496-4ddf-b4ca-1891ed75cbb4")
     public Telepath() {
+    	pusherArm = new PusherArm();
+    	westCoastDrive = new WestCoastDrive();
+    	shooter = new Shooter();
+    	climbingArm = new ClimbingArm();
+    	compressor = new Compressor();
+    	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
+    	gyro = new AnalogGyro(Parameters.kGyroAnalogPort);
     }
 
     /**
@@ -83,15 +100,6 @@ public class Telepath extends SampleRobot {
 
     @objid ("92f9f534-aeba-40f2-849c-24d5ee83688c")
     public double getAngleToTarget() {
-        return 0;
-    }
-
-    /**
-     * Get the result to use in PIDController
-     * @return the result to use in PIDController
-     */
-    @objid ("e92caffb-11f7-41f4-acdc-b40ce1d43e94")
-    public double pidGet() {
         return 0;
     }
 

@@ -13,39 +13,43 @@ import edu.wpi.first.wpilibj.Solenoid;
  */
 @objid ("e7c0967b-bd2b-41d7-a528-2d3f463133d3")
 public class Shooter {
-    @objid ("871f3fd5-0de0-4432-868a-82369fcf07de")
+    /**
+     * This attribute stores the angle the shooter will move to.
+     * 
+     * This method is used when the Shooter is in autopilot control.  It sets the position as the number of ticks (typically 4096 ticks per revolution) from the home position.  The Talon will use distance control to hold the Shooter angle at the specified position.
+     */
+    @objid ("2cba802d-0e00-4a6f-a589-c6ec5069db6f")
+    protected double tiltSetpoint;
+
+    @objid ("4ede4b6a-ff63-46f7-9714-da4101e49e75")
     public Solenoid Kicker;
 
     /**
      * <Enter note text here>
      */
-    @objid ("54c45f11-335d-432c-93c6-f1a8354239b9")
+    @objid ("63f2413a-d988-445a-ace3-67d34b261a43")
     protected DigitalInput ballSensor;
 
     /**
      * <Enter note text here>
      */
-    @objid ("fde5fcfa-15dc-4eae-a052-65112042635a")
+    @objid ("89cdc41c-1864-4459-8d64-5f9914675c79")
     protected CANTalon leftPitchingMotor;
 
     /**
      * <Enter note text here>
      */
-    @objid ("e22e0db7-a4cb-46a2-85aa-b7a1de718fc6")
+    @objid ("3149120a-5cf8-4902-bee1-1e15cfb9d14b")
     protected CANTalon rightPitchingMotor;
 
-    @objid ("01c41837-6db2-47af-ba2f-e34cc6166b56")
+    @objid ("ca52f5d5-e895-4f2b-b8eb-cf991ceae8ff")
     protected CANTalon tiltMotor;
 
-    @objid ("2c653aa8-a80f-4797-975e-a6799cc7f9aa")
+    @objid ("c541cb16-62b1-4934-bb7c-a37d4bd8f851")
     protected Solenoid ballShooter;
 
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
     public Shooter() {
-    }
-
-    @objid ("af588d71-18eb-4098-95a6-d69164a77e41")
-    public void shoot() {
     }
 
     @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
@@ -53,16 +57,35 @@ public class Shooter {
         return false;
     }
 
+    /**
+     * This method powers both of the two picthing matchine motors.  
+     * 
+     * This method intended for use during autopilot when the two Talon motor controllers are in speed control mode.  It provides a setpoint in counts per 100 milisecond.  Both motors must spin their respective wheels in oposite directions.
+     * 
+     * @param power Power to apply to the tilt motor as a percentage in counts per 100 miliseconds where negative numbers run the motors in reverse and positive numbers run the motors forward
+     */
     @objid ("f1761ce3-8d39-43f8-9b3c-6adaedaec7ad")
-    public void setShootAngle(ShooterPosition shooterPosition) {
+    public void setShootState(ShooterPosition shooterPosition) {
     }
 
+    /**
+     * This method powers both of the two picthing matchine motors.  
+     * 
+     * This method can only be used when autopilot is disabled and is intended for troubleshooting and debugging.  Both motors must spin their respective wheels in oposite directions.
+     * 
+     * @param power Power to apply to the tilt motor as a percentage in the range of -1.0 .. 0 1.0 where -1.0 is 100% reverse and 1.0 is 100% forward.
+     */
     @objid ("f0ee0c60-695b-452c-b734-44653ea8b4fd")
-    public void manualRunBallFeeder() {
+    public void manualRunPichingMachine(double power) {
     }
 
+    /**
+     * This method powers the tilt motor.  This method can only be used when autopilot is disabled and is intended for troubleshooting and debugging.
+     * 
+     * @param power Power to apply to the tilt motor as a percentage in the range of -1.0 .. 0 1.0 where -1.0 is 100% reverse and 1.0 is 100% forward.
+     */
     @objid ("eba4d1df-2aa2-4f39-b3a7-f0ca4f9b6626")
-    public void manualRunShooter() {
+    public void manualShooterTiltPower(double power) {
     }
 
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
@@ -70,11 +93,90 @@ public class Shooter {
         return false;
     }
 
+    /**
+     * This method enables or disables the pneumatic ball pusher solenoid.
+     * 
+     * @param push True extends the penumatic ball thumper, false retracts it
+     */
+    @objid ("e0334a6b-b527-4a95-936a-51e68527f3ea")
+    public void pushBall(boolean push) {
+    }
+
+    @objid ("bf56ebbc-3451-4f51-88e0-c944b48b9819")
+    public double getTiltSetpoint() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.tiltSetpoint;
+    }
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("89bd53b8-23c9-4a16-adb2-95ec7d912696")
+    public void setTiltSetpoint(double value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.tiltSetpoint = value;
+    }
+
+    /**
+     */
+    @objid ("f6797d96-b58a-47ee-a41a-4ea7709c5062")
+    public boolean isPitchingMachineOn() {
+    	return false;
+    }
+
+    /**
+     * This method returns if the shooter is in a known position.
+     * 
+     * The shooter uses an encoder to count ticks as it moves.  When the robot is initially powered on, the shooter angle is in an unknown state until it reaches a limit switch at a known position.  If the motor is ever shutoff for an over current condition it is reset to an unknown position (since that should never happen).
+     * 
+     * @return true if shooter tilt angle has reached the home limit switch since being powered on, false otherwise.
+     */
+    @objid ("2a8ebf57-a97b-499d-af56-80d785a4ffde")
+    public boolean isKnownPosition() {
+    	return false;
+    }
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("4d7bd443-0329-4985-8729-3ec742465875")
+    public boolean isPositionAtSetpoint() {
+    	return false;
+    }
+
+    /**
+     * This enumeration provides an easy to use value for each state the shooter can be in.
+     */
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
     public enum ShooterPosition {
-        kLow,
-        kMedium,
-        kHigh;
+        /**
+         * This setpoint puts the Shooter tilt angle at the home position
+         */
+        kHome,
+        /**
+         * This represents the shooter tilt angle is in an unknown position.  This is the initial state of the robot until it is homed.
+         */
+        kUnknown,
+        /**
+         * This setpoint holds the tilt angle of the shooter for shooting at the goal from the batter position.
+         */
+        kShootBatter,
+        /**
+         * This setpoint indicates the shooter tilt angle is correct for shooting when the robot is lined up on the tape in the center of the courtyard.
+         */
+        kShootTape,
+        /**
+         * This setpoint aligns the shooter tilt angle to take a shot from the couryard just inside the defense.
+         */
+        kShootDefense,
+        /**
+         * This setpoint puts the shooter tilt angle at the full-down position to clear the low bar.
+         */
+        kLowBar,
+        /**
+         * This setpoint holds the shooter tilt angle to the full-down position and runs the pitching machine motors in reverse until a ball is loaded.
+         */
+        kReload;
     }
 
 }

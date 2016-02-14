@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="java" version="4">
+  <OBJECT>
+    <ID name="java" mc="Standard.Package" uid="66fa5bb1-77de-4180-b991-b4ebeab90076"/>
+    <PID name="FIRST FRC 2016" mc="Standard.Package" uid="d7b9adaa-b30c-4c3d-b8fb-bf2062da88e5"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[java]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="lang" mc="Standard.Package" uid="505ba2e1-be4f-446d-bb9a-d8b21c85997c"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

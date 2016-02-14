@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="Autopilot" version="4">
+  <OBJECT>
+    <ID name="Autopilot" mc="Standard.Package" uid="bf0f9707-d35b-4301-be3e-e8b45397d4d1"/>
+    <PID name="Stronghold" mc="Standard.Package" uid="3254a605-ad1b-48a5-9ea4-a14ab79fc9b2"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[Autopilot]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Autopilot" mc="Standard.Class" uid="51808c75-6bd6-4f90-975a-784b714c5fba"/>
+        <COMPID name="AutoDrive" mc="Standard.Class" uid="faf35b12-f052-4aeb-b323-6c3b10671387"/>
+        <COMPID name="AutoMoat" mc="Standard.Class" uid="2e7b2583-3a04-4188-beec-544aff2708ac"/>
+        <COMPID name="AutoLowBar" mc="Standard.Class" uid="6e68fcd3-ac51-46b8-9089-679dbdd5f934"/>
+        <COMPID name="Autonomous" mc="Standard.Class" uid="d5c53723-495a-4d0d-9cc0-37fc89facee4"/>
+        <COMPID name="AutoDrawBridge" mc="Standard.Class" uid="38a40f7b-cbe0-4b5c-be22-96454d76cbba"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Standard.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Product">
+        <COMPID name="Autopilot Class diagram" mc="Standard.ClassDiagram" uid="4d9efc4b-c1aa-4343-90a8-34e5a5eaf430"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
