@@ -4,7 +4,7 @@ import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.ControlMode;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -92,18 +92,18 @@ public class DriveUnit {
         {
         	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kRightFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(ControlMode.Follower);
+        	followerMotor.changeControlMode(TalonControlMode.Follower);
         	followerMotor.set(Parameters.kRightMasterDriveMotorCanId);
         }
         else if (placement == Placement.Left)
         {
         	masterMotor = new CANTalon(Parameters.kLeftMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kLeftFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(ControlMode.Follower);
+        	followerMotor.changeControlMode(TalonControlMode.Follower);
         	followerMotor.set(Parameters.kLeftMasterDriveMotorCanId);
         	
         }
-        masterMotor.changeControlMode(ControlMode.PercentVbus);
+        masterMotor.changeControlMode(TalonControlMode.PercentVbus);
     	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     }
 
@@ -180,7 +180,7 @@ public class DriveUnit {
     @objid ("ff98472c-d4a4-4aa7-815a-ae058c161375")
     public boolean isSpeedControlEnabled() 
     {
-    	if (masterMotor.getControlMode() == ControlMode.Speed) 
+    	if (masterMotor.getControlMode() == TalonControlMode.Speed) 
     	{
     		return true;
     	}       	
@@ -203,12 +203,12 @@ public class DriveUnit {
     	{
     		if (speedControlEnabled)
         	{
-        		masterMotor.changeControlMode(ControlMode.Speed);
+        		masterMotor.changeControlMode(TalonControlMode.Speed);
         		masterMotor.setPID(p, i, d, f, izone, closeLoopRampRate, profile);
         	}
         	else 
         	{
-        		masterMotor.changeControlMode(ControlMode.PercentVbus);
+        		masterMotor.changeControlMode(TalonControlMode.PercentVbus);
         	}
     	}
     	
