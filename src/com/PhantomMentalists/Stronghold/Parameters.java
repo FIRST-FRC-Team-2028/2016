@@ -72,6 +72,10 @@ public class Parameters {
      */
     @objid ("84c6a947-3dd9-40ea-a483-650ecea1dbfb")
     public static final String kCameraIpAddress = "10.20.28.11";
+    
+    public static final int kGyroAnalogPort = 0;
+    
+    public static final int kUltraSonicAnalogPort = 0;
 
     /**
      * <Enter note text here>
@@ -79,4 +83,58 @@ public class Parameters {
     @objid ("7845afef-ef6b-4ac8-af0a-df9c3c2140db")
     public static final double delay = 0.05;
 
+    /**
+     * 
+     */
+    public static final double kDriveMotorDownshiftCurrentThreshold = 20.0;
+    
+    /**
+     * The chanel on the pneumatics module that's wired to the solenoid for drive's low gear
+     * <p>
+     * If a negative value, it must be replaced with the actual chanel once it has been wired.
+     */
+    public static final int kLowGearSolenoidChanel = -1;
+
+
+    /**
+     * The chanel on the pneumatics module that's wired to the solenoid for drive's high gear
+     * <p>
+     * If a negative value, it must be replaced with the actual chanel once it has been wired.
+     */
+    public static final int kHighGearSolenoidChanel = -1;
+    
+    /**
+     * 
+     */
+    public static final double kDriveSpeedControlProportional = 0;
+    
+    /**
+     * 
+     */
+    public static final double kDriveSpeedControlIntegral = 0;
+    
+    /**
+     * 
+     */
+    public static final double kDriveSpeedControlDifferential = 0;
+    
+    /**
+     * 
+     */
+    public static final double kDriveSpeedControlThrottle = 0;
+    
+    /**
+     * 
+     */
+    public static final int kDriveSpeedControlIZone = 0;
+    
+    /**
+     * 
+     */
+    public static final double kDriveControlCloseLoopRampRate = -1;
+    
+    /**
+     * 
+     */
+    public static final int kDriveControlProfile = 0;
 }

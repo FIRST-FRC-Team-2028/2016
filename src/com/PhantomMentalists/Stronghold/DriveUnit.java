@@ -1,12 +1,9 @@
 package com.PhantomMentalists.Stronghold;
 
-import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
-import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * DriveUnit encapsulates all the hardware that makes one side of the 
@@ -32,17 +29,16 @@ public class DriveUnit {
     protected double speedSetpoint;
 
     /**
+     * 
+     */
+    protected double turnSetpoint;
+    
+    /**
      * This attribute identifies where the DriveUnit is mounted.  
      * It is used to format telemetry values for the SmartDashboard.
      */
     @objid ("7303330e-6bf8-4f1f-bb7e-b8ad6117e9ca")
     protected final Placement placement;
-
-    /**
-     * This attribute stores the gear the DriveUnit's gearbox should be in.
-     */
-    @objid ("68cc68bf-030b-4f27-aefb-dc90d58f4c1f")
-    protected Gear gear;
 
     /**
      * Master Talon Speed Controller.  This device controls the output 
@@ -62,18 +58,6 @@ public class DriveUnit {
     protected CANTalon followerMotor;
 
     /**
-     * Controls the hardware that sets the gearbox to high gear.
-     */
-    @objid ("0481c694-c2c4-4ced-8acb-4e7c6b6b92d1")
-    protected Solenoid highGear;
-
-    /**
-     * Controls the hardware that sets the gearbox to low gear.
-     */
-    @objid ("63e9ddc3-81da-4bfc-9639-fcb085f32ec5")
-    protected Solenoid lowGear;
-
-    /**
      * DriveUnit constructor.  This method initializes all attributes 
      * of the DriveUnit to a known state.  It instantiates all hardware 
      * attributes (both Talon Motor Controllers and the gear Solenoid) using 
@@ -86,32 +70,34 @@ public class DriveUnit {
     @objid ("72aba1e2-59da-49cd-914f-a0aba060f665")
     public DriveUnit(Placement placements) 
     {
-    	this.gear = Gear.kLowGear;
         placement = placements;
         if (placement == Placement.Right) 
         {
         	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kRightFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(ControlMode.Follower);
+        	followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
         	followerMotor.set(Parameters.kRightMasterDriveMotorCanId);
         }
         else if (placement == Placement.Left)
         {
         	masterMotor = new CANTalon(Parameters.kLeftMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kLeftFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(ControlMode.Follower);
+        	followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
         	followerMotor.set(Parameters.kLeftMasterDriveMotorCanId);
         	
         }
-        masterMotor.changeControlMode(ControlMode.PercentVbus);
+        masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
     	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	turnSetpoint = 0.0;
+    	speedSetpoint = 0.0;
     }
 
     /**
-     * Returns the setpoint.
+     * Returns the speed setpoint.
+     * 
      * @returns double - setpoint of the drive motor controller as a 
-     * percentage in the range -1.0 .. 0 .. 1.0 where negative values 
-     * indicate reverse and positive values indicate forward.
+     *                   percentage in the range -1.0 .. 0 .. 1.0 where negative values 
+     *                   indicate reverse and positive values indicate forward.
      */
     @objid ("5dad8b50-8973-4186-80f9-5dd883b14e9d")
     public double getSpeedSetpoint() {
@@ -120,10 +106,11 @@ public class DriveUnit {
     }
 
     /**
-     * Sets the motor controller setpoint.
+     * Sets the motor controller speed setpoint.
+     * 
      * @param value - Percentage of the motor's output in the range 
-     * -1.0 .. 0 .. 1.0 where negative values indicate reverse and 
-     * positive values indicate forward.
+     *                -1.0 .. 0 .. 1.0 where negative values indicate reverse and 
+     *                positive values indicate forward.
      */
     @objid ("6b1aafd1-f349-430d-8d23-f281df820075")
     public void setSpeedSetpoint(double value) {
@@ -131,7 +118,6 @@ public class DriveUnit {
     	if (getSpeedSetpoint() != value)
     	{
     		this.speedSetpoint = value;
-    		masterMotor.set(speedSetpoint);
     	}
         
     }
@@ -141,31 +127,83 @@ public class DriveUnit {
      * This method is responsible for updating the internal state of the 
      * DriveUnit based on it's attributes (which may have been changed since 
      * the last call to process().  It changes Talon Motor Controller 
-     * setpoints, sends telemetry values to the Smart Dashboard, 
-     * and checks to see if either Motor controllers are exceeding their 
-     * current threshold (and automatically downshifts the gearbox to low 
-     * gear if they are).
+     * setpoints, sends telemetry values to the Smart Dashboard.
      */
     @objid ("de5d82d9-c9f3-4739-b5a8-eeb4984e075c")
     public void process() 
     {
-    	if(currentThresholdExceeded(0))
-    	{
-    		setGear(Gear.kLowGear);
-    	}
-    	
+    	// Set the power to the master motor.  NOTE:  We need to calculate
+    	// the power based on the speed setpoint modified by the turn setpoint.
+    	// If we're driving forward and turning, the inside wheels must
+    	// turn slower than the outside wheels.  If our speed setpoint is zero
+    	// and we have a non-zero turn setpoint (i.e., we're spinning in place)
+    	// we want the inside wheels to run in reverse and the outside wheels to
+    	// run forward.
+		double setpoint = speedSetpoint;
+		if (turnSetpoint != 0.0) 
+		{
+			// We are turning
+			if (speedSetpoint == 0.0)
+			{
+				// Priority #1
+				// We're spinning in place
+				if (turnSetpoint < 0.0)
+				{
+					// We're turning to the left
+					if (placement == Placement.Left) 
+					{
+						setpoint = speedSetpoint * (1 - turnSetpoint);
+					} 
+									
+				}
+				else
+				{
+					// We're turning to the right
+					if (placement == Placement.Right) 
+					{
+						setpoint = speedSetpoint * (1 - turnSetpoint);
+					} 
+									
+				}
+			}
+			else
+			{
+				// Priority #2
+				// We're turning while moving forward/backwards, subtract the turn setpoint
+				// percentage from the inside set of wheels
+				if (turnSetpoint < 0.0)
+				{
+					
+				// We're turning to the left
+					if (placement == Placement.Left) 
+					{
+						setpoint = speedSetpoint * (1 - turnSetpoint);
+					} 
+					
+				}
+				else
+				{
+				// We're turning to the right
+					
+					if (placement == Placement.Right)
+					{
+						setpoint = speedSetpoint * (1 - turnSetpoint);
+					}
+				}
+			}
+		}
+   		masterMotor.set(setpoint);
     }
     
     /**
      * Returns if a certain threshold of the current of the motors is exceeded.
      * Returns true if exceeded, returns false if the motors have not got to the threshold set.	
-     * @param threshold
-     * @return
+     * 
+     * @return true if current of either the master or follower motor exceeds its threshold, false otherwise
      */
-    
-    public boolean currentThresholdExceeded(double threshold)
+    public boolean isCurrentThresholdExceeded()
     {
-    	if (masterMotor.getOutputCurrent() >= threshold || followerMotor.getOutputCurrent() >= threshold)
+    	if (masterMotor.getOutputCurrent() >= Parameters.kDriveMotorDownshiftCurrentThreshold || followerMotor.getOutputCurrent() >= Parameters.kDriveMotorDownshiftCurrentThreshold)
     	{
     		return true;
     	}
@@ -180,7 +218,7 @@ public class DriveUnit {
     @objid ("ff98472c-d4a4-4aa7-815a-ae058c161375")
     public boolean isSpeedControlEnabled() 
     {
-    	if (masterMotor.getControlMode() == ControlMode.Speed) 
+    	if (masterMotor.getControlMode() == CANTalon.ControlMode.Speed) 
     	{
     		return true;
     	}       	
@@ -203,12 +241,18 @@ public class DriveUnit {
     	{
     		if (speedControlEnabled)
         	{
-        		masterMotor.changeControlMode(ControlMode.Speed);
-        		masterMotor.setPID(p, i, d, f, izone, closeLoopRampRate, profile);
+        		masterMotor.changeControlMode(CANTalon.ControlMode.Speed);
+        		masterMotor.setPID(Parameters.kDriveSpeedControlProportional, 
+        						 	Parameters.kDriveSpeedControlIntegral, 
+        						 	Parameters.kDriveSpeedControlDifferential, 
+        						 	Parameters.kDriveSpeedControlThrottle, 
+        						 	Parameters.kDriveSpeedControlIZone, 
+        						 	Parameters.kDriveControlCloseLoopRampRate, 
+        						 	Parameters.kDriveControlProfile);
         	}
         	else 
         	{
-        		masterMotor.changeControlMode(ControlMode.PercentVbus);
+        		masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
         	}
     	}
     	
@@ -225,48 +269,27 @@ public class DriveUnit {
     }
 
     /**
-     * Sets the gearbox gear.
-     * @param value - the gear (Low or High) to set the gearbox to.
+     * 
+     * @param value
      */
-    @objid ("07a16abf-c1bb-4ebe-a0a0-9cee9c2b7b66")
-    public void setGear(Gear value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        
-    	if (getGear() != value)
-    	{
-    		this.gear = value;
-	        if (gear == Gear.kHighGear)
-	        {
-	        	highGear.set(true);
-	        	lowGear.set(false);
-	        }
-	        else if (gear == Gear.kLowGear)
-	        {
-	        	highGear.set(false);
-	        	lowGear.set(true);
-	        }
-    	}
+    public void setTurnSetpoint(double value)
+    {
+    	turnSetpoint = value;
     }
-
-    @objid ("e4914053-d1c5-48d3-9a8a-aeefb3c7c402")
-    public Gear getGear() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.gear;
+    
+    /**
+     * 
+     * @return
+     */
+    public double getTurnSetpoint()
+    {
+    	return this.turnSetpoint;
     }
-
+    
     @objid ("b87fda8c-c9ff-4309-987b-05d2794dfab0")
     public enum Placement {
         Left,
         Right;
-    }
-
-    /**
-     * <Enter note text here>
-     */
-    @objid ("d18d0297-82a7-46fd-b0cf-1bda39f0d7f9")
-    public enum Gear {
-        kLowGear,
-        kHighGear;
     }
 
 }
