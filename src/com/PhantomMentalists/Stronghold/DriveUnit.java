@@ -77,18 +77,18 @@ public class DriveUnit {
         {
         	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kRightFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(TalonControlMode.Follower);
+        	followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
         	followerMotor.set(Parameters.kRightMasterDriveMotorCanId);
         }
         else if (placement == Placement.Left)
         {
         	masterMotor = new CANTalon(Parameters.kLeftMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kLeftFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(TalonControlMode.Follower);
+        	followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
         	followerMotor.set(Parameters.kLeftMasterDriveMotorCanId);
         	
         }
-        masterMotor.changeControlMode(TalonControlMode.PercentVbus);
+        masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
     	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	turnSetpoint = 0.0;
     	speedSetpoint = 0.0;
@@ -182,7 +182,7 @@ public class DriveUnit {
     @objid ("ff98472c-d4a4-4aa7-815a-ae058c161375")
     public boolean isSpeedControlEnabled() 
     {
-    	if (masterMotor.getControlMode() == TalonControlMode.Speed) 
+    	if (masterMotor.getControlMode() == CANTalon.ControlMode.Speed) 
     	{
     		return true;
     	}       	
@@ -205,7 +205,7 @@ public class DriveUnit {
     	{
     		if (speedControlEnabled)
         	{
-        		masterMotor.changeControlMode(TalonControlMode.Speed);
+        		masterMotor.changeControlMode(CANTalon.ControlMode.Speed);
         		masterMotor.setPID(Parameters.kDriveSpeedControlProportional, 
         						 	Parameters.kDriveSpeedControlIntegral, 
         						 	Parameters.kDriveSpeedControlDifferential, 

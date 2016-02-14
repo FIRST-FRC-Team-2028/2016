@@ -1,25 +1,45 @@
 package com.PhantomMentalists.Stronghold;
-
+/**
+ * imports
+ */
 import com.PhantomMentalists.Stronghold.DriveUnit.Placement;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
- * <Insert class documentation from word document here>
+ * Drive
  * 
- * @author Zavion</p>
+ * The drive system allows us to drive the robot and to change between high gear and low gear using 
+ * joysticks/controllers. Moreover, we implement the change from high gear to low gear if colliding 
+ * with another robot.
+ * 
+ * States:
+ * <p>
+ * voltage control mode / speed control mode
+ * The robot is driven with speed control mode, which makes the robot more reliable. Nevertheless, 
+ * we implement the change to voltage mode in case a failure happens.  Inputs/Sensors: Quad encoders
+ * (both right and left side).
+ * <p>
+ * low gear / high gear
+ * The two states depend on the solenoid position. The transition between states (from low gear to
+ * high gear and vice versa) depend on the inputs from the joysticks/controllers. We also implement 
+ * the change from high gear to low gear if a certain threshold of current is met, for preventing
+ * motors from burning up. It affects both sides. Inputs/sensors : None. 
+ * <p>
+ * Sensors
+ * Two quad encoders (1 per side speed control).
+ * Motors
+ * 4 Talon SRX (2 on each side)
+ * 
+ * @author Zavion
  */
 @objid ("bfe07845-b9da-40e9-a047-c801ee86b209")
 public class WestCoastDrive implements PIDOutput
 {   
-   /**
-    * its a gear 
-    */
-    @objid ("28bc5bec-15fd-4924-b01c-5f725341e189")
-    protected Gear gear;
     
    /**
     * left side
@@ -34,13 +54,19 @@ public class WestCoastDrive implements PIDOutput
     protected DriveUnit rightSide;
 
     /**
-     * Controls the hardware that sets the gearbox to high gear.
+     * The setpoint for the gear we want both DriveUnits to be in.
      */
-    protected Solenoid highGear;
+    @objid ("28bc5bec-15fd-4924-b01c-5f725341e189")
+    protected Gear gear = Gear.kLowGear;
 
-    /**
-     * Controls the hardware that sets the gearbox to low gear.
-     */
+   /**
+    * Controls the solenoid valve for the high gear 
+    */
+   protected Solenoid highGear;
+      
+   /**
+    * Controls the solenoid valve for the lowGear
+    */
     protected Solenoid lowGear;   
     
    /**
@@ -48,6 +74,7 @@ public class WestCoastDrive implements PIDOutput
     */
     @objid ("06e23f53-7280-4c29-b319-50a651aca613")
     public WestCoastDrive() 
+    
     {
     	  leftSide = new DriveUnit(Placement.Left);
     	  rightSide = new DriveUnit(Placement.Right);
@@ -90,6 +117,22 @@ public class WestCoastDrive implements PIDOutput
     	rightSide.setSpeedSetpoint(setPoint);	
     }
     
+    /**
+     * Sets the speed setpoint to left and right DriveUnit individually
+     * <p>
+     * This method is used when we have a two joystick control scheme and we want to specify
+     * the power to the left and right side explicitly.  Note:  In this control scheme we will
+     * never need to set the turn setpoint (it will always be zero).
+     * 
+     * @param leftSetPoint
+     * @param rightSetPoint
+     */
+    public void setSpeedSetpoint(double leftSetPoint, double rightSetPoint)
+    {
+    	leftSide.setSpeedSetpoint(leftSetPoint);
+    	rightSide.setSpeedSetpoint(rightSetPoint);
+    }
+
    /**
  	* gets the speed setpoint.  
  	* <p>
@@ -113,7 +156,8 @@ public class WestCoastDrive implements PIDOutput
       *  
       * @param value Percentage to turn in the range (-1.0 .. 0 .. 1.0) where negative values 
       *              turn the robot left and positive values turn the robot right
-      */
+      */     
+     @objid ("77501865-67e2-4889-b074-f047bd3616a6")
      void setTurnSetpoint(double value)
      { 
     	 leftSide.setTurnSetpoint(value);
