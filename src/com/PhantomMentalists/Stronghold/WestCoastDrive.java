@@ -11,7 +11,26 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
- * <Insert class documentation from word document here>
+ * <Drive
+
+Description:
+The drive system allows us to drive the robot and to change between high gear and low gear using joysticks/controllers. Moreover, we implement the change from high gear to low gear if colliding with another robot.
+States:
+<p>
+voltage control mode / speed control mode
+The robot is driven with speed control mode, which makes the robot more reliable. Nevertheless, we implement the change to voltage mode in case a failure happens.
+Inputs/Sensors: Quad encoders (both right and left side).
+<p>
+low gear / high gear
+The two states depend on the solenoid position. The transition between states (from low gear to high gear and vice versa) depend on the inputs from the joysticks/controllers. We also implement the change from high gear to low gear if a certain threshold of current is met, for preventing motors from burning up.
+It affects both sides.
+Inputs/sensors : None. 
+<p>
+Sensors
+Two quad encoders (1 per side speed control).
+Motors
+4 Talon SRX (2 on each side)
+>
  * 
  * @author Zavion</p>
  */
