@@ -71,6 +71,7 @@ public class DriveUnit {
     public DriveUnit(Placement placements) 
     {
         placement = placements;
+        
         if (placement == Placement.Right) 
         {
         	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
@@ -82,12 +83,16 @@ public class DriveUnit {
         	followerMotor = new CANTalon(Parameters.kLeftFollowerDriveMotorCanId);
         	
         }
+        
         masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
         followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
+        
     	followerMotor.set(masterMotor.getDeviceID());
+    	
         masterMotor.enableBrakeMode(true);
         followerMotor.enableBrakeMode(true);
-    	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	//masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder); ... It might be included
+        
     	turnSetpoint = 0.0;
     	speedSetpoint = 0.0;
     }
@@ -139,8 +144,10 @@ public class DriveUnit {
     	// and we have a non-zero turn setpoint (i.e., we're spinning in place)
     	// we want the inside wheels to run in reverse and the outside wheels to
     	// run forward.
+    	
 		double setpoint = speedSetpoint;
 		double maxVelocity = Parameters.kMaxVelocity;
+		
 		if (turnSetpoint != 0.0) 
 		{
 			// We are turning
@@ -201,6 +208,7 @@ public class DriveUnit {
 				}
 			}
 		}
+		
    		masterMotor.set(setpoint);
    		
     }
