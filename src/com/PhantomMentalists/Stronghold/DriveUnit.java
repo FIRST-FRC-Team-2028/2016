@@ -1,11 +1,10 @@
 package com.PhantomMentalists.Stronghold;
 
-import com.PhantomMentalists.Stronghold.Parameters;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
  * DriveUnit encapsulates all the hardware that makes one side of the 
@@ -77,18 +76,18 @@ public class DriveUnit {
         {
         	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kRightFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
+        	followerMotor.changeControlMode(TalonControlMode.Follower);
         	followerMotor.set(Parameters.kRightMasterDriveMotorCanId);
         }
         else if (placement == Placement.Left)
         {
         	masterMotor = new CANTalon(Parameters.kLeftMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kLeftFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
+        	followerMotor.changeControlMode(TalonControlMode.Follower);
         	followerMotor.set(Parameters.kLeftMasterDriveMotorCanId);
         	
         }
-        masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+        masterMotor.changeControlMode(TalonControlMode.PercentVbus);
     	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	turnSetpoint = 0.0;
     	speedSetpoint = 0.0;
@@ -182,7 +181,7 @@ public class DriveUnit {
     @objid ("ff98472c-d4a4-4aa7-815a-ae058c161375")
     public boolean isSpeedControlEnabled() 
     {
-    	if (masterMotor.getControlMode() == CANTalon.ControlMode.Speed) 
+    	if (masterMotor.getControlMode() == TalonControlMode.Speed) 
     	{
     		return true;
     	}       	
@@ -205,7 +204,7 @@ public class DriveUnit {
     	{
     		if (speedControlEnabled)
         	{
-        		masterMotor.changeControlMode(CANTalon.ControlMode.Speed);
+        		masterMotor.changeControlMode(TalonControlMode.Speed);
         		masterMotor.setPID(Parameters.kDriveSpeedControlProportional, 
         						 	Parameters.kDriveSpeedControlIntegral, 
         						 	Parameters.kDriveSpeedControlDifferential, 
