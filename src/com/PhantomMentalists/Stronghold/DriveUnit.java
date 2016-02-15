@@ -75,18 +75,18 @@ public class DriveUnit {
         {
         	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kRightFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
-        	followerMotor.set(Parameters.kRightMasterDriveMotorCanId);
         }
         else if (placement == Placement.Left)
         {
         	masterMotor = new CANTalon(Parameters.kLeftMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kLeftFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
-        	followerMotor.set(Parameters.kLeftMasterDriveMotorCanId);
         	
         }
         masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+        followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
+    	followerMotor.set(masterMotor.getDeviceID());
+        masterMotor.enableBrakeMode(true);
+        followerMotor.enableBrakeMode(true);
     	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	turnSetpoint = 0.0;
     	speedSetpoint = 0.0;
@@ -202,6 +202,7 @@ public class DriveUnit {
 			}
 		}
    		masterMotor.set(setpoint);
+   		
     }
     
     /**
