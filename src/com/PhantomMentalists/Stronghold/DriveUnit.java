@@ -140,6 +140,7 @@ public class DriveUnit {
     	// we want the inside wheels to run in reverse and the outside wheels to
     	// run forward.
 		double setpoint = speedSetpoint;
+		double maxVelocity = Parameters.kMaxVelocity;
 		if (turnSetpoint != 0.0) 
 		{
 			// We are turning
@@ -152,8 +153,12 @@ public class DriveUnit {
 					// We're turning to the left
 					if (placement == Placement.Left) 
 					{
-						setpoint = speedSetpoint * (1 - turnSetpoint);
-					} 
+						setpoint = -(maxVelocity * turnSetpoint);
+					}
+					else
+					{
+						setpoint = maxVelocity * turnSetpoint;
+					}
 									
 				}
 				else
@@ -161,8 +166,12 @@ public class DriveUnit {
 					// We're turning to the right
 					if (placement == Placement.Right) 
 					{
-						setpoint = speedSetpoint * (1 - turnSetpoint);
+						setpoint = -(maxVelocity * turnSetpoint);
 					} 
+					else
+					{
+						setpoint = maxVelocity * turnSetpoint;
+					}
 									
 				}
 			}

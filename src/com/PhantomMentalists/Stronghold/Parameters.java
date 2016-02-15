@@ -137,4 +137,10 @@ public class Parameters {
      * 
      */
     public static final int kDriveControlProfile = 0;
+    
+    /**
+     * 
+     */
+     
+    public static final double kMaxVelocity = 20.0;
 }
