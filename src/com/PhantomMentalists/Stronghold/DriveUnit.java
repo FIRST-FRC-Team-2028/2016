@@ -147,6 +147,11 @@ public class DriveUnit {
     	
 		double setpoint = speedSetpoint;
 		double maxVelocity = Parameters.kMaxVelocity;
+		if (placement == Placement.Left)
+		{
+			setpoint = - setpoint;
+			maxVelocity = - maxVelocity;
+		}
 		
 		if (turnSetpoint != 0.0) 
 		{
