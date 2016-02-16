@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
-<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="AutoMoat" version="4">
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="AutoDriveOverDefense" version="4">
   <OBJECT>
-    <ID name="AutoMoat" mc="Standard.Class" uid="2e7b2583-3a04-4188-beec-544aff2708ac"/>
+    <ID name="AutoDriveOverDefense" mc="Standard.Class" uid="2e7b2583-3a04-4188-beec-544aff2708ac"/>
     <PID name="Autopilot" mc="Standard.Package" uid="bf0f9707-d35b-4301-be3e-e8b45397d4d1"/>
     <ATTRIBUTES>
       <ATT name="IsActive">false</ATT>
@@ -11,13 +11,13 @@
       <ATT name="IsLeaf">false</ATT>
       <ATT name="IsRoot">false</ATT>
       <ATT name="Visibility">Public</ATT>
-      <ATT name="Name"><![CDATA[AutoMoat]]></ATT>
+      <ATT name="Name"><![CDATA[AutoDriveOverDefense]]></ATT>
       <ATT name="status">1970354901745664</ATT>
     </ATTRIBUTES>
     <DEPENDENCIES>
       <COMP relation="OwnedOperation">
         <OBJECT>
-          <ID name="AutoMoat" mc="Standard.Operation" uid="e1bf47bf-543a-45f6-b369-e5a8c5869185"/>
+          <ID name="AutoDriveOverDefense" mc="Standard.Operation" uid="e1bf47bf-543a-45f6-b369-e5a8c5869185"/>
           <ATTRIBUTES>
             <ATT name="Concurrency">false</ATT>
             <ATT name="Final">false</ATT>
@@ -25,7 +25,7 @@
             <ATT name="Visibility">Public</ATT>
             <ATT name="IsClass">false</ATT>
             <ATT name="IsAbstract">false</ATT>
-            <ATT name="Name"><![CDATA[AutoMoat]]></ATT>
+            <ATT name="Name"><![CDATA[AutoDriveOverDefense]]></ATT>
             <ATT name="status">1970354901745664</ATT>
           </ATTRIBUTES>
           <DEPENDENCIES>
@@ -202,6 +202,30 @@
       <LINK relation="Extension">
         <FOREIGNID name="JavaClass" mc="Standard.Stereotype" uid="01ec23a8-0000-0258-0000-000000000000"/>
       </LINK>
+      <COMP relation="Descriptor">
+        <OBJECT>
+          <ID name="" mc="Standard.Note" uid="868024ea-39ae-41f0-94b8-d9c1bde345ec"/>
+          <ATTRIBUTES>
+            <ATT name="Content"><![CDATA[This class encapsulates the code to drive over one of the Stronghold
+defenses that require the robot to "simply" drive over them.  These
+are the Moat, Rock Wall, Ramparts and Rough Terrain.  For all of these
+defenses the climber, pusher arm and shooter will be in their raised
+positions.  The constructor will take an enum to specify the exact
+defense being crossed to allow the speed to be tailored for the
+specific defense.
+
+@author Hunter]]></ATT>
+            <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Model">
+              <FOREIGNID name="description" mc="Standard.NoteType" uid="00000000-0000-3e81-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
     </DEPENDENCIES>
   </OBJECT>
 </EXT>

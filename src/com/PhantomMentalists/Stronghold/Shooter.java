@@ -7,89 +7,220 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
- * This class encapsulates the state (attributes) and logic (methods) required to control Telepath's shooter to score points by hurling a boulder into the high goal.
+ * This class encapsulates the state (attributes) and logic (methods) required to control
+ * Telepath's shooter to score points by hurling a boulder into the high goal.
  * 
  * @author Nazhere and Moose
  */
 @objid ("e7c0967b-bd2b-41d7-a528-2d3f463133d3")
 public class Shooter {
-    /**
-     * This attribute stores the angle the shooter will move to.
-     * 
-     * This method is used when the Shooter is in autopilot control.  It sets the position as the number of ticks (typically 4096 ticks per revolution) from the home position.  The Talon will use distance control to hold the Shooter angle at the specified position.
-     */
-    @objid ("2cba802d-0e00-4a6f-a589-c6ec5069db6f")
-    protected double tiltSetpoint;
-
-    @objid ("4ede4b6a-ff63-46f7-9714-da4101e49e75")
-    public Solenoid Kicker;
+	/**
+	 * <Enter note text here>
+	 */
+	protected ShooterPosition position;
 
     /**
      * <Enter note text here>
      */
-    @objid ("63f2413a-d988-445a-ace3-67d34b261a43")
+    @objid ("54c45f11-335d-432c-93c6-f1a8354239b9")
     protected DigitalInput ballSensor;
 
     /**
-     * <Enter note text here>
+     * Controls the hardware for the motor driving the left-hand pitching motor
      */
-    @objid ("89cdc41c-1864-4459-8d64-5f9914675c79")
+    @objid ("fde5fcfa-15dc-4eae-a052-65112042635a")
     protected CANTalon leftPitchingMotor;
 
     /**
-     * <Enter note text here>
+     * Controls the hardware for the motor driving the right-hand pitching motor
      */
-    @objid ("3149120a-5cf8-4902-bee1-1e15cfb9d14b")
+    @objid ("e22e0db7-a4cb-46a2-85aa-b7a1de718fc6")
     protected CANTalon rightPitchingMotor;
 
-    @objid ("ca52f5d5-e895-4f2b-b8eb-cf991ceae8ff")
+    /**
+     * Controls the hardware for the motor driving the shooter tilt angle
+     */
+    @objid ("01c41837-6db2-47af-ba2f-e34cc6166b56")
     protected CANTalon tiltMotor;
 
-    @objid ("c541cb16-62b1-4934-bb7c-a37d4bd8f851")
+    /**
+     * <Enter note text here>
+     */
+    @objid ("2c653aa8-a80f-4797-975e-a6799cc7f9aa")
     protected Solenoid ballShooter;
+
+    /**
+     * <Enter note text here>
+     */
+    @objid ("2c653aa8-a80f-4797-975e-a6799cc7f9aa")
+    protected Solenoid dink;
+
+    /**
+     * <Enter note text here>
+     */
+	private double tiltSetpoint;
+	
+	/**
+	 * Internal variable that indicates the shooter is in the process of shooting.
+	 * This attribute is set by the shoot() method and remains true until the ball
+	 * is away.
+	 */
+	protected boolean shooting;
+	
+	/**
+	 * Internal variable that indicates the shooter is in the process of reloading.
+	 * This attribute is set by the shoot() method and remains true until we sense
+	 * a ball in the shooter (or it is cancelled by the driver).  
+	 */
+	protected boolean reloading;
 
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
     public Shooter() {
+    	rightPitchingMotor = new CANTalon(Parameters.kRightShooterPitcherMotorCanId);
+    	leftPitchingMotor = new CANTalon(Parameters.kLeftShooterPitcherMotorCanId);
+    	tiltMotor = new CANTalon(Parameters.kShooterAngleMotorCanId);
+    	
+    	rightPitchingMotor.enableBrakeMode(true);
+    	leftPitchingMotor.enableBrakeMode(true);
+    	tiltMotor.enableBrakeMode(true);
+    	ballShooter = new Solenoid(Parameters.kShooterBallShooterSolenoidChanel);
+    	ballShooter.set(false);
+    	dink = new Solenoid(Parameters.kShooterDinkSolenoidChanel);
+    	dink.set(true);
+    	position = ShooterPosition.kUnknown;
+    	enablePitchingMachineSpeedControl();
+    	// Disable tilt position control until we've reached the home position
+    	disableTiltPositionControl();
+    	shooting = false;
+    	reloading = false;
     }
 
+    /**
+     * 
+     */
+    public void disableTiltPositionControl() {
+    	tiltMotor.disable();
+    	tiltMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+    	tiltMotor.enable();       	
+    }
+    
+    /**
+     * 
+     */
+    public void enableTiltPositionControl() {
+    	tiltMotor.disable();
+    	tiltMotor.changeControlMode(CANTalon.ControlMode.Position);
+    	tiltMotor.setFeedbackDevice(device);
+    	tiltMotor.setPID(Parameters.kShootTiltPositionControlProportional, 
+			 	Parameters.kShootTiltPositionControlIntegral, 
+			 	Parameters.kShootTiltPositionControlDifferential, 
+			 	Parameters.kShootTiltPositionControlThrottle);
+    	tiltMotor.enable();
+    }
+    
+    /**
+     * 
+     */
+    public void disablePitchingMachineSpeedControl() {
+    	rightPitchingMotor.disable();
+    	leftPitchingMotor.disable();
+    	rightPitchingMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+    	leftPitchingMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+    	rightPitchingMotor.enable();    	
+    	leftPitchingMotor.enable();
+    }
+    
+    /**
+     * 
+     */
+    public void enablePitchingMachineSpeedControl() {
+    	rightPitchingMotor.disable();
+    	leftPitchingMotor.disable();    	
+    	rightPitchingMotor.changeControlMode(CANTalon.ControlMode.Speed);
+    	rightPitchingMotor.setFeedbackDevice(device);
+    	rightPitchingMotor.setPID(Parameters.kShootPitchPositionControlProportional, 
+			 	Parameters.kShootPitchPositionControlIntegral, 
+			 	Parameters.kShootPitchPositionControlDifferential, 
+			 	Parameters.kShootPitchPositionControlThrottle);    	
+    	leftPitchingMotor.changeControlMode(CANTalon.ControlMode.Speed);
+    	leftPitchingMotor.setFeedbackDevice(device);
+    	leftPitchingMotor.setPID(Parameters.kShootPitchPositionControlProportional, 
+			 	Parameters.kShootPitchPositionControlIntegral, 
+			 	Parameters.kShootPitchPositionControlDifferential, 
+			 	Parameters.kShootPitchPositionControlThrottle);
+    	rightPitchingMotor.enable();    	
+    	leftPitchingMotor.enable();    	
+    }
+    
+    /**
+     * This method shoots the shooter.  It assumes the robot is already aimed at the target
+     * (i.e., the robot is aimed at the target and the shooter tilt angle is already at the
+     * correct tilt angle).  It first turns on the two pitching machine motors, and once up
+     * to speed it retracts the dink and lastly triggers the ball shooter solenoid.
+     */
+    @objid ("af588d71-18eb-4098-95a6-d69164a77e41")
+    public void shoot() {
+    	
+    		rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
+        	leftPitchingMotor.set(-1.0 * Parameters.kShooterShootPitchingMachineSpeed);
+        	shooting = true;
+    }
+
+    public void reload() {
+    	rightPitchingMotor.set(-1.0 * Parameters.kShooterReloadPitchingMachineSpeed);
+    	leftPitchingMotor.set(Parameters.kShooterReloadPitchingMachineSpeed);
+    	reloading = true;
+    }
+    
+    /**
+     * Tells if a ball is in the shooter.
+     * 
+     * @return true if a ball is in the shooter, false otherwise
+     */
     @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
     public boolean isBallLoaded() {
-        return false;
+    	return ballSensor.get();
+    	//
     }
 
     /**
-     * This method powers both of the two picthing matchine motors.  
+     * This method tells the shooter tilt angle to move to one of its pre-defined setpoints
      * 
-     * This method intended for use during autopilot when the two Talon motor controllers are in speed control mode.  It provides a setpoint in counts per 100 milisecond.  Both motors must spin their respective wheels in oposite directions.
-     * 
-     * @param power Power to apply to the tilt motor as a percentage in counts per 100 miliseconds where negative numbers run the motors in reverse and positive numbers run the motors forward
+     * @param shooterPosition the pre-defined shooter setpoint to move to
      */
     @objid ("f1761ce3-8d39-43f8-9b3c-6adaedaec7ad")
-    public void setShootState(ShooterPosition shooterPosition) {
+    public void setShootAngle(ShooterPosition shooterPosition) {
+    	position = shooterPosition;
     }
 
     /**
-     * This method powers both of the two picthing matchine motors.  
+     * Manually run the pitching machine.
      * 
-     * This method can only be used when autopilot is disabled and is intended for troubleshooting and debugging.  Both motors must spin their respective wheels in oposite directions.
-     * 
-     * @param power Power to apply to the tilt motor as a percentage in the range of -1.0 .. 0 1.0 where -1.0 is 100% reverse and 1.0 is 100% forward.
-     */
-    @objid ("f0ee0c60-695b-452c-b734-44653ea8b4fd")
-    public void manualRunPichingMachine(double power) {
-    }
-
-    /**
-     * This method powers the tilt motor.  This method can only be used when autopilot is disabled and is intended for troubleshooting and debugging.
-     * 
-     * @param power Power to apply to the tilt motor as a percentage in the range of -1.0 .. 0 1.0 where -1.0 is 100% reverse and 1.0 is 100% forward.
+     * @param value percentage of power to run the pitching machine motors in the range of
+     *        (-1.0 .. 0 .. 1.0) where 1.0 is 100% forward and -1.0 is 100% reverse.
      */
     @objid ("eba4d1df-2aa2-4f39-b3a7-f0ca4f9b6626")
-    public void manualShooterTiltPower(double power) {
+    public void manualRunPitchingMachine(double value) {
+    	if (isPitchingMachineSpeedControlEnabled())
+    	{
+    		disablePitchingMachineSpeedControl();
+    	}
+    	rightPitchingMotor.set(value);
+    	leftPitchingMotor.set(-1.0 * value);
     }
 
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
     public boolean isUpToSpeed() {
+//    	if(rightPitchingMotor && leftPitchingMotor){
+//    		return true;
+//    	}
+//    	else{
+//    		return false;
+//    	}
+//        //if motor is up to speed return true else return false.
+//    	//This is not correct but it is a shot
+//        
+//       
         return false;
     }
 
@@ -100,8 +231,22 @@ public class Shooter {
      */
     @objid ("e0334a6b-b527-4a95-936a-51e68527f3ea")
     public void pushBall(boolean push) {
+    	ballShooter.set(push);
     }
 
+    /**
+     * This method retracts or extends the dink
+     * 
+     * @param retract true retracts the dink, false extends it
+     */
+    public void setDink(boolean retract) {
+    	dink.set(retract);
+    }
+    
+    /**
+     * 
+     * @return
+     */
     @objid ("bf56ebbc-3451-4f51-88e0-c944b48b9819")
     public double getTiltSetpoint() {
         // Automatically generated method. Please delete this comment before entering specific code.
@@ -118,10 +263,17 @@ public class Shooter {
     }
 
     /**
+     * 
+     * @return boolean - true if pitching machine motors are on, false otherwise
      */
     @objid ("f6797d96-b58a-47ee-a41a-4ea7709c5062")
     public boolean isPitchingMachineOn() {
-    	return false;
+    	boolean rc = false;
+    	if (leftPitchingMotor.getOutputVoltage() != 0.0)
+    	{
+    		rc = true;
+    	}
+    	return rc;
     }
 
     /**
@@ -145,34 +297,74 @@ public class Shooter {
     }
 
     /**
-     * This enumeration provides an easy to use value for each state the shooter can be in.
+     * This method is called once every iteration through the robot's main loop, in both
+     * autonomous and operatorControl.  It is responsible for controlling the shooter's
+     * movements based on its state, sending updated telemetry values to the smart 
+     * dashboard, and catching any error conditions (such as motors being over their 
+     * current limit).
      */
+    public void process()
+    {
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public boolean isPitchingMachineSpeedControlEnabled() {
+    	return (leftPitchingMotor.getControlMode() == CANTalon.ControlMode.Speed);
+    }
+    
+    /**
+     * Interogates the shooter to see if it is currently shooting
+     * 
+     * @return true if in the process of shooting, false otherwise
+     */
+    public boolean isShooting() {
+    	return shooting;
+    }
+    
+    /**
+     * Interogates the shooter to see if it is curently reloading
+     * 
+     * @return true if in the process of reloading, false otherwise
+     */
+    public boolean isReloading() {
+    	return reloading;
+    }
+    
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
     public enum ShooterPosition {
-        /**
+         /**
          * This setpoint puts the Shooter tilt angle at the home position
          */
         kHome,
+        
         /**
          * This represents the shooter tilt angle is in an unknown position.  This is the initial state of the robot until it is homed.
          */
         kUnknown,
+        
         /**
          * This setpoint holds the tilt angle of the shooter for shooting at the goal from the batter position.
          */
         kShootBatter,
+        
         /**
          * This setpoint indicates the shooter tilt angle is correct for shooting when the robot is lined up on the tape in the center of the courtyard.
          */
         kShootTape,
+        
         /**
          * This setpoint aligns the shooter tilt angle to take a shot from the couryard just inside the defense.
          */
         kShootDefense,
+        
         /**
          * This setpoint puts the shooter tilt angle at the full-down position to clear the low bar.
          */
         kLowBar,
+        
         /**
          * This setpoint holds the shooter tilt angle to the full-down position and runs the pitching machine motors in reverse until a ball is loaded.
          */
