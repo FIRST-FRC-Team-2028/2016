@@ -77,7 +77,7 @@ public class Shooter {
 	 */
 	protected boolean reloading;
 	
-	protected boolean autopilot;
+	protected boolean autopilotEnabled;
 
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
     public Shooter() {
@@ -98,7 +98,7 @@ public class Shooter {
     	disableTiltPositionControl();
     	shooting = false;
     	reloading = false;
-    	
+    	autopilotEnabled = true;
     }
 
     /**
@@ -127,12 +127,12 @@ public class Shooter {
      * 
      */
     public void disablePitchingMachineSpeedControl() {
-    	rightPitchingMotor.disable();
-    	leftPitchingMotor.disable();
+    	rightPitchingMotor.enable();
+    	leftPitchingMotor.enable();
     	rightPitchingMotor.changeControlMode(TalonControlMode.PercentVbus);
     	leftPitchingMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	rightPitchingMotor.enable();    	
-    	leftPitchingMotor.enable();
+    	rightPitchingMotor.disable();    	
+    	leftPitchingMotor.disable();
     }
     
     /**
@@ -167,12 +167,26 @@ public class Shooter {
     		rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
         	leftPitchingMotor.set(-1.0 * Parameters.kShooterShootPitchingMachineSpeed);
         	shooting = true;
+        	if(isUpToSpeed()){
+        		dink.set(false);
+        		ballShooter.set(true);
+        	}
+        	else{
+        		return;
+        	}
     }
 
     public void reload() {
     	rightPitchingMotor.set(-1.0 * Parameters.kShooterReloadPitchingMachineSpeed);
     	leftPitchingMotor.set(Parameters.kShooterReloadPitchingMachineSpeed);
     	reloading = true;
+    	if(isUpToSpeed()){
+    		dink.set(true);
+    		ballShooter.set(false);
+    	}
+    	else{
+    		return;
+    	}
     }
     
     /**
@@ -214,7 +228,7 @@ public class Shooter {
     }
 
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
-    public boolean isUpToSpeed() {
+    public boolean isPitchingMachineUpToSpeed() {
     	if(rightPitchingMotor.getSpeed()==Parameters.kShooterShootPitchingMachineSpeed && 
     			leftPitchingMotor.getSpeed()==Parameters.kShooterShootPitchingMachineSpeed){
     		return true;
@@ -293,8 +307,30 @@ public class Shooter {
      * <Enter note text here>
      */
     @objid ("4d7bd443-0329-4985-8729-3ec742465875")
-    public boolean isPositionAtSetpoint() {
-    	return false;
+    public boolean isTiltAngleAtSetpoint() {
+    	// Figure out if tilt angle is "close enough" to setpoint
+    }
+    
+    /**
+     * 
+     * @param on
+     */
+    public void setPitchingMachine(boolean on) {
+    	if (leftPitchingMotor && rightPitchingMotor.equals(false) ) {
+    		leftPitchingMotor && rightPitchihngMotor.set(true);
+    	}
+    	if ( isTiltAngleAtSetpoint() ) {
+    		if ( isPitchingMachineUpToSpeed() ) {
+    			if ( dink.equals(true) ) {
+    				ballShooter.equals(true);
+    			}
+    			else
+    			{
+    				// Dink is not (yet) retracted
+    				dink.set(true);
+    			}
+    		}
+    	}
     }
 
     /**
@@ -306,7 +342,73 @@ public class Shooter {
      */
     public void process()
     {
-    	
+    	//PitchingMachine method just retracts kicker, extends dink and turns motor off
+    }
+    	if (isAutopilotEnabled()) {
+    		
+    		switch (position) {
+    		case kUnknown:
+    			// We don't know the shooter's tilt angle, run the shooter in reverse at a slow
+    			// constant speed until we reach the reverse limit switch.
+    			disableTiltPositionControl();
+    			tiltMotor.set(Parameters.kShooterSeekHomePower);
+    			if (tiltMotor.isRevLimitSwitchClosed());
+    			{
+    				position = kHome;
+    				tiltMotor.set(0.0);
+    				enableTiltPositionControl();
+    			}
+    			break;
+    		
+    		case kHome:
+    			tiltMotor.set(Parameters.kShooterTiltHomePositionEncoderSetpoint);
+    			if (isPichingMachineIsOn())
+    			{
+    				setPitchingMachine(false);
+    			}
+    			break;
+    			
+    		case kLowBar:
+    			tiltMotor.set(Parameters.kShooterTiltLowBarPositionEncoderSetpoint);
+    			if (isPichingMachineIsOn())
+    			{
+    				setPitchingMachine(false);
+    			}
+    			break;
+    			
+    		case kReload:
+    			tiltMotor.set(Parameters.kShooterTiltReloadPositionEncoderSetpoint);
+    			if (isPichingMachineIsOn())
+    			{
+    				setPitchingMachine(true);
+    			}
+    			break;
+    			
+    		case kShootBatter:
+    			tiltMotor.set(Parameters.kShooterTiltShootBatterPositionEncoderSetpoint);
+    			if (isPichingMachineIsOn())
+    			{
+    				setPitchingMachine(true);
+    			}
+    			break;
+    			
+    		case kShootTape:
+    			tiltMotor.set(Parameters.kShooterTiltShootTapePositionEncoderSetpoint);
+    			if (isPichingMachineIsOn())
+    			{
+    				setPitchingMachine(true);
+    			}
+    			break;
+    			
+    		case kShootDefense:
+    			tiltMotor.set(Parameters.kShooterTiltShootDefensePositionEncoderSetpoint);
+    			if (isPichingMachineIsOn())
+    			{
+    				setPitchingMachine(true);
+    			}
+    			break;
+    	}
+    		
     }
     
     /**
@@ -363,7 +465,7 @@ public class Shooter {
         kShootDefense,
         
         /**
-         * This setpoint puts the shooter tilt angle at the full-down position to clear the low bar.
+         * This setpoint puts the shooter tilt angle at the horizontal position to clear the low bar.
          */
         kLowBar,
         
