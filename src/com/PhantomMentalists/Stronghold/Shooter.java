@@ -101,7 +101,8 @@ public class Shooter {
     public void disableTiltPositionControl() {
     	tiltMotor.disable();
     	tiltMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
-    	tiltMotor.enable();       	
+    	tiltMotor.enable();
+    	tiltMotor.set(0);
     }
     
     /**

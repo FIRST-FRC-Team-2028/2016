@@ -35,6 +35,7 @@ public class PusherArm {
     @objid ("ef54315f-71a9-48b1-8840-4441e6e9db2c")
     public PusherArm() {
     	tiltMotor = new CANTalon(Parameters.kPusherArmMotorCanId);
+    	tiltMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);    	
     	tiltMotor.enableBrakeMode(true);
     	disablePositionControl();
     	autopilotEnabled = false;

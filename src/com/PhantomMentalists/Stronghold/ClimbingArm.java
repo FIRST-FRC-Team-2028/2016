@@ -5,180 +5,345 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-//import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
- * <p>Author: Ricky</p>
- */
-/**
+ * 
+ * <Enter note text here>
+ * 
  * @author Ricky
- *
  */
 @objid ("899c26b9-be06-403c-b6de-a1d9d8a5322b")
 
 public class ClimbingArm {
     /**
-     * 
+     * <Enter note text here>
      */
-	protected CANTalon position, l_pull, r_pull, extend;
+    @objid ("de0098a0-c9b9-42cb-8012-212eec71543c")
+    protected CANTalon extendRetractMotor;
 	
-//	DigitalInput extendedlswitchl = new DigitalInput(0);
-//	DigitalInput extendedlswitchr = new DigitalInput(1);
-//	DigitalInput retractedlswitchl = new DigitalInput(2);
-//	DigitalInput retractedlswitchr = new DigitalInput(3);
+    /**
+     * <Enter note text here>
+     */
+	protected CANTalon leftWenchMotor; 
+	
+    /**
+     * <Enter note text here>
+     */
+	protected CANTalon rightWenchMotor;
+	
+    /**
+     * <Enter note text here>
+     */	
+    @objid ("94a77f41-a9e3-4f3b-b9c4-58e16c9e1898")
+    protected CANTalon raiseLowerMotor;
 
-//    @objid ("de0098a0-c9b9-42cb-8012-212eec71543c")
-//    protected CANTalon extendRetractMotor;
-//
-//    @objid ("94a77f41-a9e3-4f3b-b9c4-58e16c9e1898")
-//    protected CANTalon raiseLowerMotor;
-
+    /**
+     * <Enter note text here>
+     */
+    protected ClimberPositions climberState;
+    
+    /**
+     * <Enter note text here>
+     */	
+    protected boolean autopilotEnabled;
+    
+    /**
+     * <Enter note text here>
+     */	
     @objid ("c215a8ac-a925-4c23-aab7-ec75ee354734")
     public ClimbingArm()
     {
-    	position = new CANTalon(0);
-		l_pull = new CANTalon(0);
-		r_pull = new CANTalon(0);
-		extend = new CANTalon(0);
+    	raiseLowerMotor = new CANTalon(Parameters.kClimberAngleMotorCanId);
+    	raiseLowerMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);
+    	disableTiltPositionControl();
+		extendRetractMotor = new CANTalon(Parameters.kClimberExtendMotorCanId);
+		extendRetractMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);		
+		disableExtendRetractPositionControl();
+		rightWenchMotor = new CANTalon(Parameters.kClimberRightWinchMotorCanId);
+		leftWenchMotor = new CANTalon(Parameters.kClimberLeftWinchMotorCanId);
 		
-		position.changeControlMode(TalonControlMode.Position);
-		l_pull.changeControlMode(TalonControlMode.PercentVbus);
-		r_pull.changeControlMode(TalonControlMode.PercentVbus);
-		extend.changeControlMode(TalonControlMode.Position);
+    	// For now, assume winch motors are running in percent Vbus.
+    	// TO-DO:  FIND OUT IF THIS IS CORRECT!!!
+		rightWenchMotor.disable();
+		rightWenchMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+		rightWenchMotor.enable();
+		rightWenchMotor.set(0);
 		
-		position.enableBrakeMode(true);
-		l_pull.enableBrakeMode(true);
-		r_pull.enableBrakeMode(true);
-		extend.enableBrakeMode(true);
-		
-		position.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		extend.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		
-		position.setPID(0, 0, 0);
-		extend.setPID(0, 0, 0);
-		
-		position.enable();
-		l_pull.enable();
-		r_pull.enable();
-		extend.enable();
+		leftWenchMotor.disable();
+		leftWenchMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+		leftWenchMotor.enable();
+		leftWenchMotor.set(0);		
+    	autopilotEnabled = false;
+    	climberState = ClimberPositions.kUnknown;
     }
+    
     /**
-     * this method gets the angle of stage one.
-     * @return angle value of stage one.
+     * <Enter note text here>
+     */	
+    public void enableTiltPositionControl() {
+    	raiseLowerMotor.disable();
+    	raiseLowerMotor.changeControlMode(TalonControlMode.Position);
+    	raiseLowerMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	raiseLowerMotor.setPID(Parameters.kClimbTiltPositionControlProportional, 
+			 	Parameters.kPusherClimbTiltPositionControlIntegral, 
+			 	Parameters.kPusherClimbTiltPositionControlDifferential, 
+			 	Parameters.kPusherClimbTiltPositionControlThrottle);
+    	raiseLowerMotor.enable();
+    }
+    
+    /**
+     * <Enter note text here>
+     */	
+    public void disableTiltPositionControl() {
+    	raiseLowerMotor.disable();
+    	raiseLowerMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+    	raiseLowerMotor.enable();
+    	raiseLowerMotor.set(0);
+    	autopilotEnabled = false;    	
+    }
+    
+    /**
+     * <Enter note text here>
+     */	
+    public void enableExtendRetractPositionControl() {
+    	extendRetractMotor.disable();
+    	extendRetractMotor.changeControlMode(TalonControlMode.Position);
+    	extendRetractMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	extendRetractMotor.setPID(Parameters.kClimbExtendPositionControlProportional, 
+			 	Parameters.kPusherClimbExtendPositionControlIntegral, 
+			 	Parameters.kPusherClimbExtendPositionControlDifferential, 
+			 	Parameters.kPusherClimbExtendPositionControlThrottle);
+    	extendRetractMotor.enable();    	
+    }
+    
+    /**
+     * <Enter note text here>
+     */	
+    public void disableExtendRetractPositionControl() {
+    	extendRetractMotor.disable();
+    	extendRetractMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+    	extendRetractMotor.enable();
+    	extendRetractMotor.set(0);
+    	autopilotEnabled = false;
+    }
+    
+    /**
+     * This method will switch the control mode for the extend/retract motor
+     * to percent Vbus, disable autoPilot, and pass the supplied joystick power
+     * value to the motor.
+     * 
+     * @param power
      */
-    @objid ("a661b8a2-befb-4ed3-95cc-e445670fa559")
-    public double getStageOnePosition() 
-    {
-        return position.getPosition();
+    public void manualSetTilt(double power) {
+    	if (isTiltPositionControlEnabled()) {
+    		disableTiltPositionControl();
+    	}
+    	extendRetractMotor.set(power);    	
     }
 
     /**
-     * This method sets the angle of stage one.
-     * @param Position the angle that stage one will be set to
+     * This method will switch the control mode for the extend/retract motor
+     * to percent Vbus, disable autoPilot, and pass the supplied joystick power
+     * value to the motor.
+     * <p>
+     * When extending, we need to apply the supplied power parameter to the 
+     * extend/retract motor, and also power the winch motors slowly enough to
+     * just play out cable without allowing the cable to go slack.
+     * <p>
+     * When retracting, we need to apply the supplied power parameter to both
+     * of the two winch motors, and also retract the extend/retract motor slowly
+     * to keep the cable taught.
+     * 
+     * @param power - In the range (-1.0 .. 0 .. 1.0) where negative values
+     *                retract the arm and positive values extend the arm
      */
-    @objid ("6de04ff3-23df-472a-9c94-0e666ba14075")
-    public void setStageOnePosition(double Position) 
-    {
-    	position.setPosition(Position);
+    public void manualSetExtendRetract(double power) {
+    	if (isExtendRetractPositionControlEnabled()) {
+    		disableExtendRetractPositionControl();
+    	}
+    	
+    	if (power < 0.0)
+    	{
+    		// Retracting
+    		leftWenchMotor.set(power);
+    		rightWenchMotor.set(power);
+    		// Calculate a new power value for the extend/retract motor
+    		extendRetractMotor.set(newValue);
+    	}
+    	else
+    	{
+    		// Extending
+    		extendRetractMotor.set(power);
+    		// Calculate a new power value for the two winch motors
+    	
+    		leftWenchMotor.set(newValue);
+    		rightWenchMotor.set(newValue);
+    	}
     }
+    
     /**
-     * This method checks if the arm is in a known position, if it is known it will return true, if it isn't it will return false.
-     * @return true if arm is in a known position, False if it is not.
+     * <Enter note text here>
+     * 
+     * @param ClimberPositions
+     */
+    public void setPositionSetpoint(ClimberPositions newState) {
+    	
+    }
+    
+    /**
+     * This method checks if the arm is in a known position, if it is known
+     * it will return true, if it isn't it will return false.
+     * 
+     * @return boolean - true if arm is in a known position, False if it is not.
      */
     public boolean isKnownPosition()
     {
-    	return false;
+    	
     }
+    
     /**
-     * This method checks if stage two is fully extended on the right side.  If it is fully extended, it will return true
-     * If it is not fully extended it will return false.
+     * <Enter note text here>
+     * 
+     * @return boolean
+     */
+    public boolean isTiltPositionControlEnabled() {
+    	
+    }
+    
+    /**
+     * <Enter note text here>
+     * 
+     * @return boolean
+     */
+    public boolean isExtendRetractPositionControlEnabled() {
+    	
+    }
+    
+    /**
+     * <Enter note text here>
+     * 
+     * @return boolean
+     */
+    public boolean isAtSetpoint() {
+    	
+    }
+    
+    /**
+     * <Enter note text here>
+     * 
+     * @return
+     */
+    public boolean isClimberMoving() {
+    	
+    }
+    
+    /**
+     * This method checks if stage two is fully extended on the right side.  
+     * If it is fully extended, it will return true. If it is not fully
+     * extended it will return false.
+     * 
      * @return true if stage two is extended on right side, False if it is not.
      */
-    public boolean isStageTwoExtended()
+    public boolean isExtended()
    {	
-    	// setSetPoint ---> getSetPoint ---> keep checking ---> arm is there 
-    	//apparently i can't be serious in coding so i will not be funny anymore!
-    	
-    	
-//    	if(extendedlswitchl.get() == false)
-//    	{
-//    		return false;
-//    	}
-//    	else
-//    	{
-//    		return true;
-//    	}
-    	return false;
-    }
-    /**
-     * This method checks if stage two of the climber arm is fully retracted on the right side. If it is retracted, it will return true.
-     * If it is not retracted it will return false.
-     * @return true if stage two is retracted on the right side, False if it is not.
-     */
-    public boolean isStageTwoRetracted()		
-    {
-//    	if(retractedlswitchr.get() == true)
-//    	{
-//    		return true;
-//    	}
-//    	else
-//    	{
-//    		return false;
-//    	}
-    	return false;
+    	if (extend.getPosition() < Parameters.kClimberFullyExtendedPositionSetpoint)
+    	{
+    		return false;
+    	}
+    	return true;
     }
     
     /**
-     * This method gets the position of the first stage. (the first stage is what is connected to the chasiss.)
+     * This method checks if the climber arm is fully retracted. If it is retracted, 
+     * it will return true.  If it is not retracted it will return false.
      * 
-     * @return angle value of stage one.
+     * @return true if climber is retracted, False if it is not.
+     */
+    public boolean isRetracted()		
+    {
+    	if(extendRetractMotor.isRevLimitSwitchClosed())
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
+    
+    /**
+     * This method gets the angle position.  The value will be in full revolutions
+     * of the motor's gearbox shaft from the home position (e.g., 0.0 is the home
+     * position and 1024.25 is 1024 and a quarter revolutions of the gearbox shaft).
+     * 
+     * @return double - value of tilt ange in motor gearbox revolutions.
      */ 
-    public double getPosition()
+    public double getTiltPosition()
     {
-    	return position.getPosition();
+    	return raiseLowerMotor.getPosition();
     }
     
     /**
-     * This method set the position of the first stage. (the first stage is what is connected to the chassis.)
-     * @param positionAngle the angle that the first stage will be set to.
+     * This method assigns a new setpoint for the climber while in autopilot
+     * control.
+     * 
+     * @param newState - a new enum for the climber to move to in autopilot
      */
-    public void setPosition(double positionAngle)
+    public void autoSetClimberState(ClimberPositions newState)
     {
-    	position.setPosition(positionAngle);
+    	climberState = newState;
     }
     
     /**
-     * This method sets the position of the first stage at home. Home is when the arm is laying horizontally facing the back of the robot.
-     * @param homeAngle the angle value of the home position of the first stage.
+     * This method is called once every iteration through the robot's main loop, 
+     * in both autonomous and operatorControl.  It is responsible for controlling
+     * the climbing arm's movements based on its state, sending updated telemetry 
+     * values to the smart dashboard, and catching any error conditions (such as 
+     * motors being over their current limit).
      */
-    public void homePosition()
-    {
-    	position.setPosition(0);
+    public void process() {
+    	
     }
+    
     /**
-     * This method extends the position of stage two of the climber arm.
-     * It extends the left and right pulling motors while extending the second stage with the extend motor.
-     * @param extendPosition position that stage two will extend to.
-     * @param retractV the voltage value that will be applied to retracting stage two.
+     * <Enter note text here>
      */
-    @objid ("5447b3c0-a7a2-45f6-8b5a-ec97ee145ea1")
-    public void extendStageTwo(double extendPosition, double retractV) 
+    public enum ClimberPositions
     {
-    	extend.setPosition(extendPosition);
-    	l_pull.set(retractV);
-    	r_pull.set(retractV);
-    }
+        /**
+         * <Enter note text here>
+         */
+    	kUnknown, 
+        
+    	/**
+         * <Enter note text here>
+         */
+    	kHome, 
 
-    /**
-     * This method retracts stage two of the climber arm.
-     * @param retractPosition position that stage two will retract to.
-     * @param retractV the voltage value that will be applied to retracting stage two.
-     */
-    @objid ("0053d6a3-1878-46e1-b726-12de04b65c1d")
-    public void retractStageTwo(double retractPosition, double retractV)
-    {
-    	extend.setPosition(retractPosition);
-    	l_pull.set(retractV);
-    	r_pull.set(retractV);
+        /**
+         * <Enter note text here>
+         */
+    	kLowBar,
+    	
+        /**
+         * <Enter note text here>
+         */
+    	kDeployHook,
+    	
+        /**
+         * <Enter note text here>
+         */
+    	kClimb,
+    	
+        /**
+         * <Enter note text here>
+         */
+    	kRaised,
+    	
+        /**
+         * <Enter note text here>
+         */
+    	kDrawBridge
     }
+    
 }
