@@ -64,12 +64,10 @@ public class WestCoastDrive implements PIDOutput
     * Controls the solenoid valve for the high gear 
     */
    protected Solenoid highGear;
-      
    /**
-    * Controls the solenoid valve for the lowGear
+    * Controls the solenoid valve for the low gear
     */
-    protected Solenoid lowGear;   
-    
+   protected Solenoid lowGear;
    /**
     * constructor
     */
@@ -79,9 +77,9 @@ public class WestCoastDrive implements PIDOutput
     {
     	  leftSide = new DriveUnit(Placement.Left);
     	  rightSide = new DriveUnit(Placement.Right);
-    	  setGear(Gear.kLowGear);
-    	  lowGear = new Solenoid(Parameters.kLowGearSolenoidChanel);
     	  highGear = new Solenoid(Parameters.kHighGearSolenoidChanel);
+//    	  lowGear = new Solenoid(Parameters.kLowGearSolenoidChanel);
+    	  setGear(Gear.kLowGear);
     }
 
    /**
@@ -201,12 +199,10 @@ public class WestCoastDrive implements PIDOutput
     	gear = value;
     	if (gear == Gear.kLowGear)
     	{
-    		lowGear.set(true);
     		highGear.set(false);
     	}
     	else
     	{
-    		lowGear.set(false);
     		highGear.set(true);
     	}
     }
@@ -219,10 +215,10 @@ public class WestCoastDrive implements PIDOutput
      */
     public void process()
     {
-    	if(leftSide.isCurrentThresholdExceeded() || rightSide.isCurrentThresholdExceeded())
-    	{
-    		setGear(Gear.kLowGear);
-    	}
+//    	if(leftSide.isCurrentThresholdExceeded() || rightSide.isCurrentThresholdExceeded())
+//    	{
+//    		setGear(Gear.kLowGear);
+//    	}
     	leftSide.process();
     	rightSide.process();
     }

@@ -1,22 +1,23 @@
 package com.PhantomMentalists.Stronghold;
 
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
-import com.PhantomMentalists.Stronghold.DriveUnit;
-import com.PhantomMentalists.Stronghold.Parameters;
+import com.PhantomMentalists.Stronghold.WestCoastDrive.Gear;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Ultrasonic;
 
 @objid ("839537d8-f1f4-49a5-ac60-eaa7467a9f20")
 public class Telepath extends SampleRobot {
-    /**
+    public Joystick leftstick;
+    public Joystick rightstick;
+	/**
      * <Enter note text here>
      */
+	protected Joystick lstick,rstick,buttonstick,analogstick;
     @objid ("f4bbb171-d580-4f7e-858a-1f36d93dabaa")
     public boolean autopilotEnabled;
 
@@ -74,13 +75,31 @@ public class Telepath extends SampleRobot {
      */
     @objid ("a9a437aa-9281-40cd-a90f-1fa3eec18b3c")
     public void operatorControl() {
+    	double leftval = 0,rightval = 0;
         while (isEnabled() && isOperatorControl()) {
+        	leftval = newJoystickValue(leftstick.getY());
+        	rightval = newJoystickValue(rightstick.getY());
+        	
+        	if(leftstick.getTrigger())
+        	{
+        		westCoastDrive.setGear(Gear.kLowGear);
+        	}
+        	if(rightstick.getTrigger())
+        	{
+        		westCoastDrive.setGear(Gear.kHighGear);
+        	}
+        	
+        	westCoastDrive.setSpeedSetpoint(leftval, rightval);
+        	westCoastDrive.process();
+        	
             Timer.delay(Parameters.delay);
         }
     }
 
     @objid ("bc395b50-2496-4ddf-b4ca-1891ed75cbb4")
     public Telepath() {
+    	leftstick = new Joystick(0);
+    	rightstick = new Joystick(1);
     	pusherArm = new PusherArm();
     	westCoastDrive = new WestCoastDrive();
     	shooter = new Shooter();
@@ -89,7 +108,23 @@ public class Telepath extends SampleRobot {
     	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
     	gyro = new AnalogGyro(Parameters.kGyroAnalogPort);
     }
-
+    public boolean isJoystickInDeadband(double val)
+    {
+    	return (val > -0.05 && val < 0.05);
+    }
+    
+    public double newJoystickValue(double val)
+    {
+    	if (val > -0.05 && val < 0.05)
+    	{
+    		return 0;
+    	}
+    	else
+    	{
+    		return val;
+    	}
+    }
+    
     /**
      * <Enter note text here>
      */

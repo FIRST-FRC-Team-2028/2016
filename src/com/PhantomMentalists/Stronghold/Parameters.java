@@ -11,25 +11,25 @@ public class Parameters {
      * CAN ID for the first (primary) motor on the left-side Drive Unit.
      */
     @objid ("a46d1d4c-8185-43c1-abd5-648d21706f50")
-    public static final int kLeftMasterDriveMotorCanId = 21;
+    public static final int kLeftMasterDriveMotorCanId = 11;
 
     /**
      * CAN ID for the second motor powering the Left Drive Unit
      */
     @objid ("1421bb0d-9370-4be8-8702-e551cebf019f")
-    public static final int kLeftFollowerDriveMotorCanId = 22;
+    public static final int kLeftFollowerDriveMotorCanId = 12;
 
     /**
      * <Enter note text here>
      */
     @objid ("d59d9116-a49e-40ed-a68d-7ae8dc108c5e")
-    public static final int kRightMasterDriveMotorCanId = 11;
+    public static final int kRightMasterDriveMotorCanId = 21;
 
     /**
      * <Enter note text here>
      */
     @objid ("440bfe17-9a55-44dc-b53e-96e5a0be2911")
-    public static final int kRightFollowerDriveMotorCanId = 12;
+    public static final int kRightFollowerDriveMotorCanId = 22;
 
     /**
      * <Enter note text here>
@@ -101,7 +101,7 @@ public class Parameters {
      * <p>
      * If a negative value, it must be replaced with the actual chanel once it has been wired.
      */
-    public static final int kHighGearSolenoidChanel = -1;
+    public static final int kHighGearSolenoidChanel = 0;
     
     /**
      * 

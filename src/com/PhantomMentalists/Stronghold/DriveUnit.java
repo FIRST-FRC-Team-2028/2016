@@ -88,7 +88,7 @@ public class DriveUnit {
         	
         }
         masterMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+//    	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	turnSetpoint = 0.0;
     	speedSetpoint = 0.0;
     }
@@ -118,6 +118,10 @@ public class DriveUnit {
         // Automatically generated method. Please delete this comment before entering specific code.
     	if (getSpeedSetpoint() != value)
     	{
+    		if(placement == Placement.Left)
+    		{
+    			value = -value;
+    		}
     		this.speedSetpoint = value;
     	}
         
@@ -140,22 +144,22 @@ public class DriveUnit {
     	// and we have a non-zero turn setpoint (i.e., we're spinning in place)
     	// we want the inside wheels to run in reverse and the outside wheels to
     	// run forward.
-    	if (speedSetpoint != 0.0)
-    	{
-    		if (placement == Placement.Left)
-    		{
-    		
-    		}
-    		else 
-    		{
-    		
-    		}
-    	}
-    	else
-    	{
+//    	if (speedSetpoint != 0.0)
+//    	{
+//    		if (placement == Placement.Left)
+//    		{
+//    		
+//    		}
+//    		else 
+//    		{
+//    		
+//    		}
+//    	}
+//    	else
+//    	{
     		// We're not turning
     		masterMotor.set(speedSetpoint);
-    	}
+//    	}
     }
     
     /**
