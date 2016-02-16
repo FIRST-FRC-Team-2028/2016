@@ -137,4 +137,24 @@ public class Parameters {
      * 
      */
     public static final int kDriveControlProfile = 0;
+	public static final double kShooterShootPitchingMachineSpeed = 0;
+
+	public static final double kShooterReloadPitchingMachineSpeed = 0;
+
+	public static final double kShootPitchPositionControlProportional = 0;
+
+	public static final double kShootPitchPositionControlIntegral = 0;
+
+	public static final double kShootPitchPositionControlDifferential = 0;
+
+	public static final double kShootTiltPositionControlProportional = 0;
+
+	public static final double kShootTiltPositionControlIntegral = 0;
+
+	public static final double kShootTiltPositionControlDifferential = 0;
+
+	public static final int kShooterBallShooterSolenoidChanel = 0;
+
+	public static final int kShooterDinkSolenoidChanel = 0;
+
 }

@@ -2,9 +2,14 @@ package com.PhantomMentalists.Stronghold;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
+import edu.wpi.first.wpilibj.CANSpeedController.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+<<<<<<< HEAD
+=======
+import edu.wpi.first.wpilibj.Solenoid;
+>>>>>>> refs/remotes/origin/Moose
 
 /**
  * DriveUnit encapsulates all the hardware that makes one side of the 
@@ -88,9 +93,13 @@ public class DriveUnit {
         	
         }
         masterMotor.changeControlMode(TalonControlMode.PercentVbus);
+<<<<<<< HEAD
 //    	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	turnSetpoint = 0.0;
     	speedSetpoint = 0.0;
+=======
+    	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+>>>>>>> refs/remotes/origin/Moose
     }
 
     /**
@@ -209,6 +218,7 @@ public class DriveUnit {
     		if (speedControlEnabled)
         	{
         		masterMotor.changeControlMode(TalonControlMode.Speed);
+<<<<<<< HEAD
         		masterMotor.setPID(Parameters.kDriveSpeedControlProportional, 
         						 	Parameters.kDriveSpeedControlIntegral, 
         						 	Parameters.kDriveSpeedControlDifferential, 
@@ -216,6 +226,8 @@ public class DriveUnit {
         						 	Parameters.kDriveSpeedControlIZone, 
         						 	Parameters.kDriveControlCloseLoopRampRate, 
         						 	Parameters.kDriveControlProfile);
+=======
+>>>>>>> refs/remotes/origin/Moose
         	}
         	else 
         	{
