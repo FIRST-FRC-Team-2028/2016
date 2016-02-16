@@ -92,8 +92,13 @@ public class ClimbingArm {
     public boolean isStageTwoExtended()
    {	
     	// setSetPoint ---> getSetPoint ---> keep checking ---> arm is there (note for me).
+    	while(extend.getPosition() < 1)
+    	{
+    		return false;
+    	}
     	
-//    	if(extendedlswitchl.get() == false)
+    	
+//    	if(switchPressed == false)
 //    	{
 //    		return false;
 //    	}
@@ -108,17 +113,17 @@ public class ClimbingArm {
      * If it is not retracted it will return false.
      * @return true if stage two is retracted on the right side, False if it is not.
      */
-    public boolean isStageTwoRetracted()		
+    public boolean isStageTwoRetracted(boolean limitPressed)		
     {
-//    	if(retractedlswitchr.get() == true)
-//    	{
-//    		return true;
-//    	}
-//    	else
-//    	{
-//    		return false;
-//    	}
-    	return false;
+    	if(limitPressed)
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+//    	return false;
     }
     /**
      * This method gets the position of the first stage. (the first stage is what is connected to the chasiss.)
@@ -142,9 +147,9 @@ public class ClimbingArm {
     /**
      * This method sets the position of the first stage at home. Home is when the arm is laying horizontally facing the back of the robot.
      */
-    public void homePosition()
+    public void homePosition(double homePosition)
     {
-    	position.setPosition(0);
+    	position.setPosition(homePosition);
     }
     /**
      * This method extends the position of stage two of the climber arm.
