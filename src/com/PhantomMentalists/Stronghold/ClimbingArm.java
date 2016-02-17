@@ -8,8 +8,9 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
  * 
- * <Enter note text here>
- * 
+ * This is the class for the climber and controls the extending and retracting 
+ * the climbing arm as well as changing the control modes of the climbing arm motors.
+ *  
  * @author Ricky
  */
 @objid ("899c26b9-be06-403c-b6de-a1d9d8a5322b")
@@ -43,7 +44,7 @@ public class ClimbingArm {
     protected ClimberPositions climberState;
     
     /**
-     * <Enter note text here>
+     * true or false value dependent on if the autopilot mode is enabled.
      */	
     protected boolean autopilotEnabled;
     
@@ -85,8 +86,8 @@ public class ClimbingArm {
     	raiseLowerMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	raiseLowerMotor.setPID(Parameters.kClimbTiltPositionControlProportional, 
 			 	Parameters.kPusherClimbTiltPositionControlIntegral, 
-			 	Parameters.kPusherClimbTiltPositionControlDifferential, 
-			 	Parameters.kPusherClimbTiltPositionControlThrottle);
+			 	Parameters.kPusherClimbTiltPositionControlDifferential);
+    	raiseLowerMotor.setF(Parameters.kPusherClimbTiltPositionControlThrottle);
     	raiseLowerMotor.enable();
     }
     
@@ -111,8 +112,8 @@ public class ClimbingArm {
     	extendRetractMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	extendRetractMotor.setPID(Parameters.kClimbExtendPositionControlProportional,
     			Parameters.kPusherClimbExtendPositionControlIntegral, 
-			 	Parameters.kPusherClimbExtendPositionControlDifferential, 
-			 	Parameters.kPusherClimbExtendPositionControlThrottle);
+			 	Parameters.kPusherClimbExtendPositionControlDifferential);
+    	extendRetractMotor.setF(Parameters.kPusherClimbExtendPositionControlThrottle);
     	extendRetractMotor.enable();    	
     }
     
@@ -149,7 +150,7 @@ public class ClimbingArm {
      * <p>
      * When extending, we need to apply the supplied power parameter to the 
      * extend/retract motor, and also power the winch motors slowly enough to
-     * just play out cable without allowing the cable to go slack.
+     * just play out cable without allowing the cable to be slack.
      * <p>
      * When retracting, we need to apply the supplied power parameter to both
      * of the two winch motors, and also retract the extend/retract motor slowly
@@ -187,7 +188,8 @@ public class ClimbingArm {
      * 
      * @param ClimberPositions
      */
-    public void setPositionSetpoint(ClimberPositions newState) {
+    public void setPositionSetpoint(ClimberPositions newState) 
+    {
     	
     }
     
@@ -200,6 +202,7 @@ public class ClimbingArm {
     public boolean isKnownPosition()
     {
     	return false;
+    	 
     }
     
     /**
@@ -306,7 +309,52 @@ public class ClimbingArm {
      */
     public void process()
     {
-    	
+    	if(autopilotEnabled == true)
+    	{
+    		switch (climberState) 
+    		{
+    		case kUnknown:
+    			disableTiltPositionControl();
+    			raiseLowerMotor.set(Parameters.kRaiseLowerMoterHomeSpeed);
+    			if(raiseLowerMotor.isRevLimitSwitchClosed())
+    			{
+    				climberState = ClimberPositions.kHome;
+    				raiseLowerMotor.set(0.0);
+    				enableTiltPositionControl();
+    			}
+    			break;
+    			
+    		case kHome:
+    			
+    			
+    			break;
+    			
+    		case kLowBar:
+    			
+    			
+    			break;
+    			
+    		case kDeployHook:
+    			
+    			
+    			break;
+    			
+    		case kClimb:
+    			
+    			
+    			break;
+    			
+    		case kRaised:
+    			
+    			
+    			break;
+    			
+    		case kDrawBridge:
+    			
+    			
+    			break;
+    		}
+    	}
     }
     
     

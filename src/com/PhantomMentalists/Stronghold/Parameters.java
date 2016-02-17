@@ -99,4 +99,6 @@ public class Parameters {
 
 	public static final double kClimberFullyExtendedPositionSetpoint = 0;
 
+	public static final double kRaiseLowerMoterHomeSpeed = 0;
+
 }
