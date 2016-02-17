@@ -210,7 +210,7 @@ public class Shooter {
     	}
     	rightPitchingMotor.set(value);
     	leftPitchingMotor.set(-1.0 * value);
-    	autopilotEnabled = false;
+    	autopilot = false;
     }
 
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
