@@ -123,7 +123,7 @@ public class DriveUnit {
     	{
     		if(placement == Placement.Left)
     		{
-    			value = -value;
+    			value *= -1;
     		}
     		this.speedSetpoint = value;
     	}
@@ -161,7 +161,15 @@ public class DriveUnit {
 //    	else
 //    	{
     		// We're not turning
+//    	System.out.println("turn: "+turnSetpoint);
+    	if(turnSetpoint == 0)
+    	{
     		masterMotor.set(speedSetpoint);
+    	}
+    	else
+    	{
+    		masterMotor.set(turnSetpoint);
+    	}
 //    	}
     }
     
@@ -245,7 +253,11 @@ public class DriveUnit {
      */
     public void setTurnSetpoint(double value)
     {
-    	
+    	if(placement == Placement.Left)
+		{
+			value *= -1;
+		}
+		turnSetpoint = value;
     }
     
     /**

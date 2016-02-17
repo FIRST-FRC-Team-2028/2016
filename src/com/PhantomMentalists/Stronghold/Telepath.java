@@ -1,19 +1,27 @@
 package com.PhantomMentalists.Stronghold;
 
-import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.PhantomMentalists.Stronghold.WestCoastDrive.Gear;
+import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 @objid ("839537d8-f1f4-49a5-ac60-eaa7467a9f20")
 public class Telepath extends SampleRobot {
     public Joystick leftstick;
     public Joystick rightstick;
+    public PIDController turncont;
+    public double P =0.07,I = 0.0001,D= 0.005;
+    public double tangle = 0;
+    public Preferences prefs;
 	/**
      * <Enter note text here>
      */
@@ -59,7 +67,7 @@ public class Telepath extends SampleRobot {
      */
     @objid ("819d3be2-a72e-4178-9fd5-0d5727789bcf")
     protected AnalogGyro gyro;
-
+    protected Solenoid fan;
     /**
      * <Enter note text here>
      */
@@ -76,10 +84,23 @@ public class Telepath extends SampleRobot {
     @objid ("a9a437aa-9281-40cd-a90f-1fa3eec18b3c")
     public void operatorControl() {
     	double leftval = 0,rightval = 0;
+    	fan.set(true);
+    	P = prefs.getDouble("Turn P", P);
+    	I = prefs.getDouble("Turn I", I);
+    	D = prefs.getDouble("Turn D", D);
+    	turncont.setPID(P, I, D);
         while (isEnabled() && isOperatorControl()) {
         	leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
-        	
+        	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
+        	if(rightstick.getRawButton(2))
+        	{
+        		tangle = gyro.getAngle();
+        	}
+        	if(rightstick.getRawButton(3))
+        	{
+        		gyro.calibrate();
+        	}
         	if(leftstick.getTrigger())
         	{
         		westCoastDrive.setGear(Gear.kLowGear);
@@ -89,24 +110,62 @@ public class Telepath extends SampleRobot {
         		westCoastDrive.setGear(Gear.kHighGear);
         	}
         	
-        	westCoastDrive.setSpeedSetpoint(leftval, rightval);
+        	if(leftstick.getRawButton(2))
+        	{
+        		westCoastDrive.setSpeedSetpoint(leftval, leftval);
+        	}
+        	else
+        	{
+//        		System.out.println("here3");
+        		westCoastDrive.setSpeedSetpoint(leftval, rightval);
+        	}
+        	if(leftstick.getRawButton(8) && !turncont.isEnabled())
+        	{
+//        		System.out.println("here2");
+        		turncont.setSetpoint(0);
+        		turncont.enable();
+
+        	}
+        	else if(leftstick.getRawButton(9) && !turncont.isEnabled())
+        	{
+//        		System.out.println("here2");
+        		turncont.setSetpoint(tangle);
+        		turncont.enable();
+
+        	}
+        	else if(!leftstick.getRawButton(9) && !leftstick.getRawButton(8) && turncont.isEnabled())
+        	{
+//        		System.out.println("here");
+        		turncont.disable();
+        		westCoastDrive.setTurnSetpoint(0);
+        	}
         	westCoastDrive.process();
         	
             Timer.delay(Parameters.delay);
         }
+        fan.set(false);
     }
 
     @objid ("bc395b50-2496-4ddf-b4ca-1891ed75cbb4")
     public Telepath() {
+    	prefs = Preferences.getInstance();
+    	prefs.putDouble("Turn P", P);
+    	prefs.putDouble("Turn I", I);
+    	prefs.putDouble("Turn D", D);
+
     	leftstick = new Joystick(0);
     	rightstick = new Joystick(1);
-    	pusherArm = new PusherArm();
+//    	pusherArm = new PusherArm();
     	westCoastDrive = new WestCoastDrive();
-    	shooter = new Shooter();
-    	climbingArm = new ClimbingArm();
-    	compressor = new Compressor();
-    	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
+//    	shooter = new Shooter();
+//    	climbingArm = new ClimbingArm();
+//    	compressor = new Compressor();
+//    	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
     	gyro = new AnalogGyro(Parameters.kGyroAnalogPort);
+    	gyro.initGyro();
+    	gyro.calibrate();
+    	fan = new Solenoid(Parameters.kGyroFanAnalogPort);
+    	turncont = new PIDController(P,I,D,gyro,westCoastDrive);
     }
     public boolean isJoystickInDeadband(double val)
     {

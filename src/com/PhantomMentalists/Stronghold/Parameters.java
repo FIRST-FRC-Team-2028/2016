@@ -74,6 +74,7 @@ public class Parameters {
     public static final String kCameraIpAddress = "10.20.28.11";
     
     public static final int kGyroAnalogPort = 0;
+    public static final int kGyroFanAnalogPort = 7;
     
     public static final int kUltraSonicAnalogPort = 0;
 

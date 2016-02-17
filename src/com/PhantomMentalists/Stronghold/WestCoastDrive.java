@@ -92,6 +92,7 @@ public class WestCoastDrive implements PIDOutput
     @objid ("fc5f1ae8-f7bf-4800-924d-f54e5ee2a661")
     public void pidWrite(double output) 
     {
+    	System.out.println("PID write: "+output);
     	setTurnSetpoint(output);
     }
     
@@ -159,8 +160,12 @@ public class WestCoastDrive implements PIDOutput
      @objid ("77501865-67e2-4889-b074-f047bd3616a6")
      void setTurnSetpoint(double value)
      { 
-    	 leftSide.setTurnSetpoint(value);
-    	 rightSide.setTurnSetpoint(value);
+    	 double leftvalue = value*0.5;
+    	 double rightvalue = -value*0.5;
+    	 System.out.println("Left: "+leftvalue);
+    	 System.out.println("Right: "+rightvalue);
+    	 leftSide.setTurnSetpoint(leftvalue);
+    	 rightSide.setTurnSetpoint(rightvalue);
      }
      
      /**
