@@ -167,7 +167,7 @@ public class Shooter {
     		rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
         	leftPitchingMotor.set(-1.0 * Parameters.kShooterShootPitchingMachineSpeed);
         	shooting = true;
-        	if(isUpToSpeed()){
+        	if(isPitchingMachineUpToSpeed()){
         		dink.set(false);
         		ballShooter.set(true);
         	}
@@ -180,7 +180,7 @@ public class Shooter {
     	rightPitchingMotor.set(-1.0 * Parameters.kShooterReloadPitchingMachineSpeed);
     	leftPitchingMotor.set(Parameters.kShooterReloadPitchingMachineSpeed);
     	reloading = true;
-    	if(isUpToSpeed()){
+    	if(isPitchingMachineUpToSpeed()){
     		dink.set(true);
     		ballShooter.set(false);
     	}
@@ -309,6 +309,7 @@ public class Shooter {
     @objid ("4d7bd443-0329-4985-8729-3ec742465875")
     public boolean isTiltAngleAtSetpoint() {
     	// Figure out if tilt angle is "close enough" to setpoint
+    	jfkdjal;
     }
     
     /**
@@ -316,8 +317,9 @@ public class Shooter {
      * @param on
      */
     public void setPitchingMachine(boolean on) {
-    	if (leftPitchingMotor && rightPitchingMotor.equals(false) ) {
-    		leftPitchingMotor && rightPitchihngMotor.set(true);
+    	if (leftPitchingMotor.equals(false) && rightPitchingMotor.equals(false) ) {
+    		leftPitchingMotor.enable(); 
+    		rightPitchingMotor.enable();
     	}
     	if ( isTiltAngleAtSetpoint() ) {
     		if ( isPitchingMachineUpToSpeed() ) {
@@ -343,75 +345,81 @@ public class Shooter {
     public void process()
     {
     	//PitchingMachine method just retracts kicker, extends dink and turns motor off
+   	 if(isAutoPilotEnabled()){
+ 		
+   		switch (position) {
+   		case kUnknown:
+   			// We don't know the shooter's tilt angle, run the shooter in reverse at a slow
+   			// constant speed until we reach the reverse limit switch.
+   			disableTiltPositionControl();
+   			tiltMotor.set(Parameters.kShooterSeekHomePower);
+   			if (tiltMotor.isRevLimitSwitchClosed());
+   			{
+   				position = ShooterPosition.kHome;
+   				tiltMotor.set(0.0);
+   				enableTiltPositionControl();
+   			}
+   			break;
+   		
+   		case kHome:
+   			tiltMotor.set(Parameters.kShooterTiltHomePositionEncoderSetpoint);
+   			if (isPichingMachineIsOn())
+   			{
+   				setPitchingMachine(false);
+   			}
+   			break;
+   			
+   		case kLowBar:
+   			tiltMotor.set(Parameters.kShooterTiltLowBarPositionEncoderSetpoint);
+   			if (isPichingMachineIsOn())
+   			{
+   				setPitchingMachine(false);
+   			}
+   			break;
+   			
+   		case kReload:
+   			tiltMotor.set(Parameters.kShooterTiltReloadPositionEncoderSetpoint);
+   			if (isPichingMachineIsOn())
+   			{
+   				setPitchingMachine(true);
+   			}
+   			break;
+   			
+   		case kShootBatter:
+   			tiltMotor.set(Parameters.kShooterTiltShootBatterPositionEncoderSetpoint);
+   			if (isPichingMachineIsOn())
+   			{
+   				setPitchingMachine(true);
+   			}
+   			break;
+   			
+   		case kShootTape:
+   			tiltMotor.set(Parameters.kShooterTiltShootTapePositionEncoderSetpoint);
+   			if (isPichingMachineIsOn())
+   			{
+   				setPitchingMachine(true);
+   			}
+   			break;
+   			
+   		case kShootDefense:
+   			tiltMotor.set(Parameters.kShooterTiltShootDefensePositionEncoderSetpoint);
+   			if (isPichingMachineIsOn())
+   			{
+   				setPitchingMachine(true);
+   			}
+   			break;
+   	}
+   		
+   }
     }
-    	if (isAutopilotEnabled()) {
-    		
-    		switch (position) {
-    		case kUnknown:
-    			// We don't know the shooter's tilt angle, run the shooter in reverse at a slow
-    			// constant speed until we reach the reverse limit switch.
-    			disableTiltPositionControl();
-    			tiltMotor.set(Parameters.kShooterSeekHomePower);
-    			if (tiltMotor.isRevLimitSwitchClosed());
-    			{
-    				position = kHome;
-    				tiltMotor.set(0.0);
-    				enableTiltPositionControl();
-    			}
-    			break;
-    		
-    		case kHome:
-    			tiltMotor.set(Parameters.kShooterTiltHomePositionEncoderSetpoint);
-    			if (isPichingMachineIsOn())
-    			{
-    				setPitchingMachine(false);
-    			}
-    			break;
-    			
-    		case kLowBar:
-    			tiltMotor.set(Parameters.kShooterTiltLowBarPositionEncoderSetpoint);
-    			if (isPichingMachineIsOn())
-    			{
-    				setPitchingMachine(false);
-    			}
-    			break;
-    			
-    		case kReload:
-    			tiltMotor.set(Parameters.kShooterTiltReloadPositionEncoderSetpoint);
-    			if (isPichingMachineIsOn())
-    			{
-    				setPitchingMachine(true);
-    			}
-    			break;
-    			
-    		case kShootBatter:
-    			tiltMotor.set(Parameters.kShooterTiltShootBatterPositionEncoderSetpoint);
-    			if (isPichingMachineIsOn())
-    			{
-    				setPitchingMachine(true);
-    			}
-    			break;
-    			
-    		case kShootTape:
-    			tiltMotor.set(Parameters.kShooterTiltShootTapePositionEncoderSetpoint);
-    			if (isPichingMachineIsOn())
-    			{
-    				setPitchingMachine(true);
-    			}
-    			break;
-    			
-    		case kShootDefense:
-    			tiltMotor.set(Parameters.kShooterTiltShootDefensePositionEncoderSetpoint);
-    			if (isPichingMachineIsOn())
-    			{
-    				setPitchingMachine(true);
-    			}
-    			break;
-    	}
-    		
-    }
+
     
-    /**
+    public boolean isPichingMachineIsOn() {
+		
+		return false;
+	}
+
+	/**
      * 
      * @return
      */
@@ -436,7 +444,9 @@ public class Shooter {
     public boolean isReloading() {
     	return reloading;
     }
-    
+    public boolean isAutoPilotEnabled(){
+    	return true;
+    }
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
     public enum ShooterPosition {
          /**
