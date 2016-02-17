@@ -1,5 +1,4 @@
 package com.PhantomMentalists.Stronghold;
-
 /**
  * imports
  */

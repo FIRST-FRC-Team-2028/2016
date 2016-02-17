@@ -74,6 +74,7 @@ public class DriveUnit {
     public DriveUnit(Placement placements) 
     {
         placement = placements;
+        
         if (placement == Placement.Right) 
         {
         	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
@@ -94,6 +95,18 @@ public class DriveUnit {
     	turnSetpoint = 0.0;
     	speedSetpoint = 0.0;
     	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+        
+        masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
+        followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
+        
+    	followerMotor.set(masterMotor.getDeviceID());
+    	
+        masterMotor.enableBrakeMode(true);
+        followerMotor.enableBrakeMode(true);
+    	//masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder); ... It might be included
+        
+    	turnSetpoint = 0.0;
+    	speedSetpoint = 0.0;
     }
 
     /**
@@ -170,7 +183,85 @@ public class DriveUnit {
     	{
     		masterMotor.set(turnSetpoint);
     	}
+    	// Set the power to the master motor.  NOTE:  We need to calculate
+    	// the power based on the speed setpoint modified by the turn setpoint.
+    	// If we're driving forward and turning, the inside wheels must
+    	// turn slower than the outside wheels.  If our speed setpoint is zero
+    	// and we have a non-zero turn setpoint (i.e., we're spinning in place)
+    	// we want the inside wheels to run in reverse and the outside wheels to
+    	// run forward.
 //    	}
+		double setpoint = speedSetpoint;
+		double maxVelocity = Parameters.kMaxVelocity;
+		if (placement == Placement.Left)
+		{
+			setpoint = - setpoint;
+			maxVelocity = - maxVelocity;
+		}
+		
+		if (turnSetpoint != 0.0) 
+		{
+			// We are turning
+			if (speedSetpoint == 0.0)
+			{
+				// Priority #1
+				// We're spinning in place
+				if (turnSetpoint < 0.0)
+				{
+					// We're turning to the left
+					if (placement == Placement.Left) 
+					{
+						setpoint = -(maxVelocity * turnSetpoint);
+					}
+					else
+					{
+						setpoint = maxVelocity * turnSetpoint;
+					}
+									
+				}
+				else
+				{
+					// We're turning to the right
+					if (placement == Placement.Right) 
+					{
+						setpoint = -(maxVelocity * turnSetpoint);
+					} 
+					else
+					{
+						setpoint = maxVelocity * turnSetpoint;
+					}
+									
+				}
+			}
+			else
+			{
+				// Priority #2
+				// We're turning while moving forward/backwards, subtract the turn setpoint
+				// percentage from the inside set of wheels
+				if (turnSetpoint < 0.0)
+				{
+					
+				// We're turning to the left
+					if (placement == Placement.Left) 
+					{
+						setpoint = speedSetpoint * (1 - turnSetpoint);
+					} 
+					
+				}
+				else
+				{
+				// We're turning to the right
+					
+					if (placement == Placement.Right)
+					{
+						setpoint = speedSetpoint * (1 - turnSetpoint);
+					}
+				}
+			}
+		}
+		
+   		masterMotor.set(setpoint);
+   		
     }
     
     /**
@@ -228,10 +319,19 @@ public class DriveUnit {
         						 	Parameters.kDriveSpeedControlIZone, 
         						 	Parameters.kDriveControlCloseLoopRampRate, 
         						 	Parameters.kDriveControlProfile);
+        		masterMotor.changeControlMode(CANTalon.ControlMode.Speed);
+        		masterMotor.setPID(Parameters.kDriveSpeedControlProportional, 
+        						 	Parameters.kDriveSpeedControlIntegral, 
+        						 	Parameters.kDriveSpeedControlDifferential, 
+        						 	Parameters.kDriveSpeedControlThrottle, 
+        						 	Parameters.kDriveSpeedControlIZone, 
+        						 	Parameters.kDriveControlCloseLoopRampRate, 
+        						 	Parameters.kDriveControlProfile);
         	}
         	else 
         	{
         		masterMotor.changeControlMode(TalonControlMode.PercentVbus);
+        		masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
         	}
     	}
     	
@@ -258,6 +358,9 @@ public class DriveUnit {
 			value *= -1;
 		}
 		turnSetpoint = value;
+    public void setTurnSetpoint(double value)
+    {
+    	turnSetpoint = value;
     }
     
     /**
@@ -267,6 +370,14 @@ public class DriveUnit {
     public double getTurnSetpoint()
     {
     	return this.speedSetpoint;
+    
+    /**
+     * 
+     * @return
+     */
+    public double getTurnSetpoint()
+    {
+    	return this.turnSetpoint;
     }
     
     @objid ("b87fda8c-c9ff-4309-987b-05d2794dfab0")
@@ -275,4 +386,5 @@ public class DriveUnit {
         Right;
     }
 
+}
 }

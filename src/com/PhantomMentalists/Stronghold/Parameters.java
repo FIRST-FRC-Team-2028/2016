@@ -74,7 +74,10 @@ public class Parameters {
     public static final String kCameraIpAddress = "10.20.28.11";
     
     public static final int kGyroAnalogPort = 0;
+<<<<<<< HEAD
     public static final int kGyroFanAnalogPort = 7;
+=======
+>>>>>>> refs/remotes/origin/Diego
     
     public static final int kUltraSonicAnalogPort = 0;
 
@@ -102,6 +105,7 @@ public class Parameters {
      * <p>
      * If a negative value, it must be replaced with the actual chanel once it has been wired.
      */
+<<<<<<< HEAD
     public static final int kHighGearSolenoidChanel = 0;
     
     /**
@@ -159,3 +163,48 @@ public class Parameters {
 	public static final int kShooterDinkSolenoidChanel = 0;
 
 }
+=======
+    public static final int kHighGearSolenoidChanel = -1;
+    
+    /**
+     * 
+     */
+    public static final double kDriveSpeedControlProportional = 0;
+    
+    /**
+     * 
+     */
+    public static final double kDriveSpeedControlIntegral = 0;
+    
+    /**
+     * 
+     */
+    public static final double kDriveSpeedControlDifferential = 0;
+    
+    /**
+     * 
+     */
+    public static final double kDriveSpeedControlThrottle = 0;
+    
+    /**
+     * 
+     */
+    public static final int kDriveSpeedControlIZone = 0;
+    
+    /**
+     * 
+     */
+    public static final double kDriveControlCloseLoopRampRate = -1;
+    
+    /**
+     * 
+     */
+    public static final int kDriveControlProfile = 0;
+    
+    /**
+     * 
+     */
+     
+    public static final double kMaxVelocity = 20.0;
+}
+>>>>>>> refs/remotes/origin/Diego
