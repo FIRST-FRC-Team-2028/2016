@@ -68,6 +68,7 @@ public class Shooter {
 	 * This attribute is set by the shoot() method and remains true until the ball
 	 * is away.
 	 */
+	private double tiltAngle;
 	protected boolean shooting;
 	
 	/**
@@ -197,7 +198,7 @@ public class Shooter {
     @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
     public boolean isBallLoaded() {
     	return ballSensor.get();
-    	//
+    	// may change depending on if the sensor is analog of digital.
     }
 
     /**
@@ -267,6 +268,9 @@ public class Shooter {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.tiltSetpoint;
     }
+    public double getTiltAngle(){
+    	return this.tiltAngle;
+    }
 
     /**
      * <Enter note text here>
@@ -309,7 +313,13 @@ public class Shooter {
     @objid ("4d7bd443-0329-4985-8729-3ec742465875")
     public boolean isTiltAngleAtSetpoint() {
     	// Figure out if tilt angle is "close enough" to setpoint
-    	jfkdjal;
+    	if(isTiltAngleAtSetpoint()){
+    		tiltSetpoint = tiltAngle ;
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
     }
     
     /**
