@@ -8,42 +8,43 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
  * 
- * <Enter note text here>
- * 
+ * This is the class for the climber and controls the extending and retracting 
+ * the climbing arm as well as changing the control modes of the climbing arm motors.
+ *  
  * @author Ricky
  */
 @objid ("899c26b9-be06-403c-b6de-a1d9d8a5322b")
 
 public class ClimbingArm {
     /**
-     * <Enter note text here>
+     * This is the motor that extends and retracts the climber arm.
      */
     @objid ("de0098a0-c9b9-42cb-8012-212eec71543c")
     protected CANTalon extendRetractMotor;
 	
     /**
-     * <Enter note text here>
+     * This is the motor that retracts the climber arm on the left side
      */
 	protected CANTalon leftWenchMotor; 
 	
     /**
-     * <Enter note text here>
+     * This is the motor that retracts the climber arm on the right side
      */
 	protected CANTalon rightWenchMotor;
 	
     /**
-     * <Enter note text here>
+     * This is the motor that raises and lowers the climbing arm.
      */	
     @objid ("94a77f41-a9e3-4f3b-b9c4-58e16c9e1898")
     protected CANTalon raiseLowerMotor;
 
     /**
-     * <Enter note text here>
+     * this has all of the states of the climber arm.
      */
     protected ClimberPositions climberState;
     
     /**
-     * <Enter note text here>
+     * true or false value dependent on if the autopilot mode is enabled.
      */	
     protected boolean autopilotEnabled;
     
@@ -62,8 +63,7 @@ public class ClimbingArm {
 		rightWenchMotor = new CANTalon(Parameters.kClimberRightWinchMotorCanId);
 		leftWenchMotor = new CANTalon(Parameters.kClimberLeftWinchMotorCanId);
 		
-    	// For now, assume winch motors are running in percent Vbus.
-    	// TO-DO:  FIND OUT IF THIS IS CORRECT!!!
+    	//winch motors are running in percent Vbus.
 		rightWenchMotor.disable();
 		rightWenchMotor.changeControlMode(TalonControlMode.PercentVbus);
 		rightWenchMotor.enable();
@@ -78,7 +78,7 @@ public class ClimbingArm {
     }
     
     /**
-     * <Enter note text here>
+     * This method enables the climbing arm's Raise/lower motor's position control mode.
      */	
     public void enableTiltPositionControl() {
     	raiseLowerMotor.disable();
@@ -86,13 +86,14 @@ public class ClimbingArm {
     	raiseLowerMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	raiseLowerMotor.setPID(Parameters.kClimbTiltPositionControlProportional, 
 			 	Parameters.kPusherClimbTiltPositionControlIntegral, 
-			 	Parameters.kPusherClimbTiltPositionControlDifferential, 
-			 	Parameters.kPusherClimbTiltPositionControlThrottle);
+			 	Parameters.kPusherClimbTiltPositionControlDifferential);
+    	raiseLowerMotor.setF(Parameters.kPusherClimbTiltPositionControlThrottle);
     	raiseLowerMotor.enable();
     }
     
     /**
-     * <Enter note text here>
+     * This method disables the climbing arm's Raise/lower motor's position
+     * control mode. It changes the control mode to PercentVbus.
      */	
     public void disableTiltPositionControl() {
     	raiseLowerMotor.disable();
@@ -103,21 +104,22 @@ public class ClimbingArm {
     }
     
     /**
-     * <Enter note text here>
+     * This method enables the position control mode on the extend/retract motor.
      */	
     public void enableExtendRetractPositionControl() {
     	extendRetractMotor.disable();
     	extendRetractMotor.changeControlMode(TalonControlMode.Position);
     	extendRetractMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	extendRetractMotor.setPID(Parameters.kClimbExtendPositionControlProportional, 
-			 	Parameters.kPusherClimbExtendPositionControlIntegral, 
-			 	Parameters.kPusherClimbExtendPositionControlDifferential, 
-			 	Parameters.kPusherClimbExtendPositionControlThrottle);
+    	extendRetractMotor.setPID(Parameters.kClimbExtendPositionControlProportional,
+    			Parameters.kPusherClimbExtendPositionControlIntegral, 
+			 	Parameters.kPusherClimbExtendPositionControlDifferential);
+    	extendRetractMotor.setF(Parameters.kPusherClimbExtendPositionControlThrottle);
     	extendRetractMotor.enable();    	
     }
     
     /**
-     * <Enter note text here>
+     * This method disables the position control mode on the extend/retract motor.
+     * Then it switches the control mode to PercentVbus.
      */	
     public void disableExtendRetractPositionControl() {
     	extendRetractMotor.disable();
@@ -148,7 +150,7 @@ public class ClimbingArm {
      * <p>
      * When extending, we need to apply the supplied power parameter to the 
      * extend/retract motor, and also power the winch motors slowly enough to
-     * just play out cable without allowing the cable to go slack.
+     * just play out cable without allowing the cable to be slack.
      * <p>
      * When retracting, we need to apply the supplied power parameter to both
      * of the two winch motors, and also retract the extend/retract motor slowly
@@ -161,7 +163,7 @@ public class ClimbingArm {
     	if (isExtendRetractPositionControlEnabled()) {
     		disableExtendRetractPositionControl();
     	}
-    	double newValue =0;
+    	
     	if (power < 0.0)
     	{
     		// Retracting
@@ -182,11 +184,12 @@ public class ClimbingArm {
     }
     
     /**
-     * <Enter note text here>
+     * sets the position setpoint
      * 
      * @param ClimberPositions
      */
-    public void setPositionSetpoint(ClimberPositions newState) {
+    public void setPositionSetpoint(ClimberPositions newState) 
+    {
     	
     }
     
@@ -199,42 +202,44 @@ public class ClimbingArm {
     public boolean isKnownPosition()
     {
     	return false;
+    	 
     }
     
     /**
-     * <Enter note text here>
+     * returns true or false if raise/lower motor is in position control.
      * 
      * @return boolean
      */
     public boolean isTiltPositionControlEnabled() {
-    	
+    	return false;
     }
     
     /**
-     * <Enter note text here>
+     * returns true or false if the extend/retract motor is in position control or not.
      * 
      * @return boolean
      */
     public boolean isExtendRetractPositionControlEnabled() {
-    	
+    	return false;
     }
     
     /**
-     * <Enter note text here>
+     * returns true or false if the climber arm is at the home point
      * 
      * @return boolean
      */
     public boolean isAtSetpoint() {
-    	
+    	return false;
     }
     
     /**
-     * <Enter note text here>
+     * this method returns true or false if the climber is moving in any way.
      * 
      * @return
      */
-    public boolean isClimberMoving() {
-    	
+    public boolean isClimberMoving()
+    {
+    	return true;
     }
     
     /**
@@ -246,7 +251,7 @@ public class ClimbingArm {
      */
     public boolean isExtended()
    {	
-    	if (extend.getPosition() < Parameters.kClimberFullyExtendedPositionSetpoint)
+    	if (extendRetractMotor.getPosition() < Parameters.kClimberFullyExtendedPositionSetpoint)
     	{
     		return false;
     	}
@@ -294,6 +299,7 @@ public class ClimbingArm {
     	climberState = newState;
     }
     
+    
     /**
      * This method is called once every iteration through the robot's main loop, 
      * in both autonomous and operatorControl.  It is responsible for controlling
@@ -301,47 +307,106 @@ public class ClimbingArm {
      * values to the smart dashboard, and catching any error conditions (such as 
      * motors being over their current limit).
      */
-    public void process() {
-    	
+    public void process()
+    {
+    	if(autopilotEnabled == true)
+    	{
+    		switch (climberState) 
+    		{
+    		case kUnknown:
+    			disableTiltPositionControl();
+    			raiseLowerMotor.set(Parameters.kRaiseLowerMoterHomeSpeed);
+    			if(raiseLowerMotor.isRevLimitSwitchClosed())
+    			{
+    				climberState = ClimberPositions.kHome;
+    				raiseLowerMotor.set(0.0);
+    				enableTiltPositionControl();
+    			}
+    			break;
+    			
+    		case kHome:
+    			raiseLowerMotor.set(Parameters.kClimberTiltHomePositionEncSetpoint);
+    			if(isExtended())
+    			{
+    				manualSetExtendRetract(-.09);
+    			}
+    			break;
+    			
+    		case kLowBar:
+    			raiseLowerMotor.set(Parameters.kClimberTiltLowBarPositionEncSetPoint);
+    			if(isExtended())
+    			{
+    				manualSetExtendRetract(-.09);
+    			}
+    			
+    			break;
+    			
+    		case kDeployHook:
+    			
+    			
+    			break;
+    			
+    		case kClimb:
+    			extendRetractMotor.set(Parameters.kClimberFullyExtendedPositionSetpoint);
+    			
+    			
+    			break;
+    			
+    		case kRaised:
+    			raiseLowerMotor.set(Parameters.kClimberRaisedPositionSetPoint);
+    			
+    			break;
+    			
+    		case kDrawBridge:
+    			raiseLowerMotor.set(Parameters.kClimberDrawBridgeSetPoint);
+    			
+    			break;
+    		}
+    	}
     }
     
+    
+    
     /**
-     * <Enter note text here>
+     * these are the positions of the climber arm. (e.g. home state: home
+     * state is the state where the climber arm is touching the home limit switch)
      */
     public enum ClimberPositions
     {
         /**
-         * <Enter note text here>
+         * This is when the climber arm is in an unknown state.
          */
     	kUnknown, 
         
     	/**
-         * <Enter note text here>
+         * this is when the climber arm is at it's home position
          */
     	kHome, 
 
         /**
-         * <Enter note text here>
+         * this is when the climber arm is low enough that it
+         * can get under the low bar.
          */
     	kLowBar,
     	
         /**
-         * <Enter note text here>
+         * this is the when the hook of the climber arm is fully deployed
          */
     	kDeployHook,
     	
         /**
-         * <Enter note text here>
+         * this is the state of the climber arm when the arm is already attatched
+         * to the rung and is in the process of climbing.
          */
     	kClimb,
     	
         /**
-         * <Enter note text here>
+         * This is when the climber arm is positioned vertically.
          */
     	kRaised,
     	
         /**
-         * <Enter note text here>
+         * This is the state of the climber arm when it brings down the drawbridge.
          */
     	kDrawBridge
     }

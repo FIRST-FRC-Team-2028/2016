@@ -181,4 +181,25 @@ public class Parameters {
 
 	public static final int kEncoderCodesPerRev = 0;
 
+
+	public static final double kClimbTiltPositionControlProportional = 0;
+
+	public static final double kPusherClimbTiltPositionControlIntegral = 0;
+
+	public static final double kPusherClimbTiltPositionControlDifferential = 0;
+
+	public static final double kPusherClimbTiltPositionControlThrottle = 0;
+
+	public static final double kClimbExtendPositionControlProportional = 0;
+
+	public static final double kPusherClimbExtendPositionControlIntegral = 0;
+
+	public static final double kPusherClimbExtendPositionControlDifferential = 0;
+
+	public static final double kPusherClimbExtendPositionControlThrottle = 0;
+
+	public static final double kClimberFullyExtendedPositionSetpoint = 0;
+
+	public static final double kRaiseLowerMoterHomeSpeed = 0;
+
 }
