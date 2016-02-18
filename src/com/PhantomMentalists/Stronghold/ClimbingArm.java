@@ -325,12 +325,19 @@ public class ClimbingArm {
     			break;
     			
     		case kHome:
-    			
-    			
+    			raiseLowerMotor.set(Parameters.kClimberTiltHomePositionEncSetpoint);
+    			if(isExtended())
+    			{
+    				manualSetExtendRetract(-.09);
+    			}
     			break;
     			
     		case kLowBar:
-    			
+    			raiseLowerMotor.set(Parameters.kClimberTiltLowBarPositionEncSetPoint);
+    			if(isExtended())
+    			{
+    				manualSetExtendRetract(-.09);
+    			}
     			
     			break;
     			
@@ -340,17 +347,18 @@ public class ClimbingArm {
     			break;
     			
     		case kClimb:
+    			extendRetractMotor.set(Parameters.kClimberFullyExtendedPositionSetpoint);
     			
     			
     			break;
     			
     		case kRaised:
-    			
+    			raiseLowerMotor.set(Parameters.kClimberRaisedPositionSetPoint);
     			
     			break;
     			
     		case kDrawBridge:
-    			
+    			raiseLowerMotor.set(Parameters.kClimberDrawBridgeSetPoint);
     			
     			break;
     		}
