@@ -101,4 +101,14 @@ public class Parameters {
 
 	public static final double kRaiseLowerMoterHomeSpeed = 0;
 
+	public static final double kClimberTiltHomePositionEncSetpoint = 0;
+
+	public static final double kClimberTiltLowBarPositionEncSetPoint = 0;
+
+	public static final double kClimberRaisedPositionSetPoint = 0;
+
+	public static final double kClimberDrawBridgeSetPoint = 0;
+
+	public static final double kClimberHookExtendPositionSetpoint = 0;
+
 }

@@ -201,8 +201,11 @@ public class ClimbingArm {
      */
     public boolean isKnownPosition()
     {
+    	if(raiseLowerMotor.isRevLimitSwitchClosed())
+    	{
+    		return true;
+    	}
     	return false;
-    	 
     }
     
     /**
@@ -210,7 +213,12 @@ public class ClimbingArm {
      * 
      * @return boolean
      */
-    public boolean isTiltPositionControlEnabled() {
+    public boolean isTiltPositionControlEnabled() 
+    {
+    	if(raiseLowerMotor.equals(TalonControlMode.Position))
+    	{
+    		return true;
+    	}
     	return false;
     }
     
@@ -219,8 +227,13 @@ public class ClimbingArm {
      * 
      * @return boolean
      */
-    public boolean isExtendRetractPositionControlEnabled() {
-    	return false;
+    public boolean isExtendRetractPositionControlEnabled() 
+    {
+    	if(extendRetractMotor.equals(TalonControlMode.Position))
+    	{
+    		return true;
+    	}
+    	return false; 
     }
     
     /**
@@ -228,7 +241,12 @@ public class ClimbingArm {
      * 
      * @return boolean
      */
-    public boolean isAtSetpoint() {
+    public boolean isAtSetpoint() 
+    {
+    	if(raiseLowerMotor.get()-raiseLowerMotor.getSetpoint() == 0 || raiseLowerMotor.getSetpoint()-raiseLowerMotor.get() == 0)
+    	{
+    		return true;
+    	}
     	return false;
     }
     
@@ -239,7 +257,11 @@ public class ClimbingArm {
      */
     public boolean isClimberMoving()
     {
-    	return true;
+    	if(raiseLowerMotor)
+    	{
+    		return true;
+    	}
+    	return false;
     }
     
     /**
@@ -338,11 +360,10 @@ public class ClimbingArm {
     			{
     				manualSetExtendRetract(-.09);
     			}
-    			
     			break;
     			
     		case kDeployHook:
-    			
+    			extendRetractMotor.set(Parameters.kClimberHookExtendPositionSetpoint);
     			
     			break;
     			
@@ -395,7 +416,7 @@ public class ClimbingArm {
     	kDeployHook,
     	
         /**
-         * this is the state of the climber arm when the arm is already attatched
+         * this is the state of the climber arm when the arm is already attached
          * to the rung and is in the process of climbing.
          */
     	kClimb,
