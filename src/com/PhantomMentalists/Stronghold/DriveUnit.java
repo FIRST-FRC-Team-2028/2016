@@ -2,11 +2,8 @@ package com.PhantomMentalists.Stronghold;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-import edu.wpi.first.wpilibj.CANSpeedController.ControlMode;
 import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * DriveUnit encapsulates all the hardware that makes one side of the 
@@ -79,34 +76,23 @@ public class DriveUnit {
         {
         	masterMotor = new CANTalon(Parameters.kRightMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kRightFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(TalonControlMode.Follower);
-        	followerMotor.set(Parameters.kRightMasterDriveMotorCanId);
         }
         else if (placement == Placement.Left)
         {
         	masterMotor = new CANTalon(Parameters.kLeftMasterDriveMotorCanId);
         	followerMotor = new CANTalon(Parameters.kLeftFollowerDriveMotorCanId);
-        	followerMotor.changeControlMode(TalonControlMode.Follower);
-        	followerMotor.set(Parameters.kLeftMasterDriveMotorCanId);
-        	
         }
         masterMotor.changeControlMode(TalonControlMode.PercentVbus);
-//    	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	turnSetpoint = 0.0;
     	speedSetpoint = 0.0;
-    	masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
         
-        masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
-        followerMotor.changeControlMode(CANTalon.ControlMode.Follower);
-        
+        followerMotor.changeControlMode(TalonControlMode.Follower);  
     	followerMotor.set(masterMotor.getDeviceID());
     	
         masterMotor.enableBrakeMode(true);
         followerMotor.enableBrakeMode(true);
-    	//masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder); ... It might be included
         
-    	turnSetpoint = 0.0;
-    	speedSetpoint = 0.0;
+    	//masterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder); ... It might be included
     }
 
     /**
@@ -132,7 +118,7 @@ public class DriveUnit {
     @objid ("6b1aafd1-f349-430d-8d23-f281df820075")
     public void setSpeedSetpoint(double value) {
         // Automatically generated method. Please delete this comment before entering specific code.
-    	if (getSpeedSetpoint() != value)
+    	if (speedSetpoint != value)
     	{
     		if(placement == Placement.Left)
     		{
@@ -192,11 +178,9 @@ public class DriveUnit {
     	// run forward.
 //    	}
 		double setpoint = speedSetpoint;
-		double maxVelocity = Parameters.kMaxVelocity;
 		if (placement == Placement.Left)
 		{
-			setpoint = - setpoint;
-			maxVelocity = - maxVelocity;
+			turnSetpoint = - turnSetpoint;
 		}
 		
 		if (turnSetpoint != 0.0) 
@@ -211,11 +195,11 @@ public class DriveUnit {
 					// We're turning to the left
 					if (placement == Placement.Left) 
 					{
-						setpoint = -(maxVelocity * turnSetpoint);
+						setpoint = turnSetpoint;
 					}
 					else
 					{
-						setpoint = maxVelocity * turnSetpoint;
+						setpoint = turnSetpoint;
 					}
 									
 				}
@@ -224,11 +208,11 @@ public class DriveUnit {
 					// We're turning to the right
 					if (placement == Placement.Right) 
 					{
-						setpoint = -(maxVelocity * turnSetpoint);
+						setpoint = -turnSetpoint;
 					} 
 					else
 					{
-						setpoint = maxVelocity * turnSetpoint;
+						setpoint = turnSetpoint;
 					}
 									
 				}
@@ -319,7 +303,7 @@ public class DriveUnit {
         						 	Parameters.kDriveSpeedControlIZone, 
         						 	Parameters.kDriveControlCloseLoopRampRate, 
         						 	Parameters.kDriveControlProfile);
-        		masterMotor.changeControlMode(CANTalon.ControlMode.Speed);
+        		masterMotor.changeControlMode(TalonControlMode.Speed);
         		masterMotor.setPID(Parameters.kDriveSpeedControlProportional, 
         						 	Parameters.kDriveSpeedControlIntegral, 
         						 	Parameters.kDriveSpeedControlDifferential, 
@@ -331,7 +315,6 @@ public class DriveUnit {
         	else 
         	{
         		masterMotor.changeControlMode(TalonControlMode.PercentVbus);
-        		masterMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
         	}
     	}
     	
@@ -357,19 +340,8 @@ public class DriveUnit {
 		{
 			value *= -1;
 		}
-		turnSetpoint = value;
-    public void setTurnSetpoint(double value)
-    {
     	turnSetpoint = value;
     }
-    
-    /**
-     * 
-     * @return
-     */
-    public double getTurnSetpoint()
-    {
-    	return this.speedSetpoint;
     
     /**
      * 
@@ -386,5 +358,5 @@ public class DriveUnit {
         Right;
     }
 
-}
+
 }

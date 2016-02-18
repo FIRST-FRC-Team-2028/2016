@@ -41,10 +41,10 @@ public class Parameters {
     public static final int kShooterAngleMotorCanId = 33;
 
     @objid ("ba76d02f-5cb3-45d4-87d4-7c0f38f7372d")
-    public static final int kLeftShooterPitcherMotorCanId = 32;
+    public static final int kLeftShooterPitcherMotorCanId = 42;
 
     @objid ("02b639b3-8099-4c45-83ab-463996000324")
-    public static final int kRightShooterPitcherMotorCanId = 31;
+    public static final int kRightShooterPitcherMotorCanId = 41;
 
     /**
      * <Enter note text here>
@@ -74,10 +74,7 @@ public class Parameters {
     public static final String kCameraIpAddress = "10.20.28.11";
     
     public static final int kGyroAnalogPort = 0;
-<<<<<<< HEAD
     public static final int kGyroFanAnalogPort = 7;
-=======
->>>>>>> refs/remotes/origin/Diego
     
     public static final int kUltraSonicAnalogPort = 0;
 
@@ -105,7 +102,7 @@ public class Parameters {
      * <p>
      * If a negative value, it must be replaced with the actual chanel once it has been wired.
      */
-<<<<<<< HEAD
+
     public static final int kHighGearSolenoidChanel = 0;
     
     /**
@@ -142,9 +139,9 @@ public class Parameters {
      * 
      */
     public static final int kDriveControlProfile = 0;
-	public static final double kShooterShootPitchingMachineSpeed = 0;
+	public static final double kShooterShootPitchingMachineSpeed = 1.0;
 
-	public static final double kShooterReloadPitchingMachineSpeed = 0;
+	public static final double kShooterReloadPitchingMachineSpeed = .6;
 
 	public static final double kShootPitchPositionControlProportional = 0;
 
@@ -162,44 +159,6 @@ public class Parameters {
 
 	public static final int kShooterDinkSolenoidChanel = 0;
 
-}
-=======
-    public static final int kHighGearSolenoidChanel = -1;
-    
-    /**
-     * 
-     */
-    public static final double kDriveSpeedControlProportional = 0;
-    
-    /**
-     * 
-     */
-    public static final double kDriveSpeedControlIntegral = 0;
-    
-    /**
-     * 
-     */
-    public static final double kDriveSpeedControlDifferential = 0;
-    
-    /**
-     * 
-     */
-    public static final double kDriveSpeedControlThrottle = 0;
-    
-    /**
-     * 
-     */
-    public static final int kDriveSpeedControlIZone = 0;
-    
-    /**
-     * 
-     */
-    public static final double kDriveControlCloseLoopRampRate = -1;
-    
-    /**
-     * 
-     */
-    public static final int kDriveControlProfile = 0;
     
     /**
      * 
@@ -207,4 +166,3 @@ public class Parameters {
      
     public static final double kMaxVelocity = 20.0;
 }
->>>>>>> refs/remotes/origin/Diego

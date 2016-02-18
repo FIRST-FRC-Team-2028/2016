@@ -83,21 +83,21 @@ public class Shooter {
     public Shooter() {
     	rightPitchingMotor = new CANTalon(Parameters.kRightShooterPitcherMotorCanId);
     	leftPitchingMotor = new CANTalon(Parameters.kLeftShooterPitcherMotorCanId);
-    	tiltMotor = new CANTalon(Parameters.kShooterAngleMotorCanId);
+//    	tiltMotor = new CANTalon(Parameters.kShooterAngleMotorCanId);
     	
     	rightPitchingMotor.enableBrakeMode(true);
     	leftPitchingMotor.enableBrakeMode(true);
-    	tiltMotor.enableBrakeMode(true);
-    	ballShooter = new Solenoid(Parameters.kShooterBallShooterSolenoidChanel);
-    	ballShooter.set(false);
-    	dink = new Solenoid(Parameters.kShooterDinkSolenoidChanel);
-    	dink.set(true);
+//    	tiltMotor.enableBrakeMode(true);
+//    	ballShooter = new Solenoid(Parameters.kShooterBallShooterSolenoidChanel);
+//    	ballShooter.set(false);
+//    	dink = new Solenoid(Parameters.kShooterDinkSolenoidChanel);
+//    	dink.set(true);
     	position = ShooterPosition.kUnknown;
-    	enablePitchingMachineSpeedControl();
+//    	enablePitchingMachineSpeedControl();
     	// Disable tilt position control until we've reached the home position
-    	disableTiltPositionControl();
-    	shooting = false;
-    	reloading = false;
+//    	disableTiltPositionControl();
+//    	shooting = false;
+//    	reloading = false;
     	
     }
 
@@ -165,16 +165,21 @@ public class Shooter {
     public void shoot() {
     	
     		rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
-        	leftPitchingMotor.set(-1.0 * Parameters.kShooterShootPitchingMachineSpeed);
+        	leftPitchingMotor.set(-Parameters.kShooterShootPitchingMachineSpeed);
         	shooting = true;
     }
 
     public void reload() {
-    	rightPitchingMotor.set(-1.0 * Parameters.kShooterReloadPitchingMachineSpeed);
+    	rightPitchingMotor.set(-Parameters.kShooterReloadPitchingMachineSpeed);
     	leftPitchingMotor.set(Parameters.kShooterReloadPitchingMachineSpeed);
     	reloading = true;
     }
     
+    public void stop()
+    {
+    	rightPitchingMotor.set(0);
+    	leftPitchingMotor.set(0);
+    }
     /**
      * Tells if a ball is in the shooter.
      * 

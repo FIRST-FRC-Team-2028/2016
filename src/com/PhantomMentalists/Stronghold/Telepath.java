@@ -93,6 +93,18 @@ public class Telepath extends SampleRobot {
         	leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
+        	if(leftstick.getRawButton(6))
+        	{
+        		shooter.shoot();
+        	}
+        	else if(leftstick.getRawButton(7))
+        	{
+        		shooter.reload();
+        	}
+        	else
+        	{
+        		shooter.stop();
+        	}
         	if(rightstick.getRawButton(2))
         	{
         		tangle = gyro.getAngle();
@@ -157,7 +169,7 @@ public class Telepath extends SampleRobot {
     	rightstick = new Joystick(1);
 //    	pusherArm = new PusherArm();
     	westCoastDrive = new WestCoastDrive();
-//    	shooter = new Shooter();
+    	shooter = new Shooter();
 //    	climbingArm = new ClimbingArm();
 //    	compressor = new Compressor();
 //    	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
