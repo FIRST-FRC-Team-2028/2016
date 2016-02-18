@@ -179,4 +179,6 @@ public class Parameters {
 
 	public static final double kShooterSeekHomePower = 0;
 
+	public static final int kEncoderCodesPerRev = 0;
+
 }

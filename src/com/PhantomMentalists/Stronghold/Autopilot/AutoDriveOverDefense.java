@@ -1,5 +1,6 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import com.PhantomMentalists.Stronghold.ClimbingArm;
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.PhantomMentalists.Stronghold.PusherArm;
@@ -20,16 +21,57 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
  */
 @objid ("2e7b2583-3a04-4188-beec-544aff2708ac")
 public class AutoDriveOverDefense extends Autopilot {
-    /**
+
+	/**
+     * <Enter note text here>
+     */
+	protected Defense defense;
+
+	/**
+     * <Enter note text here>
+     */
+	protected AnalogGyro gyro;
+	
+	/**
      * <Enter note text here>
      */
     @objid ("e1bf47bf-543a-45f6-b369-e5a8c5869185")
-    public AutoDriveOverDefense(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climbingArm) {
+    public AutoDriveOverDefense(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climbingArm, AnalogGyro gyro, Defense defense) {
         super(drive, shooter, pusherArm, climbingArm);
+        this.gyro = gyro;
+        this.defense = defense;
     }
 
+    /**
+     * <Enter note text here>
+     */
     @objid ("46ef2765-db09-4fc1-a9a8-04e9fb7c4ff9")
     public void process() {
+    }
+    
+    /**
+     * <Enter note text here>
+     */
+    public enum Defense {
+        /**
+         * <Enter note text here>
+         */
+    	kMoat,
+
+    	/**
+         * <Enter note text here>
+         */
+    	kRockWall,
+
+    	/**
+         * <Enter note text here>
+         */
+    	kRamparts,
+
+    	/**
+         * <Enter note text here>
+         */
+    	kRoughTerain
     }
 
 }

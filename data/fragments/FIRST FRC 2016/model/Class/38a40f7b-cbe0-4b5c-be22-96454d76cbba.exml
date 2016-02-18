@@ -127,7 +127,7 @@
                 <ID name="" mc="Standard.Note" uid="de7f9680-712d-4708-a9f7-1332ca05d9f1"/>
                 <ATTRIBUTES>
                   <ATT name="Content"><![CDATA[super(drive, shooter, pusherArm, climbingArm);]]></ATT>
-                  <ATT name="MimeType"></ATT>
+                  <ATT name="MimeType"><![CDATA[text/plain]]></ATT>
                   <ATT name="Name"></ATT>
                   <ATT name="status">1970354901745664</ATT>
                 </ATTRIBUTES>

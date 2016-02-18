@@ -8,7 +8,9 @@ import com.PhantomMentalists.Stronghold.WestCoastDrive;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 /**
- * This is an abstract base class.  It is used as the base class for a hierarchy of concrete classes, each designed to traverse a single defense or perform a specific action (such as aiming and shooting the boulder).
+ * This is an abstract base class.  It is used as the base class for a hierarchy of
+ * concrete classes, each designed to traverse a single defense or perform a specific
+ * action (such as aiming and shooting the boulder).
  */
 @objid ("51808c75-6bd6-4f90-975a-784b714c5fba")
 public abstract class Autopilot {
@@ -18,6 +20,9 @@ public abstract class Autopilot {
     @objid ("4fdd9cb6-a7ec-4b08-b502-67f8c957d9be")
     protected boolean enabled;
 
+    /**
+     * <Enter note text here>
+     */
     @objid ("d74f2d0e-ec97-42d2-84ae-1b25814a0283")
     protected WestCoastDrive drive;
 
@@ -39,6 +44,9 @@ public abstract class Autopilot {
     @objid ("09cd8f95-bffd-403e-8326-2ee2956eab31")
     protected ClimbingArm climbingArm;
 
+    /**
+     * <Enter note text here>
+     */
     @objid ("35e9e305-e9fe-407b-b2d3-d11900535076")
     public abstract void process();
 
@@ -57,6 +65,9 @@ public abstract class Autopilot {
         return false;
     }
 
+    /**
+     * <Enter note text here>
+     */
     @objid ("fd1d5c3f-9dc1-4bf4-8f73-d86fa21874d2")
     public void setEnabled(boolean value) {
         // Automatically generated method. Please delete this comment before entering specific code.
