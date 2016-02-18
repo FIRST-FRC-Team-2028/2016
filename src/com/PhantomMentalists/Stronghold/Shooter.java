@@ -68,7 +68,6 @@ public class Shooter {
 	 * This attribute is set by the shoot() method and remains true until the ball
 	 * is away.
 	 */
-<<<<<<< HEAD
 	private double tiltAngle;
 	protected boolean shooting;
 	
@@ -77,11 +76,8 @@ public class Shooter {
 	 * This attribute is set by the shoot() method and remains true until we sense
 	 * a ball in the shooter (or it is cancelled by the driver).  
 	 */
-	protected boolean reloading;
 	
 	protected boolean autopilotEnabled;
-=======
-	protected boolean shooting;
 	
 	/**
 	 * Internal variable that indicates the shooter is in the process of reloading.
@@ -89,7 +85,7 @@ public class Shooter {
 	 * a ball in the shooter (or it is cancelled by the driver).  
 	 */
 	protected boolean reloading;
->>>>>>> refs/remotes/origin/master
+
 
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
     public Shooter() {
@@ -100,7 +96,6 @@ public class Shooter {
     	rightPitchingMotor.enableBrakeMode(true);
     	leftPitchingMotor.enableBrakeMode(true);
     	tiltMotor.enableBrakeMode(true);
-<<<<<<< HEAD
 //    	ballShooter = new Solenoid(Parameters.kShooterBallShooterSolenoidChanel);
 //    	ballShooter.set(false);
 //    	dink = new Solenoid(Parameters.kShooterDinkSolenoidChanel);
@@ -113,7 +108,6 @@ public class Shooter {
     	shooting = false;
     	reloading = false;
     	autopilotEnabled = true;
-=======
     	ballShooter = new Solenoid(Parameters.kShooterBallShooterSolenoidChanel);
     	ballShooter.set(false);
     	dink = new Solenoid(Parameters.kShooterDinkSolenoidChanel);
@@ -124,7 +118,6 @@ public class Shooter {
     	disableTiltPositionControl();
     	shooting = false;
     	reloading = false;
->>>>>>> refs/remotes/origin/master
     }
 
     /**
@@ -132,54 +125,8 @@ public class Shooter {
      */
     public void disableTiltPositionControl() {
     	tiltMotor.disable();
-<<<<<<< HEAD
     	tiltMotor.changeControlMode(TalonControlMode.PercentVbus);
     	tiltMotor.enable();       	
-    }
-    
-    /**
-     * 
-     */
-    public void enableTiltPositionControl() {
-    	tiltMotor.disable();
-    	tiltMotor.changeControlMode(TalonControlMode.Position);
-    	tiltMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-    	tiltMotor.setPID(Parameters.kShootTiltPositionControlProportional, 
-			 	Parameters.kShootTiltPositionControlIntegral, 
-			 	Parameters.kShootTiltPositionControlDifferential);
-    	tiltMotor.enable();
-    }
-    
-    /**
-     * 
-     */
-    public void disablePitchingMachineSpeedControl() {
-    	rightPitchingMotor.disable();
-    	leftPitchingMotor.disable();
-    	rightPitchingMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	leftPitchingMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	rightPitchingMotor.enable();    	
-    	leftPitchingMotor.enable();
-    }
-    
-    /**
-     * 
-     */
-    public void enablePitchingMachineSpeedControl() {
-    	rightPitchingMotor.disable();
-    	leftPitchingMotor.disable();    	
-    	rightPitchingMotor.changeControlMode(TalonControlMode.Speed);
-    	rightPitchingMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-    	rightPitchingMotor.setPID(Parameters.kShootPitchPositionControlProportional, 
-			 	Parameters.kShootPitchPositionControlIntegral, 
-			 	Parameters.kShootPitchPositionControlDifferential);    	
-    	leftPitchingMotor.changeControlMode(TalonControlMode.Speed);
-    	leftPitchingMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-    	leftPitchingMotor.setPID(Parameters.kShootPitchPositionControlProportional, 
-			 	Parameters.kShootPitchPositionControlIntegral, 
-			 	Parameters.kShootPitchPositionControlDifferential);
-    	rightPitchingMotor.enable();    	
-    	leftPitchingMotor.enable();    	
     }
     
     /**
@@ -214,7 +161,6 @@ public class Shooter {
     	else{
     		return;
     	}
-=======
     	tiltMotor.changeControlMode(CANTalon.ControlMode.PercentVbus);
     	tiltMotor.enable();
     	tiltMotor.set(0);
@@ -286,7 +232,6 @@ public class Shooter {
     	rightPitchingMotor.set(-1.0 * Parameters.kShooterReloadPitchingMachineSpeed);
     	leftPitchingMotor.set(Parameters.kShooterReloadPitchingMachineSpeed);
     	reloading = true;
->>>>>>> refs/remotes/origin/master
     }
     
     /**
@@ -297,11 +242,7 @@ public class Shooter {
     @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
     public boolean isBallLoaded() {
     	return ballSensor.get();
-<<<<<<< HEAD
     	// may change depending on if the sensor is analog of digital.
-=======
-    	//
->>>>>>> refs/remotes/origin/master
     }
 
     /**
@@ -328,14 +269,10 @@ public class Shooter {
     	}
     	rightPitchingMotor.set(value);
     	leftPitchingMotor.set(-1.0 * value);
-<<<<<<< HEAD
     	autopilotEnabled = false;
-=======
->>>>>>> refs/remotes/origin/master
     }
 
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
-<<<<<<< HEAD
     public boolean isPitchingMachineUpToSpeed() {
     	if(rightPitchingMotor.getSpeed()==Parameters.kShooterShootPitchingMachineSpeed && 
     			leftPitchingMotor.getSpeed()==Parameters.kShooterShootPitchingMachineSpeed){
@@ -345,7 +282,6 @@ public class Shooter {
     		return false;
     	}
        
-=======
     public boolean isUpToSpeed() {
 //    	if(rightPitchingMotor && leftPitchingMotor){
 //    		return true;
@@ -358,7 +294,6 @@ public class Shooter {
 //        
 //       
         return false;
->>>>>>> refs/remotes/origin/master
     }
 
     /**
@@ -475,7 +410,6 @@ public class Shooter {
      */
     public void process()
     {
-<<<<<<< HEAD
     	//PitchingMachine method just retracts kicker, extends dink and turns motor off
    	 if(isAutoPilotEnabled()){
  		
@@ -578,8 +512,6 @@ public class Shooter {
     }
     public boolean isAutoPilotEnabled(){
     	return true;
-    }
-=======
     }
     
     /**

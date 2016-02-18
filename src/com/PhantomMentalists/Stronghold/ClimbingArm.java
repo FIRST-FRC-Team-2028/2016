@@ -163,7 +163,7 @@ public class ClimbingArm {
     	if (isExtendRetractPositionControlEnabled()) {
     		disableExtendRetractPositionControl();
     	}
-    	
+    	double newValue = 0;
     	if (power < 0.0)
     	{
     		// Retracting
