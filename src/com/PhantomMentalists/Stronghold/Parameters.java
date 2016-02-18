@@ -165,4 +165,18 @@ public class Parameters {
      */
      
     public static final double kMaxVelocity = 20.0;
+	public static final double kShooterTiltShootTapePositionEncoderSetpoint = 0;
+
+	public static final double kShooterTiltShootDefensePositionEncoderSetpoint = 0;
+
+	public static final double kShooterTiltShootBatterPositionEncoderSetpoint = 0;
+
+	public static final double kShooterTiltReloadPositionEncoderSetpoint = 0;
+
+	public static final double kShooterTiltLowBarPositionEncoderSetpoint = 0;
+
+	public static final double kShooterTiltHomePositionEncoderSetpoint = 0;
+
+	public static final double kShooterSeekHomePower = 0;
+
 }

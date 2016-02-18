@@ -95,15 +95,15 @@ public class Telepath extends SampleRobot {
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
         	if(leftstick.getRawButton(6))
         	{
-        		shooter.shoot();
+        		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
         	}
         	else if(leftstick.getRawButton(7))
         	{
-        		shooter.reload();
+        		shooter.manualRunPitchingMachine(Parameters.kShooterReloadPitchingMachineSpeed);
         	}
         	else
         	{
-        		shooter.stop();
+        		shooter.manualRunPitchingMachine(0);
         	}
         	if(rightstick.getRawButton(2))
         	{
