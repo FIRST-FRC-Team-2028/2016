@@ -1,4 +1,4 @@
-package com.PhantomMentalists.Stronghold;
+	package com.PhantomMentalists.Stronghold;
 
 import org.omg.Dynamic.Parameter;
 
@@ -423,7 +423,10 @@ public class Shooter {
    }
     }
 
-    
+    /**
+     * 
+     * @return sets pitching machine off at base due to orientation of cases in process()
+     */
     public boolean isPichingMachineIsOn() {
 		
 		return false;
@@ -431,7 +434,7 @@ public class Shooter {
 
 	/**
      * 
-     * @return
+     * @return true if speed control for pitching machine is enabled. returns false otherwise.
      */
     public boolean isPitchingMachineSpeedControlEnabled() {
     	return (leftPitchingMotor.getControlMode() == TalonControlMode.Speed);
