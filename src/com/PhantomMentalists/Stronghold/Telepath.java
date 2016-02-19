@@ -101,9 +101,25 @@ public class Telepath extends SampleRobot {
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterReloadPitchingMachineSpeed);
         	}
+        	else if(leftstick.getRawButton(11))
+        	{
+        		shooter.manualRunPitchingMachine(Parameters.kShooterShootBatterSpeed);
+        	}
         	else
         	{
         		shooter.manualRunPitchingMachine(0);
+        	}
+        	if(rightstick.getRawButton(6))
+        	{
+        		shooter.manualRunTiltMotor(Parameters.kShooterTiltPower);
+        	}
+        	else if(rightstick.getRawButton(7))
+        	{
+        		shooter.manualRunTiltMotor(-Parameters.kShooterTiltPower);
+        	}
+        	else
+        	{
+        		shooter.manualRunTiltMotor(0);
         	}
         	if(rightstick.getRawButton(2))
         	{

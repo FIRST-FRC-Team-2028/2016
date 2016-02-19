@@ -136,12 +136,13 @@ public class Parameters {
     public static final double kDriveControlCloseLoopRampRate = -1;
     
     /**
-     * 
+     * 48.5 degrees, 38.2 degrees
      */
     public static final int kDriveControlProfile = 0;
 	public static final double kShooterShootPitchingMachineSpeed = 1.0;
+	public static final double kShooterShootBatterSpeed = 0.65;
 
-	public static final double kShooterReloadPitchingMachineSpeed = .6;
+	public static final double kShooterReloadPitchingMachineSpeed = -.6;
 
 	public static final double kShootPitchPositionControlProportional = 0;
 
@@ -176,6 +177,8 @@ public class Parameters {
 	public static final double kShooterTiltLowBarPositionEncoderSetpoint = 0;
 
 	public static final double kShooterTiltHomePositionEncoderSetpoint = 0;
+	
+	public static final double kShooterTiltPower = 0.2;
 
 	public static final double kShooterSeekHomePower = 0;
 
@@ -203,5 +206,11 @@ public class Parameters {
 	public static final double kRaiseLowerMoterHomeSpeed = 0;
 
 	public static final double kClimberTiltHomePositionEncSetpoint = 0;
+
+	public static final double kClimberTiltLowBarPositionEncSetPoint = 0;
+
+	public static final double kClimberRaisedPositionSetPoint = 0;
+
+	public static final double kClimberDrawBridgeSetPoint = 0;
 
 }
