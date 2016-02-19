@@ -257,7 +257,7 @@ public class ClimbingArm {
      */
     public boolean isClimberMoving()
     {
-    	if(raiseLowerMotor)
+    	if(raiseLowerMotor.getOutputVoltage() > 0 || raiseLowerMotor.getOutputVoltage() < 0)
     	{
     		return true;
     	}
