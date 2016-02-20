@@ -1,11 +1,13 @@
 package com.PhantomMentalists.Stronghold;
 
+import com.PhantomMentalists.Stronghold.Shooter.ShooterPosition;
 import com.PhantomMentalists.Stronghold.WestCoastDrive.Gear;
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
@@ -22,6 +24,7 @@ public class Telepath extends SampleRobot {
     public double P =0.07,I = 0.0001,D= 0.005;
     public double tangle = 0;
     public Preferences prefs;
+    DigitalInput d = new DigitalInput(0);
 	/**
      * <Enter note text here>
      */
@@ -93,15 +96,16 @@ public class Telepath extends SampleRobot {
         	leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
-        	if(leftstick.getRawButton(6))
+        	SmartDashboard.putBoolean("Digital Input",d.get());
+        	if(leftstick.getRawButton(5))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
         	}
-        	else if(leftstick.getRawButton(7))
+        	else if(leftstick.getRawButton(4))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterReloadPitchingMachineSpeed);
         	}
-        	else if(leftstick.getRawButton(11))
+        	else if(leftstick.getRawButton(6))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterShootBatterSpeed);
         	}
@@ -109,36 +113,52 @@ public class Telepath extends SampleRobot {
         	{
         		shooter.manualRunPitchingMachine(0);
         	}
-        	if(rightstick.getRawButton(6))
+        	if(leftstick.getRawButton(10))
         	{
-        		shooter.manualRunTiltMotor(Parameters.kShooterTiltPower);
-        	}
-        	else if(rightstick.getRawButton(7))
-        	{
-        		shooter.manualRunTiltMotor(-Parameters.kShooterTiltPower);
+        		shooter.pushBall(true);
         	}
         	else
         	{
-        		shooter.manualRunTiltMotor(0);
+        		shooter.pushBall(false);
         	}
-        	if(rightstick.getRawButton(2))
+        	if(leftstick.getRawButton(3))
+        	{
+        		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerUp);
+        	}
+        	else if(leftstick.getRawButton(2))
+        	{
+        		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerDown);
+        	}
+        	else if(rightstick.getRawButton(11))
+        	{
+        		shooter.setShootAngle(ShooterPosition.kHome);
+        	}
+        	else if(rightstick.getRawButton(10))
+        	{
+        		shooter.resetTiltAngle();
+        	}
+        	else
+        	{
+        		shooter.manualRunTiltMotor(0);;
+        	}
+        	if(rightstick.getRawButton(9))
         	{
         		tangle = gyro.getAngle();
         	}
-        	if(rightstick.getRawButton(3))
+        	if(rightstick.getRawButton(8))
         	{
         		gyro.calibrate();
         	}
-        	if(leftstick.getTrigger())
+        	if(rightstick.getRawButton(2))
         	{
         		westCoastDrive.setGear(Gear.kLowGear);
         	}
-        	if(rightstick.getTrigger())
+        	if(rightstick.getRawButton(3))
         	{
         		westCoastDrive.setGear(Gear.kHighGear);
         	}
         	
-        	if(leftstick.getRawButton(2))
+        	if(leftstick.getRawButton(11))
         	{
         		westCoastDrive.setSpeedSetpoint(leftval, leftval);
         	}
@@ -168,7 +188,7 @@ public class Telepath extends SampleRobot {
         		westCoastDrive.setTurnSetpoint(0);
         	}
         	westCoastDrive.process();
-        	
+        	shooter.process();
             Timer.delay(Parameters.delay);
         }
         fan.set(false);

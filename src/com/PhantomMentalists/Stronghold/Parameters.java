@@ -82,7 +82,7 @@ public class Parameters {
      * <Enter note text here>
      */
     @objid ("7845afef-ef6b-4ac8-af0a-df9c3c2140db")
-    public static final double delay = 0.05;
+    public static final double delay = 0.1;
 
     /**
      * 
@@ -94,7 +94,7 @@ public class Parameters {
      * <p>
      * If a negative value, it must be replaced with the actual chanel once it has been wired.
      */
-    public static final int kLowGearSolenoidChanel = -1;
+    public static final int kLowGearSolenoidChanel = 1;
 
 
     /**
@@ -141,6 +141,7 @@ public class Parameters {
     public static final int kDriveControlProfile = 0;
 	public static final double kShooterShootPitchingMachineSpeed = 1.0;
 	public static final double kShooterShootBatterSpeed = 0.65;
+	public static final double kShooterTiltMaxVolt = 12*0.4;
 
 	public static final double kShooterReloadPitchingMachineSpeed = -.6;
 
@@ -156,7 +157,7 @@ public class Parameters {
 
 	public static final double kShootTiltPositionControlDifferential = 0;
 
-	public static final int kShooterBallShooterSolenoidChanel = 0;
+	public static final int kShooterBallShooterSolenoidChanel = 2;
 
 	public static final int kShooterDinkSolenoidChanel = 0;
 
@@ -176,9 +177,11 @@ public class Parameters {
 
 	public static final double kShooterTiltLowBarPositionEncoderSetpoint = 0;
 
-	public static final double kShooterTiltHomePositionEncoderSetpoint = 0;
+	public static final double kShooterTiltHomePositionEncoderSetpoint = 0.1;
 	
-	public static final double kShooterTiltPower = 0.2;
+	public static final double kShooterTiltPowerDown = -0.2;
+	
+	public static final double kShooterTiltPowerUp = 0.3;
 
 	public static final double kShooterSeekHomePower = 0;
 

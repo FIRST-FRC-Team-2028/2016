@@ -77,7 +77,7 @@ public class WestCoastDrive implements PIDOutput
     	  leftSide = new DriveUnit(Placement.Left);
     	  rightSide = new DriveUnit(Placement.Right);
     	  highGear = new Solenoid(Parameters.kHighGearSolenoidChanel);
-//    	  lowGear = new Solenoid(Parameters.kLowGearSolenoidChanel);
+    	  lowGear = new Solenoid(Parameters.kLowGearSolenoidChanel);
     	  setGear(Gear.kLowGear);
     }
 
@@ -204,9 +204,11 @@ public class WestCoastDrive implements PIDOutput
     	if (gear == Gear.kLowGear)
     	{
     		highGear.set(false);
+    		lowGear.set(true);
     	}
     	else
     	{
+    		lowGear.set(false);
     		highGear.set(true);
     	}
     }
