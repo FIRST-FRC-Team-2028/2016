@@ -188,6 +188,18 @@ public class Telepath extends SampleRobot {
         		turncont.disable();
         		westCoastDrive.setTurnSetpoint(0);
         	}
+        	if(leftstick.getTrigger())
+        	{
+        		pusherArm.manualLower();
+        	}
+        	else if(rightstick.getTrigger())
+        	{
+        		pusherArm.manualRaise();
+        	}
+        	else
+        	{
+        		pusherArm.manualStop();
+        	}
         	westCoastDrive.process();
         	shooter.process();
             Timer.delay(Parameters.delay);
@@ -204,7 +216,7 @@ public class Telepath extends SampleRobot {
 
     	leftstick = new Joystick(0);
     	rightstick = new Joystick(1);
-//    	pusherArm = new PusherArm();
+    	pusherArm = new PusherArm();
     	westCoastDrive = new WestCoastDrive();
     	shooter = new Shooter();
 //    	climbingArm = new ClimbingArm();

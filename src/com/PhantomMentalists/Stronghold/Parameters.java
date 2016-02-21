@@ -217,5 +217,16 @@ public class Parameters {
 	public static final double kClimberRaisedPositionSetPoint = 0;
 
 	public static final double kClimberDrawBridgeSetPoint = 0;
+	
+	
+	public static final int kRock = 0;
+	public static final int kRough =0;
+	public static final int kDraw =0;
+	public static final int kSally =0;
+	public static final int kRamp = 0;
+	public static final int kMoat =0;
+	public static final int kPort =0;
+	public static final int kCheval =0;
+	public static final int kLowBar =0;
 
 }
