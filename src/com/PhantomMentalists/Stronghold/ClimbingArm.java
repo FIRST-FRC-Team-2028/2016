@@ -85,9 +85,9 @@ public class ClimbingArm {
     	raiseLowerMotor.changeControlMode(TalonControlMode.Position);
     	raiseLowerMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	raiseLowerMotor.setPID(Parameters.kClimbTiltPositionControlProportional, 
-			 	Parameters.kPusherClimbTiltPositionControlIntegral, 
-			 	Parameters.kPusherClimbTiltPositionControlDifferential);
-    	raiseLowerMotor.setF(Parameters.kPusherClimbTiltPositionControlThrottle);
+			 	Parameters.kClimbTiltPositionControlIntegral, 
+			 	Parameters.kClimbTiltPositionControlDifferential);
+    	raiseLowerMotor.setF(Parameters.kClimbTiltPositionControlThrottle);
     	raiseLowerMotor.enable();
     }
     
@@ -111,9 +111,9 @@ public class ClimbingArm {
     	extendRetractMotor.changeControlMode(TalonControlMode.Position);
     	extendRetractMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	extendRetractMotor.setPID(Parameters.kClimbExtendPositionControlProportional,
-    			Parameters.kPusherClimbExtendPositionControlIntegral, 
-			 	Parameters.kPusherClimbExtendPositionControlDifferential);
-    	extendRetractMotor.setF(Parameters.kPusherClimbExtendPositionControlThrottle);
+    			Parameters.kClimbExtendPositionControlIntegral, 
+			 	Parameters.kClimbExtendPositionControlDifferential);
+    	extendRetractMotor.setF(Parameters.kClimbExtendPositionControlThrottle);
     	extendRetractMotor.enable();    	
     }
     

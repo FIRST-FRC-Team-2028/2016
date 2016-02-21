@@ -190,15 +190,15 @@ public class Telepath extends SampleRobot {
         	}
         	if(leftstick.getTrigger())
         	{
-        		pusherArm.manualLower();
+        		pusherArm.manualSetTilt(-Parameters.kPusherArmHomeMotorPower);
         	}
         	else if(rightstick.getTrigger())
         	{
-        		pusherArm.manualRaise();
+        		pusherArm.manualSetTilt(Parameters.kPusherArmHomeMotorPower);
         	}
         	else
         	{
-        		pusherArm.manualStop();
+        		pusherArm.manualSetTilt(0);
         	}
         	westCoastDrive.process();
         	shooter.process();

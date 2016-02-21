@@ -192,19 +192,19 @@ public class Parameters {
 
 	public static final double kClimbTiltPositionControlProportional = 0;
 
-	public static final double kPusherClimbTiltPositionControlIntegral = 0;
+	public static final double kClimbTiltPositionControlIntegral = 0;
 
-	public static final double kPusherClimbTiltPositionControlDifferential = 0;
+	public static final double kClimbTiltPositionControlDifferential = 0;
 
-	public static final double kPusherClimbTiltPositionControlThrottle = 0;
+	public static final double kClimbTiltPositionControlThrottle = 0;
 
 	public static final double kClimbExtendPositionControlProportional = 0;
 
-	public static final double kPusherClimbExtendPositionControlIntegral = 0;
+	public static final double kClimbExtendPositionControlIntegral = 0;
 
-	public static final double kPusherClimbExtendPositionControlDifferential = 0;
+	public static final double kClimbExtendPositionControlDifferential = 0;
 
-	public static final double kPusherClimbExtendPositionControlThrottle = 0;
+	public static final double kClimbExtendPositionControlThrottle = 0;
 
 	public static final double kClimberFullyExtendedPositionSetpoint = 0;
 
@@ -228,5 +228,17 @@ public class Parameters {
 	public static final int kPort =0;
 	public static final int kCheval =0;
 	public static final int kLowBar =0;
+	// pusher arm pid
+	public static final double kPusherArmPositionControlProportional = 0;
+	public static final double kPusherArmPositionControlIntegral = 0;
+	public static final double kPusherArmPositionControlDifferential = 0;
+	public static final double kPusherArmPositionControlThrottle = 0.0;
+	//pusher arm 
+	public static final double kPusherArmMaxMotorCurrent = 20.0;
+	public static final double kPusherArmHomeMotorPower = -0.4;
+	public static final double kMotorVoltageDeadband = 0.05;
+	
+	public static final double kPusherArmHomeSetPoint = 0.0;
+	public static final double kPusherArmDownSetPoint = 0.25;
 
 }
