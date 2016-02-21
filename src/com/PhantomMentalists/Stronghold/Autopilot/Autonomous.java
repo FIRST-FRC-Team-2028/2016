@@ -20,6 +20,7 @@ public class Autonomous extends Autopilot {
 
     @objid ("89eb6fde-adee-4a71-8d26-0f72ceaaea93")
     public void process() {
+    	
     }
 
     /**

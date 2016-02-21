@@ -78,6 +78,8 @@ public class Parameters {
     
     public static final int kUltraSonicAnalogPort = 0;
 
+    public static final int kTapeSensorLeftDigitalPort = 0;
+    public static final int kTapeSensorRightDigitalPort = 1;
     /**
      * <Enter note text here>
      */

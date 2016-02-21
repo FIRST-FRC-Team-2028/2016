@@ -24,7 +24,8 @@ public class Telepath extends SampleRobot {
     public double P =0.07,I = 0.0001,D= 0.005;
     public double tangle = 0;
     public Preferences prefs;
-    DigitalInput d = new DigitalInput(0);
+    DigitalInput tapeSensorLeft = new DigitalInput(Parameters.kTapeSensorLeftDigitalPort);
+    DigitalInput tapeSensorRight = new DigitalInput(Parameters.kTapeSensorRightDigitalPort);
 	/**
      * <Enter note text here>
      */
@@ -96,7 +97,6 @@ public class Telepath extends SampleRobot {
         	leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
-        	SmartDashboard.putBoolean("Digital Input",d.get());
         	if(leftstick.getRawButton(5))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);

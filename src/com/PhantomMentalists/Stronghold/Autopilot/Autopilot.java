@@ -55,6 +55,10 @@ public abstract class Autopilot {
      */
     @objid ("c0750894-6c97-460b-a3be-801d31733962")
     public Autopilot(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climberArm) {
+    	this.drive = drive;
+    	this.shooter = shooter;
+    	this.climbingArm = climberArm;
+    	this.pusherArm = pusherArm;
     }
 
     /**
@@ -62,7 +66,7 @@ public abstract class Autopilot {
      */
     @objid ("63e39f0e-afb4-40ba-a73a-0998c5997f41")
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 
     /**
@@ -71,7 +75,7 @@ public abstract class Autopilot {
     @objid ("fd1d5c3f-9dc1-4bf4-8f73-d86fa21874d2")
     public void setEnabled(boolean value) {
         // Automatically generated method. Please delete this comment before entering specific code.
-        this.enabled = value;
+        enabled = value;
     }
 
 }
