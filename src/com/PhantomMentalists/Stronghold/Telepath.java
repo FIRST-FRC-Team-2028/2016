@@ -131,6 +131,7 @@ public class Telepath extends SampleRobot {
         	}
         	else if(rightstick.getRawButton(11))
         	{
+        		System.out.println("here2");
         		shooter.setShootAngle(ShooterPosition.kHome);
         	}
         	else if(rightstick.getRawButton(10))

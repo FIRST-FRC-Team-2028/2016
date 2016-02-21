@@ -4,6 +4,7 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -222,6 +223,7 @@ public class Shooter {
     @objid ("f1761ce3-8d39-43f8-9b3c-6adaedaec7ad")
     public void setShootAngle(ShooterPosition shooterPosition) {
 //    	enableTiltPositionControl();
+    	System.out.println("here");
     	tiltMotor.enableControl();
     	p = prefs.getDouble("Tilt P",p);
     	i = prefs.getDouble("Tilt I", i);
@@ -231,20 +233,21 @@ public class Shooter {
     }
     public double getDirection()
     {
-    	if(tiltPosition > position.getPosition())
+    	if(isTiltAngleAtSetpoint())
     	{
-    		tilting = true;
-    		return Parameters.kShooterTiltPowerDown;
+    		return 0;
     	}
-    	else if(tiltPosition < position.getPosition())
+    	else if(tiltPosition > position.getPosition())
     	{
     		tilting = true;
     		return Parameters.kShooterTiltPowerUp;
     	}
-    	else
+    	else if(tiltPosition < position.getPosition())
     	{
-    		return 0;
+    		tilting = true;
+    		return Parameters.kShooterTiltPowerDown;
     	}
+    	return 0;
     }
     public void resetTiltAngle()
     {
@@ -372,11 +375,7 @@ public class Shooter {
     @objid ("4d7bd443-0329-4985-8729-3ec742465875")
     public boolean isTiltAngleAtSetpoint() {
     	// Figure out if tilt angle is "close enough" to setpoint
-    	if(tiltMotor.getOutputVoltage() > 0 && tiltPosition >= position.getPosition())
-    	{
-    		return true;
-    	}
-    	else if(tiltMotor.getOutputVoltage() < 0 && tiltPosition <= position.getPosition())
+    	if(tiltPosition >= position.getPosition()-250 && tiltPosition <= position.getPosition()+250)
     	{
     		return true;
     	}
@@ -421,6 +420,7 @@ public class Shooter {
 //    	SmartDashboard.putNumber("L Current", leftPitchingMotor.getOutputCurrent());
 //    	SmartDashboard.putNumber("R Volt", rightPitchingMotor.getOutputVoltage());
 //    	SmartDashboard.putNumber("R Current",rightPitchingMotor.getOutputCurrent());
+    	SmartDashboard.putNumber("Tilt Pos", tiltMotor.getPosition());
     	tiltPosition = tiltMotor.getPosition();
     	p = prefs.getDouble("Tilt P", p);
     	i = prefs.getDouble("Turn I", i);
@@ -509,7 +509,6 @@ public class Shooter {
      * @return sets pitching machine off at base due to orientation of cases in process()
      */
     public boolean isPichingMachineIsOn() {
-		
 		return false;
 	}
 
@@ -584,12 +583,10 @@ public class Shooter {
     		position = pos;
     	}
     	ShooterPosition(Object obj)
-    	{
-    		
+    	{	
     	}
     	public double getPosition()
     	{
-    		
     		return position;
     	}
     }

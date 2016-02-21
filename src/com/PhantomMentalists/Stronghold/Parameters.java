@@ -141,7 +141,7 @@ public class Parameters {
     public static final int kDriveControlProfile = 0;
 	public static final double kShooterShootPitchingMachineSpeed = 1.0;
 	public static final double kShooterShootBatterSpeed = 0.65;
-	public static final double kShooterTiltMaxVolt = 12*0.4;
+	public static final double kShooterTiltMaxVolt = 12*0.6;
 
 	public static final double kShooterReloadPitchingMachineSpeed = -.6;
 
@@ -177,11 +177,11 @@ public class Parameters {
 
 	public static final double kShooterTiltLowBarPositionEncoderSetpoint = 0;
 
-	public static final double kShooterTiltHomePositionEncoderSetpoint = 0.1;
+	public static final double kShooterTiltHomePositionEncoderSetpoint = 1000;
 	
-	public static final double kShooterTiltPowerDown = -0.2;
+	public static final double kShooterTiltPowerDown = -0.35;
 	
-	public static final double kShooterTiltPowerUp = 0.3;
+	public static final double kShooterTiltPowerUp = 0.6;
 
 	public static final double kShooterSeekHomePower = 0;
 
