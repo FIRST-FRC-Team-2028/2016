@@ -23,6 +23,7 @@ public class Telepath extends SampleRobot {
     public PIDController turncont;
     public double P =0.07,I = 0.0001,D= 0.005;
     public double tangle = 0;
+    public double shootangle = 0;
     public Preferences prefs;
     DigitalInput tapeSensorLeft = new DigitalInput(Parameters.kTapeSensorLeftDigitalPort);
     DigitalInput tapeSensorRight = new DigitalInput(Parameters.kTapeSensorRightDigitalPort);
@@ -131,12 +132,13 @@ public class Telepath extends SampleRobot {
         	}
         	else if(rightstick.getRawButton(11))
         	{
-        		System.out.println("here2");
-        		shooter.setShootAngle(ShooterPosition.kHome);
+//        		System.out.println("here2");
+//        		shooter.setShootAngle(ShooterPosition.kHome);
+        		shooter.setTiltSetpoint(shootangle);
         	}
         	else if(rightstick.getRawButton(10))
         	{
-        		shooter.resetTiltAngle();
+        		shootangle = shooter.getTiltAngle();
         	}
         	else
         	{

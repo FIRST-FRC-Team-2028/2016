@@ -179,7 +179,7 @@ public class Parameters {
 
 	public static final double kShooterTiltLowBarPositionEncoderSetpoint = 0;
 
-	public static final double kShooterTiltHomePositionEncoderSetpoint = 1000;
+	public static final double kShooterTiltHomePositionEncoderSetpoint = -17389;
 	
 	public static final double kShooterTiltPowerDown = -0.35;
 	

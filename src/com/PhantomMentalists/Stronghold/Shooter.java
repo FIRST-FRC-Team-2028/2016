@@ -1,4 +1,4 @@
-	package com.PhantomMentalists.Stronghold;
+package com.PhantomMentalists.Stronghold;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
@@ -93,6 +93,7 @@ public class Shooter {
     	rightPitchingMotor = new CANTalon(Parameters.kRightShooterPitcherMotorCanId);
     	leftPitchingMotor = new CANTalon(Parameters.kLeftShooterPitcherMotorCanId);
     	tiltMotor = new CANTalon(Parameters.kShooterAngleMotorCanId);
+    	tiltMotor.enableLimitSwitch(true, true);
     	
     	rightPitchingMotor.enableBrakeMode(true);
     	leftPitchingMotor.enableBrakeMode(true);
@@ -331,7 +332,7 @@ public class Shooter {
         return this.tiltSetpoint;
     }
     public double getTiltAngle(){
-    	return this.tiltAngle;
+    	return this.tiltPosition;
     }
 
     /**
@@ -339,10 +340,19 @@ public class Shooter {
      */
     @objid ("89bd53b8-23c9-4a16-adb2-95ec7d912696")
     public void setTiltSetpoint(double value) {
+    	position = ShooterPosition.kUnknown;
+    	tilting = true;
         // Automatically generated method. Please delete this comment before entering specific code.
         this.tiltSetpoint = value;
+//        System.out.println("here");
+//    	tiltMotor.enableControl();
+//    	p = prefs.getDouble("Tilt P",p);
+//    	i = prefs.getDouble("Tilt I", i);
+//    	d = prefs.getDouble("Tilt D",d);
+//    	position = shooterPosition;
+//    	tiltMotor.set(getDirection());
     }
-
+//    public double
     /**
      * 
      * @return boolean - true if pitching machine motors are on, false otherwise
@@ -375,9 +385,20 @@ public class Shooter {
     @objid ("4d7bd443-0329-4985-8729-3ec742465875")
     public boolean isTiltAngleAtSetpoint() {
     	// Figure out if tilt angle is "close enough" to setpoint
-    	if(tiltPosition >= position.getPosition()-250 && tiltPosition <= position.getPosition()+250)
+    	
+    	if(position == ShooterPosition.kUnknown)
     	{
-    		return true;
+    		if(tiltPosition >= tiltSetpoint-250 && tiltPosition <=tiltSetpoint+250)
+    		{
+    			return true;
+    		}
+    	}
+    	else 
+    	{
+    		if(tiltPosition >= position.getPosition()-250 && tiltPosition <= position.getPosition()+250)
+    		{
+    			return true;
+    		}
     	}
     	return false;
     }
@@ -420,11 +441,14 @@ public class Shooter {
 //    	SmartDashboard.putNumber("L Current", leftPitchingMotor.getOutputCurrent());
 //    	SmartDashboard.putNumber("R Volt", rightPitchingMotor.getOutputVoltage());
 //    	SmartDashboard.putNumber("R Current",rightPitchingMotor.getOutputCurrent());
+    	SmartDashboard.putBoolean("Tilt Up Limit",tiltMotor.isFwdLimitSwitchClosed());
+    	SmartDashboard.putBoolean("Tilt Down Limit",tiltMotor.isRevLimitSwitchClosed());
     	SmartDashboard.putNumber("Tilt Pos", tiltMotor.getPosition());
     	tiltPosition = tiltMotor.getPosition();
     	p = prefs.getDouble("Tilt P", p);
     	i = prefs.getDouble("Turn I", i);
     	d = prefs.getDouble("Turn D",d);
+    	SmartDashboard.putBoolean("Is at setpoint", isTiltAngleAtSetpoint());
     	if(tilting)
     	{
     		if(isTiltAngleAtSetpoint())
@@ -432,6 +456,10 @@ public class Shooter {
     			tiltMotor.set(0);
     			tilting = false;
     		}
+    	}
+    	if(tiltMotor.isFwdLimitSwitchClosed())
+    	{
+    		tiltMotor.setPosition(0);
     	}
     	//PitchingMachine method just retracts kicker, extends dink and turns motor off
    	 	if(isAutoPilotEnabled())
