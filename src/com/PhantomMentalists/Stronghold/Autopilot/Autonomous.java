@@ -5,7 +5,7 @@ import com.PhantomMentalists.Stronghold.Parameters;
 import com.PhantomMentalists.Stronghold.PusherArm;
 import com.PhantomMentalists.Stronghold.Shooter;
 import com.PhantomMentalists.Stronghold.ClimbingArm.ClimberPositions;
-import com.PhantomMentalists.Stronghold.Shooter.ShooterPosition;
+import com.PhantomMentalists.Stronghold.Shooter.ShooterState;
 import com.PhantomMentalists.Stronghold.WestCoastDrive;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
@@ -42,7 +42,7 @@ public class Autonomous extends Autopilot {
     			if(!homing)
     			{
 	    			homing = true;
-	    			shooter.setShootAngle(ShooterPosition.kHome);
+	    			shooter.setShootAngle(ShooterState.kHome);
 	    			climbingArm.setPositionSetpoint(ClimberPositions.kHome);
 	//    			TODO: Duck bar Home method
     			}

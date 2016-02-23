@@ -1,6 +1,6 @@
 package com.PhantomMentalists.Stronghold;
 
-import com.PhantomMentalists.Stronghold.Shooter.ShooterPosition;
+import com.PhantomMentalists.Stronghold.Shooter.ShooterState;
 import com.PhantomMentalists.Stronghold.WestCoastDrive.Gear;
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
@@ -98,6 +98,7 @@ public class Telepath extends SampleRobot {
         	leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
+        	SmartDashboard.putNumber("Shoot Position",shootangle);
         	if(leftstick.getRawButton(5))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
@@ -134,7 +135,7 @@ public class Telepath extends SampleRobot {
         	{
 //        		System.out.println("here2");
 //        		shooter.setShootAngle(ShooterPosition.kHome);
-        		shooter.setTiltSetpoint(shootangle);
+        		shooter.setTiltMemSetpoint(shootangle);
         	}
         	else if(rightstick.getRawButton(10))
         	{

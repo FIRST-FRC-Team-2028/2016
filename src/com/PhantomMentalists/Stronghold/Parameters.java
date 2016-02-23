@@ -183,11 +183,11 @@ public class Parameters {
 	
 	public static final double kShooterTiltPowerDown = -0.35;
 	
-	public static final double kShooterTiltPowerUp = 0.6;
+	public static final double kShooterTiltPowerUp = 0.4;
 
-	public static final double kShooterSeekHomePower = 0;
+	public static final double kShooterSeekHomePower = 0.4;
 
-	public static final int kEncoderCodesPerRev = 0;
+	public static final int kEncoderCodesPerRev = 1024;
 
 
 	public static final double kClimbTiltPositionControlProportional = 0;
@@ -240,5 +240,7 @@ public class Parameters {
 	
 	public static final double kPusherArmHomeSetPoint = 0.0;
 	public static final double kPusherArmDownSetPoint = 0.25;
+
+	public static final double kShooterTiltMaxCurrent = 25.0;
 
 }

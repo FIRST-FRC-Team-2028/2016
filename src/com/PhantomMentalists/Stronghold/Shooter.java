@@ -1,13 +1,14 @@
 package com.PhantomMentalists.Stronghold;
 
+import java.util.TimerTask;
+
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class encapsulates the state (attributes) and logic (methods) required to control
@@ -17,20 +18,27 @@ import edu.wpi.first.wpilibj.Solenoid;
  */
 @objid ("e7c0967b-bd2b-41d7-a528-2d3f463133d3")
 public class Shooter {
-	public double p = 0,i=0,d =0;
-	public Preferences prefs;
-	public boolean tilting = false;
+	
 	/**
-	 * <Enter note text here>
+	 * True if the the pitching machine is accelerating and if the pitching machine is not accelerating
 	 */
-	protected ShooterPosition position;
-
-    /**
-     * <Enter note text here>
-     */
-    @objid ("54c45f11-335d-432c-93c6-f1a8354239b9")
-    protected DigitalInput ballSensor;
-
+	private boolean shootAccel = false;
+	
+	/**
+	 * True if shooter is up to speed and false if not up to speed
+	 */
+	private boolean shootUpToSpeed = false;
+	
+	/**
+	 * Predefined shooting tilt setpoints
+	 */
+	protected ShooterState tiltSetpoint;
+	
+	/**
+	 * Current prefdefined shooting tilt position
+	 */
+	protected ShooterState currentPosition;
+	
     /**
      * Controls the hardware for the motor driving the left-hand pitching motor
      */
@@ -54,66 +62,52 @@ public class Shooter {
      */
     @objid ("2c653aa8-a80f-4797-975e-a6799cc7f9aa")
     protected Solenoid ballShooter;
-
+    
     /**
-     * <Enter note text here>
+     * Custom memory to store a shooter tilt setpoint
      */
-    @objid ("2c653aa8-a80f-4797-975e-a6799cc7f9aa")
-    protected Solenoid dink;
-
-    /**
-     * <Enter note text here>
-     */
-	private double tiltSetpoint;
-	private double tiltPosition;
+	private double tiltMemSetpoint;
 	
+	private boolean memSetpointSet = false;
+		
 	/**
 	 * Internal variable that indicates the shooter is in the process of shooting.
 	 * This attribute is set by the shoot() method and remains true until the ball
 	 * is away.
 	 */
-	private double tiltAngle;
 	protected boolean shooting;
 	
 	/**
-	 * Internal variable that indicates the shooter is in the process of reloading.
-	 * This attribute is set by the shoot() method and remains true until we sense
-	 * a ball in the shooter (or it is cancelled by the driver).  
+	 * True if the shooter is allowed move itself
 	 */
-	protected boolean reloading;
-	
 	protected boolean autopilotEnabled;
+	
+//	protected boolean 
 	
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
     public Shooter() {
-    	prefs = Preferences.getInstance();
-    	prefs.putDouble("Tilt P", p);
-    	prefs.putDouble("Tilt I", i);
-    	prefs.putDouble("Tilt D", d);
     	rightPitchingMotor = new CANTalon(Parameters.kRightShooterPitcherMotorCanId);
     	leftPitchingMotor = new CANTalon(Parameters.kLeftShooterPitcherMotorCanId);
     	tiltMotor = new CANTalon(Parameters.kShooterAngleMotorCanId);
-    	tiltMotor.enableLimitSwitch(true, true);
+    	//TODO: Check motor voltage to direction
+    	tiltMotor.enableLimitSwitch(true, false);
     	
     	rightPitchingMotor.enableBrakeMode(true);
     	leftPitchingMotor.enableBrakeMode(true);
     	tiltMotor.enableBrakeMode(true);
-//    	tiltMotor.configMaxOutputVoltage(Parameters.kShooterTiltMaxVolt);
+    	
+    	tiltMotor.configMaxOutputVoltage(Parameters.kShooterTiltMaxVolt);
+    	
     	ballShooter = new Solenoid(Parameters.kShooterBallShooterSolenoidChanel);
     	ballShooter.set(false);
-//    	dink = new Solenoid(Parameters.kShooterDinkSolenoidChanel);
-//    	dink.set(true);
-//    	tiltMotor.setPosition(0);
-    	position = ShooterPosition.kUnknown;
-//    	enablePitchingMachineSpeedControl();
+    	
+    	tiltSetpoint = ShooterState.kUnknown;
     	
     	// Disable tilt position control until we've reached the home position
     	disablePitchingMachineSpeedControl();
-//    	enableTiltPositionControl();
     	disableTiltPositionControl();
     	shooting = false;
-    	reloading = false;
-    	autopilotEnabled = true;
+    	autopilotEnabled = false;
     }
 
     /**
@@ -121,18 +115,21 @@ public class Shooter {
      */
     public void disableTiltPositionControl() {
     	tiltMotor.disable();
+    	tiltMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	tiltMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);
     	tiltMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	tiltMotor.enable();       	
+    	tiltMotor.enable();     
+    	autopilotEnabled = false;
     }
     
     /**
      * 
      */
     public void enableTiltPositionControl() {
-    	System.out.println("here");
     	tiltMotor.disable();
     	tiltMotor.changeControlMode(TalonControlMode.Position);
     	tiltMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	tiltMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);
     	tiltMotor.setPID(Parameters.kShootTiltPositionControlProportional, 
 			 	Parameters.kShootTiltPositionControlIntegral, 
 			 	Parameters.kShootTiltPositionControlDifferential);
@@ -149,6 +146,7 @@ public class Shooter {
     	leftPitchingMotor.changeControlMode(TalonControlMode.PercentVbus);
     	rightPitchingMotor.enable();    	
     	leftPitchingMotor.enable();
+    	autopilotEnabled = false;
     }
     
     /**
@@ -157,8 +155,13 @@ public class Shooter {
     public void enablePitchingMachineSpeedControl() {
     	rightPitchingMotor.disable();
     	leftPitchingMotor.disable();    	
+    	
     	rightPitchingMotor.changeControlMode(TalonControlMode.Speed);
     	rightPitchingMotor.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	
+    	leftPitchingMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);
+    	rightPitchingMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);
+    	
     	rightPitchingMotor.setPID(Parameters.kShootPitchPositionControlProportional, 
 			 	Parameters.kShootPitchPositionControlIntegral, 
 			 	Parameters.kShootPitchPositionControlDifferential);    	
@@ -167,6 +170,7 @@ public class Shooter {
     	leftPitchingMotor.setPID(Parameters.kShootPitchPositionControlProportional, 
 			 	Parameters.kShootPitchPositionControlIntegral, 
 			 	Parameters.kShootPitchPositionControlDifferential);
+    	
     	rightPitchingMotor.enable();    	
     	leftPitchingMotor.enable();    	
     }
@@ -179,41 +183,17 @@ public class Shooter {
      */
     @objid ("af588d71-18eb-4098-95a6-d69164a77e41")
     public void shoot() {
-    	
-    		rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
-        	leftPitchingMotor.set(-Parameters.kShooterShootPitchingMachineSpeed);
-        	shooting = true;
-//        	if(isPitchingMachineUpToSpeed()){
-//        		dink.set(false);
-//        		ballShooter.set(true);
-//        	}
-//        	else{
-//        		return;
-//        	}
+		rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
+    	leftPitchingMotor.set(-Parameters.kShooterShootPitchingMachineSpeed);
+    	shooting = true;
+    	//TODO: Add java timer for shoot up to speed
     }
-
+    /**
+     * TODO: Should this be protected?
+     */
     public void reload() {
     	rightPitchingMotor.set(-Parameters.kShooterReloadPitchingMachineSpeed);
     	leftPitchingMotor.set(Parameters.kShooterReloadPitchingMachineSpeed);
-    	reloading = true;
-//    	if(isPitchingMachineUpToSpeed()){
-//    		dink.set(true);
-//    		ballShooter.set(false);
-//    	}
-//    	else{
-//    		return;
-//    	}
-    }
-    
-    /**
-     * Tells if a ball is in the shooter.
-     * 
-     * @return true if a ball is in the shooter, false otherwise
-     */
-    @objid ("91e9f52a-d664-4f68-ba8b-4e5503fe8eda")
-    public boolean isBallLoaded() {
-    	return ballSensor.get();
-    	// may change depending on if the sensor is analog of digital.
     }
 
     /**
@@ -222,51 +202,56 @@ public class Shooter {
      * @param shooterPosition the pre-defined shooter setpoint to move to
      */
     @objid ("f1761ce3-8d39-43f8-9b3c-6adaedaec7ad")
-    public void setShootAngle(ShooterPosition shooterPosition) {
-//    	enableTiltPositionControl();
-    	System.out.println("here");
-    	tiltMotor.enableControl();
-    	p = prefs.getDouble("Tilt P",p);
-    	i = prefs.getDouble("Tilt I", i);
-    	d = prefs.getDouble("Tilt D",d);
-    	position = shooterPosition;
-    	tiltMotor.set(getDirection());
+    public void setShootAngle(ShooterState shooterPosition) {
+    	tiltSetpoint = shooterPosition;
     }
-    public double getDirection()
+    /**
+     * TODO: If motor leads get swaped fix the logic
+     * @return
+     */
+    public double getMotorPower()
     {
+    	double rc = 0;
     	if(isTiltAngleAtSetpoint())
     	{
-    		return 0;
+    		rc = 0;
     	}
-    	else if(tiltPosition > position.getPosition())
+    	else if(memSetpointSet)
     	{
-    		tilting = true;
-    		return Parameters.kShooterTiltPowerUp;
+    		if(tiltMotor.getPosition() > tiltMemSetpoint)
+    		{
+    			rc = Parameters.kShooterTiltPowerUp;
+    		}
+    		else if(tiltMotor.getPosition() < tiltMemSetpoint)
+    		{
+    			rc = Parameters.kShooterTiltPowerDown;
+    		}
     	}
-    	else if(tiltPosition < position.getPosition())
+    	else if(tiltMotor.getPosition() > tiltSetpoint.getPosition())
     	{
-    		tilting = true;
-    		return Parameters.kShooterTiltPowerDown;
+    		rc =Parameters.kShooterTiltPowerUp;
     	}
-    	return 0;
+    	else if(tiltMotor.getPosition() < tiltSetpoint.getPosition())
+    	{
+    		rc =  Parameters.kShooterTiltPowerDown;
+    	}
+    	return rc;
     }
+    /**
+     * Resets the tilt angle to zero "Homing"
+     */
     public void resetTiltAngle()
     {
     	tiltMotor.setPosition(0);
     }
+    /**
+     * 
+     * @param value
+     */
     public void manualRunTiltMotor(double value)
     {
     	disableTiltPositionControl();
-    	tiltMotor.enableControl();
-//    	System.out.println("here2");
-    	if(tiltMotor.getControlMode() == TalonControlMode.Position)
-    	{
-    		tiltMotor.set(tiltMotor.getPosition()+value);
-    	}
-    	else
-    	{
-    		tiltMotor.set(value);
-    	}
+    	tiltMotor.set(value);
     }
     
     /**
@@ -277,19 +262,22 @@ public class Shooter {
      */
     @objid ("eba4d1df-2aa2-4f39-b3a7-f0ca4f9b6626")
     public void manualRunPitchingMachine(double value) {
-//    	if (isPitchingMachineSpeedControlEnabled())
-//    	{
-//    		disablePitchingMachineSpeedControl();
-//    	}
+    	if (isPitchingMachineSpeedControlEnabled())
+    	{
+    		disablePitchingMachineSpeedControl();
+    	}
     	rightPitchingMotor.set(value);
     	leftPitchingMotor.set(-value);
     	autopilotEnabled = false;
     }
 
+    /**
+     * 
+     * @return
+     */
     @objid ("17dd7815-19f9-4e9f-80bb-74ef735538d4")
     public boolean isPitchingMachineUpToSpeed() {
-    	if(rightPitchingMotor.getSpeed()==Parameters.kShooterShootPitchingMachineSpeed && 
-    			leftPitchingMotor.getSpeed()==Parameters.kShooterShootPitchingMachineSpeed){
+    	if(shootAccel && shootUpToSpeed){
     		return true;
     	}
     	else{
@@ -307,64 +295,55 @@ public class Shooter {
     public void pushBall(boolean push) {
     	ballShooter.set(push);
     }
-
-    public void stop()
-    {
-    	tiltMotor.disableControl();
-    }
-    
-    /**
-     * This method retracts or extends the dink
-     * 
-     * @param retract true retracts the dink, false extends it
-     */
-    public void setDink(boolean retract) {
-    	dink.set(retract);
-    }
     
     /**
      * 
-     * @return
+     * @return  The tilt Memory setpoint
      */
     @objid ("bf56ebbc-3451-4f51-88e0-c944b48b9819")
-    public double getTiltSetpoint() {
+    public double getTiltMemSetpoint() {
         // Automatically generated method. Please delete this comment before entering specific code.
-        return this.tiltSetpoint;
+        return this.tiltMemSetpoint;
     }
+    
+    /**
+     * 
+     * @return Shooter state
+     */
+    public ShooterState getTiltSetpoint()
+    {
+    	return tiltSetpoint;
+    }
+    
+    /**
+     * 
+     * @return Current tilt motor position
+     */
     public double getTiltAngle(){
-    	return this.tiltPosition;
+    	return tiltMotor.getPosition();
     }
 
     /**
      * <Enter note text here>
      */
     @objid ("89bd53b8-23c9-4a16-adb2-95ec7d912696")
-    public void setTiltSetpoint(double value) {
-    	position = ShooterPosition.kUnknown;
-    	tilting = true;
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.tiltSetpoint = value;
-//        System.out.println("here");
-//    	tiltMotor.enableControl();
-//    	p = prefs.getDouble("Tilt P",p);
-//    	i = prefs.getDouble("Tilt I", i);
-//    	d = prefs.getDouble("Tilt D",d);
-//    	position = shooterPosition;
-//    	tiltMotor.set(getDirection());
+    public void setTiltMemSetpoint(double value) {
+    	memSetpointSet = true;
+        tiltMemSetpoint = value;
     }
-//    public double
+    
     /**
      * 
      * @return boolean - true if pitching machine motors are on, false otherwise
      */
     @objid ("f6797d96-b58a-47ee-a41a-4ea7709c5062")
     public boolean isPitchingMachineOn() {
-    	boolean rc = false;
-    	if (leftPitchingMotor.getOutputVoltage() != 0.0)
+    	double voltage = leftPitchingMotor.getOutputVoltage();
+    	if (voltage <= Parameters.kMotorVoltageDeadband || voltage >= (-1.0 * Parameters.kMotorVoltageDeadband))
     	{
-    		rc = true;
+    		return false;
     	}
-    	return rc;
+    	return true;
     }
 
     /**
@@ -376,7 +355,11 @@ public class Shooter {
      */
     @objid ("2a8ebf57-a97b-499d-af56-80d785a4ffde")
     public boolean isKnownPosition() {
-    	return false;
+    	if(tiltSetpoint == ShooterState.kUnknown)
+    	{
+    		return false;
+    	}
+    	return true;
     }
 
     /**
@@ -386,44 +369,21 @@ public class Shooter {
     public boolean isTiltAngleAtSetpoint() {
     	// Figure out if tilt angle is "close enough" to setpoint
     	
-    	if(position == ShooterPosition.kUnknown)
+    	if(memSetpointSet)
     	{
-    		if(tiltPosition >= tiltSetpoint-250 && tiltPosition <=tiltSetpoint+250)
+    		if(getTiltAngle() >= tiltMemSetpoint-250 && getTiltAngle() <=tiltMemSetpoint+250)
     		{
     			return true;
     		}
     	}
     	else 
     	{
-    		if(tiltPosition >= position.getPosition()-250 && tiltPosition <= position.getPosition()+250)
+    		if(getTiltAngle() >= tiltSetpoint.getPosition()-250 && getTiltAngle() <= tiltSetpoint.getPosition()+250)
     		{
     			return true;
     		}
     	}
     	return false;
-    }
-    
-    /**
-     * 
-     * @param on
-     */
-    public void setPitchingMachine(boolean on) {
-    	if (leftPitchingMotor.equals(false) && rightPitchingMotor.equals(false) ) {
-    		leftPitchingMotor.enable(); 
-    		rightPitchingMotor.enable();
-    	}
-    	if ( isTiltAngleAtSetpoint() ) {
-    		if ( isPitchingMachineUpToSpeed() ) {
-    			if ( dink.equals(true) ) {
-    				ballShooter.equals(true);
-    			}
-    			else
-    			{
-    				// Dink is not (yet) retracted
-    				dink.set(true);
-    			}
-    		}
-    	}
     }
 
     /**
@@ -435,111 +395,124 @@ public class Shooter {
      */
     public void process()
     {
-//    	SmartDashboard.putNumber("Tilt Voltage", tiltMotor.getOutputVoltage());
-//    	SmartDashboard.putNumber("Tilt Current", tiltMotor.getOutputCurrent());
-//    	SmartDashboard.putNumber("L Volt", leftPitchingMotor.getOutputVoltage());
-//    	SmartDashboard.putNumber("L Current", leftPitchingMotor.getOutputCurrent());
-//    	SmartDashboard.putNumber("R Volt", rightPitchingMotor.getOutputVoltage());
-//    	SmartDashboard.putNumber("R Current",rightPitchingMotor.getOutputCurrent());
+    	SmartDashboard.putNumber("Tilt Voltage", tiltMotor.getOutputVoltage());
+    	SmartDashboard.putNumber("Tilt Current", tiltMotor.getOutputCurrent());
+    	SmartDashboard.putNumber("L Volt", leftPitchingMotor.getOutputVoltage());
+    	SmartDashboard.putNumber("L Current", leftPitchingMotor.getOutputCurrent());
+    	SmartDashboard.putNumber("R Volt", rightPitchingMotor.getOutputVoltage());
+    	SmartDashboard.putNumber("R Current",rightPitchingMotor.getOutputCurrent());
     	SmartDashboard.putBoolean("Tilt Up Limit",tiltMotor.isFwdLimitSwitchClosed());
     	SmartDashboard.putBoolean("Tilt Down Limit",tiltMotor.isRevLimitSwitchClosed());
     	SmartDashboard.putNumber("Tilt Pos", tiltMotor.getPosition());
-    	tiltPosition = tiltMotor.getPosition();
-    	p = prefs.getDouble("Tilt P", p);
-    	i = prefs.getDouble("Turn I", i);
-    	d = prefs.getDouble("Turn D",d);
+    	double tiltPosition = tiltMotor.getPosition();
     	SmartDashboard.putBoolean("Is at setpoint", isTiltAngleAtSetpoint());
-    	if(tilting)
-    	{
-    		if(isTiltAngleAtSetpoint())
-    		{
-    			tiltMotor.set(0);
-    			tilting = false;
-    		}
-    	}
+    	//TODO: Check for fwd or rev if motor power swapped
     	if(tiltMotor.isFwdLimitSwitchClosed())
     	{
     		tiltMotor.setPosition(0);
+    		currentPosition = ShooterState.kHome;
+    		memSetpointSet = false;
     	}
     	//PitchingMachine method just retracts kicker, extends dink and turns motor off
+    	if(tiltMotor.getOutputCurrent() > Parameters.kShooterTiltMaxCurrent)
+    	{
+    		disableTiltPositionControl();
+    		currentPosition = ShooterState.kUnknown;
+    		tiltMotor.set(0);
+    		autopilotEnabled = false;
+    	}
    	 	if(isAutoPilotEnabled())
    	 	{
-	 		
-	   		switch (position) 
-	   		{
-		   		case kUnknown:
-		   			// We don't know the shooter's tilt angle, run the shooter in reverse at a slow
-		   			// constant speed until we reach the reverse limit switch.
-		   			disableTiltPositionControl();
-		   			tiltMotor.set(Parameters.kShooterSeekHomePower);
-		   			if (tiltMotor.isRevLimitSwitchClosed());
-		   			{
-		   				position = ShooterPosition.kHome;
-		   				tiltMotor.set(0.0);
-		   				enableTiltPositionControl();
-		   			}
-		   			break;
-		   		
-		   		case kHome:
-		   			tiltMotor.set(Parameters.kShooterTiltHomePositionEncoderSetpoint);
-		   			if (isPichingMachineIsOn())
-		   			{
-		   				setPitchingMachine(false);
-		   			}
-		   			break;
-		   			
-		   		case kLowBar:
-		   			tiltMotor.set(Parameters.kShooterTiltLowBarPositionEncoderSetpoint);
-		   			if (isPichingMachineIsOn())
-		   			{
-		   				setPitchingMachine(false);
-		   			}
-		   			break;
-		   			
-		   		case kReload:
-		   			tiltMotor.set(Parameters.kShooterTiltReloadPositionEncoderSetpoint);
-		   			if (isPichingMachineIsOn())
-		   			{
-		   				setPitchingMachine(true);
-		   			}
-		   			break;
-		   			
-		   		case kShootBatter:
-		   			tiltMotor.set(Parameters.kShooterTiltShootBatterPositionEncoderSetpoint);
-		   			if (isPichingMachineIsOn())
-		   			{
-		   				setPitchingMachine(true);
-		   			}
-		   			break;
-		   			
-		   		case kShootTape:
-		   			tiltMotor.set(Parameters.kShooterTiltShootTapePositionEncoderSetpoint);
-		   			if (isPichingMachineIsOn())
-		   			{
-		   				setPitchingMachine(true);
-		   			}
-		   			break;
-		   			
-		   		case kShootDefense:
-		   			tiltMotor.set(Parameters.kShooterTiltShootDefensePositionEncoderSetpoint);
-		   			if (isPichingMachineIsOn())
-		   			{
-		   				setPitchingMachine(true);
-		   			}
-		   			break;
-	   		}
-   		
+	 		if(currentPosition == ShooterState.kUnknown)
+	 		{
+	 			// We don't know the shooter's tilt angle, run the shooter in reverse at a slow
+	   			// constant speed until we reach the reverse limit switch.
+	   			disableTiltPositionControl();
+	   			tiltMotor.set(Parameters.kShooterSeekHomePower);
+	   			if (tiltMotor.isFwdLimitSwitchClosed());
+	   			{
+	   				currentPosition = ShooterState.kHome;
+	   				tiltMotor.set(0.0);
+	   				enableTiltPositionControl();
+	   			}
+	   			
+	 		}
+	 		else if (!memSetpointSet)
+	 		{
+		   		switch (tiltSetpoint) 
+		   		{
+			   		case kUnknown:
+			   			System.out.println("SHOULD NEVER HAPPEN IN SHOOTER");
+			   			break;
+			   		
+			   		case kHome:
+			   		case kLowBar:
+			   			manualRunPitchingMachine(0.0);
+			   			if(isTiltAngleAtSetpoint())
+			   			{
+			   				currentPosition = tiltSetpoint;
+			   				tiltMotor.set(0.0);
+			   			}
+			   			else
+			   			{
+			   				tiltMotor.set(getMotorPower());
+			   			}
+			   			break;
+			   			
+			   		case kReload:
+			   			if(isTiltAngleAtSetpoint())
+			   			{
+			   				currentPosition = tiltSetpoint;
+			   				tiltMotor.set(0.0);
+			   				manualRunPitchingMachine(Parameters.kShooterReloadPitchingMachineSpeed);
+			   			}
+			   			else
+			   			{
+			   				tiltMotor.set(getMotorPower());
+			   			}
+			   			break;
+			   			
+			   		case kShootBatter:
+			   		case kShootTape:
+			   		case kShootDefense:
+			   			if(isTiltAngleAtSetpoint())
+			   			{
+			   				currentPosition = tiltSetpoint;
+			   				tiltMotor.set(0.0);
+			   				if(!shootAccel && !shootUpToSpeed)
+			   				{
+			   					shoot();			   					
+			   				}
+			   				else if(isPitchingMachineUpToSpeed())
+			   				{
+			   					pushBall(true);
+			   					//TODO: Set java timer to stop pitching machine
+			   				}
+			   			}
+			   			else
+			   			{
+			   				tiltMotor.set(getMotorPower());
+			   			}
+
+			   			break;
+		   		}
+	 		}
+	 		else
+	 		{
+	 			//We are moving to a custom setpoint
+	   			if(isTiltAngleAtSetpoint())
+	   			{
+	   				tiltMotor.set(0.0);
+	   				memSetpointSet = false;
+	   			}
+	   			else
+	   			{
+	   				tiltMotor.set(getMotorPower());
+	   			}
+	 		}
    	 	}
     }
-
-    /**
-     * 
-     * @return sets pitching machine off at base due to orientation of cases in process()
-     */
-    public boolean isPichingMachineIsOn() {
-		return false;
-	}
-
+    
 	/**
      * 
      * @return true if speed control for pitching machine is enabled. returns false otherwise.
@@ -558,18 +531,36 @@ public class Shooter {
     }
     
     /**
-     * Interogates the shooter to see if it is curently reloading
      * 
-     * @return true if in the process of reloading, false otherwise
+     * @return returns weather autopilot is enabled or disabled
      */
-    public boolean isReloading() {
-    	return reloading;
-    }
     public boolean isAutoPilotEnabled(){
-    	return false;
+    	return autopilotEnabled;
     }
+    
+    class pushShooter extends TimerTask
+    {
+		@Override
+		public void run() {
+			shootUpToSpeed = true;
+		}
+    	
+    }
+    
+    class stopPitching extends TimerTask
+    {
+    	public void run()
+    	{
+    		manualRunPitchingMachine(0);
+    	}
+    }
+    
+    /**
+     * 
+     * @author Robotics
+     */
     @objid ("08844018-94d8-4017-af1b-f834faa0871b")
-    public enum ShooterPosition {
+    public enum ShooterState {
 
          /**
          * This setpoint puts the Shooter tilt angle at the home position
@@ -606,11 +597,11 @@ public class Shooter {
          */
         kReload(Parameters.kShooterTiltReloadPositionEncoderSetpoint);
     	private double position;
-    	ShooterPosition(double pos)
+    	ShooterState(double pos)
     	{
     		position = pos;
     	}
-    	ShooterPosition(Object obj)
+    	ShooterState(Object obj)
     	{	
     	}
     	public double getPosition()
