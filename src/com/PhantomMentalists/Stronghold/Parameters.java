@@ -1,5 +1,7 @@
 package com.PhantomMentalists.Stronghold;
 
+import java.util.Date;
+
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 /**
@@ -56,13 +58,13 @@ public class Parameters {
      * <Enter note text here>
      */
     @objid ("ad953a2c-2244-4439-a2aa-0e86cd05d5c5")
-    public static final int kClimberLeftWinchMotorCanId = 42;
+    public static final int kClimberLeftWinchMotorCanId = 31;
 
     /**
      * <Enter note text here>
      */
     @objid ("2b176629-4eaf-473e-9106-e8f7f32633de")
-    public static final int kClimberRightWinchMotorCanId = 41;
+    public static final int kClimberRightWinchMotorCanId = 32;
 
     @objid ("48388446-73d2-468b-9b56-780f9bd7f5e7")
     public static final int kClimberExtendMotorCanId = 44;
@@ -76,7 +78,7 @@ public class Parameters {
     public static final int kGyroAnalogPort = 0;
     public static final int kGyroFanAnalogPort = 7;
     
-    public static final int kUltraSonicAnalogPort = 0;
+    public static final int kUltraSonicAnalogPort = 1;
 
     public static final int kTapeSensorLeftDigitalPort = 0;
     public static final int kTapeSensorRightDigitalPort = 1;
@@ -141,7 +143,7 @@ public class Parameters {
      * 48.5 degrees, 38.2 degrees
      */
     public static final int kDriveControlProfile = 0;
-	public static final double kShooterShootPitchingMachineSpeed = 1.0;
+	public static final double kShooterShootPitchingMachineSpeed = 0.8;
 	public static final double kShooterShootBatterSpeed = 0.65;
 	public static final double kShooterTiltMaxVolt = 12*0.6;
 
@@ -169,9 +171,9 @@ public class Parameters {
      */
      
     public static final double kMaxVelocity = 20.0;
-	public static final double kShooterTiltShootTapePositionEncoderSetpoint = 0;
+	public static final double kShooterTiltShootTapePositionEncoderSetpoint = 1.125;
 
-	public static final double kShooterTiltShootDefensePositionEncoderSetpoint = 0;
+	public static final double kShooterTiltShootDefensePositionEncoderSetpoint = 1.600;
 
 	public static final double kShooterTiltShootBatterPositionEncoderSetpoint = 0;
 
@@ -185,7 +187,9 @@ public class Parameters {
 	
 	public static final double kShooterTiltPowerUp = 0.4;
 
-	public static final double kShooterSeekHomePower = 0.4;
+	public static final double kShooterSeekHomePower = 0.35;
+	
+	public static final double kShooterSeekTolerance = 0.035;
 
 	public static final int kEncoderCodesPerRev = 1024;
 
@@ -218,6 +222,10 @@ public class Parameters {
 
 	public static final double kClimberDrawBridgeSetPoint = 0;
 	
+	public static final double kClimberTiltPower = 0.35;
+	
+	public static final double kClimberExtendPower = 0.45;
+	
 	
 	public static final int kRock = 0;
 	public static final int kRough =0;
@@ -242,5 +250,13 @@ public class Parameters {
 	public static final double kPusherArmDownSetPoint = 0.25;
 
 	public static final double kShooterTiltMaxCurrent = 25.0;
+
+	public static final long kShooterPitchingMachineAccelTimeout = 2500;
+
+	public static final long kShooterPitchingMachinePushBallTimeout = 250;
+	
+	public static final double kGoalHeight = 85;//height from camera to middle of goal, camera is 12 inches high
+	
+	public static final double kShooterOffSetFromCamera = 7;
 
 }

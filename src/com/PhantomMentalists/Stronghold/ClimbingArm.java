@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 
 /**
  * 
- * This is the class for the climber and controls the extending and retracting 
+ * This is the class for the climber and it controls the extending and retracting 
  * the climbing arm as well as changing the control modes of the climbing arm motors.
  *  
  * @author Ricky
@@ -36,7 +36,7 @@ public class ClimbingArm {
      * This is the motor that raises and lowers the climbing arm.
      */	
     @objid ("94a77f41-a9e3-4f3b-b9c4-58e16c9e1898")
-    protected CANTalon raiseLowerMotor;
+    protected CANTalon tiltMotor;
 
     /**
      * this has all of the states of the climber arm.
@@ -54,8 +54,8 @@ public class ClimbingArm {
     @objid ("c215a8ac-a925-4c23-aab7-ec75ee354734")
     public ClimbingArm()
     {
-    	raiseLowerMotor = new CANTalon(Parameters.kClimberAngleMotorCanId);
-    	raiseLowerMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);
+    	tiltMotor = new CANTalon(Parameters.kClimberAngleMotorCanId);
+    	tiltMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);
     	disableTiltPositionControl();
 		extendRetractMotor = new CANTalon(Parameters.kClimberExtendMotorCanId);
 		extendRetractMotor.configEncoderCodesPerRev(Parameters.kEncoderCodesPerRev);		
@@ -81,14 +81,14 @@ public class ClimbingArm {
      * This method enables the climbing arm's Raise/lower motor's position control mode.
      */	
     public void enableTiltPositionControl() {
-    	raiseLowerMotor.disable();
-    	raiseLowerMotor.changeControlMode(TalonControlMode.Position);
-    	raiseLowerMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-    	raiseLowerMotor.setPID(Parameters.kClimbTiltPositionControlProportional, 
+    	tiltMotor.disable();
+    	tiltMotor.changeControlMode(TalonControlMode.Position);
+    	tiltMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+    	tiltMotor.setPID(Parameters.kClimbTiltPositionControlProportional, 
 			 	Parameters.kClimbTiltPositionControlIntegral, 
 			 	Parameters.kClimbTiltPositionControlDifferential);
-    	raiseLowerMotor.setF(Parameters.kClimbTiltPositionControlThrottle);
-    	raiseLowerMotor.enable();
+    	tiltMotor.setF(Parameters.kClimbTiltPositionControlThrottle);
+    	tiltMotor.enable();
     }
     
     /**
@@ -96,10 +96,10 @@ public class ClimbingArm {
      * control mode. It changes the control mode to PercentVbus.
      */	
     public void disableTiltPositionControl() {
-    	raiseLowerMotor.disable();
-    	raiseLowerMotor.changeControlMode(TalonControlMode.PercentVbus);
-    	raiseLowerMotor.enable();
-    	raiseLowerMotor.set(0);
+    	tiltMotor.disable();
+    	tiltMotor.changeControlMode(TalonControlMode.PercentVbus);
+    	tiltMotor.enable();
+    	tiltMotor.set(0);
     	autopilotEnabled = false;    	
     }
     
@@ -140,7 +140,7 @@ public class ClimbingArm {
     	if (isTiltPositionControlEnabled()) {
     		disableTiltPositionControl();
     	}
-    	extendRetractMotor.set(power);    	
+    	tiltMotor.set(power);    	
     }
 
     /**
@@ -164,23 +164,24 @@ public class ClimbingArm {
     		disableExtendRetractPositionControl();
     	}
     	double newValue = 0;
-    	if (power < 0.0)
-    	{
-    		// Retracting
-    		leftWenchMotor.set(power);
-    		rightWenchMotor.set(power);
-    		// Calculate a new power value for the extend/retract motor
-    		extendRetractMotor.set(newValue);
-    	}
-    	else
-    	{
-    		// Extending
-    		extendRetractMotor.set(power);
-    		// Calculate a new power value for the two winch motors
-    	
-    		leftWenchMotor.set(newValue);
-    		rightWenchMotor.set(newValue);
-    	}
+    	extendRetractMotor.set(power);
+//    	if (power < 0.0)
+//    	{
+//    		// Retracting
+//    		leftWenchMotor.set(power);
+//    		rightWenchMotor.set(power);
+//    		// Calculate a new power value for the extend/retract motor
+//    		extendRetractMotor.set(newValue);
+//    	}
+//    	else
+//    	{
+//    		// Extending
+//    		extendRetractMotor.set(power);
+//    		// Calculate a new power value for the two winch motors
+//    	
+//    		leftWenchMotor.set(newValue);
+//    		rightWenchMotor.set(newValue);
+//    	}
     }
     
     /**
@@ -285,7 +286,7 @@ public class ClimbingArm {
      */ 
     public double getTiltPosition()
     {
-    	return raiseLowerMotor.getPosition();
+    	return tiltMotor.getPosition();
     }
     
     /**
@@ -315,17 +316,17 @@ public class ClimbingArm {
     		{
     		case kUnknown:
     			disableTiltPositionControl();
-    			raiseLowerMotor.set(Parameters.kRaiseLowerMoterHomeSpeed);
-    			if(raiseLowerMotor.isRevLimitSwitchClosed())
+    			tiltMotor.set(Parameters.kRaiseLowerMoterHomeSpeed);
+    			if(tiltMotor.isRevLimitSwitchClosed())
     			{
     				climberState = ClimberPositions.kHome;
-    				raiseLowerMotor.set(0.0);
+    				tiltMotor.set(0.0);
     				enableTiltPositionControl();
     			}
     			break;
     			
     		case kHome:
-    			raiseLowerMotor.set(Parameters.kClimberTiltHomePositionEncSetpoint);
+    			tiltMotor.set(Parameters.kClimberTiltHomePositionEncSetpoint);
     			if(isExtended())
     			{
     				manualSetExtendRetract(-.09);
@@ -333,7 +334,7 @@ public class ClimbingArm {
     			break;
     			
     		case kLowBar:
-    			raiseLowerMotor.set(Parameters.kClimberTiltLowBarPositionEncSetPoint);
+    			tiltMotor.set(Parameters.kClimberTiltLowBarPositionEncSetPoint);
     			if(isExtended())
     			{
     				manualSetExtendRetract(-.09);
@@ -353,12 +354,12 @@ public class ClimbingArm {
     			break;
     			
     		case kRaised:
-    			raiseLowerMotor.set(Parameters.kClimberRaisedPositionSetPoint);
+    			tiltMotor.set(Parameters.kClimberRaisedPositionSetPoint);
     			
     			break;
     			
     		case kDrawBridge:
-    			raiseLowerMotor.set(Parameters.kClimberDrawBridgeSetPoint);
+    			tiltMotor.set(Parameters.kClimberDrawBridgeSetPoint);
     			
     			break;
     		}

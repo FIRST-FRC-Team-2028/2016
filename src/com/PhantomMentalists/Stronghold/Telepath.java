@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Telepath extends SampleRobot {
     public Joystick leftstick;
     public Joystick rightstick;
+    public Joystick buttonstick,analogstick;
     public PIDController turncont;
     public double P =0.07,I = 0.0001,D= 0.005;
     public double tangle = 0;
@@ -30,7 +31,6 @@ public class Telepath extends SampleRobot {
 	/**
      * <Enter note text here>
      */
-	protected Joystick lstick,rstick,buttonstick,analogstick;
     @objid ("f4bbb171-d580-4f7e-858a-1f36d93dabaa")
     public boolean autopilotEnabled;
 
@@ -51,6 +51,11 @@ public class Telepath extends SampleRobot {
 
     @objid ("434ab641-6873-4ddc-a690-48168db127aa")
     protected ClimbingArm climbingArm;
+    
+    /**
+     * Camera used for aiming
+     */
+    protected Camera cam;
 
     @objid ("352325f0-e7b8-4746-8690-a318ffdc697c")
     protected Autopilot autopilot;
@@ -99,6 +104,8 @@ public class Telepath extends SampleRobot {
         	rightval = newJoystickValue(rightstick.getY());
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
         	SmartDashboard.putNumber("Shoot Position",shootangle);
+        	SmartDashboard.putBoolean("Left Tape",tapeSensorLeft.get());
+        	SmartDashboard.putBoolean("Right Tape",tapeSensorRight.get());
         	if(leftstick.getRawButton(5))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
@@ -136,6 +143,7 @@ public class Telepath extends SampleRobot {
 //        		System.out.println("here2");
 //        		shooter.setShootAngle(ShooterPosition.kHome);
         		shooter.setTiltMemSetpoint(shootangle);
+//        		cam.setCam(-1,(0.335*shooter.getTiltAngle()/3.9)+0.665);
         	}
         	else if(rightstick.getRawButton(10))
         	{
@@ -143,7 +151,7 @@ public class Telepath extends SampleRobot {
         	}
         	else
         	{
-        		shooter.manualRunTiltMotor(0);;
+        		shooter.manualRunTiltMotor(0);
         	}
         	if(rightstick.getRawButton(9))
         	{
@@ -191,20 +199,51 @@ public class Telepath extends SampleRobot {
         		turncont.disable();
         		westCoastDrive.setTurnSetpoint(0);
         	}
-        	if(leftstick.getTrigger())
+        	if(rightstick.getTrigger())
         	{
-        		pusherArm.manualSetTilt(-Parameters.kPusherArmHomeMotorPower);
+        		System.out.println("Cam angle: "+cam.getCameraAngle());
+        		shooter.setShooterAngle(cam.getCameraAngle());
         	}
-        	else if(rightstick.getTrigger())
+//        	if(leftstick.getTrigger())
+//        	{
+//        		pusherArm.manualSetTilt(-Parameters.kPusherArmHomeMotorPower);
+//        	}
+//        	else if(rightstick.getTrigger())
+//        	{
+//        		pusherArm.manualSetTilt(Parameters.kPusherArmHomeMotorPower);
+//        	}
+//        	else
+//        	{
+//        		pusherArm.manualSetTilt(0);
+//        	}
+        	if(buttonstick.getRawButton(5))
         	{
-        		pusherArm.manualSetTilt(Parameters.kPusherArmHomeMotorPower);
+        		climbingArm.manualSetTilt(Parameters.kClimberTiltPower);
+        	}
+        	else if(buttonstick.getRawButton(2))
+        	{
+        		climbingArm.manualSetTilt(-Parameters.kClimberTiltPower*.5);
         	}
         	else
         	{
-        		pusherArm.manualSetTilt(0);
+        		climbingArm.manualSetTilt(0);
         	}
+        	if(buttonstick.getRawButton(4))
+        	{
+        		climbingArm.manualSetExtendRetract(Parameters.kClimberExtendPower);
+        	}
+        	else if(buttonstick.getRawButton(3))
+        	{
+        		climbingArm.manualSetExtendRetract(-Parameters.kClimberExtendPower);
+        	}
+        	else
+        	{
+        		climbingArm.manualSetExtendRetract(0);
+        	}
+        	cam.setCam(-1, (analogstick.getY()+1)/2);
         	westCoastDrive.process();
         	shooter.process();
+        	cam.process();
             Timer.delay(Parameters.delay);
         }
         fan.set(false);
@@ -216,15 +255,17 @@ public class Telepath extends SampleRobot {
     	prefs.putDouble("Turn P", P);
     	prefs.putDouble("Turn I", I);
     	prefs.putDouble("Turn D", D);
-
+    	cam = new Camera(Parameters.kCameraIpAddress);
     	leftstick = new Joystick(0);
     	rightstick = new Joystick(1);
+    	analogstick = new Joystick(2);
+    	buttonstick = new Joystick(3);
     	pusherArm = new PusherArm();
     	westCoastDrive = new WestCoastDrive();
     	shooter = new Shooter();
-//    	climbingArm = new ClimbingArm();
+    	climbingArm = new ClimbingArm();
 //    	compressor = new Compressor();
-//    	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
+    	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
     	gyro = new AnalogGyro(Parameters.kGyroAnalogPort);
     	gyro.initGyro();
     	gyro.calibrate();

@@ -4,6 +4,7 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * DriveUnit encapsulates all the hardware that makes one side of the 
@@ -139,6 +140,21 @@ public class DriveUnit {
     @objid ("de5d82d9-c9f3-4739-b5a8-eeb4984e075c")
     public void process() 
     {
+    	if(placement == Placement.Left)
+    	{
+    		SmartDashboard.putNumber("Left Top V",masterMotor.getOutputVoltage());
+    		SmartDashboard.putNumber("Left Top C",masterMotor.getOutputCurrent());
+    		SmartDashboard.putNumber("Left Bot V",followerMotor.getOutputVoltage());
+    		SmartDashboard.putNumber("Left Bot C",followerMotor.getOutputCurrent());
+
+    	}
+    	else if(placement == Placement.Right)
+    	{
+    		SmartDashboard.putNumber("Right Top V",masterMotor.getOutputVoltage());
+    		SmartDashboard.putNumber("Right Top C",masterMotor.getOutputCurrent());
+    		SmartDashboard.putNumber("Right Bot V",followerMotor.getOutputVoltage());
+    		SmartDashboard.putNumber("Right Bot C",followerMotor.getOutputCurrent());
+    	}
     	// Set the power to the master motor.  NOTE:  We need to calculate
     	// the power based on the speed setpoint modified by the turn setpoint.
     	// If we're driving forward and turning, the inside wheels must
