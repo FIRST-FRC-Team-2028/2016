@@ -91,6 +91,10 @@ public class AutoDriveOverDefense extends Autopilot {
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		state = DriveStates.driving;
 			    			break;
+			    		case kLowBar:
+			    			drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
+			    			state = DriveStates.driving;
+			    			break;
 			    		default:
 			    			System.out.println("Should never happen in AutoDriveOverDefense");
 		    		}
@@ -157,7 +161,11 @@ public class AutoDriveOverDefense extends Autopilot {
     	/**
          * <Enter note text here>
          */
-    	kRoughTerain
+    	kRoughTerain,
+    	/**
+    	 * 
+    	 */
+    	kLowBar
     }
 
 }
