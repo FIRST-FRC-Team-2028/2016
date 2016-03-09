@@ -1,13 +1,14 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
 import com.PhantomMentalists.Stronghold.ClimbingArm;
-import com.PhantomMentalists.Stronghold.Parameters;
+import com.PhantomMentalists.Stronghold.ClimbingArm.ClimberPositions;
 import com.PhantomMentalists.Stronghold.PusherArm;
 import com.PhantomMentalists.Stronghold.Shooter;
-import com.PhantomMentalists.Stronghold.ClimbingArm.ClimberPositions;
 import com.PhantomMentalists.Stronghold.Shooter.ShooterState;
 import com.PhantomMentalists.Stronghold.WestCoastDrive;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * This class controls the Telepath robot during the 15 second autonomous period.  It instantiates its own Autopilot classes to control traversing the defense, driving to the goal and shooting.
@@ -106,8 +107,8 @@ public class Autonomous extends Autopilot {
      * This method initializes the local references to Telepath's major components.
      */
     @objid ("a472f866-0ec6-4c52-bc30-c893eb1086b3")
-    public Autonomous(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climbingArm) {
-        super(drive, shooter, pusherArm, climbingArm);
+    public Autonomous(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climbingArm, DigitalInput lTape, DigitalInput rTape) {
+        super(drive, shooter, pusherArm, climbingArm, lTape, lTape);
     }
 
     public void setLane(int lane)

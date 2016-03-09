@@ -258,5 +258,7 @@ public class Parameters {
 	public static final double kGoalHeight = 85;//height from camera to middle of goal, camera is 12 inches high
 	
 	public static final double kShooterOffSetFromCamera = 7;
+	
+	public static final double autonomousDrivePower = 0.5;
 
 }
