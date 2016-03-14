@@ -108,23 +108,27 @@ public class Telepath extends SampleRobot {
         	SmartDashboard.putNumber("Shoot Position",shootangle);
         	SmartDashboard.putBoolean("Left Tape",tapeSensorLeft.get());
         	SmartDashboard.putBoolean("Right Tape",tapeSensorRight.get());
-        	if(leftstick.getRawButton(5))
+        	
+        	// Manually control shooter pitching machine
+        	if(buttonstick1.getRawButton(ButtonStick0Values.kShooterShoot.getValue()))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
         	}
-        	else if(leftstick.getRawButton(4))
+        	else if(buttonstick0.getRawButton(ButtonStick0Values.kShooterInfeed.getValue()))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterReloadPitchingMachineSpeed);
         	}
-        	else if(leftstick.getRawButton(6))
-        	{
-        		shooter.manualRunPitchingMachine(Parameters.kShooterShootBatterSpeed);
-        	}
+//        	else if(buttonstick1.getRawButton(kShooterSpare.getValue()))
+//        	{
+//        		shooter.manualRunPitchingMachine(Parameters.kShooterShootBatterSpeed);
+//        	}
         	else
         	{
         		shooter.manualRunPitchingMachine(0);
         	}
-        	if(leftstick.getRawButton(buttons.kKick))
+        	
+        	// Manually control dink
+        	if(leftstick.getRawButton(ButtonStick0Values.kKick.getValue()))
         	{
         		shooter.pushBall(true);
         	}
@@ -132,11 +136,13 @@ public class Telepath extends SampleRobot {
         	{
         		shooter.pushBall(false);
         	}
-        	if(leftstick.getRawButton(3))
+        	
+        	// Manually control shooter angle
+        	if(buttonstick0.getRawButton(ButtonStick0Values.kShooterUp.getValue()))
         	{
         		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerUp);
         	}
-        	else if(leftstick.getRawButton(2))
+        	else if(buttonstick0.getRawButton(ButtonStick0Values.kShooterDown.getValue()))
         	{
         		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerDown);
         	}
@@ -218,29 +224,37 @@ public class Telepath extends SampleRobot {
 //        	{
 //        		pusherArm.manualSetTilt(0);
 //        	}
-        	if(buttonstick0.getRawButton(5))
+        	if(buttonstick1.getRawButton(ButtonStick1Values.kClimberOut.getValue()))
+        	{
+        		//
+        		// TODO:  We cannot extend the climber without at least putting the
+        		//        winch in "coast" mode, or preferably slowly playing out cord 
+        		//  
+        		climbingArm.manualSetExtendRetract(Parameters.kClimberExtendPower);
+        	}
+        	else if(buttonstick0.getRawButton(ButtonStick0Values.kClimberIn.getValue()))
+        	{
+        		// 
+        		// TODO:  We cannot pull the climber in without also realing in the 
+        		//        winch cord
+        		//
+        		climbingArm.manualSetExtendRetract(-Parameters.kClimberExtendPower);
+        	}
+        	else
+        	{
+        		climbingArm.manualSetExtendRetract(0);
+        	}
+        	if(buttonstick0.getRawButton(ButtonStick0Values.kClimberUp.getValue()))
         	{
         		climbingArm.manualSetTilt(Parameters.kClimberTiltPower);
         	}
-        	else if(buttonstick0.getRawButton(2))
+        	else if(buttonstick0.getRawButton(ButtonStick0Values.kClimberDown.getValue()))
         	{
         		climbingArm.manualSetTilt(-Parameters.kClimberTiltPower*.5);
         	}
         	else
         	{
         		climbingArm.manualSetTilt(0);
-        	}
-        	if(buttonstick0.getRawButton(4))
-        	{
-        		climbingArm.manualSetExtendRetract(Parameters.kClimberExtendPower);
-        	}
-        	else if(buttonstick0.getRawButton(3))
-        	{
-        		climbingArm.manualSetExtendRetract(-Parameters.kClimberExtendPower);
-        	}
-        	else
-        	{
-        		climbingArm.manualSetExtendRetract(0);
         	}
         	cam.setCam(-1, (analogstick.getY()+1)/2);
         	westCoastDrive.process();
@@ -309,16 +323,160 @@ public class Telepath extends SampleRobot {
     public void shoot() {
     }
 
-    public enum buttons
+    public enum ButtonStick0Values
     {
     	/**
     	 * Runs the shooter's pitching machine motors in reverse slowly to load a ball
     	 */
-    	kInfeed = 1,
+    	kShooterInfeed(1),
     	
     	/**
-   		 * 
+   		 * Button that engages the Shooter's dink
    		 */
-    	kKick = 2;
+    	kKick(2),
+    	
+    	/**
+    	 * Button that runs the shooter's tilt motor forward to lower the shooter angle
+    	 */
+    	kShooterDown(3),
+    	
+    	/**
+    	 * Button that runs the shooter's tilt motor in reverse to raise the shooter angle
+    	 */
+    	kClimberOut(4),
+    	
+    	/**
+    	 * Button to run the Climber arm's winch motors slowly in reverse to play out cable
+    	 */
+    	kClimberRelease(5),
+    	
+    	/**
+    	 * Button to run the Climber arm's extend/retract motor forward to extend/raise
+    	 * the climbing arm.
+    	 */
+    	kClimberIn(6),
+    	
+    	/**
+    	 * Button to run the Climber arm's tilt motor forward to angle the climber arm
+    	 * towards the front of the robot (towards the shooter)
+    	 */
+    	kClimberUp(7),
+    	
+    	/**
+    	 * Button to run the Climber arm's tilt motor in reverse to angle the climber arm
+    	 * toward the back of the robot (towards the pusher/duck bar)
+    	 */
+    	kClimberDown(8),
+    	
+    	/**
+    	 * Button to run the Pusher arm (a.k.a., the "duck" bar) in reverse to raise the
+    	 * pusher arm towards it home/stoweed position
+    	 */
+    	kPusherUp(9),
+    	
+    	/**
+    	 * Button to run the Pusher arm (a.k.a., the "duck" bar) forward to lower the
+    	 * pusher arm towards the bumper
+    	 */
+    	kPusherDown(10),
+    	
+    	/**
+    	 * Button to run the Shooter's tilt motor in reverse to raise the shooter tilt
+    	 * angle (towards it's home/stowed position)
+    	 */
+    	kShooterUp(11),
+    	
+    	/**
+    	 * Button to run the Shooter's pitching machine motors full-speed forward to 
+    	 * propell the boulder towards the tower.
+    	 */
+    	kShooterShoot(12);
+    	
+    	private int value;
+    	
+    	private ButtonStick0Values(int value)
+    	{
+    		this.value = value;
+    	}
+    	
+    	public int getValue()
+    	{
+    		return value;
+    	}
+    }
+    
+    public enum ButtonStick1Values
+    {
+    	/**
+    	 * 
+    	 */
+    	kOn(1),
+    	
+    	/**
+    	 * 
+    	 */
+    	kOff(2),
+    	
+    	/**
+    	 * 
+    	 */
+    	kSpare(3),
+    	
+    	/**
+    	 *
+    	 */
+    	kClimberOut(4),
+    	
+    	/**
+    	 * 
+    	 */
+    	kSetZero(5),
+    	
+    	/**
+    	 * 
+    	 */
+    	kGotoZero(6),
+    	
+    	/**
+    	 * 
+    	 */
+    	kSetTarget(7),
+    	
+    	/**
+    	 * 
+    	 */
+    	kGotoTarget(8),
+    	
+    	/**
+    	 * 
+    	 */
+    	kClimberWindUp(9),
+    	
+    	/**
+    	 * 
+    	 */
+    	kFindTarget(10),
+    	
+    	/**
+    	 * 
+    	 */
+    	kShooterUp(11),
+    	
+    	/**
+    	 * 
+    	 */
+    	kShooterShoot(12);
+    	
+    	private int value;
+    	
+    	private ButtonStick1Values(int value)
+    	{
+    		this.value = value;
+    	}
+    	
+    	public int getValue()
+    	{
+    		return value;
+    	}
     }
 }
