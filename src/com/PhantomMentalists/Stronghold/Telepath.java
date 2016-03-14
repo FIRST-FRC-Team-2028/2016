@@ -20,7 +20,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Telepath extends SampleRobot {
     public Joystick leftstick;
     public Joystick rightstick;
-    public Joystick buttonstick,analogstick;
+    public Joystick buttonstick0;
+    public Joystick buttonstick1;
+    public Joystick analogstick;
     public PIDController turncont;
     public double P =0.07,I = 0.0001,D= 0.005;
     public double tangle = 0;
@@ -122,7 +124,7 @@ public class Telepath extends SampleRobot {
         	{
         		shooter.manualRunPitchingMachine(0);
         	}
-        	if(leftstick.getRawButton(10))
+        	if(leftstick.getRawButton(buttons.kKick))
         	{
         		shooter.pushBall(true);
         	}
@@ -216,11 +218,11 @@ public class Telepath extends SampleRobot {
 //        	{
 //        		pusherArm.manualSetTilt(0);
 //        	}
-        	if(buttonstick.getRawButton(5))
+        	if(buttonstick0.getRawButton(5))
         	{
         		climbingArm.manualSetTilt(Parameters.kClimberTiltPower);
         	}
-        	else if(buttonstick.getRawButton(2))
+        	else if(buttonstick0.getRawButton(2))
         	{
         		climbingArm.manualSetTilt(-Parameters.kClimberTiltPower*.5);
         	}
@@ -228,11 +230,11 @@ public class Telepath extends SampleRobot {
         	{
         		climbingArm.manualSetTilt(0);
         	}
-        	if(buttonstick.getRawButton(4))
+        	if(buttonstick0.getRawButton(4))
         	{
         		climbingArm.manualSetExtendRetract(Parameters.kClimberExtendPower);
         	}
-        	else if(buttonstick.getRawButton(3))
+        	else if(buttonstick0.getRawButton(3))
         	{
         		climbingArm.manualSetExtendRetract(-Parameters.kClimberExtendPower);
         	}
@@ -256,10 +258,11 @@ public class Telepath extends SampleRobot {
     	prefs.putDouble("Turn I", I);
     	prefs.putDouble("Turn D", D);
     	cam = new Camera(Parameters.kCameraIpAddress);
-    	leftstick = new Joystick(0);
-    	rightstick = new Joystick(1);
-    	analogstick = new Joystick(2);
-    	buttonstick = new Joystick(3);
+    	leftstick = new Joystick(Parameters.kDriverStationLeftStick);
+    	rightstick = new Joystick(Parameters.kDriverStationRightStick);
+    	analogstick = new Joystick(Parameters.kDriverStationAnalogStick);
+    	buttonstick0 = new Joystick(Parameters.kDriverStationButtonStick0);
+    	buttonstick1 = new Joystick(Parameters.kDriverStationButtonStick1);
     	pusherArm = new PusherArm();
     	westCoastDrive = new WestCoastDrive();
     	shooter = new Shooter();
@@ -306,4 +309,16 @@ public class Telepath extends SampleRobot {
     public void shoot() {
     }
 
+    public enum buttons
+    {
+    	/**
+    	 * Runs the shooter's pitching machine motors in reverse slowly to load a ball
+    	 */
+    	kInfeed = 1,
+    	
+    	/**
+   		 * 
+   		 */
+    	kKick = 2;
+    }
 }

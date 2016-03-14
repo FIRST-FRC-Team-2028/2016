@@ -4,6 +4,8 @@ import java.util.Date;
 
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * This class stores all constant variables for team 2028.  Everything in this class should be a static public final.  There will be no instances of this class and no class will hold a reference to any instance.
  */
@@ -260,5 +262,11 @@ public class Parameters {
 	public static final double kShooterOffSetFromCamera = 7;
 	
 	public static final double autonomousDrivePower = 0.5;
+	
+	public static final int kDriverStationLeftStick = 1;
+	public static final int kDriverStationRightStick = 0;
+	public static final int kDriverStationAnalogStick = 5;
+	public static final int kDriverStationButtonStick0 = 2;
+	public static final int kDriverStationButtonStick1 = 3;
 
 }
