@@ -256,10 +256,12 @@ public class Telepath extends SampleRobot {
         	{
         		climbingArm.manualSetTilt(0);
         	}
+        	
         	cam.setCam(-1, (analogstick.getY()+1)/2);
         	westCoastDrive.process();
         	shooter.process();
         	cam.process();
+        	
             Timer.delay(Parameters.delay);
         }
         fan.set(false);
