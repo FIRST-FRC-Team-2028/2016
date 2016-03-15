@@ -1,18 +1,19 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
-import com.PhantomMentalists.Stronghold.ClimbingArm;
-import com.PhantomMentalists.Stronghold.PusherArm;
-import com.PhantomMentalists.Stronghold.Shooter;
-import com.PhantomMentalists.Stronghold.WestCoastDrive;
+import com.PhantomMentalists.Stronghold.Telepath;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PIDController;
 
 public class AutoAim extends Autonomous {
 
 	AimingStates state = AimingStates.getTargetInFrame;
 	
-	public AutoAim(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm,ClimbingArm climbingArm, DigitalInput lTape, DigitalInput rTape) {
-		super(drive, shooter, pusherArm, climbingArm, lTape, rTape);
+	PIDController turncont;
+	
+	public AutoAim(Telepath tele) {
+		super(tele);
+		turncont = tele.getTurnController();
+		
 	}
 
 	public void process()

@@ -1,15 +1,10 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
-import com.PhantomMentalists.Stronghold.ClimbingArm;
 import com.PhantomMentalists.Stronghold.Parameters;
-import com.PhantomMentalists.Stronghold.PusherArm;
-import com.PhantomMentalists.Stronghold.Shooter;
-import com.PhantomMentalists.Stronghold.WestCoastDrive;
-import com.PhantomMentalists.Stronghold.Autopilot.AutoDrive.DriveStates;
+import com.PhantomMentalists.Stronghold.Telepath;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * This class encapsulates the code to drive over one of the Stronghold
@@ -43,10 +38,10 @@ public class AutoDriveOverDefense extends Autopilot {
      * <Enter note text here>
      */
     @objid ("e1bf47bf-543a-45f6-b369-e5a8c5869185")
-    public AutoDriveOverDefense(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climbingArm, DigitalInput lTape, DigitalInput rTape, AnalogGyro gyro, Defense defense) {
-        super(drive, shooter, pusherArm, climbingArm, lTape, rTape);
-        this.gyro = gyro;
-        this.defense = defense;
+    public AutoDriveOverDefense(Telepath tele) {
+        super(tele);
+        this.gyro = tele.getGyro();
+//        this.defense = ;TODO: FIX DISd
     }
 
     public void setEnabled(boolean value)
@@ -101,7 +96,7 @@ public class AutoDriveOverDefense extends Autopilot {
 		    		break;
 		    	case driving:
 		    		//TODO: Might not be correct and check what happens to tape sensor if robot jumps
-		    		if(lTape.get())
+		    		if(tele.getLeftTape())
 		    		{
 		    			state = DriveStates.done;
 		    		}

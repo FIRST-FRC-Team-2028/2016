@@ -3,10 +3,9 @@ package com.PhantomMentalists.Stronghold.Autopilot;
 import com.PhantomMentalists.Stronghold.ClimbingArm;
 import com.PhantomMentalists.Stronghold.PusherArm;
 import com.PhantomMentalists.Stronghold.Shooter;
+import com.PhantomMentalists.Stronghold.Telepath;
 import com.PhantomMentalists.Stronghold.WestCoastDrive;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * This is an abstract base class.  It is used as the base class for a hierarchy of
@@ -44,11 +43,8 @@ public abstract class Autopilot {
      */
     @objid ("09cd8f95-bffd-403e-8326-2ee2956eab31")
     protected ClimbingArm climbingArm;
-    
-    protected DigitalInput lTape;
-    
-    protected DigitalInput rTape;
 
+    protected Telepath tele;
     /**
      * <Enter note text here>
      */
@@ -59,13 +55,12 @@ public abstract class Autopilot {
      * <Enter note text here>
      */
     @objid ("c0750894-6c97-460b-a3be-801d31733962")
-    public Autopilot(WestCoastDrive drive, Shooter shooter, PusherArm pusherArm, ClimbingArm climberArm, DigitalInput lTape, DigitalInput rTape) {
-    	this.drive = drive;
-    	this.shooter = shooter;
-    	this.climbingArm = climberArm;
-    	this.pusherArm = pusherArm;
-    	this.lTape = lTape;
-    	this.rTape = rTape;
+    public Autopilot(Telepath tele) {
+    	this.tele = tele;
+    	this.drive = tele.getDrive();
+    	this.shooter = tele.getShooter();
+    	this.climbingArm = tele.getClimberArm();
+    	this.pusherArm = tele.getPusherArm();
     }
 
     /**

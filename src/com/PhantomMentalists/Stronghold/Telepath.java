@@ -1,6 +1,5 @@
 package com.PhantomMentalists.Stronghold;
 
-import com.PhantomMentalists.Stronghold.Shooter.ShooterState;
 import com.PhantomMentalists.Stronghold.WestCoastDrive.Gear;
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
@@ -20,8 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Telepath extends SampleRobot {
     public Joystick leftstick;
     public Joystick rightstick;
-    public Joystick buttonstick0;
-    public Joystick buttonstick1;
+    public Joystick buttonstick2;
+    public Joystick buttonstick3;
     public Joystick analogstick;
     public PIDController turncont;
     public double P =0.07,I = 0.0001,D= 0.005;
@@ -78,7 +77,7 @@ public class Telepath extends SampleRobot {
      * <Enter note text here>
      */
     @objid ("819d3be2-a72e-4178-9fd5-0d5727789bcf")
-    protected AnalogGyro gyro;
+    protected Gyro gyro;
     protected Solenoid fan;
     /**
      * <Enter note text here>
@@ -102,19 +101,22 @@ public class Telepath extends SampleRobot {
     	D = prefs.getDouble("Turn D", D);
     	turncont.setPID(P, I, D);
         while (isEnabled() && isOperatorControl()) {
-        	leftval = newJoystickValue(leftstick.getY());
+            System.out.println("Configure: "+analogstick.getX());
+            System.out.println("Lane: "+analogstick.getY());
+        	System.out.println("Shooter Pos: "+analogstick.getZ());
+        	System.out.println("Camera Pos: "+analogstick.getRawAxis(3));
+            leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
         	SmartDashboard.putNumber("Shoot Position",shootangle);
         	SmartDashboard.putBoolean("Left Tape",tapeSensorLeft.get());
         	SmartDashboard.putBoolean("Right Tape",tapeSensorRight.get());
-        	
         	// Manually control shooter pitching machine
-        	if(buttonstick1.getRawButton(ButtonStick0Values.kShooterShoot.getValue()))
+        	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterShoot.getValue()))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
         	}
-        	else if(buttonstick0.getRawButton(ButtonStick0Values.kShooterInfeed.getValue()))
+        	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterInfeed.getValue()))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterReloadPitchingMachineSpeed);
         	}
@@ -128,7 +130,7 @@ public class Telepath extends SampleRobot {
         	}
         	
         	// Manually control dink
-        	if(leftstick.getRawButton(ButtonStick0Values.kKick.getValue()))
+        	if(buttonstick2.getRawButton(ButtonStick3Values.kKick.getValue()))
         	{
         		shooter.pushBall(true);
         	}
@@ -138,11 +140,11 @@ public class Telepath extends SampleRobot {
         	}
         	
         	// Manually control shooter angle
-        	if(buttonstick0.getRawButton(ButtonStick0Values.kShooterUp.getValue()))
+        	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterUp.getValue()))
         	{
         		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerUp);
         	}
-        	else if(buttonstick0.getRawButton(ButtonStick0Values.kShooterDown.getValue()))
+        	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterDown.getValue()))
         	{
         		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerDown);
         	}
@@ -224,7 +226,7 @@ public class Telepath extends SampleRobot {
 //        	{
 //        		pusherArm.manualSetTilt(0);
 //        	}
-        	if(buttonstick1.getRawButton(ButtonStick1Values.kClimberOut.getValue()))
+        	if(buttonstick3.getRawButton(ButtonStick2Values.kClimberOut.getValue()))
         	{
         		//
         		// TODO:  We cannot extend the climber without at least putting the
@@ -232,7 +234,7 @@ public class Telepath extends SampleRobot {
         		//  
         		climbingArm.manualSetExtendRetract(Parameters.kClimberExtendPower);
         	}
-        	else if(buttonstick0.getRawButton(ButtonStick0Values.kClimberIn.getValue()))
+        	else if(buttonstick2.getRawButton(ButtonStick3Values.kClimberIn.getValue()))
         	{
         		// 
         		// TODO:  We cannot pull the climber in without also realing in the 
@@ -244,11 +246,11 @@ public class Telepath extends SampleRobot {
         	{
         		climbingArm.manualSetExtendRetract(0);
         	}
-        	if(buttonstick0.getRawButton(ButtonStick0Values.kClimberUp.getValue()))
+        	if(buttonstick2.getRawButton(ButtonStick3Values.kClimberUp.getValue()))
         	{
         		climbingArm.manualSetTilt(Parameters.kClimberTiltPower);
         	}
-        	else if(buttonstick0.getRawButton(ButtonStick0Values.kClimberDown.getValue()))
+        	else if(buttonstick2.getRawButton(ButtonStick3Values.kClimberDown.getValue()))
         	{
         		climbingArm.manualSetTilt(-Parameters.kClimberTiltPower*.5);
         	}
@@ -257,7 +259,7 @@ public class Telepath extends SampleRobot {
         		climbingArm.manualSetTilt(0);
         	}
         	
-        	cam.setCam(-1, (analogstick.getY()+1)/2);
+        	cam.setCam(-1, (analogstick.getRawAxis(3)+1)/2);
         	westCoastDrive.process();
         	shooter.process();
         	cam.process();
@@ -277,15 +279,15 @@ public class Telepath extends SampleRobot {
     	leftstick = new Joystick(Parameters.kDriverStationLeftStick);
     	rightstick = new Joystick(Parameters.kDriverStationRightStick);
     	analogstick = new Joystick(Parameters.kDriverStationAnalogStick);
-    	buttonstick0 = new Joystick(Parameters.kDriverStationButtonStick0);
-    	buttonstick1 = new Joystick(Parameters.kDriverStationButtonStick1);
+    	buttonstick2 = new Joystick(Parameters.kDriverStationButtonStick2);
+    	buttonstick3 = new Joystick(Parameters.kDriverStationButtonStick3);
     	pusherArm = new PusherArm();
     	westCoastDrive = new WestCoastDrive();
     	shooter = new Shooter();
     	climbingArm = new ClimbingArm();
 //    	compressor = new Compressor();
     	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
-    	gyro = new AnalogGyro(Parameters.kGyroAnalogPort);
+    	gyro = new Gyro(Parameters.kGyroAnalogPort);
     	gyro.initGyro();
     	gyro.calibrate();
     	fan = new Solenoid(Parameters.kGyroFanAnalogPort);
@@ -325,7 +327,7 @@ public class Telepath extends SampleRobot {
     public void shoot() {
     }
 
-    public enum ButtonStick0Values
+    public enum ButtonStick3Values
     {
     	/**
     	 * Runs the shooter's pitching machine motors in reverse slowly to load a ball
@@ -396,7 +398,7 @@ public class Telepath extends SampleRobot {
     	
     	private int value;
     	
-    	private ButtonStick0Values(int value)
+    	private ButtonStick3Values(int value)
     	{
     		this.value = value;
     	}
@@ -407,7 +409,57 @@ public class Telepath extends SampleRobot {
     	}
     }
     
-    public enum ButtonStick1Values
+    public WestCoastDrive getDrive()
+    {
+    	return westCoastDrive;
+    }
+    
+    public Shooter getShooter()
+    {
+    	return shooter;
+    }
+    
+    public PusherArm getPusherArm()
+    {
+    	return pusherArm;
+    }
+    
+    public Camera getCamera()
+    {
+    	return cam;
+    }
+    
+    public ClimbingArm getClimberArm()
+    {
+    	return climbingArm;
+    }
+    
+    public PIDController getTurnController()
+    {
+    	return turncont;
+    }
+    
+    public boolean getLeftTape()
+    {
+    	return tapeSensorLeft.get();
+    }
+    
+    public boolean getRightTape()
+    {
+    	return tapeSensorRight.get();
+    }
+    
+    public Gyro getGyro()
+    {
+    	return gyro;
+    }
+    
+    public UltrasonicSensor getUltrasonic()
+    {
+    	return ultrasonic;
+    }
+    
+    public enum ButtonStick2Values
     {
     	/**
     	 * 
@@ -471,7 +523,7 @@ public class Telepath extends SampleRobot {
     	
     	private int value;
     	
-    	private ButtonStick1Values(int value)
+    	private ButtonStick2Values(int value)
     	{
     		this.value = value;
     	}

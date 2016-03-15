@@ -238,12 +238,12 @@ public class Parameters {
 	public static final int kPort =0;
 	public static final int kCheval =0;
 	public static final int kLowBar =0;
-	//pusher arm pid
+	// pusher arm pid
 	public static final double kPusherArmPositionControlProportional = 0.0;
 	public static final double kPusherArmPositionControlIntegral = 0.0;
 	public static final double kPusherArmPositionControlDifferential = 0.0;
 	public static final double kPusherArmPositionControlThrottle = 0.0;
-	//pusher arm
+	//pusher arm 
 	public static final double kPusherArmMaxMotorCurrent = 20.0;
 	public static final double kPusherArmHomeMotorPower = -0.4;
 	public static final double kMotorVoltageDeadband = 0.05;
