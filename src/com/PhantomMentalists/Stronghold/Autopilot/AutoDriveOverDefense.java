@@ -1,5 +1,8 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.PhantomMentalists.Stronghold.Telepath;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
@@ -23,7 +26,7 @@ public class AutoDriveOverDefense extends Autopilot {
 	/**
      * <Enter note text here>
      */
-	protected Defense defense;
+	protected DefenceSelection defense;
 	/**
 	 * 
 	 */
@@ -34,13 +37,19 @@ public class AutoDriveOverDefense extends Autopilot {
      */
 	protected AnalogGyro gyro;
 	
+	protected boolean driven = false;
+	
+	protected Timer timer;
+	
+	
 	/**
      * <Enter note text here>
      */
     @objid ("e1bf47bf-543a-45f6-b369-e5a8c5869185")
-    public AutoDriveOverDefense(Telepath tele) {
+    public AutoDriveOverDefense(Telepath tele,DefenceSelection defence) {
         super(tele);
         this.gyro = tele.getGyro();
+        this.defense = defence;
 //        this.defense = ;TODO: FIX DISd
     }
 
@@ -74,15 +83,15 @@ public class AutoDriveOverDefense extends Autopilot {
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		state = DriveStates.driving;
 			    			break;
-			    		case kRockWall:
+			    		case kRock:
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		state = DriveStates.driving;
 			    			break;
-			    		case kRamparts:
+			    		case kRamp:
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		state = DriveStates.driving;
 			    			break;
-			    		case kRoughTerain:
+			    		case kRough:
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		state = DriveStates.driving;
 			    			break;
@@ -93,11 +102,14 @@ public class AutoDriveOverDefense extends Autopilot {
 			    		default:
 			    			System.out.println("Should never happen in AutoDriveOverDefense");
 		    		}
+		    		timer = new Timer();
+		    		timer.schedule(new driveTime(), 5500);
 		    		break;
 		    	case driving:
 		    		//TODO: Might not be correct and check what happens to tape sensor if robot jumps
-		    		if(tele.getLeftTape())
+		    		if(driven)
 		    		{
+		    			drive.setSpeedSetpoint(0);
 		    			state = DriveStates.done;
 		    		}
 		    		break;
@@ -124,6 +136,14 @@ public class AutoDriveOverDefense extends Autopilot {
     public boolean isStopped()
     {
     	return state == DriveStates.stopped;
+    }
+    
+    class driveTime extends TimerTask
+    {
+    	public void run()
+    	{
+    		driven = true;
+    	}
     }
     
     public enum DriveStates

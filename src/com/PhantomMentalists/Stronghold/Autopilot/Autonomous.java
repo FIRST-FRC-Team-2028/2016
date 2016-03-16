@@ -1,9 +1,13 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
+import com.PhantomMentalists.Stronghold.Camera;
 import com.PhantomMentalists.Stronghold.ClimbingArm.ClimberPositions;
+import com.PhantomMentalists.Stronghold.PusherArm.Position;
 import com.PhantomMentalists.Stronghold.Shooter.ShooterState;
 import com.PhantomMentalists.Stronghold.Telepath;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class controls the Telepath robot during the 15 second autonomous period.  It instantiates its own Autopilot classes to control traversing the defense, driving to the goal and shooting.
@@ -24,25 +28,29 @@ public class Autonomous extends Autopilot {
     
     protected boolean homing = false;
     
+    protected Camera cam;
+    
     @objid ("89eb6fde-adee-4a71-8d26-0f72ceaaea93")
     public void process() 
     {
+    	SmartDashboard.putString("Auto State", state.name());
     	switch(state)
     	{
     	case kInit:
     		state = State.kHome;
     		break;
     	case kHome:
-    		if(lane == 1 || defence == DefenceSelection.kPort)//Low Bar Lane
+    		if(lane == 1 || defence == DefenceSelection.kPort || defence == DefenceSelection.kRough)//Low Bar Lane
     		{
     			if(!homing)
     			{
 	    			homing = true;
+	    			shooter.setAutoPilot(true);
 	    			shooter.setShootAngle(ShooterState.kHome);
 	    			climbingArm.setPositionSetpoint(ClimberPositions.kHome);
 	//    			TODO: Duck bar Home method
     			}
-    			else if(shooter.isTiltAngleAtSetpoint() && climbingArm.isAtSetpoint() /*TODO: check if duck bar is also home*/)
+    			else if(shooter.isShooterHome() /*TODO: check if duck bar is also home*/)
         		{
         			homing = false;
         			state = State.kConfigure;
@@ -77,15 +85,101 @@ public class Autonomous extends Autopilot {
     		}
     		break;
     	case kConfigure:
-    		
+    		if(lane == 1)
+    		{
+    			shooter.setShootAngle(ShooterState.kReload);
+    			climbingArm.setPositionSetpoint(ClimberPositions.kLowBar);
+    			pusherArm.setTiltPosition(Position.kDown);
+//    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(180));
+    			if(shooter.isTiltAngleAtSetpoint() && climbingArm.isAtSetpoint() && pusherArm.isPositionAtSetpoint())
+    			{
+    				state = State.kCrossDefence;
+    			}
+    		}
+    		if(defence == DefenceSelection.kRough || defence == DefenceSelection.kMoat)
+    		{
+    			shooter.setShootAngle(ShooterState.kHome);
+//    			climbingArm.setPositionSetpoint(ClimberPositions.kLowBar);
+//    			pusherArm.setTiltPosition(Position.kHome);
+    			if(shooter.isShooterHome())
+    			{
+    				state = State.kCrossDefence;
+    			}
+    		}
+    		if(defence == DefenceSelection.kRock || defence == DefenceSelection.kRamp)
+    		{
+    			
+    		}
+    		if(defence == DefenceSelection.kCheval)
+    		{
+    			
+    		}
     		break;
     	case kCrossDefence:
+    		if(autopilotMode == null)
+    		{
+	    		autopilotMode = new AutoDriveOverDefense(tele,defence);
+	    		autopilotMode.setEnabled(true);
+	    		
+    		}
+    		else
+    		{
+	    		autopilotMode.process();
+	    		if(((AutoDriveOverDefense)autopilotMode).isDone())
+	    		{
+	    			state = State.kDrive;
+	    			autopilotMode = null;
+	    		}
+    		}
     		break;
     	case kDrive:
+    		state = State.kAim;
+//    		if(autopilotMode == null)
+//    		{
+//    			autopilotMode = new AutoDrive(tele);
+//    			autopilotMode.setEnabled(true);
+//    		}
+//    		else
+//    		{
+//    			autopilotMode.process();
+//    			if(((AutoDrive)autopilotMode).isDone())
+//    			{
+//    				state = State.kTurn;
+//    				autopilotMode = null;
+//    			}
+//    		}
     		break;
     	case kTurn:
+    		if(lane == 1)
+    		{
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    		}
+    		else if(lane == 2)
+    		{
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    		}
+    		else if(lane == 3)
+    		{
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    		}
+    		else if(lane == 4)
+    		{
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    		}
+    		else if(lane == 5)
+    		{
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    		}
+    		if(isAngleInDeadband(gyro.getAngle(),turncon.getSetpoint()))
+    		{
+    			state = State.kAim;
+    		}
     		break;
     	case kAim:
+    		cam.setCam(-1, 0.8);
+    		cam.getImage();
+    		cam.centerTarget();
+    		state = State.kDone;
     		break;
     	case kDriveToRange:
     		break;
@@ -94,6 +188,10 @@ public class Autonomous extends Autopilot {
     	case kDone:
     		break;
     	}
+    	shooter.process();
+//    	climberArm.process();
+    	pusherArm.process();
+    	drive.process();
     }
 
     /**
@@ -104,6 +202,7 @@ public class Autonomous extends Autopilot {
     @objid ("a472f866-0ec6-4c52-bc30-c893eb1086b3")
     public Autonomous(Telepath tele) {
         super(tele);
+        cam = tele.getCamera();
     }
 
     public void setLane(int lane)
@@ -122,6 +221,19 @@ public class Autonomous extends Autopilot {
     		}
     	}
     }
+    
+    public boolean isAngleInDeadband(double angle,double setpoint)
+    {
+    	boolean val = false;
+    	double up = setpoint+1;
+    	double down = setpoint-1;
+    	if(angle <= up && angle >= down)
+    	{
+    		val = true;
+    	}
+    	return val;
+    }
+    
     
     public enum State{
     	kInit,

@@ -18,4 +18,11 @@ public class Gyro extends AnalogGyro
 		newAngle *= 360;
 		return newAngle;
 	}
+	
+	public double getAbsoluteAngleFromRelative(double relativeAngle)
+	{
+		double newangle = relativeAngle - getRelativeAngle();
+		newangle = getAngle()-newangle;
+		return newangle;
+	}
 }

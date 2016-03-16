@@ -1,10 +1,11 @@
 package com.PhantomMentalists.Stronghold;
 
 import com.PhantomMentalists.Stronghold.WestCoastDrive.Gear;
+import com.PhantomMentalists.Stronghold.Autopilot.Autonomous;
 import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
+import com.PhantomMentalists.Stronghold.Autopilot.DefenceSelection;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -84,7 +85,12 @@ public class Telepath extends SampleRobot {
      */
     @objid ("6538383a-6e25-4552-ad07-03d18282baf2")
     public void autonomous() {
+    	Autonomous auto = new Autonomous(this);
+    	auto.setLane(4);
+    	auto.setDefence(DefenceSelection.kRough.getNum());
+    	auto.setEnabled(true);
         while (isAutonomous() && isEnabled()) {
+        	auto.process();
             Timer.delay(Parameters.delay);
         }
     }
@@ -100,6 +106,8 @@ public class Telepath extends SampleRobot {
     	I = prefs.getDouble("Turn I", I);
     	D = prefs.getDouble("Turn D", D);
     	turncont.setPID(P, I, D);
+    	boolean isCameraMovingManually = true;
+    	
         while (isEnabled() && isOperatorControl()) {
             System.out.println("Configure: "+analogstick.getX());
             System.out.println("Lane: "+analogstick.getY());
@@ -114,20 +122,21 @@ public class Telepath extends SampleRobot {
         	// Manually control shooter pitching machine
         	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterShoot.getValue()))
         	{
-        		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
+//        		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
+        		shooter.shoot2();
         	}
         	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterInfeed.getValue()))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterReloadPitchingMachineSpeed);
         	}
-//        	else if(buttonstick1.getRawButton(kShooterSpare.getValue()))
-//        	{
-//        		shooter.manualRunPitchingMachine(Parameters.kShooterShootBatterSpeed);
-//        	}
         	else
         	{
         		shooter.manualRunPitchingMachine(0);
         	}
+//        	else if(buttonstick1.getRawButton(kShooterSpare.getValue()))
+//        	{
+//        		shooter.manualRunPitchingMachine(Parameters.kShooterShootBatterSpeed);
+//        	}
         	
         	// Manually control dink
         	if(buttonstick2.getRawButton(ButtonStick3Values.kKick.getValue()))
@@ -226,40 +235,72 @@ public class Telepath extends SampleRobot {
 //        	{
 //        		pusherArm.manualSetTilt(0);
 //        	}
-        	if(buttonstick3.getRawButton(ButtonStick2Values.kClimberOut.getValue()))
+//        	if(buttonstick3.getRawButton(ButtonStick2Values.kClimberOut.getValue()))
+//        	{
+//        		//
+//        		// TODO:  We cannot extend the climber without at least putting the
+//        		//        winch in "coast" mode, or preferably slowly playing out cord 
+//        		//  
+//        		climbingArm.manualSetExtendRetract(Parameters.kClimberExtendPower);
+//        	}
+//        	else if(buttonstick2.getRawButton(ButtonStick3Values.kClimberIn.getValue()))
+//        	{
+//        		// 
+//        		// TODO:  We cannot pull the climber in without also realing in the 
+//        		//        winch cord
+//        		//
+//        		climbingArm.manualSetExtendRetract(-Parameters.kClimberExtendPower);
+//        	}
+//        	else
+//        	{
+//        		climbingArm.manualSetExtendRetract(0);
+//        	}
+//        	if(buttonstick2.getRawButton(ButtonStick3Values.kClimberUp.getValue()))
+//        	{
+//        		climbingArm.manualSetTilt(Parameters.kClimberTiltPower);
+//        	}
+//        	else if(buttonstick2.getRawButton(ButtonStick3Values.kClimberDown.getValue()))
+//        	{
+//        		climbingArm.manualSetTilt(-Parameters.kClimberTiltPower*.5);
+//        	}
+//        	else
+//        	{
+//        		climbingArm.manualSetTilt(0);
+//        	}
+        	
+        	if(buttonstick2.getRawButton(ButtonStick3Values.kPusherUp.getValue()))
         	{
-        		//
-        		// TODO:  We cannot extend the climber without at least putting the
-        		//        winch in "coast" mode, or preferably slowly playing out cord 
-        		//  
-        		climbingArm.manualSetExtendRetract(Parameters.kClimberExtendPower);
+        		pusherArm.manualSetTilt(Parameters.kPusherArmHomeMotorPower);
         	}
-        	else if(buttonstick2.getRawButton(ButtonStick3Values.kClimberIn.getValue()))
+        	else if(buttonstick2.getRawButton(ButtonStick3Values.kPusherDown.getValue()))
         	{
-        		// 
-        		// TODO:  We cannot pull the climber in without also realing in the 
-        		//        winch cord
-        		//
-        		climbingArm.manualSetExtendRetract(-Parameters.kClimberExtendPower);
+        		pusherArm.manualSetTilt(-Parameters.kPusherArmHomeMotorPower);
         	}
         	else
         	{
-        		climbingArm.manualSetExtendRetract(0);
-        	}
-        	if(buttonstick2.getRawButton(ButtonStick3Values.kClimberUp.getValue()))
-        	{
-        		climbingArm.manualSetTilt(Parameters.kClimberTiltPower);
-        	}
-        	else if(buttonstick2.getRawButton(ButtonStick3Values.kClimberDown.getValue()))
-        	{
-        		climbingArm.manualSetTilt(-Parameters.kClimberTiltPower*.5);
-        	}
-        	else
-        	{
-        		climbingArm.manualSetTilt(0);
+        		pusherArm.manualSetTilt(0);
         	}
         	
-        	cam.setCam(-1, (analogstick.getRawAxis(3)+1)/2);
+        	if (buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()) && isCameraMovingManually)
+        	{	
+        		isCameraMovingManually = false;
+        		cam.getImage();
+        		cam.centerTarget();
+        		turncont.setSetpoint(gyro.getAbsoluteAngleFromRelative(cam.getPosx()));
+        		turncont.enable();
+        	}
+        	else if(!buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()))
+        	{
+        		isCameraMovingManually = true;
+        		turncont.disable();
+        	}
+        	
+        	
+        	if (isCameraMovingManually)
+        	{
+        		cam.setCam(-1, (analogstick.getRawAxis(3)+1)/2);
+        	}
+        	
         	westCoastDrive.process();
         	shooter.process();
         	cam.process();
@@ -308,6 +349,11 @@ public class Telepath extends SampleRobot {
     	{
     		return val;
     	}
+    }
+    
+    public int getNumFromPot(double val)
+    {
+    	return -1;
     }
     
     /**

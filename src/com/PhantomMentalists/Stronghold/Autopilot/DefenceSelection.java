@@ -4,15 +4,15 @@ import com.PhantomMentalists.Stronghold.Parameters;
 
 public enum DefenceSelection 
 {
-	kLowBar(Parameters.kLowBar),
-	kRock(Parameters.kRock),
-	kRough(Parameters.kRough),
+	kLowBar(Parameters.kLowBar),//everything down
+	kRock(Parameters.kRock),//shooter up, pusher up, climber down
+	kRough(Parameters.kRough),//shooter level, climber down, pusher up
 	kDraw(Parameters.kDraw),
 	kSally(Parameters.kSally),
-	kRamp(Parameters.kRamp),
-	kMoat(Parameters.kMoat),
+	kRamp(Parameters.kRamp),//shooter up, climber down,pusher up
+	kMoat(Parameters.kMoat),//shooter level, climber down, pusher up
 	kPort(Parameters.kPort),
-	kCheval(Parameters.kCheval);
+	kCheval(Parameters.kCheval);//shooter up, climber down
 	
 	private int num;
 	DefenceSelection(int num)

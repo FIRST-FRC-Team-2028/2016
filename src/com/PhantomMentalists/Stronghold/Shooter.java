@@ -23,6 +23,7 @@ public class Shooter extends TimerTask{
 	 * Timer used for the timing operations
 	 */
 	private Timer timer;
+	private Timer timer2;
 	
 	/**
 	 * True if the the pitching machine is accelerating and if the pitching machine is not accelerating
@@ -88,6 +89,49 @@ public class Shooter extends TimerTask{
 	protected boolean autopilotEnabled;
 	
 //	protected boolean 
+	
+	class shooter2 extends TimerTask
+	{
+		public void run()
+		{
+			if(!shootUpToSpeed)
+	    	{
+	    		shootAccel = true;
+	    		shootUpToSpeed = true;
+	    		timer = null;
+	    		timer2 = new Timer();
+	    		timer2.schedule(new shooter2(), Parameters.kShooterPitchingMachineAccelTimeout);
+	    	}
+	    	else
+	    	{
+	    		shootAccel = false;
+	    		shooting = false;
+	    		shootUpToSpeed = false;
+	    		manualRunPitchingMachine(0);
+	    		tiltSetpoint = ShooterState.kLowBar;
+	    	}
+		}
+	}
+	
+	public void setAutoPilot(boolean val)
+	{
+		autopilotEnabled = val;
+	}
+	
+	public void shoot2()
+	{
+		if(!shooting)
+		{
+			rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
+	    	leftPitchingMotor.set(-Parameters.kShooterShootPitchingMachineSpeed);
+	    	shooting = true;
+	    	shootAccel = true;
+	    	shootUpToSpeed = false;
+	    	timer = new Timer();
+	    	long timeout = Parameters.kShooterPitchingMachineAccelTimeout;
+	    	timer.schedule(new shooter2(),timeout);
+		}
+	}
 	
     @objid ("e8c46368-8549-4701-acd1-6a7a1b073c83")
     public Shooter() {
@@ -415,15 +459,22 @@ public class Shooter extends TimerTask{
     	return false;
     }
     
+    public boolean isShooterHome()
+    {
+    	return (currentPosition == ShooterState.kHome);
+    }
     
     public void setShooterAngle(double angleSetpoint)
     {
-    	double setpoint = Math.toRadians(angleSetpoint);
+    	double setpoint = Math.toRadians(angleSetpoint);    	
     	double tan = Math.tan(setpoint);
+    	
 //    	double constant = Parameters.kGoalHeight/Parameters.kShooterOffSetFromCamera;
-    	double h = Parameters.kGoalHeight;
+    	double h = Parameters.kGoalHeight;   	
     	double d = Parameters.kShooterOffSetFromCamera;
-    	double angleInRads = Math.atan((h)/((h/tan)+d));
+    	double hgd = Parameters.kHeightGoalDifference;
+    	
+    	double angleInRads = Math.atan((h+hgd)/((h/tan)+d));
     	double newAngle = Math.toDegrees(angleInRads);
     	double newPosition = (-3.7*newAngle/68.5)+3.7;
     	System.out.println("Setpoint: "+setpoint);
@@ -657,7 +708,10 @@ public class Shooter extends TimerTask{
          * This represents the shooter tilt angle is in an unknown position.  This is the initial state of the robot until it is homed.
          */
         kUnknown(null),
-        
+        /**
+         * 
+         */
+        kShoot(-1),
         /**
          * This setpoint holds the tilt angle of the shooter for shooting at the goal from the batter position.
          */

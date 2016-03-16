@@ -65,6 +65,10 @@ public class Camera
     double posx = 0.45;
     boolean followMode = false;
     boolean followInit = false;
+    
+    
+    double distanceToTarget;
+    
 	
 	public Camera(String loc)
 	{
@@ -108,13 +112,25 @@ public class Camera
 	}
 	
 	public double getCameraAngle()
-	{
+	{	
 		return ((1 - servoy.get()) * 69 / 0.382);
+		
 	}
+	
+//	public double getDistanceToTarget()
+//	{
+//		return distanceToTarget;
+//	}
+	
 	public void process()
 	{
 		SmartDashboard.putNumber("Servo y Pos", servoy.get());
 		SmartDashboard.putNumber("Servo angle", ((1 - servoy.get()) * 69 / 0.382));
+		
+		
+		
+//		distanceToTarget = Math.tan(cameraAngle) * Parameters.kGoalHeight;
+		
 //		if(Math.abs(servoy.get()-posy) < 0.005)
 //		{
 //			servoy.
@@ -182,7 +198,7 @@ public class Camera
 		accepted =0;
 		particles = new Vector<ParticleReport>();
 		largest = null;
-		for(int i = 0;i<5;i++)
+		for(int i = 0;i<3;i++)
 		{
 //			System.out.println();
 //			System.out.println("Sample: "+(i+1));
@@ -229,7 +245,7 @@ public class Camera
 //			float areaMin = (float)SmartDashboard.getNumber("Area min %", AREA_MINIMUM);
 			long partfilts = System.nanoTime();
 			criteria[0].lower = (float) AREA_MINIMUM;
-//			imaqError = NIVision.imaqParticleFilter4(binaryFrame, binaryFrame, criteria, filterOptions, null);
+			imaqError = NIVision.imaqParticleFilter4(binaryFrame, binaryFrame, criteria, filterOptions, null);
 //			NIVision.imaq
 //			System.out.println("Particle Filter Time: "+(System.nanoTime()-partfilts));
 	//		System.out.println("4");
@@ -426,20 +442,30 @@ public class Camera
 			double dify = 0;
 			double midxp =best.BoundingRectLeft+((best.BoundingRectRight-best.BoundingRectLeft)/2);
 			double midyp = best.BoundingRectTop+((best.BoundingRectBottom-best.BoundingRectTop)/2);
-			difx = (320/2)-midxp;
+			difx = midxp*(64/320);
+			difx = (-difx)+32;
+			
+//			difx = (320/2)-midxp;
 			dify = (240/2)-midyp;
-			difx /= 320;
+//			difx /= 320;
 			dify /= 240;
 //			System.out.println("Posx: "+posx + "\tPosy: "+posy);
 //			System.out.println("X diff: "+difx +"\tY diff: "+dify);
-			posx -= difx*.35;
+			posx = difx;
+			System.out.println("Angle Diff: "+posx);
 			posy -= dify*.25;
+			servoy.set(posy);
 //			System.out.println("Posx: "+posx + "\tPosy: "+posy);
 		}
 //		else
 //		{
 //			System.out.println("No best target");
 //		}
+	}
+	
+	public double getPosx()
+	{
+		return posx;
 	}
 	
 	public void changeBrightness(int bright)

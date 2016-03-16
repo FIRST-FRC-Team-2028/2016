@@ -39,7 +39,7 @@ public class Parameters {
      * <Enter note text here>
      */
     @objid ("2a05fc7b-925f-4bec-a68e-8ead1eada820")
-    public static final int kPusherArmMotorCanId = 51;
+    public static final int kPusherArmMotorCanId = 43;
 
     @objid ("2deeb224-65ff-4963-8cac-4c00697bb3b9")
     public static final int kShooterAngleMotorCanId = 33;
@@ -54,7 +54,7 @@ public class Parameters {
      * <Enter note text here>
      */
     @objid ("fe6208ba-4d13-4928-b0c0-dea88626ef4e")
-    public static final int kClimberAngleMotorCanId = 43;
+    public static final int kClimberAngleMotorCanId = 51;
 
     /**
      * <Enter note text here>
@@ -181,7 +181,7 @@ public class Parameters {
 
 	public static final double kShooterTiltReloadPositionEncoderSetpoint = 0;
 
-	public static final double kShooterTiltLowBarPositionEncoderSetpoint = 0;
+	public static final double kShooterTiltLowBarPositionEncoderSetpoint = 3.7;
 
 	public static final double kShooterTiltHomePositionEncoderSetpoint = -17389;
 	
@@ -230,7 +230,7 @@ public class Parameters {
 	
 	
 	public static final int kRock = 0;
-	public static final int kRough =0;
+	public static final int kRough =1;
 	public static final int kDraw =0;
 	public static final int kSally =0;
 	public static final int kRamp = 0;
@@ -245,7 +245,7 @@ public class Parameters {
 	public static final double kPusherArmPositionControlThrottle = 0.0;
 	//pusher arm 
 	public static final double kPusherArmMaxMotorCurrent = 20.0;
-	public static final double kPusherArmHomeMotorPower = -0.4;
+	public static final double kPusherArmHomeMotorPower = 0.4;
 	public static final double kMotorVoltageDeadband = 0.05;
 	
 	public static final double kPusherArmHomeSetPoint = 0.0;
@@ -261,12 +261,14 @@ public class Parameters {
 	
 	public static final double kShooterOffSetFromCamera = 7;
 	
-	public static final double autonomousDrivePower = 0.5;
+	public static final double autonomousDrivePower = -0.5;
 	
 	public static final int kDriverStationLeftStick = 1;
 	public static final int kDriverStationRightStick = 0;
-	public static final int kDriverStationAnalogStick = 5;
-	public static final int kDriverStationButtonStick0 = 2;
-	public static final int kDriverStationButtonStick1 = 3;
+	public static final int kDriverStationAnalogStick = 4;
+	public static final int kDriverStationButtonStick2 = 2;
+	public static final int kDriverStationButtonStick3 = 3;
+
+	public static final double kHeightGoalDifference = 6;
 
 }

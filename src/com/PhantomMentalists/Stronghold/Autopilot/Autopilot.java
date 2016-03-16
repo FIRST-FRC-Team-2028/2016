@@ -1,11 +1,14 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
 import com.PhantomMentalists.Stronghold.ClimbingArm;
+import com.PhantomMentalists.Stronghold.Gyro;
 import com.PhantomMentalists.Stronghold.PusherArm;
 import com.PhantomMentalists.Stronghold.Shooter;
 import com.PhantomMentalists.Stronghold.Telepath;
 import com.PhantomMentalists.Stronghold.WestCoastDrive;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
+import edu.wpi.first.wpilibj.PIDController;
 
 /**
  * This is an abstract base class.  It is used as the base class for a hierarchy of
@@ -43,8 +46,14 @@ public abstract class Autopilot {
      */
     @objid ("09cd8f95-bffd-403e-8326-2ee2956eab31")
     protected ClimbingArm climbingArm;
+    
+    protected DefenceSelection defence;
 
     protected Telepath tele;
+    
+    protected Gyro gyro;
+    
+    protected PIDController turncon;
     /**
      * <Enter note text here>
      */
@@ -61,6 +70,8 @@ public abstract class Autopilot {
     	this.shooter = tele.getShooter();
     	this.climbingArm = tele.getClimberArm();
     	this.pusherArm = tele.getPusherArm();
+    	this.turncon = tele.getTurnController();
+    	this.gyro = tele.getGyro();
     }
 
     /**
@@ -79,5 +90,6 @@ public abstract class Autopilot {
         // Automatically generated method. Please delete this comment before entering specific code.
         enabled = value;
     }
+   
 
 }
