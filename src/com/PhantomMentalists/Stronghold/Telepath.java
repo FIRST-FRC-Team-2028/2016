@@ -100,6 +100,7 @@ public class Telepath extends SampleRobot {
      */
     @objid ("a9a437aa-9281-40cd-a90f-1fa3eec18b3c")
     public void operatorControl() {
+    	compressor.start();
     	double leftval = 0,rightval = 0;
     	fan.set(true);
     	P = prefs.getDouble("Turn P", P);
@@ -326,7 +327,7 @@ public class Telepath extends SampleRobot {
     	westCoastDrive = new WestCoastDrive();
     	shooter = new Shooter();
     	climbingArm = new ClimbingArm();
-//    	compressor = new Compressor();
+    	compressor = new Compressor();
     	ultrasonic= new UltrasonicSensor(Parameters.kUltraSonicAnalogPort);
     	gyro = new Gyro(Parameters.kGyroAnalogPort);
     	gyro.initGyro();
