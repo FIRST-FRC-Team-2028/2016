@@ -100,6 +100,7 @@ public class Shooter extends TimerTask{
 	    		shootAccel = true;
 	    		shootUpToSpeed = true;
 	    		timer = null;
+	    		pushBall(true);
 	    		timer2 = new Timer();
 	    		timer2.schedule(new shooter2(), Parameters.kShooterPitchingMachineAccelTimeout);
 	    	}
@@ -109,6 +110,7 @@ public class Shooter extends TimerTask{
 	    		shooting = false;
 	    		shootUpToSpeed = false;
 	    		manualRunPitchingMachine(0);
+	    		pushBall(false);
 	    		tiltSetpoint = ShooterState.kLowBar;
 	    	}
 		}
@@ -354,7 +356,8 @@ public class Shooter extends TimerTask{
     	if(shootAccel && shootUpToSpeed){
     		return true;
     	}
-    	else{
+    	else
+    	{
     		return false;
     	}
        
@@ -473,7 +476,7 @@ public class Shooter extends TimerTask{
     	
 //    	double constant = Parameters.kGoalHeight/Parameters.kShooterOffSetFromCamera;
     	double h = Parameters.kGoalHeight;   	
-    	double d = Parameters.kShooterOffSetFromCamera;
+    	double d = Parameters.kShooterOffSetFromCameraZ;
     	double hgd = Parameters.kHeightGoalDifference;
     	
     	double angleInRads = Math.atan((h+hgd)/((h/tan)+d));

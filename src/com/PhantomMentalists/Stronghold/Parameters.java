@@ -229,15 +229,16 @@ public class Parameters {
 	public static final double kClimberExtendPower = 0.45;
 	
 	
-	public static final int kRock = 0;
-	public static final int kRough =1;
-	public static final int kDraw =0;
-	public static final int kSally =0;
-	public static final int kRamp = 0;
-	public static final int kMoat =0;
-	public static final int kPort =0;
-	public static final int kCheval =0;
-	public static final int kLowBar =0;
+	public static final int kRock = 8;
+	public static final int kRough =9;
+	public static final int kDraw =6;
+	public static final int kSally =7;
+	public static final int kRamp = 5;
+	public static final int kMoat =4;
+	public static final int kPort =2;
+	public static final int kCheval =3;
+	public static final int kLowBar =1;
+	public static final int kClimb = 10;
 	// pusher arm pid
 	public static final double kPusherArmPositionControlProportional = 0.0;
 	public static final double kPusherArmPositionControlIntegral = 0.0;
@@ -246,7 +247,7 @@ public class Parameters {
 	//pusher arm 
 	public static final double kPusherArmMaxMotorCurrent = 20.0;
 	public static final double kPusherArmHomeMotorPower = 0.4;
-	public static final double kPusherArmMotorPowerUp = 0.75;
+	public static final double kPusherArmMotorPowerUp = 0.5;
 	public static final double kMotorVoltageDeadband = 0.05;
 	
 	public static final double kPusherArmHomeSetPoint = 0.0;
@@ -260,16 +261,17 @@ public class Parameters {
 	
 	public static final double kGoalHeight = 85;//height from camera to middle of goal, camera is 12 inches high
 	
-	public static final double kShooterOffSetFromCamera = 7;
+	public static final double kShooterOffSetFromCameraZ = 7;
 	
 	public static final double autonomousDrivePower = -0.5;
 	
-	public static final int kDriverStationLeftStick = 1;
-	public static final int kDriverStationRightStick = 0;
+	public static final int kDriverStationLeftStick = 0;
+	public static final int kDriverStationRightStick = 1;
 	public static final int kDriverStationAnalogStick = 4;
 	public static final int kDriverStationButtonStick2 = 2;
 	public static final int kDriverStationButtonStick3 = 3;
 
-	public static final double kHeightGoalDifference = 6;
+	public static final double kHeightGoalDifference = 0;
+	public static final double kDistCamToShooterX = 10.5;//inches
 
 }

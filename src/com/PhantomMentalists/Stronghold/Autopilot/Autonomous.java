@@ -179,7 +179,9 @@ public class Autonomous extends Autopilot {
     		cam.setCam(-1, 0.8);
     		cam.getImage();
     		cam.centerTarget();
-    		this.turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(cam.getPosx()));
+    		shooter.setShooterAngle(cam.getCameraAngle());
+//    		turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
+//    		turncon.enable();
     		state = State.kDone;
     		break;
     	case kDriveToRange:
@@ -211,16 +213,9 @@ public class Autonomous extends Autopilot {
     	this.lane = lane;
     }
     
-    public void setDefence(int defence)
+    public void setDefence(DefenceSelection defence)
     {
-    	for(DefenceSelection defences: DefenceSelection.values())
-    	{
-    		if(defences.getNum() == defence)
-    		{
-    			this.defence = defences;
-    			return;
-    		}
-    	}
+    	this.defence = defence;
     }
     
     public boolean isAngleInDeadband(double angle,double setpoint)

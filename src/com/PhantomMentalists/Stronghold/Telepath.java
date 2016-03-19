@@ -30,6 +30,7 @@ public class Telepath extends SampleRobot {
     public Preferences prefs;
     DigitalInput tapeSensorLeft = new DigitalInput(Parameters.kTapeSensorLeftDigitalPort);
     DigitalInput tapeSensorRight = new DigitalInput(Parameters.kTapeSensorRightDigitalPort);
+    public DefenceSelection defence;
 	/**
      * <Enter note text here>
      */
@@ -86,8 +87,9 @@ public class Telepath extends SampleRobot {
     @objid ("6538383a-6e25-4552-ad07-03d18282baf2")
     public void autonomous() {
     	Autonomous auto = new Autonomous(this);
-    	auto.setLane(4);
-    	auto.setDefence(DefenceSelection.kRough.getNum());
+    	auto.setLane(getLaneFromJoyStick());
+    	this.setDefenceConfig();
+    	auto.setDefence(defence);
     	auto.setEnabled(true);
         while (isAutonomous() && isEnabled()) {
         	auto.process();
@@ -110,21 +112,24 @@ public class Telepath extends SampleRobot {
     	boolean isCameraMovingManually = true;
     	
         while (isEnabled() && isOperatorControl()) {
-            System.out.println("Configure: "+analogstick.getX());
-            System.out.println("Lane: "+analogstick.getY());
-        	System.out.println("Shooter Pos: "+analogstick.getZ());
-        	System.out.println("Camera Pos: "+analogstick.getRawAxis(3));
+        	setDefenceConfig();
+            SmartDashboard.putNumber("Configure",defence.getNum());
+            SmartDashboard.putNumber("Lane",getLaneFromJoyStick());
+//            System.out.println("Lane: "+analogstick.getY());
+//        	System.out.println("Shooter Pos: "+analogstick.getZ());
+//        	System.out.println("Camera Pos: "+analogstick.getRawAxis(3));
             leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getAngle());
         	SmartDashboard.putNumber("Shoot Position",shootangle);
         	SmartDashboard.putBoolean("Left Tape",tapeSensorLeft.get());
         	SmartDashboard.putBoolean("Right Tape",tapeSensorRight.get());
+        	System.out.println("Gyro Angle: "+gyro.getRelativeAngle());
         	// Manually control shooter pitching machine
         	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterShoot.getValue()) || leftstick.getRawButton(5))
         	{
-//        		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
-        		shooter.shoot2();
+        		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
+//        		shooter.shoot2();
         	}
         	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterInfeed.getValue()) || leftstick.getRawButton(4))
         	{
@@ -223,8 +228,9 @@ public class Telepath extends SampleRobot {
         		isCameraMovingManually = false;
         		cam.getImage();
         		cam.centerTarget();
-        		turncont.setSetpoint(gyro.getAbsoluteAngleFromRelative(cam.getPosx()));
-        		turncont.enable();
+        		shooter.setShooterAngle(cam.getCameraAngle());
+//        		turncont.setSetpoint(gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
+//        		turncont.enable();
         	}
         	else if(!buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()))
         	{
@@ -235,6 +241,13 @@ public class Telepath extends SampleRobot {
         	if(buttonstick2.getRawButton(ButtonStick2Values.kGoTo.getValue()))
         	{
         		shooter.setShooterAngle(cam.getCameraAngle());
+        	}
+        	if(buttonstick3.getRawButton(ButtonStick2Values.kSpare.getValue()))
+        	{
+        		shooter.setShooterAngle(cam.getCameraAngle());
+        		SmartDashboard.putNumber("Target Angle", gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
+//        		turncont.setSetpoint(gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
+//        		turncont.enable();
         	}
         	
         	if (isCameraMovingManually)
@@ -421,14 +434,14 @@ public class Telepath extends SampleRobot {
     	return climbingArm;
     }
     
-    public PIDController getTurnController()
+    public boolean getLeftTape()
+	{
+		return tapeSensorLeft.get();
+	}
+
+	public PIDController getTurnController()
     {
     	return turncont;
-    }
-    
-    public boolean getLeftTape()
-    {
-    	return tapeSensorLeft.get();
     }
     
     public boolean getRightTape()
@@ -446,6 +459,80 @@ public class Telepath extends SampleRobot {
     	return ultrasonic;
     }
     
+    public int getLaneFromJoyStick()
+    {
+    	double val = analogstick.getY();
+    	if(val <= -0.9)
+    	{
+    		val = 1;
+    	}
+    	else if(val <= -0.5 && val >= -0.7)
+    	{
+    		val = 2;
+    	}
+    	else if(val <= -0.1 && val >= -0.3)
+    	{
+    		val = 3;
+    	}
+    	else if(val <= 0.3 && val >= 0.1)
+    	{
+    		val = 4;
+    	}
+    	else if(val <= 0.7 && val >= 0.5)
+    	{
+    		val = 5;
+    	}
+    	else
+    	{
+    		val = -1;
+    	}
+    	return (int)val;
+    }
+ 
+    public void setDefenceConfig()
+    {
+    	double val = analogstick.getX();
+    	if(val <= -0.925)
+    	{
+    		defence = DefenceSelection.kLowBar;
+    	}
+    	else if(val >= -0.875 && val <= -0.725)
+    	{
+    		defence = DefenceSelection.kPort;
+    	}
+    	else if(val >= -0.675 && val <= -0.525)
+    	{
+    		defence = DefenceSelection.kCheval;
+    	}
+    	else if(val >= -0.475 && val <= -0.325)
+    	{
+    		defence = DefenceSelection.kMoat;
+    	}
+    	else if(val >= -0.275 && val <= -0.125)
+    	{
+    		defence = DefenceSelection.kRamp;
+    	}
+    	else if(val >= 0.125 && val <= 0.275)
+    	{
+    		defence = DefenceSelection.kDraw;
+    	}
+    	else if(val >= 0.325 && val <= 0.475)
+    	{
+    		defence = DefenceSelection.kSally;
+    	}
+    	else if(val >= 0.525 && val <= 0.675)
+    	{
+    		defence = DefenceSelection.kRock;
+    	}
+    	else if(val >= 0.725 && val <= 0.875)
+    	{
+    		defence = DefenceSelection.kRough;
+    	}
+    	else if(val >=0.925)
+    	{
+    		defence = DefenceSelection.kClimb;
+    	}
+    }
     public enum ButtonStick2Values
     {
     	/**

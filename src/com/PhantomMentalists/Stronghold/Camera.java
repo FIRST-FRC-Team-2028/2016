@@ -451,6 +451,7 @@ public class Camera
 			dify /= 240;
 //			System.out.println("Posx: "+posx + "\tPosy: "+posy);
 //			System.out.println("X diff: "+difx +"\tY diff: "+dify);
+			
 			posx = difx;
 			System.out.println("Angle Diff: "+posx);
 			posy -= dify*.25;
@@ -463,9 +464,19 @@ public class Camera
 //		}
 	}
 	
-	public double getPosx()
+	public double getDistanceToTarget()
 	{
-		return posx;
+		double val = 0;
+		double rads = Math.toRadians(getCameraAngle());
+		val = (Parameters.kGoalHeight/Math.tan(rads));
+		return val;
+	}
+	
+	public double getDiffAngleX()
+	{
+		double angle = Math.atan((Parameters.kDistCamToShooterX)/getDistanceToTarget());
+		angle = Math.toDegrees(angle);
+		return posx+angle;
 	}
 	
 	public void changeBrightness(int bright)

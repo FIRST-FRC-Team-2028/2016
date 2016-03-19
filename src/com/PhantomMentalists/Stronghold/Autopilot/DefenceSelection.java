@@ -12,7 +12,8 @@ public enum DefenceSelection
 	kRamp(Parameters.kRamp),//shooter up, climber down,pusher up
 	kMoat(Parameters.kMoat),//shooter level, climber down, pusher up
 	kPort(Parameters.kPort),
-	kCheval(Parameters.kCheval);//shooter up, climber down
+	kCheval(Parameters.kCheval),//shooter up, climber down
+	kClimb(Parameters.kClimb);
 	
 	private int num;
 	DefenceSelection(int num)
