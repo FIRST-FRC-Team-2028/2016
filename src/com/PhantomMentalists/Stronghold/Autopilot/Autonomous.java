@@ -83,6 +83,22 @@ public class Autonomous extends Autopilot {
     				state = State.kConfigure;
     			}
     		}
+    		else if(defence == DefenceSelection.kMoat)
+    		{
+    			if(!homing)
+    			{
+	    			homing = true;
+	    			shooter.setAutoPilot(true);
+	    			shooter.setShootAngle(ShooterState.kHome);
+	    			climbingArm.setPositionSetpoint(ClimberPositions.kHome);
+	//    			TODO: Duck bar Home method
+    			}
+    			else if(shooter.isShooterHome() /*TODO: check if duck bar is also home*/)
+        		{
+        			homing = false;
+        			state = State.kConfigure;
+        		}
+    		}
     		break;
     	case kConfigure:
     		if(lane == 1)
@@ -178,7 +194,7 @@ public class Autonomous extends Autopilot {
     	case kAim:
     		cam.setCam(-1, 0.8);
     		cam.getImage();
-    		cam.centerTarget();
+    		cam.centerTarget(gyro.getAngle());
     		shooter.setShooterAngle(cam.getCameraAngle());
 //    		turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
 //    		turncon.enable();

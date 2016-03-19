@@ -177,14 +177,14 @@ public class DriveUnit {
 //    	{
     		// We're not turning
 //    	System.out.println("turn: "+turnSetpoint);
-    	if(turnSetpoint == 0)
-    	{
-    		masterMotor.set(speedSetpoint);
-    	}
-    	else
-    	{
-    		masterMotor.set(turnSetpoint);
-    	}
+//    	if(turnSetpoint == 0)
+//    	{
+//    		masterMotor.set(speedSetpoint);
+//    	}
+//    	else
+//    	{
+//    		masterMotor.set(turnSetpoint);
+//    	}
     	// Set the power to the master motor.  NOTE:  We need to calculate
     	// the power based on the speed setpoint modified by the turn setpoint.
     	// If we're driving forward and turning, the inside wheels must
@@ -211,7 +211,7 @@ public class DriveUnit {
 					// We're turning to the left
 					if (placement == Placement.Left) 
 					{
-						setpoint = turnSetpoint;
+						setpoint = -turnSetpoint;
 					}
 					else
 					{
@@ -224,11 +224,11 @@ public class DriveUnit {
 					// We're turning to the right
 					if (placement == Placement.Right) 
 					{
-						setpoint = -turnSetpoint;
+						setpoint = turnSetpoint;
 					} 
 					else
 					{
-						setpoint = turnSetpoint;
+						setpoint = -turnSetpoint;
 					}
 									
 				}
@@ -352,6 +352,7 @@ public class DriveUnit {
      */
     public void setTurnSetpoint(double value)
     {
+    	System.out.println("here3 ");
     	if(placement == Placement.Left)
 		{
 			value *= -1;

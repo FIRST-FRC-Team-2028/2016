@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import com.PhantomMentalists.Stronghold.Parameters;
 import com.PhantomMentalists.Stronghold.Telepath;
+import com.PhantomMentalists.Stronghold.WestCoastDrive.Gear;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -80,20 +81,20 @@ public class AutoDriveOverDefense extends Autopilot {
 		    		switch(defense)
 		    		{
 			    		case kMoat:
+			    		case kRamp:
+			    			drive.setGear(Gear.kHighGear);
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
+				    		
+				    		timer = new Timer();
+				    		timer.schedule(new driveTime(), 3000);
 				    		state = DriveStates.driving;
 			    			break;
 			    		case kRock:
-				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
-				    		state = DriveStates.driving;
-			    			break;
-			    		case kRamp:
-				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
-				    		state = DriveStates.driving;
-			    			break;
 			    		case kRough:
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		state = DriveStates.driving;
+				    		timer = new Timer();
+				    		timer.schedule(new driveTime(), 5500);
 			    			break;
 			    		case kLowBar:
 			    			drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
@@ -102,8 +103,6 @@ public class AutoDriveOverDefense extends Autopilot {
 			    		default:
 			    			System.out.println("Should never happen in AutoDriveOverDefense");
 		    		}
-		    		timer = new Timer();
-		    		timer.schedule(new driveTime(), 5500);
 		    		break;
 		    	case driving:
 		    		//TODO: Might not be correct and check what happens to tape sensor if robot jumps

@@ -247,7 +247,7 @@ public class Parameters {
 	//pusher arm 
 	public static final double kPusherArmMaxMotorCurrent = 20.0;
 	public static final double kPusherArmHomeMotorPower = 0.4;
-	public static final double kPusherArmMotorPowerUp = 0.5;
+	public static final double kPusherArmMotorPowerUp = 0.75;
 	public static final double kMotorVoltageDeadband = 0.05;
 	
 	public static final double kPusherArmHomeSetPoint = 0.0;

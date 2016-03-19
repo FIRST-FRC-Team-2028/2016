@@ -37,4 +37,20 @@ public class Gyro extends AnalogGyro
 		newangle = getAngle()+newangle;
 		return newangle;
 	}
+	
+	
+	public double getGyroAngle(double newAngle)
+	{
+
+	if(newAngle >= 180)
+	{
+		newAngle = -360+newAngle;
+	}
+	else if (newAngle <= -180)
+	{
+		newAngle = 360+newAngle;
+	}
+	newAngle = getAngle()+newAngle;
+	return newAngle;
+	}
 }

@@ -163,8 +163,8 @@ public class WestCoastDrive implements PIDOutput
     	 double rightvalue = -value*0.5;
     	 System.out.println("Left: "+leftvalue);
     	 System.out.println("Right: "+rightvalue);
-    	 leftSide.setSpeedSetpoint(0);
-    	 rightSide.setSpeedSetpoint(0);
+//    	 leftSide.setSpeedSetpoint(0);
+//    	 rightSide.setSpeedSetpoint(0);
     	 leftSide.setTurnSetpoint(leftvalue);
     	 rightSide.setTurnSetpoint(rightvalue);
      }
