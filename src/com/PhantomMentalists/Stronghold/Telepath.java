@@ -121,12 +121,12 @@ public class Telepath extends SampleRobot {
         	SmartDashboard.putBoolean("Left Tape",tapeSensorLeft.get());
         	SmartDashboard.putBoolean("Right Tape",tapeSensorRight.get());
         	// Manually control shooter pitching machine
-        	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterShoot.getValue()))
+        	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterShoot.getValue()) || leftstick.getRawButton(5))
         	{
 //        		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
         		shooter.shoot2();
         	}
-        	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterInfeed.getValue()))
+        	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterInfeed.getValue()) || leftstick.getRawButton(4))
         	{
         		shooter.manualRunPitchingMachine(Parameters.kShooterReloadPitchingMachineSpeed);
         	}
@@ -150,36 +150,21 @@ public class Telepath extends SampleRobot {
         	}
         	
         	// Manually control shooter angle
-        	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterUp.getValue()))
+        	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterUp.getValue()) || leftstick.getRawButton(3))
         	{
         		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerUp);
         	}
-        	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterDown.getValue()))
+        	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterDown.getValue()) || leftstick.getRawButton(2))
         	{
         		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerDown);
-        	}
-        	else if(rightstick.getRawButton(11))
-        	{
-//        		System.out.println("here2");
-//        		shooter.setShootAngle(ShooterPosition.kHome);
-        		shooter.setTiltMemSetpoint(shootangle);
-//        		cam.setCam(-1,(0.335*shooter.getTiltAngle()/3.9)+0.665);
-        	}
-        	else if(rightstick.getRawButton(10))
-        	{
-        		shootangle = shooter.getTiltAngle();
         	}
         	else
         	{
         		shooter.manualRunTiltMotor(0);
         	}
-        	if(rightstick.getRawButton(9))
+        	if(buttonstick3.getRawButton(ButtonStick2Values.kSetTarget.getValue()))
         	{
         		tangle = gyro.getAngle();
-        	}
-        	if(rightstick.getRawButton(8))
-        	{
-        		gyro.calibrate();
         	}
         	if(rightstick.getRawButton(2))
         	{
@@ -199,79 +184,30 @@ public class Telepath extends SampleRobot {
 //        		System.out.println("here3");
         		westCoastDrive.setSpeedSetpoint(leftval, rightval);
         	}
-        	if(leftstick.getRawButton(8) && !turncont.isEnabled())
+        	if(buttonstick3.getRawButton(ButtonStick2Values.kGotoZero.getValue()) && !turncont.isEnabled())
         	{
 //        		System.out.println("here2");
         		turncont.setSetpoint(0);
         		turncont.enable();
 
         	}
-        	else if(leftstick.getRawButton(9) && !turncont.isEnabled())
+        	else if(buttonstick3.getRawButton(ButtonStick2Values.kGotoTarget.getValue()) && !turncont.isEnabled())
         	{
 //        		System.out.println("here2");
         		turncont.setSetpoint(tangle);
         		turncont.enable();
 
         	}
-        	else if(!leftstick.getRawButton(9) && !leftstick.getRawButton(8) && turncont.isEnabled())
+        	else if(!buttonstick3.getRawButton(ButtonStick2Values.kGotoTarget.getValue()) && !buttonstick3.getRawButton(ButtonStick2Values.kGotoZero.getValue()) && !buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()) && turncont.isEnabled())
         	{
 //        		System.out.println("here");
         		turncont.disable();
         		westCoastDrive.setTurnSetpoint(0);
         	}
-        	if(rightstick.getTrigger())
-        	{
-        		System.out.println("Cam angle: "+cam.getCameraAngle());
-        		shooter.setShooterAngle(cam.getCameraAngle());
-        	}
-//        	if(leftstick.getTrigger())
-//        	{
-//        		pusherArm.manualSetTilt(-Parameters.kPusherArmHomeMotorPower);
-//        	}
-//        	else if(rightstick.getTrigger())
-//        	{
-//        		pusherArm.manualSetTilt(Parameters.kPusherArmHomeMotorPower);
-//        	}
-//        	else
-//        	{
-//        		pusherArm.manualSetTilt(0);
-//        	}
-//        	if(buttonstick3.getRawButton(ButtonStick2Values.kClimberOut.getValue()))
-//        	{
-//        		//
-//        		// TODO:  We cannot extend the climber without at least putting the
-//        		//        winch in "coast" mode, or preferably slowly playing out cord 
-//        		//  
-//        		climbingArm.manualSetExtendRetract(Parameters.kClimberExtendPower);
-//        	}
-//        	else if(buttonstick2.getRawButton(ButtonStick3Values.kClimberIn.getValue()))
-//        	{
-//        		// 
-//        		// TODO:  We cannot pull the climber in without also realing in the 
-//        		//        winch cord
-//        		//
-//        		climbingArm.manualSetExtendRetract(-Parameters.kClimberExtendPower);
-//        	}
-//        	else
-//        	{
-//        		climbingArm.manualSetExtendRetract(0);
-//        	}
-//        	if(buttonstick2.getRawButton(ButtonStick3Values.kClimberUp.getValue()))
-//        	{
-//        		climbingArm.manualSetTilt(Parameters.kClimberTiltPower);
-//        	}
-//        	else if(buttonstick2.getRawButton(ButtonStick3Values.kClimberDown.getValue()))
-//        	{
-//        		climbingArm.manualSetTilt(-Parameters.kClimberTiltPower*.5);
-//        	}
-//        	else
-//        	{
-//        		climbingArm.manualSetTilt(0);
-//        	}
-        	
+
         	if(buttonstick2.getRawButton(ButtonStick3Values.kPusherUp.getValue()))
         	{
-        		pusherArm.manualSetTilt(Parameters.kPusherArmHomeMotorPower);
+        		pusherArm.manualSetTilt(Parameters.kPusherArmMotorPowerUp);
         	}
         	else if(buttonstick2.getRawButton(ButtonStick3Values.kPusherDown.getValue()))
         	{
@@ -296,6 +232,10 @@ public class Telepath extends SampleRobot {
         		turncont.disable();
         	}
         	
+        	if(buttonstick2.getRawButton(ButtonStick2Values.kGoTo.getValue()))
+        	{
+        		shooter.setShooterAngle(cam.getCameraAngle());
+        	}
         	
         	if (isCameraMovingManually)
         	{
@@ -526,7 +466,7 @@ public class Telepath extends SampleRobot {
     	/**
     	 *
     	 */
-    	kClimberOut(4),
+    	kGoTo(4),
     	
     	/**
     	 * 

@@ -94,6 +94,7 @@ public class Shooter extends TimerTask{
 	{
 		public void run()
 		{
+			System.out.println("Shoot2 timer");
 			if(!shootUpToSpeed)
 	    	{
 	    		shootAccel = true;
@@ -122,6 +123,7 @@ public class Shooter extends TimerTask{
 	{
 		if(!shooting)
 		{
+			System.out.println("Shooter 2");
 			rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
 	    	leftPitchingMotor.set(-Parameters.kShooterShootPitchingMachineSpeed);
 	    	shooting = true;

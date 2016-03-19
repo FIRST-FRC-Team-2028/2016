@@ -152,23 +152,23 @@ public class Autonomous extends Autopilot {
     	case kTurn:
     		if(lane == 1)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(319.62));
     		}
     		else if(lane == 2)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(334.36));
     		}
     		else if(lane == 3)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(343.68));
     		}
     		else if(lane == 4)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(6.59));
     		}
     		else if(lane == 5)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(300));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(19.17));
     		}
     		if(isAngleInDeadband(gyro.getAngle(),turncon.getSetpoint()))
     		{
@@ -179,6 +179,7 @@ public class Autonomous extends Autopilot {
     		cam.setCam(-1, 0.8);
     		cam.getImage();
     		cam.centerTarget();
+    		this.turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(cam.getPosx()));
     		state = State.kDone;
     		break;
     	case kDriveToRange:

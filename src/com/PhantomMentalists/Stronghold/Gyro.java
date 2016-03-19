@@ -16,13 +16,25 @@ public class Gyro extends AnalogGyro
 		int revs = (int)(angle/360);
 		double newAngle = (angle/360)-revs;
 		newAngle *= 360;
+		if(newAngle < 0)
+		{
+			newAngle += 360;
+		}
 		return newAngle;
 	}
 	
 	public double getAbsoluteAngleFromRelative(double relativeAngle)
 	{
 		double newangle = relativeAngle - getRelativeAngle();
-		newangle = getAngle()-newangle;
+		if(newangle >= 180)
+		{
+			newangle = -360+newangle;
+		}
+		else if (newangle <= -180)
+		{
+			newangle = 360+newangle;
+		}
+		newangle = getAngle()+newangle;
 		return newangle;
 	}
 }
