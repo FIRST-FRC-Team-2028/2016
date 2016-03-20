@@ -87,7 +87,7 @@ public class AutoDriveOverDefense extends Autopilot {
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		
 				    		timer = new Timer();
-				    		timer.schedule(new driveTime(), 4000);
+				    		timer.schedule(new driveTime(), 2500);
 				    		state = DriveStates.driving;
 			    			break;
 			    		case kRough:

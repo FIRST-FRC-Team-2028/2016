@@ -159,8 +159,8 @@ public class WestCoastDrive implements PIDOutput
      @objid ("77501865-67e2-4889-b074-f047bd3616a6")
      void setTurnSetpoint(double value)
      { 
-    	 double leftvalue = value*0.5;
-    	 double rightvalue = -value*0.5;
+    	 double leftvalue = value;
+    	 double rightvalue = -value;
 //    	 System.out.println("Left: "+leftvalue);
 //    	 System.out.println("Right: "+rightvalue);
 //    	 leftSide.setSpeedSetpoint(0);

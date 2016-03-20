@@ -1,5 +1,8 @@
 package com.PhantomMentalists.Stronghold.Autopilot;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.PhantomMentalists.Stronghold.Camera;
 import com.PhantomMentalists.Stronghold.ClimbingArm.ClimberPositions;
 import com.PhantomMentalists.Stronghold.PusherArm.Position;
@@ -29,6 +32,8 @@ public class Autonomous extends Autopilot {
     protected boolean homing = false;
     
     protected Camera cam;
+    
+    protected Timer dtimer;
     
     @objid ("89eb6fde-adee-4a71-8d26-0f72ceaaea93")
     public void process() 
@@ -149,7 +154,7 @@ public class Autonomous extends Autopilot {
     		}
     		break;
     	case kDrive:
-    		state = State.kAim;
+    		state = State.kTurn;
 //    		if(autopilotMode == null)
 //    		{
 //    			autopilotMode = new AutoDrive(tele);
@@ -166,6 +171,7 @@ public class Autonomous extends Autopilot {
 //    		}
     		break;
     	case kTurn:
+    		turncon.enable();
     		if(lane == 1)
     		{
     			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(319.62));
@@ -188,8 +194,10 @@ public class Autonomous extends Autopilot {
     		}
     		if(isAngleInDeadband(gyro.getAngle(),turncon.getSetpoint()))
     		{
+    			turncon.disable();
     			state = State.kAim;
     		}
+    		
     		break;
     	case kAim:
     		cam.setCam(-1, 0.8);
@@ -246,6 +254,13 @@ public class Autonomous extends Autopilot {
     	return val;
     }
     
+    class delay extends TimerTask
+    {
+    	public void run()
+    	{
+    		
+    	}
+    }
     
     public enum State{
     	kInit,

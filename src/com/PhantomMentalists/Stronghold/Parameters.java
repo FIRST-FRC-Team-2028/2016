@@ -259,11 +259,11 @@ public class Parameters {
 
 	public static final long kShooterPitchingMachinePushBallTimeout = 250;
 	
-	public static final double kGoalHeight = 85;//height from camera to middle of goal, camera is 12 inches high
+	public static final double kGoalHeight = 77.5;//height from camera to middle of goal, camera is 12 inches high
 	
 	public static final double kShooterOffSetFromCameraZ = 9.5;
 	
-	public static final double autonomousDrivePower = -0.5;
+	public static final double autonomousDrivePower = -0.75;
 	
 	public static final int kDriverStationLeftStick = 0;
 	public static final int kDriverStationRightStick = 1;

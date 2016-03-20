@@ -179,261 +179,267 @@ public class Camera {
 	}
 
 	public void getImage() {
-		long start = System.nanoTime();
-		// read file in from disk. For this example to run you need to copy
-		// image.jpg from the SampleImages folder to the
-		// directory shown below using FTP or SFTP:
-		// http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
-		// NIVision.imaqReadFile(frame, "/testImage.jpg");
-		// cam.writeBrightness(50);
-		try {
-			print = new PrintWriter(file);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// print.println("First,Second,Third");
-		avglarg = 0;
-		accepted = 0;
-		particles = new Vector<ParticleReport>();
-		largest = null;
-		for (int i = 0; i < 3; i++) {
-			// System.out.println();
-			// System.out.println("Sample: "+(i+1));
-			long ims = System.nanoTime();
-			cam.getImage(frame);
-			// System.out.println("Image Capture Time: "+(System.nanoTime()-ims));
-			NIVision.imaqWriteJPEGFile(frame, "/testing.jpg", 400, table);
-			// System.out.println("1");
-			// SmartDashboard.putNumber("Tote hue min",
-			// TOTE_HUE_RANGE.minValue);
-			// SmartDashboard.putNumber("Tote hue max",
-			// TOTE_HUE_RANGE.maxValue);
-			// SmartDashboard.putNumber("Tote sat min",
-			// TOTE_SAT_RANGE.minValue);
-			// SmartDashboard.putNumber("Tote sat max",
-			// TOTE_SAT_RANGE.maxValue);
-			// SmartDashboard.putNumber("Tote val min",
-			// TOTE_VAL_RANGE.minValue);
-			// SmartDashboard.putNumber("Tote val max",
-			// TOTE_VAL_RANGE.maxValue);
-			// Update threshold values from SmartDashboard. For performance
-			// reasons it is recommended to remove this after calibration is
-			// finished.
-			// HUE_RANGE.minValue = (int)prefs.getInt("Hue min",
-			// HUE_RANGE.minValue);
-			// HUE_RANGE.maxValue = (int)prefs.getInt("Hue max",
-			// HUE_RANGE.maxValue);
-			// SAT_RANGE.minValue = (int)prefs.getInt("Sat min",
-			// SAT_RANGE.minValue);
-			// SAT_RANGE.maxValue = (int)prefs.getInt("Sat max",
-			// SAT_RANGE.maxValue);
-			// L_RANGE.minValue = (int)prefs.getInt("Val min",
-			// L_RANGE.minValue);
-			// L_RANGE.maxValue = (int)prefs.getInt("Val max",
-			// L_RANGE.maxValue);
-			// System.out.println(HUE_RANGE.minValue);
-			// System.out.println(HUE_RANGE.maxValue);
-			// System.out.println(SAT_RANGE.minValue);
-			// System.out.println(SAT_RANGE.maxValue);
-			// System.out.println(L_RANGE.minValue);
-			// System.out.println(L_RANGE.maxValue);
-
-			// Threshold the image looking for yellow (tote color)
-			long maskings = System.nanoTime();
-			NIVision.imaqColorThreshold(binaryFrame, frame, 255,
-					NIVision.ColorMode.HSL, HUE_RANGE, SAT_RANGE, L_RANGE);
-			// System.out.println("Image Masking Time: "+(System.nanoTime()-maskings));
-			// System.out.println("2");
-
-			// Send particle count to dashboard
-			int numParticles = NIVision.imaqCountParticles(binaryFrame, 1);
-			SmartDashboard.putNumber("Masked particles", numParticles);
-
-			// Send masked image to dashboard to assist in tweaking mask.
-			// CameraServer.getInstance().setImage(binaryFrame);
-			// System.out.println("3");
-
-			// filter out small particles
-			// float areaMin = (float)SmartDashboard.getNumber("Area min %",
-			// AREA_MINIMUM);
-			long partfilts = System.nanoTime();
-			criteria[0].lower = (float) AREA_MINIMUM;
-			imaqError = NIVision.imaqParticleFilter4(binaryFrame, binaryFrame,
-					criteria, filterOptions, null);
-			// NIVision.imaq
-			// System.out.println("Particle Filter Time: "+(System.nanoTime()-partfilts));
-			// System.out.println("4");
-
-			// Send particle count after filtering to dashboard
-			numParticles = NIVision.imaqCountParticles(binaryFrame, 1);
-			SmartDashboard.putNumber("Filtered particles", numParticles);
-
-			if (numParticles > 0) {
-				// Measure particles and sort by particle size
-				long targets = System.nanoTime();
-				// System.out.println("Total Targets found: "+numParticles);
-				int lareaindex = 0;
-				for (int particleIndex = 0; particleIndex < numParticles; particleIndex++) {
-					ParticleReport par = new ParticleReport();
-					// par.
-					// par.Area = NIVision.imaqMeasureParticle(binaryFrame,
-					// particleIndex, 0, NIVision.MeasurementType.MT_AREA);
-					// NIVision.imaq
-
-					par.BoundingRectTop = NIVision.imaqMeasureParticle(
-							binaryFrame, particleIndex, 0,
-							NIVision.MeasurementType.MT_BOUNDING_RECT_TOP);
-					par.BoundingRectLeft = NIVision.imaqMeasureParticle(
-							binaryFrame, particleIndex, 0,
-							NIVision.MeasurementType.MT_BOUNDING_RECT_LEFT);
-					par.BoundingRectBottom = NIVision.imaqMeasureParticle(
-							binaryFrame, particleIndex, 0,
-							NIVision.MeasurementType.MT_BOUNDING_RECT_BOTTOM);
-					par.BoundingRectRight = NIVision.imaqMeasureParticle(
-							binaryFrame, particleIndex, 0,
-							NIVision.MeasurementType.MT_BOUNDING_RECT_RIGHT);
-
-					par.Area = (par.BoundingRectRight - par.BoundingRectLeft)
-							* (par.BoundingRectBottom - par.BoundingRectTop);
-					par.PercentAreaToImageArea = par.Area / (320 * 240);
-					par.length = par.BoundingRectRight - par.BoundingRectLeft;
-					par.height = par.BoundingRectBottom - par.BoundingRectTop;
-//					System.out.println("Percent: " + par.PercentAreaToImageArea
-//							+ "\nArea: " + par.Area);
-					double len = par.BoundingRectRight - par.BoundingRectLeft;
-					double height = par.BoundingRectBottom
-							- par.BoundingRectTop;
-					double ratio = len / height;
-
-					ArrayList<Boolean> filter = new ArrayList<Boolean>();
-					filter.add(ratio <= (UPPER_LONG_RATIO));
-					filter.add(ratio >= (LOWER_LONG_RATIO));
-					filter.add(len >= 20);
-					filter.add(height >= 12);
-					filter.add(len <= 150);
-					filter.add(height <= 85);
-					filter.add(par.Area < 14000);
-					filter.add(par.Area > 400);
-					if (!filter.contains(false)) {
-						// particles.add(par);
-						// System.out.println();
-//						System.out.println("(Filter Accepted)");
-						// System.out.println();
-						if (largest != null) {
-							if (par.Area > largest.Area) {
-								largest = par;
-							} else if (smallest != null) {
-								if (par.Area < smallest.Area) {
+		try
+		{
+			long start = System.nanoTime();
+			// read file in from disk. For this example to run you need to copy
+			// image.jpg from the SampleImages folder to the
+			// directory shown below using FTP or SFTP:
+			// http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
+			// NIVision.imaqReadFile(frame, "/testImage.jpg");
+			// cam.writeBrightness(50);
+			try {
+				print = new PrintWriter(file);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// print.println("First,Second,Third");
+			avglarg = 0;
+			accepted = 0;
+			particles = new Vector<ParticleReport>();
+			largest = null;
+			for (int i = 0; i < 3; i++) {
+				// System.out.println();
+				// System.out.println("Sample: "+(i+1));
+				long ims = System.nanoTime();
+				cam.getImage(frame);
+				// System.out.println("Image Capture Time: "+(System.nanoTime()-ims));
+				NIVision.imaqWriteJPEGFile(frame, "/testing.jpg", 400, table);
+				// System.out.println("1");
+				// SmartDashboard.putNumber("Tote hue min",
+				// TOTE_HUE_RANGE.minValue);
+				// SmartDashboard.putNumber("Tote hue max",
+				// TOTE_HUE_RANGE.maxValue);
+				// SmartDashboard.putNumber("Tote sat min",
+				// TOTE_SAT_RANGE.minValue);
+				// SmartDashboard.putNumber("Tote sat max",
+				// TOTE_SAT_RANGE.maxValue);
+				// SmartDashboard.putNumber("Tote val min",
+				// TOTE_VAL_RANGE.minValue);
+				// SmartDashboard.putNumber("Tote val max",
+				// TOTE_VAL_RANGE.maxValue);
+				// Update threshold values from SmartDashboard. For performance
+				// reasons it is recommended to remove this after calibration is
+				// finished.
+				// HUE_RANGE.minValue = (int)prefs.getInt("Hue min",
+				// HUE_RANGE.minValue);
+				// HUE_RANGE.maxValue = (int)prefs.getInt("Hue max",
+				// HUE_RANGE.maxValue);
+				// SAT_RANGE.minValue = (int)prefs.getInt("Sat min",
+				// SAT_RANGE.minValue);
+				// SAT_RANGE.maxValue = (int)prefs.getInt("Sat max",
+				// SAT_RANGE.maxValue);
+				// L_RANGE.minValue = (int)prefs.getInt("Val min",
+				// L_RANGE.minValue);
+				// L_RANGE.maxValue = (int)prefs.getInt("Val max",
+				// L_RANGE.maxValue);
+				// System.out.println(HUE_RANGE.minValue);
+				// System.out.println(HUE_RANGE.maxValue);
+				// System.out.println(SAT_RANGE.minValue);
+				// System.out.println(SAT_RANGE.maxValue);
+				// System.out.println(L_RANGE.minValue);
+				// System.out.println(L_RANGE.maxValue);
+	
+				// Threshold the image looking for yellow (tote color)
+				long maskings = System.nanoTime();
+				NIVision.imaqColorThreshold(binaryFrame, frame, 255,
+						NIVision.ColorMode.HSL, HUE_RANGE, SAT_RANGE, L_RANGE);
+				// System.out.println("Image Masking Time: "+(System.nanoTime()-maskings));
+				// System.out.println("2");
+	
+				// Send particle count to dashboard
+				int numParticles = NIVision.imaqCountParticles(binaryFrame, 1);
+				SmartDashboard.putNumber("Masked particles", numParticles);
+	
+				// Send masked image to dashboard to assist in tweaking mask.
+				// CameraServer.getInstance().setImage(binaryFrame);
+				// System.out.println("3");
+	
+				// filter out small particles
+				// float areaMin = (float)SmartDashboard.getNumber("Area min %",
+				// AREA_MINIMUM);
+				long partfilts = System.nanoTime();
+				criteria[0].lower = (float) AREA_MINIMUM;
+				imaqError = NIVision.imaqParticleFilter4(binaryFrame, binaryFrame,
+						criteria, filterOptions, null);
+				// NIVision.imaq
+				// System.out.println("Particle Filter Time: "+(System.nanoTime()-partfilts));
+				// System.out.println("4");
+	
+				// Send particle count after filtering to dashboard
+				numParticles = NIVision.imaqCountParticles(binaryFrame, 1);
+				SmartDashboard.putNumber("Filtered particles", numParticles);
+	
+				if (numParticles > 0) {
+					// Measure particles and sort by particle size
+					long targets = System.nanoTime();
+					// System.out.println("Total Targets found: "+numParticles);
+					int lareaindex = 0;
+					for (int particleIndex = 0; particleIndex < numParticles; particleIndex++) {
+						ParticleReport par = new ParticleReport();
+						// par.
+						// par.Area = NIVision.imaqMeasureParticle(binaryFrame,
+						// particleIndex, 0, NIVision.MeasurementType.MT_AREA);
+						// NIVision.imaq
+	
+						par.BoundingRectTop = NIVision.imaqMeasureParticle(
+								binaryFrame, particleIndex, 0,
+								NIVision.MeasurementType.MT_BOUNDING_RECT_TOP);
+						par.BoundingRectLeft = NIVision.imaqMeasureParticle(
+								binaryFrame, particleIndex, 0,
+								NIVision.MeasurementType.MT_BOUNDING_RECT_LEFT);
+						par.BoundingRectBottom = NIVision.imaqMeasureParticle(
+								binaryFrame, particleIndex, 0,
+								NIVision.MeasurementType.MT_BOUNDING_RECT_BOTTOM);
+						par.BoundingRectRight = NIVision.imaqMeasureParticle(
+								binaryFrame, particleIndex, 0,
+								NIVision.MeasurementType.MT_BOUNDING_RECT_RIGHT);
+	
+						par.Area = (par.BoundingRectRight - par.BoundingRectLeft)
+								* (par.BoundingRectBottom - par.BoundingRectTop);
+						par.PercentAreaToImageArea = par.Area / (320 * 240);
+						par.length = par.BoundingRectRight - par.BoundingRectLeft;
+						par.height = par.BoundingRectBottom - par.BoundingRectTop;
+	//					System.out.println("Percent: " + par.PercentAreaToImageArea
+	//							+ "\nArea: " + par.Area);
+						double len = par.BoundingRectRight - par.BoundingRectLeft;
+						double height = par.BoundingRectBottom
+								- par.BoundingRectTop;
+						double ratio = len / height;
+	
+						ArrayList<Boolean> filter = new ArrayList<Boolean>();
+						filter.add(ratio <= (UPPER_LONG_RATIO));
+						filter.add(ratio >= (LOWER_LONG_RATIO));
+						filter.add(len >= 20);
+						filter.add(height >= 12);
+						filter.add(len <= 150);
+						filter.add(height <= 85);
+						filter.add(par.Area < 14000);
+						filter.add(par.Area > 400);
+						if (!filter.contains(false)) {
+							// particles.add(par);
+							// System.out.println();
+	//						System.out.println("(Filter Accepted)");
+							// System.out.println();
+							if (largest != null) {
+								if (par.Area > largest.Area) {
+									largest = par;
+								} else if (smallest != null) {
+									if (par.Area < smallest.Area) {
+										smallest = par;
+									}
+								} else {
 									smallest = par;
 								}
 							} else {
-								smallest = par;
+								// System.out.println("Largest null");
+								largest = par;
 							}
+							particles.add(par);
 						} else {
-							// System.out.println("Largest null");
-							largest = par;
+	//						System.out.println("(Filter Rejected)");
 						}
-						particles.add(par);
-					} else {
-//						System.out.println("(Filter Rejected)");
+						// System.out.println("\nTarget,"+particleIndex+
+						// "\nTop Left,"+par.BoundingRectLeft+","+par.BoundingRectTop+
+						// "\nTop Right,"+par.BoundingRectRight+","+par.BoundingRectTop+
+						// "\nBottom Left,"+par.BoundingRectLeft+","+par.BoundingRectBottom+
+						// "\nBottom Right,"+par.BoundingRectRight+","+par.BoundingRectBottom+
+						// "\nArea,"+par.Area+
+						// "\nRatio,"+ratio+"\n");
+						// print.println("Top Left,,Top Right,,Bottom Left,,Bottom Right");
+						// print.println(par.BoundingRectLeft+","+par.BoundingRectTop+","+par.BoundingRectRight+","+par.BoundingRectTop+","+par.BoundingRectLeft+","+par.BoundingRectBottom+","+par.BoundingRectRight+","+par.BoundingRectBottom);
+	
 					}
-					// System.out.println("\nTarget,"+particleIndex+
-					// "\nTop Left,"+par.BoundingRectLeft+","+par.BoundingRectTop+
-					// "\nTop Right,"+par.BoundingRectRight+","+par.BoundingRectTop+
-					// "\nBottom Left,"+par.BoundingRectLeft+","+par.BoundingRectBottom+
-					// "\nBottom Right,"+par.BoundingRectRight+","+par.BoundingRectBottom+
-					// "\nArea,"+par.Area+
-					// "\nRatio,"+ratio+"\n");
-					// print.println("Top Left,,Top Right,,Bottom Left,,Bottom Right");
-					// print.println(par.BoundingRectLeft+","+par.BoundingRectTop+","+par.BoundingRectRight+","+par.BoundingRectTop+","+par.BoundingRectLeft+","+par.BoundingRectBottom+","+par.BoundingRectRight+","+par.BoundingRectBottom);
-
-				}
-				// if(largest != null)
-				// {
-				// avglarg += largest.Area;
-				// accepted += 1;
-				// double ratio =
-				// (largest.BoundingRectRight-largest.BoundingRectLeft)/(largest.BoundingRectBottom-largest.BoundingRectTop);
-				// // ParticleReport par = particles.get(lareaindex);
-				// System.out.println("(Filter Largest Area) Target: "+" / Top Left       "+largest.BoundingRectLeft+":"+largest.BoundingRectTop+
-				// " / Bottom Right   "+largest.BoundingRectRight+":"+largest.BoundingRectBottom
-				// + " / Area: "+largest.Area + " / Ratio: "+ratio);
-				// }
-				particles.sort(null);
-				// System.out.println("Find Target Time: "+(System.nanoTime()-targets));
-				// This example only scores the largest particle. Extending to
-				// score all particles and choosing the desired one is left as
-				// an exercise
-				// for the reader. Note that this scores and reports information
-				// about a single particle (single L shaped target). To get
-				// accurate information
-				// about the location of the tote (not just the distance) you
-				// will need to correlate two adjacent targets in order to find
-				// the true center of the tote.
-				// scores.Aspect = AspectScore(particles.elementAt(0));
-				// SmartDashboard.putNumber("Aspect", scores.Aspect);
-				// scores.Area = AreaScore(particles.elementAt(0));
-				// SmartDashboard.putNumber("Area", scores.Area);
-				// boolean isTote = scores.Aspect > SCORE_MIN && scores.Area >
-				// SCORE_MIN;
-			}
-		}
-		if (particles.size() > 2) {
-			particles.remove(largest);
-			particles.remove(smallest);
-		}
-		avglarg = 0;
-		int num = 0;
-		for (ParticleReport par : particles) {
-			num++;
-			double ratio = (par.BoundingRectRight - par.BoundingRectLeft)
-					/ (par.BoundingRectBottom - par.BoundingRectTop);
-			avglarg += par.Area;
-			// System.out.println("\nTarget,"+num+
-			// "\nTop Left,"+par.BoundingRectLeft+","+par.BoundingRectTop+
-			// "\nTop Right,"+par.BoundingRectRight+","+par.BoundingRectTop+
-			// "\nBottom Left,"+par.BoundingRectLeft+","+par.BoundingRectBottom+
-			// "\nBottom Right,"+par.BoundingRectRight+","+par.BoundingRectBottom+
-			// "\nArea,"+par.Area+
-			// "\nRatio,"+ratio+"\n");
-		}
-		ArrayList<Integer> dup = new ArrayList<Integer>();
-		for (int x = 0; x < particles.size(); x++) {
-			dup.add(0);
-		}
-		for (ParticleReport par : particles) {
-			for (ParticleReport pars : particles) {
-				int dif = par.compareTo(pars);
-				if (dif > -100 && dif < 100) {
-					int index = particles.indexOf(par);
-					dup.set(index, dup.get(index) + 1);
-				}
-				// System.out.println(par.compareTo(pars));
-			}
-		}
-		if (dup.size() != 0) {
-			int highest = 0;
-			for (int y = 0; y < dup.size(); y++) {
-				if (dup.get(y) > highest) {
-					highest = dup.get(y);
+					// if(largest != null)
+					// {
+					// avglarg += largest.Area;
+					// accepted += 1;
+					// double ratio =
+					// (largest.BoundingRectRight-largest.BoundingRectLeft)/(largest.BoundingRectBottom-largest.BoundingRectTop);
+					// // ParticleReport par = particles.get(lareaindex);
+					// System.out.println("(Filter Largest Area) Target: "+" / Top Left       "+largest.BoundingRectLeft+":"+largest.BoundingRectTop+
+					// " / Bottom Right   "+largest.BoundingRectRight+":"+largest.BoundingRectBottom
+					// + " / Area: "+largest.Area + " / Ratio: "+ratio);
+					// }
+					particles.sort(null);
+					// System.out.println("Find Target Time: "+(System.nanoTime()-targets));
+					// This example only scores the largest particle. Extending to
+					// score all particles and choosing the desired one is left as
+					// an exercise
+					// for the reader. Note that this scores and reports information
+					// about a single particle (single L shaped target). To get
+					// accurate information
+					// about the location of the tote (not just the distance) you
+					// will need to correlate two adjacent targets in order to find
+					// the true center of the tote.
+					// scores.Aspect = AspectScore(particles.elementAt(0));
+					// SmartDashboard.putNumber("Aspect", scores.Aspect);
+					// scores.Area = AreaScore(particles.elementAt(0));
+					// SmartDashboard.putNumber("Area", scores.Area);
+					// boolean isTote = scores.Aspect > SCORE_MIN && scores.Area >
+					// SCORE_MIN;
 				}
 			}
-			ParticleReport par = particles.get(dup.indexOf(highest));
-			best = par;
-			// System.out.println("\nTarget: Best,"+
-			// "\nTop Left,"+par.BoundingRectLeft+","+par.BoundingRectTop+
-			// "\nTop Right,"+par.BoundingRectRight+","+par.BoundingRectTop+
-			// "\nBottom Left,"+par.BoundingRectLeft+","+par.BoundingRectBottom+
-			// "\nBottom Right,"+par.BoundingRectRight+","+par.BoundingRectBottom+
-			// "\nArea,"+par.Area+
-			// /*"\nRatio,"+ratio+*/"\n");
+			if (particles.size() > 2) {
+				particles.remove(largest);
+				particles.remove(smallest);
+			}
+			avglarg = 0;
+			int num = 0;
+			for (ParticleReport par : particles) {
+				num++;
+				double ratio = (par.BoundingRectRight - par.BoundingRectLeft)
+						/ (par.BoundingRectBottom - par.BoundingRectTop);
+				avglarg += par.Area;
+				// System.out.println("\nTarget,"+num+
+				// "\nTop Left,"+par.BoundingRectLeft+","+par.BoundingRectTop+
+				// "\nTop Right,"+par.BoundingRectRight+","+par.BoundingRectTop+
+				// "\nBottom Left,"+par.BoundingRectLeft+","+par.BoundingRectBottom+
+				// "\nBottom Right,"+par.BoundingRectRight+","+par.BoundingRectBottom+
+				// "\nArea,"+par.Area+
+				// "\nRatio,"+ratio+"\n");
+			}
+			ArrayList<Integer> dup = new ArrayList<Integer>();
+			for (int x = 0; x < particles.size(); x++) {
+				dup.add(0);
+			}
+			for (ParticleReport par : particles) {
+				for (ParticleReport pars : particles) {
+					int dif = par.compareTo(pars);
+					if (dif > -100 && dif < 100) {
+						int index = particles.indexOf(par);
+						dup.set(index, dup.get(index) + 1);
+					}
+					// System.out.println(par.compareTo(pars));
+				}
+			}
+			if (dup.size() != 0) {
+				int highest = 0;
+				for (int y = 0; y < dup.size(); y++) {
+					if (dup.get(y) > highest) {
+						highest = dup.get(y);
+					}
+				}
+				ParticleReport par = particles.get(dup.indexOf(highest));
+				best = par;
+				// System.out.println("\nTarget: Best,"+
+				// "\nTop Left,"+par.BoundingRectLeft+","+par.BoundingRectTop+
+				// "\nTop Right,"+par.BoundingRectRight+","+par.BoundingRectTop+
+				// "\nBottom Left,"+par.BoundingRectLeft+","+par.BoundingRectBottom+
+				// "\nBottom Right,"+par.BoundingRectRight+","+par.BoundingRectBottom+
+				// "\nArea,"+par.Area+
+				// /*"\nRatio,"+ratio+*/"\n");
+			}
+			avglarg = avglarg / particles.size();
+			// System.out.println("Avg Largest Area: "+avglarg);
+			long end = System.nanoTime() - start;
+			// System.out.println("Total time: "+end);
+			// print.close();
+		}catch (Exception e)
+		{
+			System.out.println("Camera Exception");
 		}
-		avglarg = avglarg / particles.size();
-		// System.out.println("Avg Largest Area: "+avglarg);
-		long end = System.nanoTime() - start;
-		// System.out.println("Total time: "+end);
-		// print.close();
 	}
 
 	// public boolean driveAimStop()
@@ -450,15 +456,23 @@ public class Camera {
 	public void centerTarget(double gyroAngle) {
 		if (best != null) {
 			
-			double difx = 0;
+			double difx;
 			double dify = 0;
 			double midxp = best.BoundingRectLeft
 					+ ((best.BoundingRectRight - best.BoundingRectLeft) / 2);
-			System.out.println("Midxp" + midxp);
+			System.out.println("Midxp before " + midxp);
 			double midyp = best.BoundingRectTop
 					+ ((best.BoundingRectBottom - best.BoundingRectTop) / 2);
-			difx = -(midxp-160);
-			difx *= (67/320);
+			System.out.println("Midxp after " + midxp);
+			posx = -(midxp-160);
+			System.out.println("difx after 160 " + posx);
+
+			posx *= 67;
+			System.out.println("difx after 67 " + posx);
+
+			posx /= 320;
+			
+			System.out.println("difx after 320 " + posx);
 
 			// difx = (320/2)-midxp;
 			dify = (240 / 2) - midyp;
@@ -467,7 +481,8 @@ public class Camera {
 			// System.out.println("Posx: "+posx + "\tPosy: "+posy);
 			// System.out.println("X diff: "+difx +"\tY diff: "+dify);
 
-			posx = difx;
+//			posx = difx;
+			
 			System.out.println("Angle Diff: " + posx);
 			
 			System.out.println("Gyro angle" + gyroAngle);
@@ -500,6 +515,7 @@ public class Camera {
 		double doy = d+oy;
 		double angle = Math.atan(ox/doy);
 		angle = -Math.toDegrees(angle);
+		angle *= .35;
 		System.out.println("Raw diff angle x" + angle);
 		return posx + angle;
 	}
