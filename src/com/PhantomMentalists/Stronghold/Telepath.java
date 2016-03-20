@@ -125,7 +125,7 @@ public class Telepath extends SampleRobot {
         	SmartDashboard.putNumber("Shoot Position",shootangle);
         	SmartDashboard.putBoolean("Left Tape",tapeSensorLeft.get());
         	SmartDashboard.putBoolean("Right Tape",tapeSensorRight.get());
-        	System.out.println("Gyro Angle: "+gyro.getAngle());
+//        	System.out.println("Gyro Angle: "+gyro.getAngle());
         	// Manually control shooter pitching machine
         	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterShoot.getValue()) || leftstick.getRawButton(5))
         	{
@@ -192,10 +192,10 @@ public class Telepath extends SampleRobot {
         	}
         	if(buttonstick3.getRawButton(ButtonStick2Values.kGotoZero.getValue()))
         	{
-        		System.out.println("here2");
+//        		System.out.println("here2");
         		turncont.enable();
         		turncont.setSetpoint(0);
-        		System.out.println("Enabled: "+turncont.isEnabled());
+//        		System.out.println("Enabled: "+turncont.isEnabled());
 
         	}
         	else if(buttonstick3.getRawButton(ButtonStick2Values.kGotoTarget.getValue()))
@@ -207,7 +207,7 @@ public class Telepath extends SampleRobot {
         	}
         	else if(!buttonstick3.getRawButton(ButtonStick2Values.kGotoTarget.getValue()) && !buttonstick3.getRawButton(ButtonStick2Values.kSpare.getValue()) && !buttonstick3.getRawButton(ButtonStick2Values.kGotoZero.getValue()) && !buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()) && turncont.isEnabled())
         	{
-        		System.out.println("SHouldnt be here");
+//        		System.out.println("SHouldnt be here");
         		turncont.disable();
         		westCoastDrive.setTurnSetpoint(0);
         	}
@@ -249,7 +249,7 @@ public class Telepath extends SampleRobot {
         		shooter.setShooterAngle(cam.getCameraAngle());
 //        		SmartDashboard.putNumber("Target Angle", gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
 //        		turncont.setSetpoint(gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
-        		System.out.println("Target Angle" + cam.getAngleToMoveFromCamera());
+//        		System.out.println("Target Angle" + cam.getAngleToMoveFromCamera());
         		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
         		turncont.enable();
         	}
@@ -262,7 +262,7 @@ public class Telepath extends SampleRobot {
         	westCoastDrive.process();
         	shooter.process();
         	cam.process();
-        	System.out.println("Turn Cont: "+turncont.isEnabled());
+//        	System.out.println("Turn Cont: "+turncont.isEnabled());
             Timer.delay(Parameters.delay);
         }
         fan.set(false);

@@ -352,7 +352,7 @@ public class DriveUnit {
      */
     public void setTurnSetpoint(double value)
     {
-    	System.out.println("here3 ");
+//    	System.out.println("here3 ");
     	if(placement == Placement.Left)
 		{
 			value *= -1;

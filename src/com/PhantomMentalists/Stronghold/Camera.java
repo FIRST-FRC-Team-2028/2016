@@ -299,8 +299,8 @@ public class Camera {
 					par.PercentAreaToImageArea = par.Area / (320 * 240);
 					par.length = par.BoundingRectRight - par.BoundingRectLeft;
 					par.height = par.BoundingRectBottom - par.BoundingRectTop;
-					System.out.println("Percent: " + par.PercentAreaToImageArea
-							+ "\nArea: " + par.Area);
+//					System.out.println("Percent: " + par.PercentAreaToImageArea
+//							+ "\nArea: " + par.Area);
 					double len = par.BoundingRectRight - par.BoundingRectLeft;
 					double height = par.BoundingRectBottom
 							- par.BoundingRectTop;
@@ -318,7 +318,7 @@ public class Camera {
 					if (!filter.contains(false)) {
 						// particles.add(par);
 						// System.out.println();
-						System.out.println("(Filter Accepted)");
+//						System.out.println("(Filter Accepted)");
 						// System.out.println();
 						if (largest != null) {
 							if (par.Area > largest.Area) {
@@ -336,7 +336,7 @@ public class Camera {
 						}
 						particles.add(par);
 					} else {
-						System.out.println("(Filter Rejected)");
+//						System.out.println("(Filter Rejected)");
 					}
 					// System.out.println("\nTarget,"+particleIndex+
 					// "\nTop Left,"+par.BoundingRectLeft+","+par.BoundingRectTop+
@@ -454,11 +454,11 @@ public class Camera {
 			double dify = 0;
 			double midxp = best.BoundingRectLeft
 					+ ((best.BoundingRectRight - best.BoundingRectLeft) / 2);
-			System.out.println(midxp);
+			System.out.println("Midxp" + midxp);
 			double midyp = best.BoundingRectTop
 					+ ((best.BoundingRectBottom - best.BoundingRectTop) / 2);
-			difx = midxp * (64 / 320);
-			difx = (-difx) + 32;
+			difx = -(midxp-160);
+			difx *= (67/320);
 
 			// difx = (320/2)-midxp;
 			dify = (240 / 2) - midyp;
@@ -494,11 +494,13 @@ public class Camera {
 	}
 
 	public double getDiffAngleX() {
-		double angle = Math.atan((Parameters.kDistCamToShooterX)
-				/ getDistanceToTarget());
-		angle = Math.toDegrees(angle);
+		double ox = Parameters.kDistCamToShooterX;
+		double oy = Parameters.kShooterOffSetFromCameraZ;
+		double d = getDistanceToTarget();
+		double doy = d+oy;
+		double angle = Math.atan(ox/doy);
+		angle = -Math.toDegrees(angle);
 		System.out.println("Raw diff angle x" + angle);
-		System.out.println("This should match target angle"+(posx + angle));
 		return posx + angle;
 	}
 	

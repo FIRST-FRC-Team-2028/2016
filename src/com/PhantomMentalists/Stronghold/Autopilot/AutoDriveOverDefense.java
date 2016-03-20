@@ -82,14 +82,14 @@ public class AutoDriveOverDefense extends Autopilot {
 		    		{
 			    		case kMoat:
 			    		case kRamp:
+			    		case kRock:
 			    			drive.setGear(Gear.kHighGear);
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		
 				    		timer = new Timer();
-				    		timer.schedule(new driveTime(), 3000);
+				    		timer.schedule(new driveTime(), 4000);
 				    		state = DriveStates.driving;
 			    			break;
-			    		case kRock:
 			    		case kRough:
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		state = DriveStates.driving;

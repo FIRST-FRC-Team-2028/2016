@@ -94,7 +94,7 @@ public class Shooter extends TimerTask{
 	{
 		public void run()
 		{
-			System.out.println("Shoot2 timer");
+//			System.out.println("Shoot2 timer");
 			if(!shootUpToSpeed)
 	    	{
 	    		shootAccel = true;
@@ -125,7 +125,7 @@ public class Shooter extends TimerTask{
 	{
 		if(!shooting)
 		{
-			System.out.println("Shooter 2");
+//			System.out.println("Shooter 2");
 			rightPitchingMotor.set(Parameters.kShooterShootPitchingMachineSpeed);
 	    	leftPitchingMotor.set(-Parameters.kShooterShootPitchingMachineSpeed);
 	    	shooting = true;
@@ -482,12 +482,12 @@ public class Shooter extends TimerTask{
     	double angleInRads = Math.atan((h+hgd)/((h/tan)+d));
     	double newAngle = Math.toDegrees(angleInRads);
     	double newPosition = (-3.7*newAngle/68.5)+3.7;
-    	System.out.println("Setpoint: "+setpoint);
-    	System.out.println("tan: "+tan);
+//    	System.out.println("Setpoint: "+setpoint);
+//    	System.out.println("tan: "+tan);
 //    	System.out.println("constant: "+constant);
-    	System.out.println("angle in rads: "+angleInRads);
-    	System.out.println("new angle: "+newAngle);
-    	System.out.println("New position: "+newPosition);
+//    	System.out.println("angle in rads: "+angleInRads);
+//    	System.out.println("new angle: "+newAngle);
+//    	System.out.println("New position: "+newPosition);
     	setTiltMemSetpoint(newPosition);
     }
     
