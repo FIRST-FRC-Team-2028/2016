@@ -145,7 +145,6 @@ public class Camera {
 		posy /=240;
 		posy *= 0.382;
 		posy /= 69;
-		posy += 1;
 		return posy;
 	}
 	
@@ -154,7 +153,7 @@ public class Camera {
 		double posx;
 		posx = pixx;
 		posx -= 160;
-		posx *= -67;
+		posx *= 67;
 		posx /= 320;
 		return posx;
 	}
@@ -483,7 +482,7 @@ public class Camera {
 
 //			dify = (240 / 2) - midyp;
 //			dify /= 240;
-			posy = pixelYToPosY(midyp);
+			posy = servoy.get()+pixelYToPosY(midyp);
 			System.out.println("Angle Diff: " + posx);
 			
 			System.out.println("Gyro angle" + gyroAngle);
@@ -491,7 +490,7 @@ public class Camera {
 			posx = getDiffAngleX();
 			posx += gyroAngle;
 			
-			posy -= dify * .25;			
+//			posy -= dify * .25;			
 			servoy.set(posy);
 		}
 	}
@@ -511,7 +510,7 @@ public class Camera {
 		double doy = d+oy;
 		double angle = Math.atan(ox/doy);
 		angle = -Math.toDegrees(angle);
-		angle *= .35;
+//		angle *= .5;
 		System.out.println("Raw diff angle x" + angle);
 		return posx + angle;
 	}

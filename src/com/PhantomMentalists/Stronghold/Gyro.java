@@ -9,7 +9,7 @@ public class Gyro extends AnalogGyro
 	public Gyro(int channel) {
 		super(channel);
 	}
-
+	
 	public double getRelativeAngle()
 	{
 		double angle = this.getAngle();

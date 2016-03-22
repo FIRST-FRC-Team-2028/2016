@@ -118,7 +118,8 @@ public class Telepath extends SampleRobot {
             SmartDashboard.putNumber("Lane",getLaneFromJoyStick());
             leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
-        	SmartDashboard.putNumber("Gyro Anagle",gyro.getRelativeAngle());
+        	SmartDashboard.putNumber("Gyro Relative Anagle",gyro.getRelativeAngle());
+        	SmartDashboard.putNumber("Gyro Absolute Angle", gyro.getAngle());
         	SmartDashboard.putNumber("Shoot Position",shootangle);
         	SmartDashboard.putBoolean("Left Tape",tapeSensorLeft.get());
         	SmartDashboard.putBoolean("Right Tape",tapeSensorRight.get());

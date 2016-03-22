@@ -276,13 +276,30 @@ public class Shooter extends TimerTask{
     	}
     	else if(memSetpointSet)
     	{
+    		double differenceToCompare = tiltMotor.getPosition()-tiltMemSetpoint;
+    	
     		if(tiltMotor.getPosition() > tiltMemSetpoint)
     		{
-    			rc = Parameters.kShooterSeekHomePower;
+    			if (differenceToCompare < 0.1)
+    			{
+    				rc = Parameters.kShooterSeekHomePower * 0.5;
+    			}
+    			else
+    			{
+    				rc = Parameters.kShooterSeekHomePower;
+    			}
+    			
     		}
     		else if(tiltMotor.getPosition() < tiltMemSetpoint)
     		{
-    			rc = -Parameters.kShooterSeekHomePower*0.65;
+    			if(differenceToCompare > -0.1)
+    			{
+    				rc = -Parameters.kShooterSeekHomePower*0.35;
+    			}
+    			else
+    			{
+    				rc = -Parameters.kShooterSeekHomePower*0.65;
+    			}
     		}
     	}
     	else if(tiltMotor.getPosition() > tiltSetpoint.getPosition())
@@ -463,10 +480,10 @@ public class Shooter extends TimerTask{
     	
     	double angleInRads = Math.atan((h+hgd)/((h/tan)+d));
     	double newAngle = Math.toDegrees(angleInRads);
-    	double offset = (-0.0284*newAngle)+2.139;
-    	offset = offset/12;
-    	angleInRads = Math.atan((h+offset)/((h/tan)+d));
-    	newAngle = Math.toDegrees(angleInRads);
+//    	double offset = (-0.0284*newAngle)+2.139;
+//    	offset = offset/12;
+//    	angleInRads = Math.atan((h+offset)/((h/tan)+d));
+//    	newAngle = Math.toDegrees(angleInRads);
 //    	newAngle -= 5;
     	double newPosition = (-3.7*newAngle/68.5)+3.7;
 //    	System.out.println("Setpoint: "+setpoint);
@@ -512,7 +529,7 @@ public class Shooter extends TimerTask{
     	//TODO: Check for fwd or rev if motor power swapped
     	if(tiltMotor.isFwdLimitSwitchClosed())
     	{
-//    		tiltMotor.setPosition(0);
+    		tiltMotor.setPosition(0);
     		currentPosition = ShooterState.kHome;
     		memSetpointSet = false;
     	}
