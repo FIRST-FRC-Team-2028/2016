@@ -276,11 +276,26 @@ public class Shooter extends TimerTask{
     	}
     	else if(memSetpointSet)
     	{
+    		
+    		/**
+    		 * 
+    		 * 
+    		 * Added the several if else statements to try to get the shooter faster when seeking the setpoint
+    		 * 
+    		 */
     		double differenceToCompare = tiltMotor.getPosition()-tiltMemSetpoint;
     	
     		if(tiltMotor.getPosition() > tiltMemSetpoint)
     		{
     			if (differenceToCompare < 0.1)
+    			{
+    				rc = Parameters.kShooterSeekHomePower * 0.20;
+    			}
+    			else if(differenceToCompare < 0.15)
+    			{
+    				rc = Parameters.kShooterSeekHomePower * 0.35;
+    			}
+    			else if (differenceToCompare < 0.25)
     			{
     				rc = Parameters.kShooterSeekHomePower * 0.5;
     			}
@@ -293,6 +308,14 @@ public class Shooter extends TimerTask{
     		else if(tiltMotor.getPosition() < tiltMemSetpoint)
     		{
     			if(differenceToCompare > -0.1)
+    			{
+    				rc = -Parameters.kShooterSeekHomePower*0.1;
+    			}
+    			if(differenceToCompare > -0.15)
+    			{
+    				rc = -Parameters.kShooterSeekHomePower*0.2;
+    			}
+    			if(differenceToCompare > -0.25)
     			{
     				rc = -Parameters.kShooterSeekHomePower*0.35;
     			}
