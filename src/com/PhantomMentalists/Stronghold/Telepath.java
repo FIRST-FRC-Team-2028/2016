@@ -116,16 +116,13 @@ public class Telepath extends SampleRobot {
         	setDefenceConfig();
             SmartDashboard.putNumber("Configure",defence.getNum());
             SmartDashboard.putNumber("Lane",getLaneFromJoyStick());
-//            System.out.println("Lane: "+analogstick.getY());
-//        	System.out.println("Shooter Pos: "+analogstick.getZ());
-//        	System.out.println("Camera Pos: "+analogstick.getRawAxis(3));
             leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
         	SmartDashboard.putNumber("Gyro Anagle",gyro.getRelativeAngle());
         	SmartDashboard.putNumber("Shoot Position",shootangle);
         	SmartDashboard.putBoolean("Left Tape",tapeSensorLeft.get());
         	SmartDashboard.putBoolean("Right Tape",tapeSensorRight.get());
-//        	System.out.println("Gyro Angle: "+gyro.getAngle());
+        	
         	// Manually control shooter pitching machine
         	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterShoot.getValue()) || leftstick.getRawButton(5))
         	{
@@ -140,11 +137,43 @@ public class Telepath extends SampleRobot {
         	{
         		shooter.manualRunPitchingMachine(0);
         	}
-//        	else if(buttonstick1.getRawButton(kShooterSpare.getValue()))
-//        	{
-//        		shooter.manualRunPitchingMachine(Parameters.kShooterShootBatterSpeed);
-//        	}
         	
+        	// Shooter Control
+        	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterUp.getValue()) || leftstick.getRawButton(3))
+        	{
+        		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerUp);
+        	}
+        	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterDown.getValue()) || leftstick.getRawButton(2))
+        	{
+        		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerDown);
+        	}
+        	else if (buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()))
+        	{	
+        		if(isCameraMovingManually)
+        		{
+        			cam.getImage();
+            		cam.centerTarget(gyro.getAngle());
+            		turncont.enable();
+        		}
+        		isCameraMovingManually = false;
+        		shooter.setShooterAngle(cam.getCameraAngle());
+        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
+        	}
+        	else if(buttonstick2.getRawButton(ButtonStick2Values.kGoTo.getValue()))
+        	{
+        		shooter.setShooterAngle(cam.getCameraAngle());
+        	}
+        	else if(buttonstick3.getRawButton(ButtonStick2Values.kSpare.getValue()) && !turncont.isEnabled())
+        	{
+        		shooter.setShooterAngle(cam.getCameraAngle());
+        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
+        		turncont.enable();
+        	}
+        	else
+        	{
+        		isCameraMovingManually = true;
+        		shooter.manualRunTiltMotor(0);
+        	}
         	// Manually control dink
         	if(buttonstick2.getRawButton(ButtonStick3Values.kKick.getValue()))
         	{
@@ -154,64 +183,49 @@ public class Telepath extends SampleRobot {
         	{
         		shooter.pushBall(false);
         	}
-        	
-        	// Manually control shooter angle
-        	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterUp.getValue()) || leftstick.getRawButton(3))
-        	{
-        		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerUp);
-        	}
-        	else if(buttonstick2.getRawButton(ButtonStick3Values.kShooterDown.getValue()) || leftstick.getRawButton(2))
-        	{
-        		shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerDown);
-        	}
-        	else
-        	{
-        		shooter.manualRunTiltMotor(0);
-        	}
-        	if(buttonstick3.getRawButton(ButtonStick2Values.kSetTarget.getValue()))
-        	{
-        		tangle = gyro.getAngle();
-        	}
+
+        	//DRIVE
         	if(rightstick.getRawButton(2))
         	{
         		westCoastDrive.setGear(Gear.kLowGear);
         	}
-        	if(rightstick.getRawButton(3))
+        	else if(rightstick.getRawButton(3))
         	{
         		westCoastDrive.setGear(Gear.kHighGear);
         	}
-        	
         	if(leftstick.getRawButton(11))
         	{
         		westCoastDrive.setSpeedSetpoint(leftval, leftval);
         	}
         	else
         	{
-//        		System.out.println("here3");
         		westCoastDrive.setSpeedSetpoint(leftval, rightval);
         	}
+        	
+        	//GYRO
+        	
         	if(buttonstick3.getRawButton(ButtonStick2Values.kGotoZero.getValue()))
         	{
-//        		System.out.println("here2");
         		turncont.enable();
         		turncont.setSetpoint(0);
-//        		System.out.println("Enabled: "+turncont.isEnabled());
-
         	}
         	else if(buttonstick3.getRawButton(ButtonStick2Values.kGotoTarget.getValue()))
         	{
-//        		System.out.println("here2");
         		turncont.enable();
         		turncont.setSetpoint(tangle);
-
         	}
         	else if(!buttonstick3.getRawButton(ButtonStick2Values.kGotoTarget.getValue()) && !buttonstick3.getRawButton(ButtonStick2Values.kSpare.getValue()) && !buttonstick3.getRawButton(ButtonStick2Values.kGotoZero.getValue()) && !buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()) && turncont.isEnabled())
         	{
-//        		System.out.println("SHouldnt be here");
         		turncont.disable();
         		westCoastDrive.setTurnSetpoint(0);
         	}
+        	if(buttonstick3.getRawButton(ButtonStick2Values.kSetTarget.getValue()))
+        	{
+        		tangle = gyro.getAngle();
+        	}
 
+        	//DUCK BARS
+        	
         	if(buttonstick2.getRawButton(ButtonStick3Values.kPusherUp.getValue()))
         	{
         		pusherArm.manualSetTilt(Parameters.kPusherArmMotorPowerUp);
@@ -225,34 +239,8 @@ public class Telepath extends SampleRobot {
         		pusherArm.manualSetTilt(0);
         	}
         	
-        	if (buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()) && isCameraMovingManually)
-        	{	
-        		isCameraMovingManually = false;
-        		cam.getImage();
-        		cam.centerTarget(gyro.getAngle());
-        		shooter.setShooterAngle(cam.getCameraAngle());
-//        		turncont.setSetpoint(gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
-//        		turncont.enable();
-        	}
-        	else if(!buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()))
-        	{
-        		isCameraMovingManually = true;
-//        		turncont.disable();
-        	}
         	
-        	if(buttonstick2.getRawButton(ButtonStick2Values.kGoTo.getValue()))
-        	{
-        		shooter.setShooterAngle(cam.getCameraAngle());
-        	}
-        	if(buttonstick3.getRawButton(ButtonStick2Values.kSpare.getValue()) && !turncont.isEnabled())
-        	{
-        		shooter.setShooterAngle(cam.getCameraAngle());
-//        		SmartDashboard.putNumber("Target Angle", gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
-//        		turncont.setSetpoint(gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
-//        		System.out.println("Target Angle" + cam.getAngleToMoveFromCamera());
-        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
-        		turncont.enable();
-        	}
+        	//CAMERA MOVEMENT
         	
         	if (isCameraMovingManually)
         	{

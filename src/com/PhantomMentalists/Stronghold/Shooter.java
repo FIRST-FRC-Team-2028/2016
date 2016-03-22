@@ -280,28 +280,10 @@ public class Shooter extends TimerTask{
     		{
     			rc = Parameters.kShooterSeekHomePower;
     		}
-    		else if(tiltMotor.getPosition()+0.25 < tiltMemSetpoint)
+    		else if(tiltMotor.getPosition() < tiltMemSetpoint)
     		{
     			rc = -Parameters.kShooterSeekHomePower*0.65;
     		}
-    		
-//    		double compare = tiltMotor.getPosition() - tiltMemSetpoint;
-//    		if(compare > 0.1)
-//    		{
-//    			rc = 0.4;
-//    		}
-//    		else if(compare < -0.1)
-//    		{
-//    			rc = - 0.4;
-//    		}
-//    		else if (compare > 0.0)
-//    		{
-//    			rc = 0.15;
-//    		}
-//    		else
-//    		{
-//    			rc = -0.15;
-//    		}
     	}
     	else if(tiltMotor.getPosition() > tiltSetpoint.getPosition())
     	{
@@ -526,7 +508,7 @@ public class Shooter extends TimerTask{
     	//TODO: Check for fwd or rev if motor power swapped
     	if(tiltMotor.isFwdLimitSwitchClosed())
     	{
-    		tiltMotor.setPosition(0);
+//    		tiltMotor.setPosition(0);
     		currentPosition = ShooterState.kHome;
     		memSetpointSet = false;
     	}

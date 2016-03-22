@@ -133,26 +133,32 @@ public class Camera {
 		SmartDashboard.putNumber("Servo angle",
 				((1 - servoy.get()) * 69 / 0.382));
 
-		// distanceToTarget = Math.tan(cameraAngle) * Parameters.kGoalHeight;
 
-		// if(Math.abs(servoy.get()-posy) < 0.005)
-		// {
-		// servoy.
-		// }
-		// else
-		// {
-		// servoy.set(posy);
-		// }
-		// if(servoy.get() < 0.25 && cam.getRotation() == Rotation.k0)
-		// {
-		// cam.writeRotation(Rotation.k180);
-		// }
-		// else if(servoy.get() > 0.25 && cam.getRotation() == Rotation.k180)
-		// {
-		// cam.writeRotation(Rotation.k0);
-		// }
 	}
 
+	public double pixelYToPosY(double pixy)
+	{
+		double posy;
+		posy = pixy;
+		posy -= 120;
+		posy *=51;
+		posy /=240;
+		posy *= 0.382;
+		posy /= 69;
+		posy += 1;
+		return posy;
+	}
+	
+	public double pixelXToTargetAngleX(double pixx)
+	{
+		double posx;
+		posx = pixx;
+		posx -= 160;
+		posx *= -67;
+		posx /= 320;
+		return posx;
+	}
+	
 	public void setCam(double posx, double posy) {
 		if (!followMode) {
 			// this.posx = posx;
@@ -464,25 +470,20 @@ public class Camera {
 			double midyp = best.BoundingRectTop
 					+ ((best.BoundingRectBottom - best.BoundingRectTop) / 2);
 			System.out.println("Midxp after " + midxp);
-			posx = -(midxp-160);
-			System.out.println("difx after 160 " + posx);
+			posx = pixelXToTargetAngleX(midxp);
+//			posx = -(midxp-160);
+//			System.out.println("difx after 160 " + posx);
+//
+//			posx *= 67;
+//			System.out.println("difx after 67 " + posx);
+//
+//			posx /= 320;
+//			
+//			System.out.println("difx after 320 " + posx);
 
-			posx *= 67;
-			System.out.println("difx after 67 " + posx);
-
-			posx /= 320;
-			
-			System.out.println("difx after 320 " + posx);
-
-			// difx = (320/2)-midxp;
-			dify = (240 / 2) - midyp;
-			// difx /= 320;
-			dify /= 240;
-			// System.out.println("Posx: "+posx + "\tPosy: "+posy);
-			// System.out.println("X diff: "+difx +"\tY diff: "+dify);
-
-//			posx = difx;
-			
+//			dify = (240 / 2) - midyp;
+//			dify /= 240;
+			posy = pixelYToPosY(midyp);
 			System.out.println("Angle Diff: " + posx);
 			
 			System.out.println("Gyro angle" + gyroAngle);
@@ -492,12 +493,7 @@ public class Camera {
 			
 			posy -= dify * .25;			
 			servoy.set(posy);
-			// System.out.println("Posx: "+posx + "\tPosy: "+posy);
 		}
-		// else
-		// {
-		// System.out.println("No best target");
-		// }
 	}
 
 	public double getDistanceToTarget() {
