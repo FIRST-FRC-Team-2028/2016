@@ -463,6 +463,10 @@ public class Shooter extends TimerTask{
     	
     	double angleInRads = Math.atan((h+hgd)/((h/tan)+d));
     	double newAngle = Math.toDegrees(angleInRads);
+    	double offset = (-0.0284*newAngle)+2.139;
+    	offset = offset/12;
+    	angleInRads = Math.atan((h+offset)/((h/tan)+d));
+    	newAngle = Math.toDegrees(angleInRads);
 //    	newAngle -= 5;
     	double newPosition = (-3.7*newAngle/68.5)+3.7;
 //    	System.out.println("Setpoint: "+setpoint);
