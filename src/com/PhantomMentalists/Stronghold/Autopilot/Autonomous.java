@@ -174,23 +174,23 @@ public class Autonomous extends Autopilot {
     		turncon.enable();
     		if(lane == 1)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(319.62));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(40.38));
     		}
     		else if(lane == 2)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(334.36));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(25.64));
     		}
     		else if(lane == 3)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(343.68));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(16.32));
     		}
     		else if(lane == 4)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(6.59));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(353.41));
     		}
     		else if(lane == 5)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(19.17));
+    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(40.83));
     		}
     		if(isAngleInDeadband(gyro.getAngle(),turncon.getSetpoint()))
     		{
