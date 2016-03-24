@@ -132,7 +132,7 @@ public class Camera {
 		SmartDashboard.putNumber("Servo y Pos", servoy.get());
 		SmartDashboard.putNumber("Servo angle",
 				((1 - servoy.get()) * 69 / 0.382));
-
+		
 
 	}
 
@@ -487,8 +487,8 @@ public class Camera {
 			
 			System.out.println("Gyro angle" + gyroAngle);
 			
-			posx = getDiffAngleX();
-			posx += gyroAngle;
+//			posx = getDiffAngleX();
+			posx -= gyroAngle;
 			
 //			posy -= dify * .25;			
 			servoy.set(posy);
@@ -512,7 +512,7 @@ public class Camera {
 		angle = -Math.toDegrees(angle);
 //		angle *= .5;
 		System.out.println("Raw diff angle x" + angle);
-		return posx + angle;
+		return posx;
 	}
 	
 	public double getAngleToMoveFromCamera()

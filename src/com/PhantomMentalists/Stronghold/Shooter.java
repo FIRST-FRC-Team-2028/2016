@@ -143,7 +143,7 @@ public class Shooter extends TimerTask{
     	leftPitchingMotor = new CANTalon(Parameters.kLeftShooterPitcherMotorCanId);
     	tiltMotor = new CANTalon(Parameters.kShooterAngleMotorCanId);
     	//TODO: Check motor voltage to direction
-    	tiltMotor.enableLimitSwitch(true, false);
+    	tiltMotor.enableLimitSwitch(false, true);
     	
     	rightPitchingMotor.enableBrakeMode(true);
     	leftPitchingMotor.enableBrakeMode(true);
@@ -289,19 +289,19 @@ public class Shooter extends TimerTask{
     		{
     			if (differenceToCompare < 0.1)
     			{
-    				rc = Parameters.kShooterSeekHomePower * 0.20;
+    				rc = -Parameters.kShooterSeekHomePower * 0.20;
     			}
     			else if(differenceToCompare < 0.15)
     			{
-    				rc = Parameters.kShooterSeekHomePower * 0.35;
+    				rc = -Parameters.kShooterSeekHomePower * 0.35;
     			}
     			else if (differenceToCompare < 0.25)
     			{
-    				rc = Parameters.kShooterSeekHomePower * 0.5;
+    				rc = -Parameters.kShooterSeekHomePower * 0.5;
     			}
     			else
     			{
-    				rc = Parameters.kShooterSeekHomePower;
+    				rc = -Parameters.kShooterSeekHomePower;
     			}
     			
     		}
@@ -309,29 +309,29 @@ public class Shooter extends TimerTask{
     		{
     			if(differenceToCompare > -0.1)
     			{
-    				rc = -Parameters.kShooterSeekHomePower*0.1;
+    				rc = Parameters.kShooterSeekHomePower*0.1;
     			}
     			if(differenceToCompare > -0.15)
     			{
-    				rc = -Parameters.kShooterSeekHomePower*0.2;
+    				rc = Parameters.kShooterSeekHomePower*0.2;
     			}
     			if(differenceToCompare > -0.25)
     			{
-    				rc = -Parameters.kShooterSeekHomePower*0.35;
+    				rc = Parameters.kShooterSeekHomePower*0.35;
     			}
     			else
     			{
-    				rc = -Parameters.kShooterSeekHomePower*0.65;
+    				rc = Parameters.kShooterSeekHomePower*0.65;
     			}
     		}
     	}
     	else if(tiltMotor.getPosition() > tiltSetpoint.getPosition())
     	{
-    		rc = Parameters.kShooterSeekHomePower;
+    		rc = -Parameters.kShooterSeekHomePower;
     	}
     	else if(tiltMotor.getPosition() < tiltSetpoint.getPosition())
     	{
-    		rc = -Parameters.kShooterSeekHomePower*0.65;
+    		rc = Parameters.kShooterSeekHomePower*0.65;
     	}
     	return rc;
     }
@@ -498,17 +498,20 @@ public class Shooter extends TimerTask{
     	
 //    	double constant = Parameters.kGoalHeight/Parameters.kShooterOffSetFromCamera;
     	double h = Parameters.kGoalHeight;   	
-    	double d = Parameters.kShooterOffSetFromCameraZ;
+    	double odx = Parameters.kShooterOffSetFromCameraZ;
     	double hgd = Parameters.kHeightGoalDifference;
+    	double d = h/tan; 
     	
-    	double angleInRads = Math.atan((h+hgd)/((h/tan)+d));
+    	double angleInRads = Math.atan((h+hgd)/(d+odx));
     	double newAngle = Math.toDegrees(angleInRads);
 //    	double offset = (-0.0284*newAngle)+2.139;
 //    	offset = offset/12;
 //    	angleInRads = Math.atan((h+offset)/((h/tan)+d));
 //    	newAngle = Math.toDegrees(angleInRads);
 //    	newAngle -= 5;
-    	double newPosition = (-3.7*newAngle/68.5)+3.7;
+    	double tAngle = Parameters.kTotalShooterTiltAngleMoveFromParallel;
+    	double tPos = Parameters.kTotalShooterTiltPositionMoveFromParallel;
+    	double newPosition = (-tPos*newAngle/tAngle)+tPos;
 //    	System.out.println("Setpoint: "+setpoint);
 //    	System.out.println("tan: "+tan);
 //    	System.out.println("constant: "+constant);
@@ -550,7 +553,7 @@ public class Shooter extends TimerTask{
 //    	double tiltPosition = tiltMotor.getPosition();
     	SmartDashboard.putBoolean("Is at setpoint", isTiltAngleAtSetpoint());
     	//TODO: Check for fwd or rev if motor power swapped
-    	if(tiltMotor.isFwdLimitSwitchClosed())
+    	if(tiltMotor.isRevLimitSwitchClosed())
     	{
     		tiltMotor.setPosition(0);
     		currentPosition = ShooterState.kHome;

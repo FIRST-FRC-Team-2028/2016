@@ -185,9 +185,9 @@ public class Parameters {
 
 	public static final double kShooterTiltHomePositionEncoderSetpoint = -17389;
 	
-	public static final double kShooterTiltPowerDown = -0.35;
+	public static final double kShooterTiltPowerDown = 0.6;
 	
-	public static final double kShooterTiltPowerUp = 0.4;
+	public static final double kShooterTiltPowerUp = -0.6;
 
 	public static final double kShooterSeekHomePower = 0.35;
 	
@@ -273,5 +273,6 @@ public class Parameters {
 
 	public static final double kHeightGoalDifference = 0;
 	public static final double kDistCamToShooterX = 10.5;//inches
-
+	public static final double kTotalShooterTiltPositionMoveFromParallel = 3.7;
+	public static final double kTotalShooterTiltAngleMoveFromParallel = 68.5;
 }
