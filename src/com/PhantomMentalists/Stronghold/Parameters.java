@@ -261,7 +261,7 @@ public class Parameters {
 	
 	public static final double kGoalHeight = 77.5;//height from camera to middle of goal, camera is 12 inches high
 	
-	public static final double kShooterOffSetFromCameraZ = 9.5;
+	public static final double kShooterOffSetFromCameraZ = -19.5;
 	
 	public static final double autonomousDrivePower = -0.75;
 	
@@ -273,6 +273,8 @@ public class Parameters {
 
 	public static final double kHeightGoalDifference = 0;
 	public static final double kDistCamToShooterX = 10.5;//inches
-	public static final double kTotalShooterTiltPositionMoveFromParallel = 3.7;
-	public static final double kTotalShooterTiltAngleMoveFromParallel = 68.5;
+	public static final double kTotalShooterTiltPositionMoveFromParallel = 8.4;
+	public static final double kTotalShooterTiltAngleMoveFromParallel = 164;
+	
+	public static final int kFlashCANId = 32;
 }

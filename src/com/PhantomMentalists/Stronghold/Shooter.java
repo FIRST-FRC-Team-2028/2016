@@ -523,7 +523,7 @@ public class Shooter extends TimerTask{
     
     public double getShooterAngle()
     {
-    	return ((3.7-tiltMotor.getPosition())*68.5/3.7);
+    	return ((tiltMotor.getPosition()+Parameters.kTotalShooterTiltPositionMoveFromParallel)*Parameters.kTotalShooterTiltAngleMoveFromParallel/Parameters.kTotalShooterTiltPositionMoveFromParallel);
     }
     
     /**
@@ -544,7 +544,7 @@ public class Shooter extends TimerTask{
     	SmartDashboard.putBoolean("Tilt Up Limit",tiltMotor.isFwdLimitSwitchClosed());
     	SmartDashboard.putBoolean("Tilt Down Limit",tiltMotor.isRevLimitSwitchClosed());
     	SmartDashboard.putNumber("Tilt Pos", tiltMotor.getPosition());
-    	SmartDashboard.putNumber("Shooter Tilt Angle",((3.7-tiltMotor.getPosition())*68.5/3.7));
+    	SmartDashboard.putNumber("Shooter Tilt Angle",getShooterAngle());
     	SmartDashboard.putNumber("MemSetpoint", tiltMemSetpoint);
     	if(currentPosition != null)
     		SmartDashboard.putString("Shooter State", currentPosition.name());

@@ -6,7 +6,6 @@ import com.PhantomMentalists.Stronghold.Autopilot.Autopilot;
 import com.PhantomMentalists.Stronghold.Autopilot.DefenceSelection;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -55,6 +54,8 @@ public class Telepath extends SampleRobot {
 
     @objid ("434ab641-6873-4ddc-a690-48168db127aa")
     protected ClimbingArm climbingArm;
+    
+    protected FlashLight light;
     
     /**
      * Camera used for aiming
@@ -164,17 +165,21 @@ public class Telepath extends SampleRobot {
         	{
         		shooter.setShooterAngle(cam.getCameraAngle());
         	}
-        	else if(buttonstick3.getRawButton(ButtonStick2Values.kSpare.getValue()) && !turncont.isEnabled())
-        	{
-        		shooter.setShooterAngle(cam.getCameraAngle());
-        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
-        		turncont.enable();
-        	}
         	else
         	{
         		isCameraMovingManually = true;
         		shooter.manualRunTiltMotor(0);
         	}
+        	//FlashLight
+        	if(buttonstick3.getRawButton(ButtonStick2Values.kSpare.getValue()) )
+        	{
+        		light.turnOff();
+        	}
+        	else
+        	{
+        		light.turnOn();
+        	}
+        	
         	// Manually control dink
         	if(buttonstick2.getRawButton(ButtonStick3Values.kKick.getValue()))
         	{
@@ -280,6 +285,7 @@ public class Telepath extends SampleRobot {
     	gyro.calibrate();
     	fan = new Solenoid(Parameters.kGyroFanAnalogPort);
     	turncont = new PIDController(P,I,D,gyro,westCoastDrive);
+    	light = new FlashLight();
     }
     public boolean isJoystickInDeadband(double val)
     {
