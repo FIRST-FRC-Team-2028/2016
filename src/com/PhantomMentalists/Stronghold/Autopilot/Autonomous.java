@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import com.PhantomMentalists.Stronghold.Camera;
 import com.PhantomMentalists.Stronghold.ClimbingArm.ClimberPositions;
+import com.PhantomMentalists.Stronghold.Parameters;
 import com.PhantomMentalists.Stronghold.PusherArm.Position;
 import com.PhantomMentalists.Stronghold.Shooter.ShooterState;
 import com.PhantomMentalists.Stronghold.Telepath;
@@ -34,6 +35,12 @@ public class Autonomous extends Autopilot {
     protected Camera cam;
     
     protected Timer dtimer;
+    
+    protected Timer gtimer;
+    
+    protected boolean shootert = false;
+    
+    protected boolean gyroHunt = false;
     
     @objid ("89eb6fde-adee-4a71-8d26-0f72ceaaea93")
     public void process() 
@@ -174,39 +181,66 @@ public class Autonomous extends Autopilot {
     		turncon.enable();
     		if(lane == 1)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(40.38));
+    			turncon.setSetpoint(-40.38);
+    			
     		}
     		else if(lane == 2)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(25.64));
+    			turncon.setSetpoint(-25.64);
     		}
     		else if(lane == 3)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(16.32));
+    			turncon.setSetpoint(-16.32);
     		}
     		else if(lane == 4)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(353.41));
+    			turncon.setSetpoint(6.59);
     		}
     		else if(lane == 5)
     		{
-    			turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(40.83));
+    			turncon.setSetpoint(19.17);
     		}
-    		if(isAngleInDeadband(gyro.getAngle(),turncon.getSetpoint()))
+    		if(gtimer != null)
     		{
+    			gtimer = new Timer();
+    			gtimer.schedule(new delay(), 3000);
+    		}
+    		if(isAngleInDeadband(gyro.getAngle(),turncon.getSetpoint()) && !gyroHunt)
+    		{
+    			
     			turncon.disable();
+    			shooter.manualRunTiltMotor(Parameters.kShooterTiltPowerDown);
+    			dtimer = new Timer();
+    			dtimer.schedule(new delayShooter(), 1500);
     			state = State.kAim;
     		}
     		
+    		
     		break;
     	case kAim:
-    		cam.setCam(-1, 0.8);
-    		cam.getImage();
-    		cam.centerTarget(gyro.getAngle());
-    		shooter.setShooterAngle(cam.getCameraAngle());
-//    		turncon.setSetpoint(gyro.getAbsoluteAngleFromRelative(gyro.getRelativeAngle()+cam.getDiffAngleX()));
+    		if(shootert)
+    		{
+    			System.out.println("Shooter At set");
+    			shooter.manualRunTiltMotor(0);
+//    			shooter.
+    			cam.setCam(-1, 0.8);
+        		cam.getImage();
+        		cam.centerTarget(gyro.getAngle());
+        		shooter.setShooterAngle(cam.getCameraAngle());
+    		}
+    		if(shooter.isTiltAngleAtSetpoint())
+    		{
+    			shooter.manualRunTiltMotor(0);
+    			state = State.kDone;
+    		}
+    		
+//    		turncon.setSetpoint(cam.getAngleToMoveFromCamera());
 //    		turncon.enable();
-    		state = State.kDone;
+//    		if(isAngleInDeadband(gyro.getAngle(),turncon.getSetpoint()))
+//    		{
+//    			turncon.disable();
+//    			state = State.kDone;
+//    		}
     		break;
     	case kDriveToRange:
     		break;
@@ -258,7 +292,15 @@ public class Autonomous extends Autopilot {
     {
     	public void run()
     	{
-    		
+    		gyroHunt = true;
+    	}
+    }
+    
+    class delayShooter extends TimerTask
+    {
+    	public void run()
+    	{
+    		shootert = true;
     	}
     }
     

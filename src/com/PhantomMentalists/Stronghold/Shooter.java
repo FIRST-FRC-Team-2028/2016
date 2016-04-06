@@ -287,41 +287,41 @@ public class Shooter extends TimerTask{
     	
     		if(tiltMotor.getPosition() > tiltMemSetpoint)
     		{
-    			if (differenceToCompare < 0.1)
+//    			if (differenceToCompare < 0.1)
+//    			{
+//    				rc = -Parameters.kShooterSeekHomePower * 0.20;
+//    			}
+//    			else if(differenceToCompare < 0.15)
+//    			{
+//    				rc = -Parameters.kShooterSeekHomePower * 0.35;
+//    			}
+    			if (differenceToCompare < 1)
     			{
-    				rc = -Parameters.kShooterSeekHomePower * 0.20;
-    			}
-    			else if(differenceToCompare < 0.15)
-    			{
-    				rc = -Parameters.kShooterSeekHomePower * 0.35;
-    			}
-    			else if (differenceToCompare < 0.25)
-    			{
-    				rc = -Parameters.kShooterSeekHomePower * 0.5;
+    				rc = Parameters.kShooterTiltPowerDown*0.5;
     			}
     			else
     			{
-    				rc = -Parameters.kShooterSeekHomePower;
+    				rc = Parameters.kShooterTiltPowerDown;
     			}
     			
     		}
     		else if(tiltMotor.getPosition() < tiltMemSetpoint)
     		{
-    			if(differenceToCompare > -0.1)
+//    			if(differenceToCompare < -0.1)
+//    			{
+//    				rc = Parameters.kShooterTiltPowerUp*0.1;
+//    			}
+//    			if(differenceToCompare < -0.15)
+//    			{
+//    				rc = Parameters.kShooterTiltPowerUp*0.2;
+//    			}
+    			if(differenceToCompare < -1)
     			{
-    				rc = Parameters.kShooterSeekHomePower*0.1;
-    			}
-    			if(differenceToCompare > -0.15)
-    			{
-    				rc = Parameters.kShooterSeekHomePower*0.2;
-    			}
-    			if(differenceToCompare > -0.25)
-    			{
-    				rc = Parameters.kShooterSeekHomePower*0.35;
+    				rc = Parameters.kShooterTiltPowerUp*0.5;
     			}
     			else
     			{
-    				rc = Parameters.kShooterSeekHomePower*0.65;
+    				rc = Parameters.kShooterTiltPowerUp;
     			}
     		}
     	}
@@ -501,6 +501,7 @@ public class Shooter extends TimerTask{
     	double odx = Parameters.kShooterOffSetFromCameraZ;
     	double hgd = Parameters.kHeightGoalDifference;
     	double d = h/tan; 
+    	SmartDashboard.putNumber("Distance from goal to shooter",d+odx);
     	
     	double angleInRads = Math.atan((h+hgd)/(d+odx));
     	double newAngle = Math.toDegrees(angleInRads);
@@ -511,7 +512,8 @@ public class Shooter extends TimerTask{
 //    	newAngle -= 5;
     	double tAngle = Parameters.kTotalShooterTiltAngleMoveFromParallel;
     	double tPos = Parameters.kTotalShooterTiltPositionMoveFromParallel;
-    	double newPosition = (-tPos*newAngle/tAngle)+tPos;
+    	double newPosition = (newAngle*(tPos/tAngle))-tPos;
+//    	double newPosition = (-tPos*newAngle/tAngle)+tPos;
 //    	System.out.println("Setpoint: "+setpoint);
 //    	System.out.println("tan: "+tan);
 //    	System.out.println("constant: "+constant);

@@ -149,7 +149,7 @@ public class Parameters {
 	public static final double kShooterShootBatterSpeed = 0.65;
 	public static final double kShooterTiltMaxVolt = 12*0.6;
 
-	public static final double kShooterReloadPitchingMachineSpeed = -.6;
+	public static final double kShooterReloadPitchingMachineSpeed = -0.75;
 
 	public static final double kShootPitchPositionControlProportional = 0;
 
@@ -185,13 +185,13 @@ public class Parameters {
 
 	public static final double kShooterTiltHomePositionEncoderSetpoint = -17389;
 	
-	public static final double kShooterTiltPowerDown = 0.6;
+	public static final double kShooterTiltPowerDown = 0.9;
 	
-	public static final double kShooterTiltPowerUp = -0.6;
+	public static final double kShooterTiltPowerUp = -0.7;
 
 	public static final double kShooterSeekHomePower = 0.35;
 	
-	public static final double kShooterSeekTolerance = 0.035;
+	public static final double kShooterSeekTolerance = 0.1;
 
 	public static final int kEncoderCodesPerRev = 1024;
 
@@ -275,6 +275,8 @@ public class Parameters {
 	public static final double kDistCamToShooterX = 10.5;//inches
 	public static final double kTotalShooterTiltPositionMoveFromParallel = 8.4;
 	public static final double kTotalShooterTiltAngleMoveFromParallel = 164;
+	public static final double kTotalCameraTiltAngle = 164;
+	public static final double kTotalCameraTiltPos = 0.845;
 	
 	public static final int kFlashCANId = 32;
 }

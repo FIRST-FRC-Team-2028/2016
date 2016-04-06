@@ -119,7 +119,7 @@ public class Camera {
 	}
 
 	public double getCameraAngle() {
-		return ((1 - servoy.get()) * 69 / 0.382);
+		return (-(servoy.get()-1) * Parameters.kTotalCameraTiltAngle / Parameters.kTotalCameraTiltPos);
 
 	}
 
@@ -130,8 +130,7 @@ public class Camera {
 
 	public void process() {
 		SmartDashboard.putNumber("Servo y Pos", servoy.get());
-		SmartDashboard.putNumber("Servo angle",
-				((1 - servoy.get()) * 69 / 0.382));
+		SmartDashboard.putNumber("Servo angle", getCameraAngle());
 		
 
 	}
@@ -143,11 +142,13 @@ public class Camera {
 		posy -= 120;
 		posy *=51;
 		posy /=240;
-		posy *= 0.382;
-		posy /= 69;
+		posy *= Parameters.kTotalCameraTiltPos;
+		posy /= Parameters.kTotalCameraTiltAngle;
+//		posy *= 0.382;
+//		posy /= 69;
 		return posy;
 	}
-	
+		
 	public double pixelXToTargetAngleX(double pixx)
 	{
 		double posx;
@@ -482,7 +483,7 @@ public class Camera {
 
 //			dify = (240 / 2) - midyp;
 //			dify /= 240;
-			posy = servoy.get()+pixelYToPosY(midyp);
+			posy = posy+pixelYToPosY(midyp);
 			System.out.println("Angle Diff: " + posx);
 			
 			System.out.println("Gyro angle" + gyroAngle);

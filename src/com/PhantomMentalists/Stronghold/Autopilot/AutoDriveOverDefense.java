@@ -94,7 +94,7 @@ public class AutoDriveOverDefense extends Autopilot {
 				    		drive.setSpeedSetpoint(Parameters.autonomousDrivePower);
 				    		state = DriveStates.driving;
 				    		timer = new Timer();
-				    		timer.schedule(new driveTime(), 5500);
+				    		timer.schedule(new driveTime(), 5000);
 			    			break;
 			    		case kLowBar:
 			    			drive.setSpeedSetpoint(Parameters.autonomousDrivePower);

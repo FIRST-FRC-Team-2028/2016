@@ -1,25 +1,22 @@
 package com.PhantomMentalists.Stronghold;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.DigitalOutput;
 
 public class FlashLight 
 {
-	CANTalon light;
+	DigitalOutput light;
 	public FlashLight()
 	{
-		light = new CANTalon(Parameters.kFlashCANId);
-		light.changeControlMode(TalonControlMode.Voltage);
-		light.enable();
+		light = new DigitalOutput(Parameters.kFlashCANId);
 	}
 	
 	public void turnOn()
 	{
-		light.set(5);
+		light.set(true);
 	}
 	
 	public void turnOff()
 	{
-		light.set(0);
+		light.set(false);
 	}
 }

@@ -119,6 +119,7 @@ public class Telepath extends SampleRobot {
             SmartDashboard.putNumber("Lane",getLaneFromJoyStick());
             leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
+        	System.out.println("Gyro Angle: "+gyro.getAngle());
         	SmartDashboard.putNumber("Gyro Relative Anagle",gyro.getRelativeAngle());
         	SmartDashboard.putNumber("Gyro Absolute Angle", gyro.getAngle());
         	SmartDashboard.putNumber("Shoot Position",shootangle);
@@ -155,11 +156,11 @@ public class Telepath extends SampleRobot {
         		{
         			cam.getImage();
             		cam.centerTarget(gyro.getAngle());
-            		turncont.enable();
+//            		turncont.enable();
         		}
         		isCameraMovingManually = false;
         		shooter.setShooterAngle(cam.getCameraAngle());
-        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
+//        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
         	}
         	else if(buttonstick2.getRawButton(ButtonStick2Values.kGoTo.getValue()))
         	{
