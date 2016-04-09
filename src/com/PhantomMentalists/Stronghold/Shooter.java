@@ -8,6 +8,7 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,6 +25,10 @@ public class Shooter extends TimerTask{
 	 */
 	private Timer timer;
 	private Timer timer2;
+	
+	private DriverStation ds;
+	
+	private boolean dinkp = false;
 	
 	/**
 	 * True if the the pitching machine is accelerating and if the pitching machine is not accelerating
@@ -161,6 +166,7 @@ public class Shooter extends TimerTask{
     	disableTiltPositionControl();
     	shooting = false;
     	autopilotEnabled = false;
+    	ds = DriverStation.getInstance();
     }
 
     /**
@@ -285,7 +291,7 @@ public class Shooter extends TimerTask{
     		 */
     		double differenceToCompare = tiltMotor.getPosition()-tiltMemSetpoint;
     	
-    		if(tiltMotor.getPosition() > tiltMemSetpoint)
+    		if(differenceToCompare > 0)
     		{
 //    			if (differenceToCompare < 0.1)
 //    			{
@@ -297,15 +303,23 @@ public class Shooter extends TimerTask{
 //    			}
     			if (differenceToCompare < 1)
     			{
-    				rc = Parameters.kShooterTiltPowerDown*0.5;
+    				rc = Parameters.kShooterTiltPowerDown*0.3;
     			}
+    			else if(differenceToCompare < 0.5)
+    			{
+    				rc = Parameters.kShooterTiltPowerDown*0.1;
+    			}
+//    			else if(differenceToCompare < 2)
+//    			{
+//    				rc = Parameters.kShooterTiltPowerDown*0.5;
+//    			}
     			else
     			{
-    				rc = Parameters.kShooterTiltPowerDown;
+    				rc = Parameters.kShooterTiltPowerDown*0.9;
     			}
     			
     		}
-    		else if(tiltMotor.getPosition() < tiltMemSetpoint)
+    		else if(differenceToCompare < 0)
     		{
 //    			if(differenceToCompare < -0.1)
 //    			{
@@ -315,24 +329,33 @@ public class Shooter extends TimerTask{
 //    			{
 //    				rc = Parameters.kShooterTiltPowerUp*0.2;
 //    			}
-    			if(differenceToCompare < -1)
+//    			System.out.println("Diff: "+differenceToCompare);
+    			if(differenceToCompare > -1)
     			{
-    				rc = Parameters.kShooterTiltPowerUp*0.5;
+    				rc = Parameters.kShooterTiltPowerUp*0.35;
     			}
+    			else if(differenceToCompare > -0.5)
+    			{
+    				rc = Parameters.kShooterTiltPowerUp*0.2;
+    			}
+//    			else if(differenceToCompare > -2)
+//    			{
+//    				rc = Parameters.kShooterTiltPowerUp*0.5;
+//    			}
     			else
     			{
     				rc = Parameters.kShooterTiltPowerUp;
     			}
     		}
     	}
-    	else if(tiltMotor.getPosition() > tiltSetpoint.getPosition())
-    	{
-    		rc = -Parameters.kShooterSeekHomePower;
-    	}
-    	else if(tiltMotor.getPosition() < tiltSetpoint.getPosition())
-    	{
-    		rc = Parameters.kShooterSeekHomePower*0.65;
-    	}
+//    	else if(tiltMotor.getPosition() > tiltSetpoint.getPosition())
+//    	{
+//    		rc = -Parameters.kShooterSeekHomePower;
+//    	}
+//    	else if(tiltMotor.getPosition() < tiltSetpoint.getPosition())
+//    	{
+//    		rc = Parameters.kShooterSeekHomePower*0.65;
+//    	}
     	return rc;
     }
     /**
@@ -393,6 +416,18 @@ public class Shooter extends TimerTask{
     @objid ("e0334a6b-b527-4a95-936a-51e68527f3ea")
     public void pushBall(boolean push) {
     	ballShooter.set(push);
+    	if(push && !dinkp)
+    	{
+    		dinkp = true;
+    		System.out.println("Time: "+ds.getMatchTime());
+	    	System.out.println("Shooter Pos: "+tiltMotor.get());
+	    	System.out.println("Shooter Angle: "+getShooterAngle());
+	    	System.out.println("-------------------------------------");
+    	}
+    	else
+    	{
+    		dinkp = false;
+    	}
     }
     
     /**
@@ -468,17 +503,17 @@ public class Shooter extends TimerTask{
     @objid ("4d7bd443-0329-4985-8729-3ec742465875")
     public boolean isTiltAngleAtSetpoint() {
     	// Figure out if tilt angle is "close enough" to setpoint
-    	
+    	double pos = getTiltAngle();
     	if(memSetpointSet)
     	{
-    		if(getTiltAngle() >= tiltMemSetpoint-Parameters.kShooterSeekTolerance && getTiltAngle() <=tiltMemSetpoint+Parameters.kShooterSeekTolerance)
+    		if(pos >= tiltMemSetpoint-Parameters.kShooterSeekTolerance && pos <=tiltMemSetpoint+Parameters.kShooterSeekTolerance)
     		{
     			return true;
     		}
     	}
     	else 
     	{
-    		if(getTiltAngle() >= tiltSetpoint.getPosition()-Parameters.kShooterSeekTolerance && getTiltAngle() <= tiltSetpoint.getPosition()+Parameters.kShooterSeekTolerance)
+    		if(pos >= tiltSetpoint.getPosition()-Parameters.kShooterSeekTolerance && pos <= tiltSetpoint.getPosition()+Parameters.kShooterSeekTolerance)
     		{
     			return true;
     		}
@@ -523,6 +558,14 @@ public class Shooter extends TimerTask{
     	setTiltMemSetpoint(newPosition);
     }
     
+    public void setShooterAngleSetpoint(double angle)
+    {
+    	double tAngle = Parameters.kTotalShooterTiltAngleMoveFromParallel;
+    	double tPos = Parameters.kTotalShooterTiltPositionMoveFromParallel;
+    	double newPosition = (angle*(tPos/tAngle))-tPos;
+    	setTiltMemSetpoint(newPosition);
+    }
+    
     public double getShooterAngle()
     {
     	return ((tiltMotor.getPosition()+Parameters.kTotalShooterTiltPositionMoveFromParallel)*Parameters.kTotalShooterTiltAngleMoveFromParallel/Parameters.kTotalShooterTiltPositionMoveFromParallel);
@@ -546,6 +589,7 @@ public class Shooter extends TimerTask{
     	SmartDashboard.putBoolean("Tilt Up Limit",tiltMotor.isFwdLimitSwitchClosed());
     	SmartDashboard.putBoolean("Tilt Down Limit",tiltMotor.isRevLimitSwitchClosed());
     	SmartDashboard.putNumber("Tilt Pos", tiltMotor.getPosition());
+    	SmartDashboard.putNumber("Tilt Power",tiltMotor.getOutputVoltage());
     	SmartDashboard.putNumber("Shooter Tilt Angle",getShooterAngle());
     	SmartDashboard.putNumber("MemSetpoint", tiltMemSetpoint);
     	if(currentPosition != null)
@@ -564,10 +608,10 @@ public class Shooter extends TimerTask{
     	//PitchingMachine method just retracts kicker, extends dink and turns motor off
     	if(tiltMotor.getOutputCurrent() > Parameters.kShooterTiltMaxCurrent)
     	{
-    		disableTiltPositionControl();
-    		currentPosition = ShooterState.kUnknown;
+//    		disableTiltPositionControl();
+//    		currentPosition = ShooterState.kUnknown;
     		tiltMotor.set(0);
-    		autopilotEnabled = false;
+//    		autopilotEnabled = false;
     	}
    	 	if(isAutoPilotEnabled())
    	 	{

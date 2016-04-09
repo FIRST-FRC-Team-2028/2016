@@ -88,12 +88,15 @@ public class Telepath extends SampleRobot {
      */
     @objid ("6538383a-6e25-4552-ad07-03d18282baf2")
     public void autonomous() {
+//    	gyro.calibrate();
+//    	gyro.
     	Autonomous auto = new Autonomous(this);
     	auto.setLane(getLaneFromJoyStick());
     	this.setDefenceConfig();
     	auto.setDefence(defence);
     	auto.setEnabled(true);
         while (isAutonomous() && isEnabled()) {
+        	SmartDashboard.putNumber("Gyro Absolute Angle", gyro.getAngle());
         	auto.process();
             Timer.delay(Parameters.delay);
         }
@@ -117,9 +120,10 @@ public class Telepath extends SampleRobot {
         	setDefenceConfig();
             SmartDashboard.putNumber("Configure",defence.getNum());
             SmartDashboard.putNumber("Lane",getLaneFromJoyStick());
+            SmartDashboard.putNumber("Shooter Pos", getShootPos());
             leftval = newJoystickValue(leftstick.getY());
         	rightval = newJoystickValue(rightstick.getY());
-        	System.out.println("Gyro Angle: "+gyro.getAngle());
+//        	System.out.println("Gyro Angle: "+gyro.getAngle());
         	SmartDashboard.putNumber("Gyro Relative Anagle",gyro.getRelativeAngle());
         	SmartDashboard.putNumber("Gyro Absolute Angle", gyro.getAngle());
         	SmartDashboard.putNumber("Shoot Position",shootangle);
@@ -129,6 +133,7 @@ public class Telepath extends SampleRobot {
         	// Manually control shooter pitching machine
         	if(buttonstick3.getRawButton(ButtonStick3Values.kShooterShoot.getValue()) || leftstick.getRawButton(5))
         	{
+        		light.turnOn();
         		shooter.manualRunPitchingMachine(Parameters.kShooterShootPitchingMachineSpeed);
 //        		shooter.shoot2();
         	}
@@ -138,6 +143,7 @@ public class Telepath extends SampleRobot {
         	}
         	else
         	{
+        		light.turnOff();
         		shooter.manualRunPitchingMachine(0);
         	}
         	
@@ -152,19 +158,41 @@ public class Telepath extends SampleRobot {
         	}
         	else if (buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()))
         	{	
-        		if(isCameraMovingManually)
-        		{
-        			cam.getImage();
-            		cam.centerTarget(gyro.getAngle());
-//            		turncont.enable();
-        		}
-        		isCameraMovingManually = false;
-        		shooter.setShooterAngle(cam.getCameraAngle());
+//        		if(isCameraMovingManually)
+//        		{
+//        			cam.getImage();
+//            		cam.centerTarget(gyro.getAngle());
+////            		turncont.enable();
+//        		}
+//        		isCameraMovingManually = false;
+//        		shooter.setShooterAngle(cam.getCameraAngle());
 //        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
+        		if(!shooter.isTiltAngleAtSetpoint())
+        		{
+        			shooter.setShooterAngle(cam.getCameraAngle());
+        		}
+        		else
+        		{
+        			shooter.manualRunTiltMotor(0);
+
+        		}
         	}
         	else if(buttonstick2.getRawButton(ButtonStick2Values.kGoTo.getValue()))
         	{
-        		shooter.setShooterAngle(cam.getCameraAngle());
+        		if(!shooter.isTiltAngleAtSetpoint())
+        		{
+        			switch(getShootPos())
+        			{
+        			case 1:
+        				shooter.setShooterAngleSetpoint(70);
+        			case 2:
+        				shooter.setShooterAngleSetpoint(48);
+        			}
+        		}
+        		else
+        		{
+        			shooter.manualRunTiltMotor(0);
+        		}
         	}
         	else
         	{
@@ -174,12 +202,9 @@ public class Telepath extends SampleRobot {
         	//FlashLight
         	if(buttonstick3.getRawButton(ButtonStick2Values.kSpare.getValue()) )
         	{
-        		light.turnOff();
-        	}
-        	else
-        	{
         		light.turnOn();
         	}
+
         	
         	// Manually control dink
         	if(buttonstick2.getRawButton(ButtonStick3Values.kKick.getValue()))
@@ -533,6 +558,42 @@ public class Telepath extends SampleRobot {
     		defence = DefenceSelection.kClimb;
     	}
     }
+   
+    public int getShootPos()
+    {
+    	double val = analogstick.getRawAxis(2);
+    	int rc = 0;
+    	if(val < -0.9)
+    	{
+    		rc = 1; 
+    	}
+    	else if(val < -0.65 && val > -0.85)
+    	{
+    		rc = 2;
+    	}
+    	else if(val < -0.45 && val > -0.65)
+    	{
+    		rc = 3;
+    	}
+    	else if(val < -0.25 && val > -0.45)
+    	{
+    		rc = 4;
+    	}
+    	else if(val < 0 && val > -0.25)
+    	{
+    		rc = 5;
+    	}
+    	else if(val < 0.2 && val > 0)
+    	{
+    		rc = 6;
+    	}
+    	else if(val >0.2)
+    	{
+    		rc = 7;
+    	}
+    	return rc;
+    } 
+
     public enum ButtonStick2Values
     {
     	/**

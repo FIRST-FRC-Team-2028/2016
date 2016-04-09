@@ -33,6 +33,8 @@ public class Camera {
 	Image frame;
 	Image binaryFrame;
 	int imaqError;
+	
+	double angle = 0;
 
 	// Constants
 	NIVision.Range HUE_RANGE = new NIVision.Range(80, 135); // Default hue range
@@ -119,6 +121,7 @@ public class Camera {
 	}
 
 	public double getCameraAngle() {
+		
 		return (-(servoy.get()-1) * Parameters.kTotalCameraTiltAngle / Parameters.kTotalCameraTiltPos);
 
 	}
@@ -131,7 +134,10 @@ public class Camera {
 	public void process() {
 		SmartDashboard.putNumber("Servo y Pos", servoy.get());
 		SmartDashboard.putNumber("Servo angle", getCameraAngle());
-		
+//		if(servoy.get() <= posy-0.05 && servoy.get() >= posy+0.05)
+//		{
+//			angle = (-(servoy.get()-1) * Parameters.kTotalCameraTiltAngle / Parameters.kTotalCameraTiltPos);
+//		}
 
 	}
 
@@ -466,10 +472,10 @@ public class Camera {
 			double dify = 0;
 			double midxp = best.BoundingRectLeft
 					+ ((best.BoundingRectRight - best.BoundingRectLeft) / 2);
-			System.out.println("Midxp before " + midxp);
+//			System.out.println("Midxp before " + midxp);
 			double midyp = best.BoundingRectTop
 					+ ((best.BoundingRectBottom - best.BoundingRectTop) / 2);
-			System.out.println("Midxp after " + midxp);
+//			System.out.println("Midxp after " + midxp);
 			posx = pixelXToTargetAngleX(midxp);
 //			posx = -(midxp-160);
 //			System.out.println("difx after 160 " + posx);
@@ -484,9 +490,9 @@ public class Camera {
 //			dify = (240 / 2) - midyp;
 //			dify /= 240;
 			posy = posy+pixelYToPosY(midyp);
-			System.out.println("Angle Diff: " + posx);
-			
-			System.out.println("Gyro angle" + gyroAngle);
+//			System.out.println("Angle Diff: " + posx);
+//			
+//			System.out.println("Gyro angle" + gyroAngle);
 			
 //			posx = getDiffAngleX();
 			posx -= gyroAngle;
@@ -500,7 +506,7 @@ public class Camera {
 		double val = 0;
 		double rads = Math.toRadians(getCameraAngle());
 		val = (Parameters.kGoalHeight / Math.tan(rads));
-		System.out.println("Get distance to target" + val);
+//		System.out.println("Get distance to target" + val);
 		return val;
 	}
 
@@ -512,7 +518,7 @@ public class Camera {
 		double angle = Math.atan(ox/doy);
 		angle = -Math.toDegrees(angle);
 //		angle *= .5;
-		System.out.println("Raw diff angle x" + angle);
+//		System.out.println("Raw diff angle x" + angle);
 		return posx;
 	}
 	

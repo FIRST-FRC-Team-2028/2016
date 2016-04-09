@@ -7,7 +7,7 @@ public class FlashLight
 	DigitalOutput light;
 	public FlashLight()
 	{
-		light = new DigitalOutput(Parameters.kFlashCANId);
+		light = new DigitalOutput(Parameters.kFlashDIO);
 	}
 	
 	public void turnOn()

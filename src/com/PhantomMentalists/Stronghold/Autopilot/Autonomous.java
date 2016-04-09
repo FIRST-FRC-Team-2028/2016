@@ -190,7 +190,7 @@ public class Autonomous extends Autopilot {
     		}
     		else if(lane == 3)
     		{
-    			turncon.setSetpoint(-16.32);
+    			turncon.setSetpoint(-10);
     		}
     		else if(lane == 4)
     		{
