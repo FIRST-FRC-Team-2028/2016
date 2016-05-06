@@ -145,7 +145,7 @@ public class Parameters {
      * 48.5 degrees, 38.2 degrees
      */
     public static final int kDriveControlProfile = 0;
-	public static final double kShooterShootPitchingMachineSpeed = 0.8;
+	public static final double kShooterShootPitchingMachineSpeed = 0.6;
 	public static final double kShooterShootBatterSpeed = 0.65;
 	public static final double kShooterTiltMaxVolt = 12*0.6;
 

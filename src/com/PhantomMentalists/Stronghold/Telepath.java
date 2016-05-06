@@ -184,6 +184,7 @@ public class Telepath extends SampleRobot {
         			switch(getShootPos())
         			{
         			case 1:
+        				System.out.println("here");
         				shooter.setShooterAngleSetpoint(70);
         			case 2:
         				shooter.setShooterAngleSetpoint(48);
