@@ -158,18 +158,18 @@ public class Telepath extends SampleRobot {
         	}
         	else if (buttonstick3.getRawButton(ButtonStick2Values.kFindTarget.getValue()))
         	{	
-//        		if(isCameraMovingManually)
-//        		{
-//        			cam.getImage();
-//            		cam.centerTarget(gyro.getAngle());
-////            		turncont.enable();
-//        		}
-//        		isCameraMovingManually = false;
-//        		shooter.setShooterAngle(cam.getCameraAngle());
-//        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
+        		if(isCameraMovingManually)
+        		{
+        			cam.getImage();
+            		cam.centerTarget(gyro.getAngle());
+            		turncont.enable();
+        		}
+        		isCameraMovingManually = false;
+        		shooter.setShooterAngle(cam.getCameraAngle()+16);
+        		turncont.setSetpoint(gyro.getAngle()+cam.getAngleToMoveFromCamera());
         		if(!shooter.isTiltAngleAtSetpoint())
         		{
-        			shooter.setShooterAngle(cam.getCameraAngle());
+        			shooter.setShooterAngle(cam.getCameraAngle()+16);
         		}
         		else
         		{

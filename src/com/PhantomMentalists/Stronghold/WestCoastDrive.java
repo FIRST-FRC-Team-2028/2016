@@ -174,7 +174,7 @@ public class WestCoastDrive implements PIDOutput
       * @param value
       * @return
       */
-     double getTurnSetpoint(double value)
+     double getTurnSetpoint()
      {
     	 return leftSide.getTurnSetpoint();
      }

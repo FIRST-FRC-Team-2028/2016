@@ -319,14 +319,7 @@ public class DriveUnit {
         						 	Parameters.kDriveSpeedControlIZone, 
         						 	Parameters.kDriveControlCloseLoopRampRate, 
         						 	Parameters.kDriveControlProfile);
-        		masterMotor.changeControlMode(TalonControlMode.Speed);
-        		masterMotor.setPID(Parameters.kDriveSpeedControlProportional, 
-        						 	Parameters.kDriveSpeedControlIntegral, 
-        						 	Parameters.kDriveSpeedControlDifferential, 
-        						 	Parameters.kDriveSpeedControlThrottle, 
-        						 	Parameters.kDriveSpeedControlIZone, 
-        						 	Parameters.kDriveControlCloseLoopRampRate, 
-        						 	Parameters.kDriveControlProfile);
+
         	}
         	else 
         	{

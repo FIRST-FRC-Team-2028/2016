@@ -1,10 +1,6 @@
 package com.PhantomMentalists.Stronghold;
 
-import java.util.Date;
-
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
-
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class stores all constant variables for team 2028.  Everything in this class should be a static public final.  There will be no instances of this class and no class will hold a reference to any instance.
@@ -65,6 +61,7 @@ public class Parameters {
     /**
      * <Enter note text here>
      */
+    
     @objid ("2b176629-4eaf-473e-9106-e8f7f32633de")
     public static final int kClimberRightWinchMotorCanId = 32;
 
@@ -145,7 +142,7 @@ public class Parameters {
      * 48.5 degrees, 38.2 degrees
      */
     public static final int kDriveControlProfile = 0;
-	public static final double kShooterShootPitchingMachineSpeed = 0.6;
+	public static final double kShooterShootPitchingMachineSpeed = 1.0;
 	public static final double kShooterShootBatterSpeed = 0.65;
 	public static final double kShooterTiltMaxVolt = 12*0.6;
 
@@ -191,7 +188,7 @@ public class Parameters {
 
 	public static final double kShooterSeekHomePower = 0.35;
 	
-	public static final double kShooterSeekTolerance = 0.1;
+	public static final double kShooterSeekTolerance = 0.03;
 
 	public static final int kEncoderCodesPerRev = 1024;
 
@@ -275,8 +272,8 @@ public class Parameters {
 	public static final double kDistCamToShooterX = 10.5;//inches
 	public static final double kTotalShooterTiltPositionMoveFromParallel = 8.4;
 	public static final double kTotalShooterTiltAngleMoveFromParallel = 164;
-	public static final double kTotalCameraTiltAngle = 164;
-	public static final double kTotalCameraTiltPos = 0.845;
+	public static final double kTotalCameraTiltAngle = 90;
+	public static final double kTotalCameraTiltPos = 0.6;
 	
 	public static final int kFlashDIO = 9;
 }

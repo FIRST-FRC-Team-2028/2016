@@ -9,9 +9,11 @@ import java.util.Comparator;
 import java.util.Vector;
 
 import com.ni.vision.NIVision;
+import com.ni.vision.NIVision.DrawMode;
 import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.ImageType;
 import com.ni.vision.NIVision.RawData;
+import com.ni.vision.NIVision.ShapeMode;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Servo;
@@ -31,18 +33,19 @@ public class Camera {
 
 	// Images
 	Image frame;
+	Image frame2;
 	Image binaryFrame;
 	int imaqError;
 	
 	double angle = 0;
 
 	// Constants
-	NIVision.Range HUE_RANGE = new NIVision.Range(80, 135); // Default hue range
+	NIVision.Range HUE_RANGE = new NIVision.Range(90, 125); // Default hue range
 															// for yellow tote
-	NIVision.Range SAT_RANGE = new NIVision.Range(30, 175); // Default
+	NIVision.Range SAT_RANGE = new NIVision.Range(70, 240); // Default
 															// saturation range
 															// for yellow tote
-	NIVision.Range L_RANGE = new NIVision.Range(30, 150); // Default value range
+	NIVision.Range L_RANGE = new NIVision.Range(40, 165); // Default value range
 															// for yellow tote
 	double AREA_MINIMUM = 0.05; // Default Area minimum for particle as a
 								// percentage of total image area
@@ -70,6 +73,7 @@ public class Camera {
 	RawData table;
 	Preferences prefs;
 	File file = new File("/home/lvuser/test.csv");
+//	File file = new File("/test.jpg");
 	PrintWriter print;
 	// Servo servox = new Servo(0);
 	Servo servoy = new Servo(0);
@@ -146,7 +150,7 @@ public class Camera {
 		double posy;
 		posy = pixy;
 		posy -= 120;
-		posy *=51;
+		posy *=48;
 		posy /=240;
 		posy *= Parameters.kTotalCameraTiltPos;
 		posy /= Parameters.kTotalCameraTiltAngle;
@@ -160,7 +164,7 @@ public class Camera {
 		double posx;
 		posx = pixx;
 		posx -= 160;
-		posx *= 67;
+		posx *= 64.5;
 		posx /= 320;
 		return posx;
 	}
@@ -216,8 +220,8 @@ public class Camera {
 				// System.out.println("Sample: "+(i+1));
 				long ims = System.nanoTime();
 				cam.getImage(frame);
+//				frame2 = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 				// System.out.println("Image Capture Time: "+(System.nanoTime()-ims));
-				NIVision.imaqWriteJPEGFile(frame, "/testing.jpg", 400, table);
 				// System.out.println("1");
 				// SmartDashboard.putNumber("Tote hue min",
 				// TOTE_HUE_RANGE.minValue);
@@ -257,6 +261,8 @@ public class Camera {
 				long maskings = System.nanoTime();
 				NIVision.imaqColorThreshold(binaryFrame, frame, 255,
 						NIVision.ColorMode.HSL, HUE_RANGE, SAT_RANGE, L_RANGE);
+				NIVision.imaqWriteFile(binaryFrame, "/testing("+i+")(binary).jpg", NIVision.RGB_BLUE);
+				NIVision.imaqWriteJPEGFile(frame, "/testing("+i+").jpg", 400, table);
 				// System.out.println("Image Masking Time: "+(System.nanoTime()-maskings));
 				// System.out.println("2");
 	
@@ -282,7 +288,8 @@ public class Camera {
 				// Send particle count after filtering to dashboard
 				numParticles = NIVision.imaqCountParticles(binaryFrame, 1);
 				SmartDashboard.putNumber("Filtered particles", numParticles);
-	
+//				BufferedImage im = new BufferedImage(320,240,BufferedImage.TYPE_INT_ARGB);
+//				Graphics2D g = (Graphics2D)im.getGraphics();
 				if (numParticles > 0) {
 					// Measure particles and sort by particle size
 					long targets = System.nanoTime();
@@ -295,16 +302,16 @@ public class Camera {
 						// particleIndex, 0, NIVision.MeasurementType.MT_AREA);
 						// NIVision.imaq
 	
-						par.BoundingRectTop = NIVision.imaqMeasureParticle(
+						par.BoundingRectTop = (int)NIVision.imaqMeasureParticle(
 								binaryFrame, particleIndex, 0,
 								NIVision.MeasurementType.MT_BOUNDING_RECT_TOP);
-						par.BoundingRectLeft = NIVision.imaqMeasureParticle(
+						par.BoundingRectLeft =(int) NIVision.imaqMeasureParticle(
 								binaryFrame, particleIndex, 0,
 								NIVision.MeasurementType.MT_BOUNDING_RECT_LEFT);
-						par.BoundingRectBottom = NIVision.imaqMeasureParticle(
+						par.BoundingRectBottom =(int) NIVision.imaqMeasureParticle(
 								binaryFrame, particleIndex, 0,
 								NIVision.MeasurementType.MT_BOUNDING_RECT_BOTTOM);
-						par.BoundingRectRight = NIVision.imaqMeasureParticle(
+						par.BoundingRectRight =(int) NIVision.imaqMeasureParticle(
 								binaryFrame, particleIndex, 0,
 								NIVision.MeasurementType.MT_BOUNDING_RECT_RIGHT);
 	
@@ -313,6 +320,13 @@ public class Camera {
 						par.PercentAreaToImageArea = par.Area / (320 * 240);
 						par.length = par.BoundingRectRight - par.BoundingRectLeft;
 						par.height = par.BoundingRectBottom - par.BoundingRectTop;
+						NIVision.Rect r = new NIVision.Rect(par.BoundingRectLeft,par.BoundingRectTop,par.length,par.height);
+//						NIVision.Rect r = new NIVision.Rect(100,100,100,100);
+						System.out.println("L: "+par.BoundingRectLeft + "\nT: "+par.BoundingRectTop +"\nW: "+par.length+"\nH: "+par.height);
+//						NIVision.imaqDrawShapeOnImage(binaryFrame,frame, r, DrawMode.DRAW_VALUE,ShapeMode.SHAPE_OVAL,0.0f);
+//						g.setColor(Color.green);
+//						g.fillRect(par.BoundingRectLeft, par.BoundingRectTop, par.length, par.height);
+//						g.fillRect((int)par.BoundingRectLeft,(int) par.BoundingRectTop, (int)par.length,(int) par.height);
 	//					System.out.println("Percent: " + par.PercentAreaToImageArea
 	//							+ "\nArea: " + par.Area);
 						double len = par.BoundingRectRight - par.BoundingRectLeft;
@@ -392,6 +406,11 @@ public class Camera {
 					// boolean isTote = scores.Aspect > SCORE_MIN && scores.Area >
 					// SCORE_MIN;
 				}
+//				ImageIO.write(im, "jpg", file);
+//				NIVision.imaqWriteJPEGFile(frame2, "/testing("+i+")(overlay).jpg", 400, table);
+//				File file;
+//				g.dispose();
+//				ImageIO.write(im, "jpg", new File("/testing("+i+").jpg"));
 			}
 			if (particles.size() > 2) {
 				particles.remove(largest);
@@ -448,9 +467,11 @@ public class Camera {
 			long end = System.nanoTime() - start;
 			// System.out.println("Total time: "+end);
 			// print.close();
+			
 		}catch (Exception e)
 		{
-			System.out.println("Camera Exception");
+			System.out.println("Camera Exception: \n"+e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -472,10 +493,10 @@ public class Camera {
 			double dify = 0;
 			double midxp = best.BoundingRectLeft
 					+ ((best.BoundingRectRight - best.BoundingRectLeft) / 2);
-//			System.out.println("Midxp before " + midxp);
 			double midyp = best.BoundingRectTop
 					+ ((best.BoundingRectBottom - best.BoundingRectTop) / 2);
-//			System.out.println("Midxp after " + midxp);
+			System.out.println("Midxp " + midxp);
+			System.out.println("Midyp " + midyp);
 			posx = pixelXToTargetAngleX(midxp);
 //			posx = -(midxp-160);
 //			System.out.println("difx after 160 " + posx);
@@ -547,12 +568,12 @@ public class Camera {
 			Comparable<ParticleReport> {
 		double PercentAreaToImageArea;
 		double Area;
-		double BoundingRectLeft;
-		double BoundingRectTop;
-		double BoundingRectRight;
-		double BoundingRectBottom;
-		double length;
-		double height;
+		int BoundingRectLeft;
+		int BoundingRectTop;
+		int BoundingRectRight;
+		int BoundingRectBottom;
+		int length;
+		int height;
 
 		public int compareTo(ParticleReport r) {
 			return (int) (r.Area - this.Area);
