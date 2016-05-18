@@ -4,6 +4,6 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="var" path="networktables"/>
 	<classpathentry exported="true" kind="var" path="wpilib"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Robotics/git/2016/data/modules/javadesigner.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hunter/git/2016/data/modules/javadesigner.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

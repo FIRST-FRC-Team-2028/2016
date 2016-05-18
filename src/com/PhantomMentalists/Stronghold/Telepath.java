@@ -160,13 +160,13 @@ public class Telepath extends SampleRobot {
         	{	
         		if(isCameraMovingManually)
         		{
+        			isCameraMovingManually = false;
         			cam.getImage();
             		cam.centerTarget(gyro.getAngle());
             		turncont.enable();
         		}
-        		isCameraMovingManually = false;
         		shooter.setShooterAngle(cam.getCameraAngle()+16);
-        		turncont.setSetpoint(gyro.getAngle()+cam.getAngleToMoveFromCamera());
+        		turncont.setSetpoint(cam.getAngleToMoveFromCamera());
         		if(!shooter.isTiltAngleAtSetpoint())
         		{
         			shooter.setShooterAngle(cam.getCameraAngle()+16);

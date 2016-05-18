@@ -148,12 +148,15 @@ public class Camera {
 	public double pixelYToPosY(double pixy)
 	{
 		double posy;
-		posy = pixy;
-		posy -= 120;
-		posy *=48;
-		posy /=240;
-		posy *= Parameters.kTotalCameraTiltPos;
-		posy /= Parameters.kTotalCameraTiltAngle;
+		double num = 48*Parameters.kTotalCameraTiltPos;
+		double denom = 240*Parameters.kTotalCameraTiltAngle;
+		double rat = num/denom;
+		posy = pixy*rat;
+		posy -= 24;
+//		posy *=48;
+//		posy /=240;
+//		posy *= Parameters.kTotalCameraTiltPos;
+//		posy /= Parameters.kTotalCameraTiltAngle;
 //		posy *= 0.382;
 //		posy /= 69;
 		return posy;
@@ -162,10 +165,9 @@ public class Camera {
 	public double pixelXToTargetAngleX(double pixx)
 	{
 		double posx;
-		posx = pixx;
-		posx -= 160;
-		posx *= 64.5;
-		posx /= 320;
+		double rat = 64.5/32;
+		posx = pixx*rat;
+		posx = posx-32.25;
 		return posx;
 	}
 	
@@ -492,9 +494,9 @@ public class Camera {
 			double difx;
 			double dify = 0;
 			double midxp = best.BoundingRectLeft
-					+ ((best.BoundingRectRight - best.BoundingRectLeft) / 2);
+					+ (best.length/2);
 			double midyp = best.BoundingRectTop
-					+ ((best.BoundingRectBottom - best.BoundingRectTop) / 2);
+					+ (best.height / 2);
 			System.out.println("Midxp " + midxp);
 			System.out.println("Midyp " + midyp);
 			posx = pixelXToTargetAngleX(midxp);
